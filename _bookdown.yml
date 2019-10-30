@@ -1,0 +1,7 @@
+book_filename: "BiometryNotes"
+chapter_name: "Week "
+#repo: https://github.com/seankross/bookdown-start
+output_dir: docs
+rmd_files: ["index.Rmd", "Week_1_Lab.Rmd"]
+clean: [packages.bib, bookdown.bbl]
+new_session: yes

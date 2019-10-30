@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Biometry Lecture and Lab Notes</title>
+  <meta name="description" content="Biometry Lecture and Lab Notes" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Biometry Lecture and Lab Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Biometry Lecture and Lab Notes" />
+  
+  
+  
+
+<meta name="author" content="Heather Lynch" />
+
+
+<meta name="date" content="2019-10-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="week-1-lab-handout.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Biometry Lecture and Lab Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html"><i class="fa fa-check"></i><b>1</b> Week 1 Lab Handout</a><ul>
+<li class="chapter" data-level="1.1" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#lesson-1-using-r-like-a-calculator"><i class="fa fa-check"></i><b>1.1</b> Lesson #1: Using R like a calculator</a></li>
+<li class="chapter" data-level="1.2" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#lesson-2-the-basic-data-structures-in-r"><i class="fa fa-check"></i><b>1.2</b> Lesson #2: The basic data structures in R</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#vectors"><i class="fa fa-check"></i><b>1.2.1</b> VECTORS</a></li>
+<li class="chapter" data-level="1.2.2" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#factors"><i class="fa fa-check"></i><b>1.2.2</b> FACTORS</a></li>
+<li class="chapter" data-level="1.2.3" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#data-frames"><i class="fa fa-check"></i><b>1.2.3</b> DATA FRAMES</a></li>
+<li class="chapter" data-level="1.2.4" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#matrices"><i class="fa fa-check"></i><b>1.2.4</b> MATRICES</a></li>
+<li class="chapter" data-level="1.2.5" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#arrays"><i class="fa fa-check"></i><b>1.2.5</b> ARRAYS</a></li>
+<li class="chapter" data-level="1.2.6" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#lists"><i class="fa fa-check"></i><b>1.2.6</b> LISTS</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#lesson-3-writing-functions-in-r"><i class="fa fa-check"></i><b>1.3</b> Lesson #3: Writing functions in R</a></li>
+<li class="chapter" data-level="1.4" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#lesson-4-writing-loops-and-ifelse"><i class="fa fa-check"></i><b>1.4</b> Lesson #4: Writing loops and if/else</a></li>
+<li class="chapter" data-level="1.5" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#lesson-5-a-short-diversion-bias-in-estimators"><i class="fa fa-check"></i><b>1.5</b> Lesson #5: (A short diversion) Bias in estimators</a></li>
+<li class="chapter" data-level="1.6" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#lesson-6-some-practice-writing-r-code"><i class="fa fa-check"></i><b>1.6</b> Lesson #6: Some practice writing R code</a></li>
+<li class="chapter" data-level="1.7" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html#lesson-7-a-few-final-notes"><i class="fa fa-check"></i><b>1.7</b> Lesson #7: A few final notes</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Biometry Lecture and Lab Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Biometry Lecture and Lab Notes</h1>
+<p class="author"><em>Heather Lynch</em></p>
+<p class="date"><em>2019-10-30</em></p>
+</div>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<p>This eBook contains all of the lecture notes and lab exercises that we will do this semester in Biometry.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="week-1-lab-handout.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
