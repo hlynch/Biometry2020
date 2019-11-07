@@ -1,0 +1,363 @@
+Week 2 Lab
+=============
+Basics of bootstrap and jackknife
+------------------------------------
+
+To get started with bootstrap and jackknife techniques, we start by working through a very simple example. First we simulate some data
+
+```{r}
+x<-seq(0,9,by=1)
+```
+
+This will constutute our "data". Let's print the result of sampling with replacement to get a sense for it...
+
+```{r}
+table(sample(x,size=length(x),replace=T))
+```
+
+Now we will write a little script to take bootstrap samples and calculate the means of each of these bootstrap samples
+
+```{r}
+xmeans<-vector(length=1000)
+for (i in 1:1000)
+  {
+  xmeans[i]<-mean(sample(x,replace=T))
+  }
+```
+
+The actual number of bootstrapped samples is arbitrary *at this point* but there are ways of characterizing the precision of the bootstrap (jackknife-after-bootstrap) which might inform the number of bootstrap samples needed. *In practice*, people tend to pick some arbitrary but large number of bootstrap samples because computers are so fast that it is often easy to draw far more samples than are actually needed. When calculation of the statistic is slow (as might be the case if you are using the samples to construct a phylogeny, for example), then you would need to be more concerned with the number of bootstrap samples. 
+
+First, lets just look at a histogram of the bootstrapped means and plot the actual sample mean on the histogram for comparison
+
+
+```{r}
+hist(xmeans,breaks=30,col="pink")
+abline(v=mean(x),lwd=2)
+```
+
+Calculating bias and standard error
+-----------------------------------
+
+From these we can calculate the bias and standard deviation for the mean (which is the "statistic"):
+
+$$
+\widehat{Bias_{boot}} = \left(\frac{1}{k}\sum^{k}_{i=1}\theta^{*}_{i}\right)-\hat{\theta}
+$$
+
+```{r}
+bias.boot<-mean(xmeans)-mean(x)
+bias.boot
+hist(xmeans,breaks=30,col="pink")
+abline(v=mean(x),lwd=5,col="black")
+abline(v=mean(xmeans),lwd=2,col="yellow")
+
+```
+
+$$
+\widehat{s.e._{boot}} = \sqrt{\frac{1}{k-1}\sum^{k}_{i=1}(\theta^{*}_{i}-\bar{\theta^{*}})^{2}}
+$$
+
+```{r}
+se.boot<-sd(xmeans)
+```
+
+We can find the confidence intervals in two ways:
+
+Method #1: Assume the bootstrap statistics are normally distributed
+
+```{r}
+LL.boot<-mean(xmeans)-1.96*se.boot #where did 1.96 come from?
+UL.boot<-mean(xmeans)+1.96*se.boot
+LL.boot
+UL.boot
+```
+
+Method #2: Simply take the quantiles of the bootstrap statistics
+
+```{r}
+quantile(xmeans,c(0.025,0.975))
+```
+
+Let's compare this to what we would have gotten if we had used normal distribution theory. First we have to calculate the standard error:
+
+```{r}
+se.normal<-sqrt(var(x)/length(x))
+LL.normal<-mean(x)-qt(0.975,length(x)-1)*se.normal
+UL.normal<-mean(x)+qt(0.975,length(x)-1)*se.normal
+LL.normal
+UL.normal
+```
+
+In this case, the confidence intervals we got from the normal distribution theory are too wide.
+
+Does it make sense why the normal distribution theory intervals are too wide? Because the original were were uniformly distributed, the data has higher variance than would be expected and therefore the standard error is higher than would be expected.
+
+There are two packages that provide functions for bootstrapping, 'boot' and 'boostrap'. We will start by using the 'bootstrap' package, which was originally designed for Efron and Tibshirani's monograph on the bootstrap. 
+
+To test the main functionality of the 'bootstrap' package, we will use the data we already have. The 'bootstrap' function requires the input of a user-defined function to calculate the statistic of interest. Here I will write a function that calculates the mean of the input values.
+
+```{r}
+library(bootstrap)
+theta<-function(x)
+  {
+    mean(x)
+  }
+results<-bootstrap(x=x,nboot=1000,theta=theta)
+results
+quantile(results$thetastar,c(0.025,0.975))
+```
+
+Notice that we get exactly what we got last time. This illustrates an important point, which is that the bootstrap functions are often no easier to use than something you could write yourself.
+
+You can also define a function of the bootstrapped statistics (we have been calling this theta) to pull out immediately any summary statistics you are interested in from the bootstrapped thetas.
+
+Here I will write a function that calculates the bias of my estimate of the mean (which is 4.5 [i.e. the mean of the number 0,1,2,3,4,5,6,7,8,9])
+
+```{r}
+bias<-function(x)
+  {
+  mean(x)-4.5
+  }
+results<-bootstrap(x=x,nboot=1000,theta=theta,func=bias)
+results
+```
+
+Compare this to 'bias.boot' (our result from above). Why might it not be the same? Try running the same section of code several times. See how the value of the bias ($func.thetastar) jumps around? We should not be surprised by this because we can look at the jackknife-after-bootstrap estimate of the standard error of the function (in this case, that function is the bias) and we can see that it is not so small that we wouldn't expect some variation in these values.
+
+Remember, everything we have discussed today are estimates. The statistic as applied to your data will change with new data, as will the standard error, the confidence intervals - everything! All of these values have sampling distributions and are subject to change if you repeated the procedure with new data.
+
+Note that we can calculate any function of $\theta^{*}$. A simple example would be the 72nd percentile:
+
+```{r}
+perc72<-function(x)
+  {
+  quantile(x,probs=c(0.72))
+  }
+results<-bootstrap(x=x,nboot=1000,theta=theta,func=perc72)
+results
+```
+
+On Tuesday we went over an example in which we bootstrapped the correlation coefficient between LSAT scores and GPA. To do that, we sampled pairs of (LSAT,GPA) data with replacement. Here is a little script that would do something like that using (X,Y) data that are independently drawn from the normal distribution
+
+```{r}
+xdata<-matrix(rnorm(30),ncol=2)
+```
+
+Everyone's data is going to be different. With such a small sample size, it would be easy to get a positive or negative correlation by random change, but on average across everyone's datasets, there should be zero correlation because the two columns are drawn independently.
+
+```{r}
+n<-15
+theta<-function(x,xdata)
+  {
+  cor(xdata[x,1],xdata[x,2])
+  }
+results<-bootstrap(x=1:n,nboot=50,theta=theta,xdata=xdata) 
+#NB: xdata is passed to the theta function, not needed for bootstrap function itself
+```
+
+Notice the parameters that get passed to the 'bootstrap' function are: (1) the indexes which will be sampled with replacement. This is different that the raw data but the end result is the same because both the indices and the raw data get passed to the function 'theta' (2) the number of bootrapped samples (in this case 50) (3) the function to calculate the statistic (4) the raw data.
+
+Lets look at a histogram of the bootstrapped statistics $\theta^{*}$ and draw a vertical line for the statistic as applied to the original data.
+
+```{r}
+hist(results$thetastar,breaks=30,col="pink")
+abline(v=cor(xdata[,1],xdata[,2]),lwd=2)
+```
+
+Parametric bootstrap
+---------------------
+
+Let's do one quick example of a parametric bootstrap. Let's generate some fairly sparse data from a Gamma distribution
+
+```{r}
+original.data<-rgamma(10,3,5)
+```
+
+and calculate the skew of the data using the R function 'skewness' from the 'moments' package. 
+
+```{r}
+library(moments)
+theta<-skewness(original.data)
+theta
+```
+
+Lets use 'fitdistr' to fit a gamma distribution to these data. We happen to know that the data are gamma distributed, but in general we wouldn't know that.
+
+```{r}
+library(MASS)
+fit<-fitdistr(original.data,dgamma,list(shape=1,rate=1))
+# fit<-fitdistr(original.data,"gamma")
+# The second version would also work.
+fit
+```
+
+Now lets sample with replacement from this new distribution and calculate the skewness at each step:
+
+```{r}
+results<-c()
+for (i in 1:1000)
+  {
+  x.star<-rgamma(length(original.data),shape=fit$estimate[1],rate=fit$estimate[2])
+  results<-c(results,skewness(x.star))
+  }
+results
+hist(results,breaks=30,col="pink",ylim=c(0,1),freq=F)
+```
+
+Now we have the bootstrap distribution for skewness (the $\theta^{*}$ s), we can compare that to the equivalent non-parametric bootstrap:
+
+```{r}
+results2<-bootstrap(x=original.data,nboot=1000,theta=skewness)
+results2
+hist(results,breaks=30,col="pink",ylim=c(0,1),freq=F)
+hist(results2$thetastar,breaks=30,border="purple",add=T,density=20,col="purple",freq=F)
+```
+
+We can compare the two empirical distributions for $\theta^{*}$ more formally by looking at the qqplot:
+
+```{r}
+qqplot(results,results2$thetastar)
+```
+
+What would have happened if we would have fit a normal distribution instead of a gamma distribution?
+
+```{r}
+fit2<-fitdistr(original.data,dnorm,start=list(mean=1,sd=1))
+fit2
+results.norm<-c()
+for (i in 1:1000)
+  {
+  x.star<-rnorm(length(original.data),mean=fit2$estimate[1],sd=fit2$estimate[2])
+  results.norm<-c(results.norm,skewness(x.star))
+  }
+results.norm
+hist(results,breaks=30,col="pink",ylim=c(0,1),freq=F)
+hist(results.norm,breaks=30,col="lightgreen",freq=F,add=T)
+hist(results2$thetastar,breaks=30,border="purple",add=T,density=20,col="purple",freq=F)
+```
+
+All three methods (two parametric and one non-parametric) really do give different distributions for the bootstrapped statistic, so the choice of which method is best depends a lot on the situation, how much data you have, and what you might already know about the underlying distribution.
+
+Jackknifing is just as easy at bootstrapping. Here we will do a trivial example for illustration. We will write a little function for the mean even though you could put the function in directly with 'jackknife(x,mean)'
+
+```{r}
+theta<-function(x)
+  {
+  mean(x)
+  }
+x<-seq(0,9,by=1)
+results<-jackknife(x=x,theta=theta)
+results
+```
+
+Why do we not have to tell the 'jackknife' function how many replicates to do?
+
+Let's compare this with what we would have obtained from bootstrapping
+
+```{r}
+results2<-bootstrap(x,1000,theta)
+mean(results2$thetastar)-mean(x)  #this is the bias
+sd(results2$thetastar)  #the standard deviation of the theta stars is the SE of the statistic (in this case, the mean)
+```
+
+
+Everything we have done to this point used the R package 'bootstrap' - now lets compare that with the R package 'boot'. To avoid any confusion (a.k.a. masking) between the two packages, I recommend detaching the bootstrap package from the workspace with
+
+```{r}
+detach("package:bootstrap")
+```
+
+
+The 'boot' package is now recommended over the 'bootstrap' package, but they give the same answers and to some extent it is personal preference which one prefers to use.
+
+We will still use the mean as the statistic of interest, but we will have to write a new function for it because the syntax of the 'boot' package is slightly different:
+
+```{r}
+library(boot)
+theta<-function(x,index)
+  {
+  mean(x[index])
+  }
+boot(x,theta,R=999)
+```
+
+One of the main advantages to the 'boot' package over the 'bootstrap' package is the nicer formatting of the output.
+
+Going back to our original code, lets see how we could reproduce all of these numbers:
+
+```{r}
+table(sample(x,size=length(x),replace=T))
+xmeans<-vector(length=1000)
+for (i in 1:1000)
+  {
+  xmeans[i]<-mean(sample(x,replace=T))
+  }
+mean(x)
+bias<-mean(xmeans)-mean(x)
+se.boot<-sd(xmeans)
+bias
+se.boot
+```
+
+Why do our numbers not agree exactly with those of the boot package? This is because our estimates of bias and standard error are just estimates, and they carry with them their own uncertainties. That is one of the reasons we might bother doing jackknife-after-bootstrap.
+
+The 'boot' package has a LOT of functionality. If we have time, we will come back to some of these more complex functions later in the semester as we cover topics like regression and glm.
+
+
+We'll finish off by briefing looking over two more examples from Phillip Good's book "Introduction to Statistics Through Resampling Methods and R/S-PLUS":
+
+```{r}
+
+# Example #1: Use permutation methods to test the hypothesis that the treatment
+# does not increase survival time
+
+
+g.trt<-c(94,197,16,38,99,141,23)
+g.ctr<-c(52,104,146,10,51,30,40,27,46)
+g.all<-c(g.trt,g.ctr)
+label<-c(1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2)
+mean.diff.perm<-c()
+n<-1000
+
+for (i in 1:n)
+ {
+  label.perm<-sample(label,size=length(label),replace=F)
+  g.trt.temp<-g.all[label.perm==1]
+  g.ctr.temp<-g.all[label.perm==2]
+  temp<-mean(g.trt.temp)-mean(g.ctr.temp)
+  mean.diff.perm<-c(mean.diff.perm,temp)
+ }
+
+test.statistic<-mean(g.trt)-mean(g.ctr)
+test.statistic
+
+# use a two tailed test, so we have to sum up over both tails!
+
+p.value<-(sum(as.numeric(mean.diff.perm>abs(test.statistic)))+sum(as.numeric(mean.diff.perm<(-abs(test.statistic)))))/n
+p.value
+```
+
+
+Do you understand what is being done here?
+
+```{r}
+# Example #2: Provide a 80% confidence interval  for the difference in mean survival days based # on 1000 bootstrap samples
+
+
+g.trt<-c(94,197,16,38,99,141,23)
+g.ctr<-c(52,104,146,10,51,30,40,27,46)
+mean.diff.boot<-c()
+n<-1000
+
+for (i in 1:n)
+ {
+  g.trt.temp<-sample(g.trt, size=length(g.trt),replace=T)
+  g.ctr.temp<-sample(g.ctr, size=length(g.ctr),replace=T)
+  temp<-mean(g.trt.temp)-mean(g.ctr.temp)
+  mean.diff.boot<-c(mean.diff.boot,temp)
+ }
+
+ll.median.ul<-quantile(mean.diff.boot,probs=c(0.10,0.50,0.90))
+```
+
+Do you understand what is being done here?

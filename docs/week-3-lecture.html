@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Biometry Lecture and Lab Notes</title>
-  <meta name="description" content="Biometry Lecture and Lab Notes" />
+  <title>5 Week 3 Lecture | Biometry Lecture and Lab Notes</title>
+  <meta name="description" content="5 Week 3 Lecture | Biometry Lecture and Lab Notes" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Biometry Lecture and Lab Notes" />
+  <meta property="og:title" content="5 Week 3 Lecture | Biometry Lecture and Lab Notes" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Biometry Lecture and Lab Notes" />
+  <meta name="twitter:title" content="5 Week 3 Lecture | Biometry Lecture and Lab Notes" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="week-1-lecture.html"/>
+<link rel="prev" href="week-2-lab.html"/>
+<link rel="next" href="week-3-lab-handout.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -180,23 +180,229 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Biometry Lecture and Lab Notes</h1>
-<p class="author"><em>Heather Lynch</em></p>
-<p class="date"><em>2019-11-06</em></p>
+<div id="week-3-lecture" class="section level1">
+<h1><span class="header-section-number">5</span> Week 3 Lecture</h1>
+<div id="overview-of-probability-distributions" class="section level2">
+<h2><span class="header-section-number">5.1</span> Overview of probability distributions</h2>
+<p>We will cover 7 distributions this week, and several more next week. Please refer to the handout if univariate distributions, and note that the arrows between Normal and Standard Normal need to be reversed.</p>
+<p>For each distribution, there are five things I want you to know.</p>
+<p>1 - Probability density function</p>
+<p>2 - General Shape</p>
+<p>3 - The expected value <span class="math inline">\(E[X]\)</span></p>
+<p>4 - The variance <span class="math inline">\(E[X-E[X]]^2\)</span></p>
+<p>5 - Relationship to other distributions</p>
+<p>What is a probability density?</p>
+<p>if <span class="math inline">\(f(x \mid params)\)</span> is a probablity density function:</p>
+<p> </p>
+<p><span class="math display">\[ P(a&lt;x&lt;b)=\int_a^bf(x \mid params)dx \]</span></p>
+<ul>
+<li><p>Probablity at a single point is always zero but probablity density is not.</p></li>
+<li><p>The probability density function is not restricted to being <span class="math inline">\(\le1\)</span></p></li>
+<li><p>The integral over it’s range is always 1.</p></li>
+</ul>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This eBook contains all of the lecture notes and lab exercises that we will do this semester in Biometry. While I have made every effort to cite sources where I’ve used “found” material, this eBook reflects my own personal notes drawn up over nearly a decade of work and some material may not properly identify the original sources used in drawing up my initial lecture notes. As I have moved this material into an online eBook, I have tried to better document material inspired by or drawn from other sources. If you find anything in these notes that is not properly cited or sourced, please let me know so it can be amended. Any mistakes are mine and mine alone.</p>
+<div id="normal-gaussian-distribution" class="section level2">
+<h2><span class="header-section-number">5.2</span> Normal (Gaussian) Distribution</h2>
+<ul>
+<li><p>The outcome is produced by small number effects acting <strong>additively</strong> and <strong>independently</strong>.</p></li>
+<li><p>Normally distributed errors is the most common assumption of linear models.</p></li>
+<li><p>Central Limit theorem!</p></li>
+</ul>
+<p>The probability density function of the Normal distribution is given by</p>
+<p><span class="math display">\[ f(x \mid \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \]</span> <span class="math display">\[ x \in \mathbb{R} \\ \mu \in \mathbb{R} \\ \sigma &gt; 0 \]</span></p>
+<p>The shape of the Normal distribution can be illustrated by a few examples</p>
+<p><img src="Week-3-lecture_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>The expected value of the Normal distribution is given by</p>
+<p><span class="math display">\[ \begin{align} E[X] &amp;= \int_{-\infty}^{\infty}{X \cdot f(X)dX} \\
+&amp;= \int_{-\infty}^{\infty} x \cdot f(x \mid \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \\ &amp;= \mu \end{align}\]</span></p>
+<p>The variance of the Normal distribution is given by</p>
+<p><span class="math display">\[ \begin{align} Var[X] &amp;= E[(X- E[X])^2] \\ 
+&amp;= E[(X - \mu)^2] \\ 
+&amp;= E[X^2] - \mu^2 \\ 
+&amp;= \left( \int_{-\infty}^{\infty} x^2 \cdot f(x \mid \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \right) - \mu^2 \\ 
+&amp;= \sigma^2 \end{align} \]</span></p>
+</div>
+<div id="standard-normal-distribution" class="section level2">
+<h2><span class="header-section-number">5.3</span> Standard Normal Distribution</h2>
+<ul>
+<li><p>Raw data rarely fits standard normal.</p></li>
+<li><p>Mostly useful as a theoretical construct in hypothesis testing.</p></li>
+</ul>
+<p>The probability density function of the Standard Normal distribution is given by</p>
+<p><span class="math display">\[ z = \frac{x-\mu}{\sigma} \]</span></p>
+<p><span class="math display">\[ f(z \mid \mu, \sigma) = \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}z^2} \]</span></p>
+<p>The expected value and variance of the Standard Normal distribution are given by</p>
+<ul>
+<li><p>E[X] = 0</p></li>
+<li><p>Var[X] = 1</p></li>
+</ul>
+<p>Note that the Standard Normal distribution is a linear transformation of the Normal distribution (centered on zero with variance equal to 1).</p>
+</div>
+<div id="log-normal-distribution" class="section level2">
+<h2><span class="header-section-number">5.4</span> Log-Normal Distribution</h2>
+<ul>
+<li><p>The outcome is produced by small number effects acting <strong>multiplicatively</strong> and <strong>independently</strong>.</p></li>
+<li><p>Often used for things where small grows slowly and big grows quickly, such as forest fires or insurence claims.</p></li>
+</ul>
+<p>The probability density function of the Log-Normal distribution is given by</p>
+<p><span class="math display">\[ \begin{align} log(X) &amp;\sim N(\mu,\sigma) \\ X &amp;\sim LN(\mu,\sigma) \end{align} \]</span></p>
+<p><span class="math display">\[ f(x \mid \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(log(x)-\mu)^2}{2\sigma^2}} \\ x \in \{0,\infty\} \\
+\mu \in \mathbb{R} \\ 
+\sigma &gt; 0 \]</span></p>
+<p>The shape of the Log-Normal distribution can be illustrated with a few examples</p>
+<p><img src="Week-3-lecture_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The expected value and variance of the Log-Normal distribution is given by</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is no longer the mean!</li>
+</ul>
+<p><span class="math display">\[ E[X] = e^{\mu + \frac{\sigma^2}{2}} \]</span></p>
+<ul>
+<li><span class="math inline">\(\sigma\)</span> is no longer the variance!</li>
+</ul>
+<p><span class="math display">\[ Var[X] = e^{2(\mu + \sigma^2) - (2\mu + \sigma^2)} \]</span></p>
+<p>Note that if the log of a variable (X) has a Normal distribution</p>
+<p><span class="math display">\[
+log(X) \sim N(\mu,\sigma^{2})
+\]</span> than the variable X follows a Log-Normal distribution.</p>
+<p><strong>NB: Be careful when using the Log-Normal distribution. In particular, keep in mind that the sum of Log-normally distributed variables is NOT Log-Normally distributed.</strong></p>
+</div>
+<div id="intermission-central-limit-theorem" class="section level2">
+<h2><span class="header-section-number">5.5</span> Intermission: Central Limit Theorem</h2>
+<p><span class="math display">\[ X_1,X_2,X_3,...,X_k \sim N(\mu,\sigma^2) \\ 
+S_n = \frac{1}{n} (X_1 + X_2 + X_3,...,X_k) \\
+\lim_{n \to \infty} S_n \to N(\mu,\frac{\sigma^2}{n}) \]</span></p>
+<ul>
+<li><p>X is i.i.d</p></li>
+<li><p>X can be drawn from any distribution!</p></li>
+</ul>
+</div>
+<div id="poisson-distribution" class="section level2">
+<h2><span class="header-section-number">5.6</span> Poisson Distribution</h2>
+<p>The Poisson distribution arises principally in 3 situations:</p>
+<p>1 - In the description of random spatial point patterns (disease events, complete spatial randomness)</p>
+<p>2 - As the frequency distribution of rare but independent events</p>
+<p>3 - As the error distribution in linear models of count data</p>
+<p>The probability mass function of the Poisson distribution is given by</p>
+<p><span class="math display">\[ P(x \mid \lambda)= \frac{e^{-\lambda} \cdot \lambda^x}{x!} \\
+\lambda&gt;0 \\
+x \in \mathbb{N} \cup \{0\} \]</span></p>
+<p>Note that when variables are discrete (i.e. when the distribution only produces integer numbers), we call the probability density function a probability <em>mass</em> function. The PDF and PMF play the same tole in both cases.</p>
+<p>The shape of the Poisson distribution is illustrated by a few examples</p>
+<p><img src="Week-3-lecture_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The expected value and variance of the Poisson distribution is given by</p>
+<p><span class="math display">\[ \begin{align} E[X] &amp;= \sum_{x=1}^{\infty} x \frac{e^{-\lambda} \cdot \lambda^x}{x!} \\
+&amp;= \lambda \cdot e^{-\lambda} \cdot \sum_{x=1}^{\infty} x \frac{\lambda^{x-1}}{x!} \\
+&amp;= \lambda \cdot e^{-\lambda} \cdot \sum_{x=1}^{\infty} \frac{\lambda^{x-1}}{(x-1)!}, y = x-1 \\
+&amp;= \lambda \cdot e^{-\lambda} \cdot \sum_{y=0}^{\infty} \frac{\lambda^{y}}{y!} \\
+&amp;= \lambda \cdot e^{-\lambda} \cdot e^{\lambda} \\
+&amp;= \lambda\end{align} \]</span></p>
+<p><span class="math display">\[ Var[X] = \lambda \]</span></p>
+<p>The Poisson distribution has the following relationship to the Normal distribution:</p>
+<p><span class="math display">\[ \lim_{\lambda \to \infty} Pois(\lambda) \to N(\lambda, \lambda)  \]</span></p>
+<p>Note that the sum of Poisson distributed variables is itself Poisson distributed.</p>
+<p><span class="math display">\[ \begin{align} X &amp;\sim Pois(1) \\ Y &amp;= \sum_{i=1}^{\lambda} X_i \\
+Y &amp;\sim Pois(\lambda) \end{align} \]</span></p>
+<p>Applying the Central Limit Theorem</p>
+<p><span class="math display">\[\begin{align} \bar{X} = \frac{Y}{\lambda} &amp;\sim N(1,\frac{1}{\lambda}) \\
+Y &amp;\sim N(\lambda, \lambda) \end{align} \]</span></p>
+</div>
+<div id="binomial-distribution" class="section level2">
+<h2><span class="header-section-number">5.7</span> Binomial Distribution</h2>
+<p>The probability mass function of the Binomial distribution is given by</p>
+<p><span class="math display">\[ P(x \mid p,n) = \frac{n!}{x!-(n-x)!}p^x(1-p)^x \\
+n \in \mathbb{N} \cup \{0\} \\ 
+x \in \{1,2,3,...,n\} \\
+p \in [0,1] \]</span></p>
+<p>The shape of the Binomial distribution is illustrated by the following examples</p>
+<p><img src="Week-3-lecture_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The expected value and variance of the Binomial distribution is given by</p>
+<p><span class="math display">\[ \begin{align} E[X] &amp;= \sum_{x=1}^n x \frac{n!}{x!-(n-x)!}p^x(1-p)^x \\ 
+&amp;=np \\
+Var[X] &amp;= np(1-p) \end{align} \]</span></p>
+<p>The Binomial distribution has the following relationship to the Normal distribution</p>
+<p><span class="math display">\[ \lim_{n \to \infty} Binom(n,p) \to N(np,np(1-p)) \]</span></p>
+</div>
+<div id="beta-distribution" class="section level2">
+<h2><span class="header-section-number">5.8</span> Beta Distribution</h2>
+<ul>
+<li><p>One of the few distributions that is restricted to a finite interval (0 and 1).</p></li>
+<li><p>Can be used to model proportions.</p></li>
+</ul>
+<p>The probability density function of the Beta distribution is given by</p>
+<p><span class="math display">\[ f(x \mid \alpha, \beta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1} \\ 
+ \alpha&gt;0 \\ 
+ \beta&gt;0 \\
+ x \in (0,1) \]</span></p>
+<p>Gamma Function: if n is a positive integer <span class="math inline">\(\Gamma(n)=(n-1)!\)</span></p>
+<p>The shape of the Beta distribution is illustrated by the following examples</p>
+<p><img src="Week-3-lecture_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>The expected value and variance of the Beta distribution is given by</p>
+<p><span class="math display">\[ \begin{align} E[X] &amp;= \int_0^1x\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) + \Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}dx \\
+&amp;= \frac{\alpha}{\alpha + \beta}  \end{align} \]</span></p>
+<p><span class="math display">\[ Var[X] = \frac{\alpha\beta}{(\alpha+\beta)^2 \cdot(\alpha + \beta + 1)} \]</span></p>
+<p>The Beta Distribution’s relationship to the Normal and Uniform distributions are given by</p>
+<p><span class="math inline">\(Beta(1,1)\)</span> is the same as <span class="math inline">\(Uniform(0,1)\)</span></p>
+<p><span class="math display">\[ f(x \mid 1,1) = \frac{\Gamma(2)}{\Gamma(1) + \Gamma(1)}x^{0}(1-x)^{0} = 1 \]</span></p>
+<p><span class="math display">\[ \lim_{\alpha=\beta \to \infty} \to N(\frac{1}{2}, \frac{1}{8\alpha + 4}) \]</span></p>
+</div>
+<div id="gamma-distribution" class="section level2">
+<h2><span class="header-section-number">5.9</span> Gamma Distribution</h2>
+<ul>
+<li><p>Useful for variables that have a positive skew.</p></li>
+<li><p>it is often used to model “waiting times”, such as the time before a device or machine fails.</p></li>
+</ul>
+<p>The probability density function of the Gamma distribution (not to be confused with the Gamma Function) is given by</p>
+<p><span class="math display">\[ f(x \mid \alpha, \beta) = \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{(\alpha-1)} e^\frac{-x}{\beta} \\
+\alpha&gt;0 \\
+\beta &gt;0 \\
+x&gt;0\]</span></p>
+<p>The shape of the Gamma distribution is illustrated by the following examples</p>
+<p><img src="Week-3-lecture_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The expected value and variance of the Gamma distribution is given by</p>
+<p><span class="math display">\[ \begin{align} E[X] &amp;= \int_0^\infty x\frac{1}{\beta^\alpha \Gamma(\alpha)} x^{(\alpha-1)} e^\frac{-x}{\beta} \\
+&amp;= \alpha\beta \end{align} \]</span></p>
+<p><span class="math display">\[ Var[X] = \alpha\beta^2 \]</span></p>
+<p>The relationship between the Gamma sistribution and the Normal distribution is</p>
+<p><span class="math display">\[ \lim_{\alpha \to \infty} Gamma(\alpha,\beta) \to N(\alpha \beta,\alpha\beta^2) \]</span></p>
+</div>
+<div id="some-additional-notes" class="section level2">
+<h2><span class="header-section-number">5.10</span> Some additional notes:</h2>
+<p>Please skim through the reading that has been posted “The Algebra of Expectations”. Focus on the “rules”.</p>
+<p>I want to make sure everyone is clear on the distribution of Normal random variables.</p>
+<p>If</p>
+<p><span class="math display">\[
+X\sim N(\mu,\sigma^{2})
+\]</span></p>
+<p>then the distribution of a new variable c*X (where c is a constant) is given by</p>
+<p><span class="math display">\[
+cX\sim N(c\mu,c^{2}\sigma^{2})
+\]</span></p>
+<p>The mean is simply multiplied by <span class="math inline">\(c\)</span>, and the variance is multiplied by <span class="math inline">\(c^{2}\)</span>.</p>
+<p>To understand why this is, let’s first go into a more detailed derivation of the variance of the distribution of Normal random variables than we did in class. To begin with, you will need to know that one property of expectations is the following:</p>
+<p><span class="math display">\[
+E[ g(x) ] = \int g(x) f(x) \ dx
+\]</span></p>
+<p>With this knowledge, let’s approach the derivation of the variance, where we are essentially defining <span class="math inline">\(g(x) = (X-E[X])^2\)</span> and using some basic properties of algebra involving integrals. Note that in this derivation we are treating <span class="math inline">\(E[X]\)</span> as a constanct, and <strong>not</strong> as a function of <span class="math inline">\(x\)</span>.</p>
+<p><span class="math display">\[
+\begin{eqnarray}
+Var[X]&amp;=&amp;E[(X-E[X])^{2}] \\
+&amp;=&amp;\int (x - E(X))^2 f(x) \ dx \\
+&amp;=&amp;\int (x^2 -2xE(X) + E(X)^2 ) f(x) \ dx \\
+&amp;=&amp;\int x^2 f(x) \ dx - 2E(X) \int x f(x) \ dx + \int E(X)^2 f(x) \ dx \\
+&amp;=&amp; E(X^2) -2 E(X)^2 + E(X)^2 \\
+&amp;=&amp; E(X^2) - E(X)^2 
+\end{eqnarray}
+\]</span></p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="week-1-lecture.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="week-2-lab.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="week-3-lab-handout.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

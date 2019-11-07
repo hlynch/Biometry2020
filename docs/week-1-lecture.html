@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Biometry Lecture and Lab Notes</title>
-  <meta name="description" content="Biometry Lecture and Lab Notes" />
+  <title>1 Week 1 Lecture | Biometry Lecture and Lab Notes</title>
+  <meta name="description" content="1 Week 1 Lecture | Biometry Lecture and Lab Notes" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Biometry Lecture and Lab Notes" />
+  <meta property="og:title" content="1 Week 1 Lecture | Biometry Lecture and Lab Notes" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Biometry Lecture and Lab Notes" />
+  <meta name="twitter:title" content="1 Week 1 Lecture | Biometry Lecture and Lab Notes" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="week-1-lecture.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="week-1-lab-handout.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -180,23 +180,230 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Biometry Lecture and Lab Notes</h1>
-<p class="author"><em>Heather Lynch</em></p>
-<p class="date"><em>2019-11-06</em></p>
+<div id="week-1-lecture" class="section level1">
+<h1><span class="header-section-number">1</span> Week 1 Lecture</h1>
+<div id="reading-material" class="section level2">
+<h2><span class="header-section-number">1.1</span> Reading Material</h2>
+<ul>
+<li>Text
+<ul>
+<li>Foundational and Applied Statistics for Biologists Using R</li>
+<li>Biostatistical Design and Analysis Using R</li>
+</ul></li>
+<li>Papers from prmiary literature</li>
+</ul>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This eBook contains all of the lecture notes and lab exercises that we will do this semester in Biometry. While I have made every effort to cite sources where I’ve used “found” material, this eBook reflects my own personal notes drawn up over nearly a decade of work and some material may not properly identify the original sources used in drawing up my initial lecture notes. As I have moved this material into an online eBook, I have tried to better document material inspired by or drawn from other sources. If you find anything in these notes that is not properly cited or sourced, please let me know so it can be amended. Any mistakes are mine and mine alone.</p>
+<div id="basic-outline" class="section level2">
+<h2><span class="header-section-number">1.2</span> Basic Outline</h2>
+<p>First half: - R - bootstrap, jackknife, and other randomization techniques - hypothesis testing - probability distributions - the “classic tests” of statistics - graphical analysis of data</p>
+<p>Second half:</p>
+<ul>
+<li>regression (incl. ANOVA, ANCOVA)</li>
+<li>model building</li>
+<li>model criticism</li>
+<li>non-linear regression</li>
+<li>multivariate regression</li>
+</ul>
+<p>Grading:</p>
+<ul>
+<li><p>12 Problem sets (3% each, 36% total)</p></li>
+<li><p>2 Quizzes (2% each, 4% total)</p></li>
+<li><p>Midterm (25%)</p></li>
+<li><p>Final (35%)</p></li>
+</ul>
+<p>Class Structure</p>
+<ul>
+<li><p>Lecture on Tuesday</p></li>
+<li><p>“Lab”&quot; on Thursday</p></li>
+<li><p>Problem sets are posted on Wednesdays (feel free to remind me via Slack if I forget), and are due before lecture next Tuesday. This deadline is very strict, no exceptions. Turn in what you have before 8:30 am on Tuesday, even if its not complete.</p></li>
+</ul>
+<p>Communication</p>
+<ul>
+<li><p>Use slack!</p></li>
+<li><p>Come to (both) office hours</p></li>
+<li>E-mail me
+<ul>
+<li>Weekdays 9 am - 10 pm</li>
+<li>Sundays 8 pm - 10 pm</li>
+</ul></li>
+</ul>
+</div>
+<div id="todays-agenda" class="section level2">
+<h2><span class="header-section-number">1.3</span> Today’s Agenda</h2>
+<ol style="list-style-type: decimal">
+<li>Basic probability theory</li>
+<li>An overview of univariate distributions</li>
+<li>Calculating the expected value of a random variable</li>
+<li>A brief introduction to the Scientific Method</li>
+<li>Introduction to statistical inference</li>
+</ol>
+</div>
+<div id="basic-probability-theory" class="section level2">
+<h2><span class="header-section-number">1.4</span> Basic Probability Theory</h2>
+<ul>
+<li><p>A bag with a mix of regular and peanut M&amp;Ms</p></li>
+<li><p>Each M&amp;M has two traits: Color and Type</p></li>
+</ul>
+<p><span class="math display">\[ \sum_{all \: colors} P(color) = 1 \]</span> <span class="math display">\[ \sum_{all \: types} P(types) = ? \]</span></p>
+<p>Basic Probability Theory | Intersection</p>
+<div class="figure">
+<img src="inter.png" />
 
+</div>
+<p> </p>
+<ul>
+<li>Pull one M&amp;M out of the bag</li>
+</ul>
+<p><span class="math display">\[ P(Green \: AND \:  Peanut) = P(Green \cap Peanut) = P(Green) \cdot P(Peanut) \]</span></p>
+<ul>
+<li>This is called a Joint Probability: <span class="math inline">\(P(Green,Peanut)\)</span></li>
+</ul>
+<p>Union:</p>
+<div class="figure">
+<img src="union.png" />
+
+</div>
+<p> </p>
+<p><span class="math display">\[ \begin{align*} 
+P(Green \: OR \: Peanut) &amp;= P(Green \cup Peanut) \\ 
+&amp;= P(Green) + P(Peanut) - P(Green \cap Peanut) \end{align*} \]</span></p>
+<p>Complement:</p>
+<div class="figure">
+<img src="comp.png" />
+
+</div>
+<p> </p>
+<p><span class="math display">\[ P(Green^c) = 1 - P(Green)  \]</span></p>
+</div>
+<div id="multiple-events" class="section level2">
+<h2><span class="header-section-number">1.5</span> Multiple events</h2>
+<ul>
+<li>Pull 2 M&amp;Ms out of the bag</li>
+</ul>
+<p><span class="math display">\[ P (Green \: AND \: THEN \: Blue) = P(Green) \cdot P(Blue) \]</span></p>
+<ul>
+<li>What if we didn’t care about the order?</li>
+</ul>
+</div>
+<div id="conditionals" class="section level2">
+<h2><span class="header-section-number">1.6</span> Conditionals</h2>
+<p><span class="math display">\[ P(A \mid B) = P(A \: conditional \: on \: B) \]</span></p>
+<p> </p>
+<p><span class="math display">\[ \begin{align*}  P(A,B) = P(A \cap B) &amp;= P(A \mid B) \cdot P(B) \\
+&amp;= P(B \mid A) \cdot P(A) \end{align*} \]</span></p>
+</div>
+<div id="bayes-theorem" class="section level2">
+<h2><span class="header-section-number">1.7</span> Bayes Theorem</h2>
+<p><span class="math display">\[ P(A \mid B) \cdot P(B) = P(B \mid A) \cdot P(A) \]</span></p>
+<p> </p>
+<p><span class="math display">\[ P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}\]</span></p>
+<p><span class="math display">\[ P(parameters \mid data) \cdot P(data) = P(data \mid parameters) \cdot P(parameters) \]</span></p>
+<p> </p>
+<p><span class="math display">\[ P(parameters \mid data) = \frac{P(data \mid parameters) \cdot P(parameters)}{P(data)}\]</span></p>
+</div>
+<div id="a-few-foundational-ideas" class="section level2">
+<h2><span class="header-section-number">1.8</span> A few foundational ideas</h2>
+<p>There are a few statistics (a statistic is just something calculated from data) that we will need to know right at the beginning.</p>
+<p>For illustration purposes, lets assume we have the following (sorted) series of data points: (1,3,3,4,7,8,13)</p>
+<p>There are three statistics relating the “central tendancy”: the mean (the average value; 5.57), the mode (the most common value; 3), and the median (the “middle” value; 4). We often denote the mean of a variable with a bar, as in <span class="math inline">\(\bar{x}\)</span>. There are also two statistics relating to how much variation there is in the data. The variance measures the average squared distance between each point and the mean. For reasons that we will discuss in lab, we estimate the variance using the following formula</p>
+<p><span class="math display">\[
+\mbox{variance}_{unbiased} = \frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}
+\]</span> rather than the more intuitive</p>
+<p><span class="math display">\[
+\mbox{variance}_{biased} = \frac{1}{n}\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}
+\]</span></p>
+<p>Keep in mind that variance measures a distance <em>squared</em>. So if your data represent heights in m, than the variance will have units <span class="math inline">\(m^{2}\)</span> or square-meters.</p>
+<p>The standard deviation is simply the square-root of variance, and is often denoted by the symbol <span class="math inline">\(\sigma\)</span>.</p>
+<p><span class="math display">\[
+\sigma = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}}
+\]</span></p>
+<p>If you were handed a distribution and you were asked to measure a characteristic “fatness” for the distribution, your estimate would be approximately <span class="math inline">\(\sigma\)</span>. Note that <span class="math inline">\(\sigma\)</span> has the same units as the original data, so if your data were in meters, <span class="math inline">\(\sigma\)</span> would also be in meters.</p>
+<p>We won’t get to Normal distributions properly until Week 3, but we will need one fact about the “Standard Normal Distribution” now. The Standard Normal distribution is a Normal (or Gaussian, bell-shaped) distribution with mean equal to zero and standard deviation equal to 1. 68<span class="math inline">\(\%\)</span> of the probability is contained within 1 standard deviation of the mean (so from -<span class="math inline">\(\sigma\)</span> to +<span class="math inline">\(\sigma\)</span>), and 95<span class="math inline">\(\%\)</span> of the probability is contained within 2 standard deviations of the mean (so from -2<span class="math inline">\(\sigma\)</span> to +2<span class="math inline">\(\sigma\)</span>). (Actually, 95<span class="math inline">\(\%\)</span> is contained with 1.96 standard deviations, so sometimes we will use the more precise 1.96 and sometimes you will see this rounded to 2.)</p>
+</div>
+<div id="overview-of-univariate-distributions" class="section level2">
+<h2><span class="header-section-number">1.9</span> Overview of Univariate Distributions</h2>
+<p>Discrete Distributions - Binomial - Multinomial - Poisson - Geometric</p>
+<p>Continuous Distributions - Normal/Gaussian - Beta - Gamma - Student’s t - <span class="math inline">\(\chi^2\)</span></p>
+</div>
+<div id="what-can-you-ask-of-a-distribution" class="section level2">
+<h2><span class="header-section-number">1.10</span> What can you ask of a distribution?</h2>
+<ul>
+<li><strong>Probability Density Function</strong>: <span class="math inline">\(P(x_1&lt;X&lt;x_2)\)</span> (continuous distributions)</li>
+</ul>
+
+<ul>
+<li><p><strong>Probability Mass Function</strong>: <span class="math inline">\(P(X=x_1)\)</span> (discrete distributions)</p></li>
+<li><p><strong>Cumulative Density Function (CDF)</strong>: What is <span class="math inline">\(P(X \le X^*)\)</span>?</p></li>
+<li><p><strong>Quantiles of the distributions</strong>: What is <span class="math inline">\(X^{*}\)</span> if <span class="math inline">\(P(X \le X^{*})=0.37\)</span>?</p></li>
+<li><p><strong>Sample from the distribution</strong>: With a large enough sample, the histogram will come very close to the underlying PDF.</p></li>
+</ul>
+<p>Note that the CDF is the integration of the PDF, and the PDF is the derivative of the CDF, so if you have one of these you can always get the other. Likewise, you can always get from the quantiles to the CDF (and then to the PDF). These three things are all equally informative about the shape of the distribution.</p>
+<p>Expected Value of a Random Variable</p>
+<p>In probability theory the expected value of a random variable is the weighted average of all possible values that this random variable can take on. The weights used in computing this average correspond to the probabilities in case of a discrete random variable, or densities in case of continious random variable.</p>
+<p>Expected Value of a Random Variable | Discrete Case</p>
+<p><span class="math display">\[ X = \{X_1, X_2,...,X_k\} \\
+E[X] = \sum_{i=1}^n{X_i \cdot P(X_i)}\]</span></p>
+<ul>
+<li>Example: Draw numbered balls with numbers 1, 2, 3, 4 and 5 with probabilities 0.1, 0.1, 0.1, 0.1, 0.6.</li>
+</ul>
+<p><span class="math display">\[ \begin{align*} E[X] &amp;= (0.1 \cdot 1) + (0.1 \cdot 2) + (0.1 \cdot 3) + (0.1 \cdot 4) + (0.6 \cdot 5) \\ &amp;=4 \end{align*}\]</span></p>
+<p>Expected Value of a Random Variable | Continuous Case</p>
+<p><span class="math display">\[ E[X] = \int_{-\infty}^{\infty}{X \cdot f(X)dX}\]</span></p>
+</div>
+<div id="a-brief-introduction-to-scientific-method" class="section level2">
+<h2><span class="header-section-number">1.11</span> A Brief Introduction to Scientific Method</h2>
+<p>INDUCTIVE reasoning:</p>
+<p>A set of specific observations -&gt; A general principle</p>
+<p>Example: I observe a number of elephants and they were all gray. Therefore, all elephants are gray.</p>
+<p>DEDUCTIVE reasoning:</p>
+<p>A general principle -&gt; A set of predictions or explanations</p>
+<p>Example: All elephants are gray. Therefore, I predict that this new (as yet undiscovered) species of elephant will be gray.</p>
+<p>QUESTION: If this new species of elephant is green, what does this do to our hypothesis that all elephants are gray?</p>
+<p>Some terminology:</p>
+<p><strong>Null Hypothesis</strong>: A statement encapsulating “no effect”</p>
+<p><strong>Alternative Hypothesis</strong>: A statement encapsulating “an effect”&quot;</p>
+<ul>
+<li><p>Fisher: Null hypothesis only</p></li>
+<li><p>Neyman and Pearson: H0 and H1, Weigh risk of of false positive against the false negative</p></li>
+<li><p>We use a hyprid approach</p></li>
+</ul>
+<div class="figure">
+<img src="popper.png" />
+
+</div>
+<p><strong>Hypothesis can only be rejected, they can never be accepted!</strong></p>
+<p> </p>
+<p>“Based on the data obtained, we reject the null hypothesis that…”</p>
+<p> or</p>
+<p>“Based on the data obained, we fail to reject the null hypothesis that…”</p>
+<p>More terminology</p>
+<p><strong>Population</strong>: Entire collection of individuals a researcher is interested in.</p>
+<p><strong>Model</strong>: Mathematical description of the quantity of interest. It combines a general description (functional form) with parameters (population parameters) that take specific values.</p>
+<p><strong>Population paramater</strong>: Some measure of a population (mean, standard deviation, range, etc.). Because populations are typically very large this quantity is unknown (and usually unknowable).</p>
+<p><strong>Sample</strong>: A subset of the population selected for the purposes of making inference for the popualtion.</p>
+<p><strong>Sample Statistic</strong>: Some measure of this sample that is used to infer the true value of the associated populatipn parameter.</p>
+<p>An example:</p>
+<p><strong>Population</strong>: Fish density in a lake</p>
+<p><strong>Sample</strong>: You do 30 net tows and count all the fish in each tow</p>
+<p><strong>Model</strong>: <span class="math inline">\(Y_i \sim Binom(p,N)\)</span></p>
+<p>The basic outline of statistical inference</p>
+<p>sample(data) -&gt; sample statistics -&gt; ESTIMATOR -&gt; population parameter -&gt; underlying distribution</p>
+<p>Estimators are imperfect tools</p>
+<ul>
+<li><p>Bias: The expected value <span class="math inline">\(\neq\)</span> population parameter</p></li>
+<li><p>Not consistent: As <span class="math inline">\(n \to \infty\)</span> sample statistic <span class="math inline">\(\neq\)</span> population parameter</p></li>
+<li><p>Variance</p></li>
+</ul>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="week-1-lecture.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="week-1-lab-handout.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

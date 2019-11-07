@@ -5,7 +5,7 @@ In lab today, we will cover just a few of the basic elements of using R. If you 
 
 For the purposes of lab, we will be entering all of the commands directly on the command line at the prompt. In general, however, you should get into the habit of writing scripts with all of your code. This will allow you to save your work and go back and easily use code that you have written in the past. When you are doing actual analyses for publication, it is essential that you have all of your code in well commented scripts that could be understood by another researcher in your field. All of your analysis should be fully reproducible long after the paper is published.
 
-Lesson #1: Using R like a calculator
+Using R like a calculator
 -----------------------------------
 
 R can be used like a basic calculator with commands entered at the R prompt '>'
@@ -65,7 +65,7 @@ For large numbers, R automatically uses scientific notation although the thresho
 ```
 
 
-Lesson #2: The basic data structures in R
+The basic data structures in R
 -----------------------------------
 
 There are several basic types of data structures in R.
@@ -77,7 +77,7 @@ There are several basic types of data structures in R.
 5. **ARRAYS**: higher dimensional matrices are called arrays in R
 6. **LISTS**: lists can contain any type of object as list elements. You can have a list of numbers, a list of matrices, a list of characters, etc., or any combination of the above.
 
-### VECTORS
+Vectors:
 
 Vectors can be column vectors or row vectors but we are almost always talking about column vectors which are defined with a `c()`. One example of a vector would be a sequence of numbers. There are many ways to generate sequences in R. Lets say you want to define an object x as the following sequence of numbers (1,2,3,4,5,6,7)
 
@@ -217,7 +217,7 @@ We can do the opposite as well, instead of pulling out a set of elements you wan
 z[-3]
 ```
 
-### FACTORS
+Factors:
 
 To explore factors, we will use the dataset Prestige.csv I posted on Blackboard. To simply everything that follows, I will set the working directory to my own folder for this week's lab. This will allow me to reference files within this folder without the entire file name.
 
@@ -272,7 +272,7 @@ Prestige$type<-factor(Prestige$type,levels=c("bc","wc","prof"))
 levels(Prestige$type)
 ```
 
-### DATA FRAMES
+Data frames:
 
 R has a special object called a dataframe which is, as the name suggests, designed to hold data. Unlike a matrix, in which all the elements have to be the same type (typically numbers), dataframes are more like spreadsheets - each column can be its own datatype. So you can have a column of numbers associated with a second column of treatment types (character).
 Let's make a data frame to play around with, which we will make the ranking of the top three girls and boys names for 2010.
@@ -297,7 +297,7 @@ new.data.frame<-edit(our.data.frame)
 
 NOTE: R allows you to 'attach' a dataframe to a workspace so that you can refer to the individual columns without having to type in the name of the dataframe. I think this is terrible practice and makes your code impossible to read by your future self.
 
-### MATRICES
+Matrices:
 
 You make a matrix as follows (here we populate the matrix with a sequence from 1:12):
 
@@ -336,11 +336,11 @@ See what happens when you try
 Notice that R automatically translates the 1 into a matrix of 1s such that the calculation makes sense.
 
 
-### ARRAYS
+Arrays:
 
 Arrays are just higher dimensional matrices and since we will not use them much, I won't get into details here.
 
-### LISTS
+Lists:
 
 A list is a one-dimensional structure of potentially heterogeneous data types.
 
@@ -363,7 +363,7 @@ list.1[[2]]
 Notice that list indexing requires double brackets.
 
 
-Lesson #3: Writing functions in R
+Writing functions in R
 -----------------------------------
 
 
@@ -395,7 +395,7 @@ product(3,5)
 
 A few notes about using R. What makes R special is not the base package but the "Contributed packages" which make up the bulk of R's utility. We will be using a variety of these contributed packages along the way, so you need to feel comfortable downloading them from the web. I have posted a handout on Blackboard to cover this.
 
-Lesson #4: Writing loops and if/else
+Writing loops and if/else
 -----------------------------------
 
 The R language is very good at doing operations on vectors or matrices, and when possible, this is always the preferred method of doing an operation mulitple times. However, sometimes this is not possible and you have to write a loop to perform some operation on elements taken one at a time.
@@ -447,10 +447,10 @@ if (a > 4) {
   } else print("Goodbye")
 ```
 
-Lesson #5: (A short diversion) Bias in estimators
+(A short diversion) Bias in estimators
 -----------------------------------
 
-Now we will stop for a short digression about how to calculate the population variance and how to estimate the sample variance, since we can now use R to convince ourselves that the naive estimator for variance is biased. 
+Now we will stop for a short digression about how to calculate the population variance (i.e. the variamce assuming the data I have is from the entire population) and how to estimate the sample variance (i.e. the variance assuming what I have is a *sample* from the population, and I want to infer the variance of the underlying but unknown population), since we can now use R to convince ourselves that the naive estimator for variance is biased. 
 
 The population variance is the variance of a population which, by definition, means that every single individual of interest has been measured. Remember, in this case there is no inference going on. When we have measured every single individual of interest, all we can do (statistically) is describe that population. The population variance describes the variation in the quantity of interest *for that population you have completely sampled*).
 
@@ -563,7 +563,7 @@ s2.A
 
 Is the variance for the Seeded clouds the same as the Unseeded clouds? How close (to equal) is close enough? What is the null hypothesis?
 
-Lesson #7: A few final notes
+A few final notes
 -----------------------------------
 
 I mentioned at the outset that all of your code should be kept in a script (some kind of text file; it could be a .R file but it could be a simple .txt file) and that your code should be clearly commented. Comments can be added to code using the # sign. For example
