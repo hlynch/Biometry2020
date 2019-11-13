@@ -1,5 +1,49 @@
 Week 2 Lab
 =============
+
+Confidence intervals
+-----------------------
+
+Before getting too far, we need to circle back and make sure we understand what is meant by a confidence interval. 
+
+A 95th percentile confidence interval say “If I repeat this procedure 100 times using 100 different datasets, 95% of the time my confidence intervals will capture the true parameter”. It does NOT say that there is a 95% chance that the parameter is in the interval.
+
+**Quiz time! (Don't worry, not a real quiz)**
+
+*Important note*: This is an area where Aho is WRONG. I will not repeat Aho's interpretation here because I think he's just wrong. Aho is correct on only one point. It is true that ONCE THE 95th CI HAS BEEN CONSTRUCTED, it is no longer possible to assign a $%$ to the probability that that CI contains the true value or not. Because that CI, once created, either DOES or DOES NOT contain the true value. However, we often talk about the interval in the abstract. When we say "There is a 95$%$ chance that the interval contains the true value" what we mean is that there is a 95$%$ probability that a CI created using that methodology would contain the true value.
+
+Do not let Week 2 pass by without fundamentally understanding the interpretation of a confidence interval. 
+
+Testing hypotheses through permutation
+------------------------------------
+
+We'll start off by working through two examples from Phillip Good's book "Introduction to Statistics Through Resampling Methods and R/S-PLUS":
+
+Example #1: Use permutation methods to test the null hypothesis that the treatment does not increase survival time (in other word: $H_{0}$: No difference in survival between the treated and control groups):
+
+Survival.treated=$\{94,197,16,38,99,141,23 \}$
+
+Survival.control=$\{52,104,146,10,51,30,40,27,46 \}$
+
+(Is this a one-tailed or a two-tailed test?)
+
+Make sure that you understand what is being done here, as this example is very closely related to the problem set.
+
+
+Example #2: Using the same data, provide a 95% confidence interval for the difference in mean survival days based on 1000 bootstrap samples
+
+Note that these two approaches are very closely related. Do you see why either approach can be used to test the null hypothesis? (What is the null hypothesis here?)
+
+Now we will do one slightly more complicated example from Phillip Good's book "Permutation tests: A practical guide to resampling methods and testing hypotheses":
+
+Holmes and Williams (1954) studied tonsil size in children to verify a possible association with the virus \textit{S. pyrogenes}. Test for an association between \textit{S. pyrogenes} status and tonsil size. (Note that you will need to come up with a reasonable test statistic.)
+
+![](Table2categories.png)
+
+Now lets consider the full dataset, where tonsil size is divided into three categories. How would we do the test now? What is the new test statistic? (There are many options.) What 'labels' do you permute?
+
+![](Table3categories.png)
+
 Basics of bootstrap and jackknife
 ------------------------------------
 
@@ -167,7 +211,34 @@ abline(v=cor(xdata[,1],xdata[,2]),lwd=2)
 Parametric bootstrap
 ---------------------
 
-Let's do one quick example of a parametric bootstrap. Let's generate some fairly sparse data from a Gamma distribution
+Let's do one quick example of a parametric bootstrap. We haven't introduced distributions yet (except for the Gaussian, or Normal, distribution, which is the most familiar), so lets spend a few minutes exploring the Gamma distribution, just so we have it to work with for testing out parametric bootstrap. All we need to know is that the Gamma distribution is a continuous, non-negative distribution that takes two parameters, which we call "shape" and "rate". Lets plot a few examples just to see what a Gamma distribution looks like. (Note that the Gamma distribution can be parameterized by "shape" and "rate" OR by "shape" and "scale", where "scale" is just 1/"rate". R will allow you to use either (shape,rate) or (shape,scale) as long as you specify which you are providing.
+
+```{r, echo=FALSE}
+
+library(ggplot2)
+
+y1 <- dgamma(seq(0,20,0.1), shape=1, rate = 0.5)
+y2 <- dgamma(seq(0,20,0.1), shape=2, rate = 0.5)
+y3 <- dgamma(seq(0,20,0.1), shape=9, rate = 2)
+y4 <- dgamma(seq(0,20,0.1), shape=7.5, rate = 1)
+
+n.data <- data.frame(y = c(y1,y2,y3,y4),
+                     x = rep(seq(0,20,0.1), times = 4),
+                     type = rep(c("shape = 1, rate = 0.5",
+                                  "shape = 2, rate = 0.5",
+                                  "shape = 9, rate = 0.5",
+                                  "shape = 7.5, rate = 1"), each = length(y1)))
+
+theme_set(theme_bw())
+ggplot(n.data, aes(x=x, y=y)) + 
+  geom_line(aes(color = type)) +
+  labs(y = "f (x | alpha, beta)", x = "x") +
+  theme(legend.title = element_blank(),
+        legend.position = c(0.5, 0.8))
+```
+
+
+Let's generate some fairly sparse data from a Gamma distribution
 
 ```{r}
 original.data<-rgamma(10,3,5)
@@ -178,10 +249,12 @@ and calculate the skew of the data using the R function 'skewness' from the 'mom
 ```{r}
 library(moments)
 theta<-skewness(original.data)
-theta
+head(theta)
 ```
 
-Lets use 'fitdistr' to fit a gamma distribution to these data. We happen to know that the data are gamma distributed, but in general we wouldn't know that.
+What is skew? Skew describes how assymetric a distribution is. A distribution with a positive skew is a distribution that is "slumped over" to the right, with a right tail that is longer than the left tail. Alternatively, a distribution with negative skew has a longer left tail. Here we are just using it for illustration, as a property of a distribution that you may want to estimate using your data.
+
+Lets use 'fitdistr' to fit a gamma distribution to these data. This function is an extremely handy function that takes in your data, the name of the distribution you are fitting, and some starting values (for the estimation optimizer under the hood), and it will return the parameter values (and their standard errors). We will learn in a couple weeks how R is doing this, but for now we will just use it out of the box. (Because we generated the data, we happen to know that the data are gamma distributed. In general we wouldn't know that, and we will see in a second that our assumption about the shape of the data really does make a difference.)
 
 ```{r}
 library(MASS)
@@ -200,7 +273,7 @@ for (i in 1:1000)
   x.star<-rgamma(length(original.data),shape=fit$estimate[1],rate=fit$estimate[2])
   results<-c(results,skewness(x.star))
   }
-results
+head(results)
 hist(results,breaks=30,col="pink",ylim=c(0,1),freq=F)
 ```
 
@@ -211,12 +284,6 @@ results2<-bootstrap(x=original.data,nboot=1000,theta=skewness)
 results2
 hist(results,breaks=30,col="pink",ylim=c(0,1),freq=F)
 hist(results2$thetastar,breaks=30,border="purple",add=T,density=20,col="purple",freq=F)
-```
-
-We can compare the two empirical distributions for $\theta^{*}$ more formally by looking at the qqplot:
-
-```{r}
-qqplot(results,results2$thetastar)
 ```
 
 What would have happened if we would have fit a normal distribution instead of a gamma distribution?
@@ -230,7 +297,7 @@ for (i in 1:1000)
   x.star<-rnorm(length(original.data),mean=fit2$estimate[1],sd=fit2$estimate[2])
   results.norm<-c(results.norm,skewness(x.star))
   }
-results.norm
+head(results.norm)
 hist(results,breaks=30,col="pink",ylim=c(0,1),freq=F)
 hist(results.norm,breaks=30,col="lightgreen",freq=F,add=T)
 hist(results2$thetastar,breaks=30,border="purple",add=T,density=20,col="purple",freq=F)
@@ -303,61 +370,3 @@ Why do our numbers not agree exactly with those of the boot package? This is bec
 
 The 'boot' package has a LOT of functionality. If we have time, we will come back to some of these more complex functions later in the semester as we cover topics like regression and glm.
 
-
-We'll finish off by briefing looking over two more examples from Phillip Good's book "Introduction to Statistics Through Resampling Methods and R/S-PLUS":
-
-```{r}
-
-# Example #1: Use permutation methods to test the hypothesis that the treatment
-# does not increase survival time
-
-
-g.trt<-c(94,197,16,38,99,141,23)
-g.ctr<-c(52,104,146,10,51,30,40,27,46)
-g.all<-c(g.trt,g.ctr)
-label<-c(1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2)
-mean.diff.perm<-c()
-n<-1000
-
-for (i in 1:n)
- {
-  label.perm<-sample(label,size=length(label),replace=F)
-  g.trt.temp<-g.all[label.perm==1]
-  g.ctr.temp<-g.all[label.perm==2]
-  temp<-mean(g.trt.temp)-mean(g.ctr.temp)
-  mean.diff.perm<-c(mean.diff.perm,temp)
- }
-
-test.statistic<-mean(g.trt)-mean(g.ctr)
-test.statistic
-
-# use a two tailed test, so we have to sum up over both tails!
-
-p.value<-(sum(as.numeric(mean.diff.perm>abs(test.statistic)))+sum(as.numeric(mean.diff.perm<(-abs(test.statistic)))))/n
-p.value
-```
-
-
-Do you understand what is being done here?
-
-```{r}
-# Example #2: Provide a 80% confidence interval  for the difference in mean survival days based # on 1000 bootstrap samples
-
-
-g.trt<-c(94,197,16,38,99,141,23)
-g.ctr<-c(52,104,146,10,51,30,40,27,46)
-mean.diff.boot<-c()
-n<-1000
-
-for (i in 1:n)
- {
-  g.trt.temp<-sample(g.trt, size=length(g.trt),replace=T)
-  g.ctr.temp<-sample(g.ctr, size=length(g.ctr),replace=T)
-  temp<-mean(g.trt.temp)-mean(g.ctr.temp)
-  mean.diff.boot<-c(mean.diff.boot,temp)
- }
-
-ll.median.ul<-quantile(mean.diff.boot,probs=c(0.10,0.50,0.90))
-```
-
-Do you understand what is being done here?

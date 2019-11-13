@@ -105,13 +105,13 @@ Notice that it now becomes a *more stringent test*. If $T^{*}$ is large, it now 
 TWO KEY POINTS:
 
 1. If you are using a one-tailed test, you have to be willing to accept a result that is opposite in sign of what was expected as being PURELY BY CHANCE!! In other words, if traffic deaths went UP after the texting ban, you would have to be willing to accept that that was by pure chance and you would then fail to reject the null hypothesis of NO CHANGE. This is in fact what happened, by the way: Texting bans actually increase traffic deaths – WHY?
+
 2. Before using the more “lenient” one-tailed test, make sure you really believe that results opposite to what you expect are only random
-	
 	
 You cannot do a one-tailed test, find the answer to have the wrong sign and then do a two-tailed test. While probably quite common, this is not statistically valid. You cannot use the data to generate the test!
 Not all tests are created equal!! Tests differ in their power to detect differences, and their efficiency. The balance between power and efficiency depends on the specific situation; we will discuss this more next week.
 
-We are going to introduce the idea of hypothesis testing through the practice of permutation tests, because it allows us to get into the flow of testing hypotheses without the burden of a lot of complicated mathematics. 
+We are going to introduce the idea of hypothesis testing through the practice of permutation tests, because it allows us to get into the flow of testing hypotheses without the burden of a lot of complicated mathematics. Moreover, in doing so, we introduce the more general concept of "generative models", which generate outcomes through simulation. for example, we can think of the statement $X \sim Pois(\lambda)$ as a generative model because it allows us to generate datasets that follow the distribution $Pois(\lambda)$. If we had a dataset and we wanted to know whether it came from a Poisson distribution, we could imagine generating lots of datasets using a generative model (i.e. drawn from $Pois(\lambda)$) and asking ourselves whether any of the generated datasets look anything like the dataset we have. In the same way, we can think about testing a null hypothesis $H_{0}$ by generating data under that null hypothesis, calculating some test statistics from that generated data, and asking whether our geneterated test statsitics "look like" the test statistic obtained from our real data. If not, then we can reject the null hypothesis. Simulations like this are enormously powerful tools for testing hypotheses and are often far more intuitive than the alternative "parametric" statistical tests we will learn in Weeks 3 and 4.
 
 Permutation tests 
 ------------------------

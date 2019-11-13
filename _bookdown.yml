@@ -5,4 +5,5 @@ output_dir: docs
 rmd_files: ["index.Rmd","Week-1-lecture.Rmd","Week-1-lab.Rmd","Week-2-lecture.Rmd","Week-2-lab.Rmd","Week-3-lecture.Rmd","Week-3-lab.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
+#setwd("~/Documents/Projects/Biometry2020")
 #bookdown::render_book("index.Rmd")
