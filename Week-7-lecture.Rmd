@@ -1,0 +1,290 @@
+Week 7 Lecture/Lab
+=============
+
+We have already covered most of the basic elements of plotting, but here I'll go over some elements of plotting that you may not have learned already this semester.
+
+You will need the packages 'ggplot2','gplots', and 'ade4' so you might as well install them now.
+
+```{r}
+library(ggplot2)
+library(gplots)
+library(ade4)
+```
+
+PART I: Box plots
+------------------
+
+A boxplot is a convenient way of summarizing univariate data; the top and bottom of the rectangle represent the upper and lower quartiles of the data, the median by a horizontal line in the rectangle. There are several conventions for the whiskers, so the meaning of the whiskers should be explained clearly in the legend. One convention holds that the whisker extend to the further point that is no more than 1.5 times the interquartile range (75th-25th). In this case, outlying datapoints are shown with their own dot or star. You can also draw whiskers that extend out to the furthest datapoint.
+
+Let's illustrate this using some randomly drawn data.
+
+```{r}
+boxplot(rnorm(1000,mean=0,sd=1),rnorm(1000,mean=0,sd=3))
+```
+
+We can play around with some of the options, such as naming the boxes and coloring the borders.
+
+```{r}
+boxplot(rnorm(1000,mean=0,sd=1),rnorm(1000,mean=0,sd=3),names=c("cats","dogs"), border=c("red","green"))
+```
+
+PART II: Two-dimensional data
+-------------------------
+
+Read in the following dataset describing fox fur production as a function of year.
+
+```{r}
+setwd("~/Dropbox/Biometry/Week 7 Graphical methods/Week 7 Lecture")
+fox.data<-read.csv("Fox fur production.csv", header=F)
+```
+
+We could do our entire analysis referring to the two columns as [,1] and [,2] but to make our code more readable, lets add some column names
+
+```{r}
+colnames(fox.data)<-c("year","production")
+```
+
+Now we can refer to the two columns of data as $year and $production.
+
+Now let's plot the data:
+
+```{r}
+plot(fox.data$year,fox.data$production)
+abline(a=200,b=0)
+abline(h=200)
+points(fox.data$year[fox.data$production>200],fox.data$production[fox.data$production>200],cex=2,pch=16)
+large.production<- fox.data$production>200
+points(fox.data$year[large.production],fox.data$production[large.production],cex=2,pch=16)
+```
+
+Notice that with this code I am highlighting all the points where fur production is >200, and I added a horizontal bar at 200 using the function "abline". (Stop: Discuss the options for abline.)
+
+All software packages make horrible default plots and R is no exception. Make the following changes to make a more information plot and to explore what R can do.
+
+1. Label the x and y axes.
+2. Try plotting as a line using "typ="l"""
+3. Plot both points and lines suing "typ="b""
+4. Change the plotting symbol using "pch=XX" where XX is a number between 1 and 25. 
+5. While black is the logical default color, play around with color using the option "col=XX" where XX can be either a number or a name.
+
+We can get R to list all of the named colors using
+
+```{r}
+colors()
+```
+
+but we can also explicitly type in RGB values using the rgb() function and values (from 0 to MaxColorValue, which is 1 by default) for each of the red, green, and blue components. 
+ 
+```{r}
+plot(fox.data$year,fox.data$production,col=rgb(red=0,green=1,blue=0))
+``` 
+ 
+You can extract rgb values from a named color using the col2rgb() function
+
+```{r}
+col2rgb("peachpuff")
+```
+
+For complex plots which require a suite of colors, I highly recommend using the R package RColorBrewer. This package has a companion website for choosing color schemes (for mapping, for example) www.colorbrewer2.org. RColorBrewer allows you to pick color schemes with certain characteristics (diverging, sequential, etc) and to select a certain number of colors within that color scheme. The website also suggests color schemes that are color-blind friendly (often required for publication).
+
+```{r}
+library(RColorBrewer)
+mypalette<-brewer.pal(7,"Greens")
+image(1:7,1,as.matrix(1:7),col=mypalette,xlab="Greens (sequential)",
+      ylab="",xaxt="n",yaxt="n",bty="n")
+```
+
+This is a sequential palette. ColorBrewer also offers up a variety of divergent and qualitative palettes such as
+
+```{r}
+display.brewer.pal(7,"BrBG")
+```
+
+and
+
+```{r}
+display.brewer.pal(7,"Accent")
+```
+
+There are many other options. You can extract the actual hex codes for these colors using
+
+```{r}
+brewer.pal(7,"Accent")
+```
+
+To play around with a few more graphics options, we will use one of the built-in datasets that has R called "mtcars". I will break one of my own rules here and attach the dataset.
+
+```{r}
+attach(mtcars)
+plot(wt, mpg, main="Milage vs. Car Weight",xlab="Weight", ylab="Mileage", pch=18, col="blue")
+text(wt, mpg, row.names(mtcars), cex=0.6, pos=4, col="red")
+```
+
+Note that we can add a legend:
+
+```{r}
+# Legend Example
+boxplot(mpg~cyl, main="Milage by Car Weight",yaxt="n", xlab="Milage", horizontal=TRUE,col=terrain.colors(3))
+legend("topright", inset=.05, title="Number of Cylinders",c("4","6","8"), fill=terrain.colors(3), horiz=TRUE)
+```
+
+Be aware of overplotting (points that overlap) especially when data are discrete or rounded. One strategy for overcoming this is jittering the points so the density of points can be displayed without overly distorting the underlying relationships. You can use the 'jitter' command in the base package.
+
+```{r}
+jitter(rep(0, 7))
+```
+
+Before we launch into three-dimensional plotting, we should introduce 'ggplot2' which is quickly becoming "industry standard" for making plots in R. There is *so* much that can be done with ggplot2 that we will only scratch the surface today, but at least this introduction will illustrate some of the things that ggplot2 can do.
+
+The basic function to make plots using ggplot2 is 'qplot'. We can recreate the scatterplot of the mtcars data using ggplot2 as follows
+
+```{r}
+library(ggplot2)
+qplot(wt, mpg, main="Milage vs. Car Weight",xlab="Weight", ylab="Mileage", data=mtcars)
+```
+
+We can also do fancier things, such as
+
+```{r}
+mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),
+   labels=c("3gears","4gears","5gears"))
+mtcars$am <- factor(mtcars$am,levels=c(0,1),
+   labels=c("Automatic","Manual"))
+mtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),
+   labels=c("4cyl","6cyl","8cyl"))
+
+# Kernel density plots for mpg
+# grouped by number of gears (indicated by color)
+qplot(mpg, data=mtcars, geom="density", fill=gear, alpha=I(.5),
+   main="Distribution of Gas Milage", xlab="Miles Per Gallon",
+   ylab="Density")
+```
+
+
+There is more to ggplot2 than I can cover today, but if you are serious about making nice plots, its worth investing some time in learning this package.
+
+
+PART III: Three-dimensional data
+------------------------
+
+There are almost an infinite variety of graphical options for R, most of which are available through the contributed R packages. We will use one of them now to demonstrate some of R's other graphical options.
+
+You should already have installed the R package 'gplots' but if not, do so now. 
+
+```{r}
+library(gplots,quietly=TRUE,warn.conflicts=F)
+```
+
+For data, we will simply draw samples from the normal distribution. Feel free to choose any two distributions of your own liking.
+
+```{r}
+x <- rnorm(2000, sd=4)
+y <- rnorm(2000, sd=1)
+hist2d(x,y, same.scale=TRUE)
+```
+
+Notice that we had to use "same.scale=T" to make sure that distances along the x and y axes were comparable.
+
+Now we will use the hisr2d function to create inputs for a three-dimensional perspective plot.
+
+```{r}
+h2d <- hist2d(x,y,show=FALSE, same.scale=TRUE, nbins=c(20,30))
+persp( h2d$x, h2d$y, h2d$counts, ticktype="detailed", theta=30, phi=30, expand=0.5, shade=0.5, col="cyan", ltheta=-30,xlab="",ylab="",zlab="")
+```
+
+Make sure you know what these options all mean! Play around with theta and phi and see how that changes the perspective.
+
+Let's use the same data and make a contour plot.
+
+```{r}
+contour( h2d$x, h2d$y, h2d$counts, nlevels=10)
+```
+
+We can also make a filled contour plot:
+
+```{r}
+filled.contour( h2d$x, h2d$y, h2d$counts, nlevels=10, col=gray((10:0)/10))
+```
+
+Play around with "col=rainbow(10)" or "col=topo.colors(10)".
+
+Go back and play around with some of the other distributions from the last few weeks. It is particularly useful to use the 2-dimensional histograms to get a sense for what changing a distribution parameter does to the distribution.
+
+We can demonstrate some other kinds of plots R can make using some of the built in datasets. Here we demonstrate both a color plot and a contour plot:
+
+```{r}
+x <- 10*(1:nrow(volcano))
+x.at <- seq(100, 800, by=100)
+y <- 10*(1:ncol(volcano))
+y.at <- seq(100, 600, by=100)
+image(x, y, volcano, col=terrain.colors(100),axes=FALSE)
+contour(x, y, volcano, levels=seq(90, 200, by=5), add=TRUE, col="brown")
+axis(1, at=x.at)
+axis(2, at=y.at)
+box()
+title(main="Maunga Whau Volcano", sub = "col=terrain.colors(100)", font.main=4)
+```
+
+PART IV: Multiple plots
+---------------------
+
+Now we will discuss how to arrange multiple plots of the same page.
+
+With the par() function, you can include the option mfrow=c(nrows,ncols) to make a matrix of nrowsxncols plots that are filled by row. mfcol=c(nrows,ncols) would fill the matrix by columns.
+
+```{r}
+# 4 figures arranged in 2 rows and 2 columns
+par(mfrow=c(2,2))
+plot(mtcars$wt,mtcars$mpg, main="Scatterplot of wt vs. mpg")
+plot(mtcars$wt,mtcars$disp, main="Scatterplot of wt vs disp")
+hist(mtcars$wt, main="Histogram of wt")
+boxplot(mtcars$wt, main="Boxplot of wt")
+```
+
+```{r}
+# 3 figures arranged in 3 rows and 1 column
+layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE))
+hist(mtcars$wt)
+hist(mtcars$mpg)
+hist(mtcars$disp)
+```
+
+Now for a slightly complicated example that uses much of what we have learned. Childrens IQ scores are normally distributed with a mean of 100 and a standard deviation of 15. What proportion of children are expected to have an IQ between 80 and 120?
+
+```{r}
+mean<-100
+sd<-15
+lb<-80
+ub<-120
+x<-seq(-4,4,length=100)*sd+mean
+hx<-dnorm(x,mean,sd)
+plot(x,hx,typ="n",xlab="IQ Values",ylab="Density",main="Normal Distribution",axes=F)
+i<-x>=lb & x<=ub
+lines(x,hx)
+polygon(c(lb,x[i],ub),c(0,hx[i],0),col="red")
+```
+
+As one final example, we will plot scatter plots with marginal histograms. For this we need to install the R package "ade4". This package has a huge number of useful functions, which we can look at here:
+
+<a href="http://pbil.univ-lyon1.fr/ADE-4/" target="_blank">The ade4 webpage</a>
+
+For now, I just want to use some of its plotting functionality to illustrate the kinds of sophisticated graphics R is capable of.
+
+```{r}
+library(ade4)
+data(rpjdl)
+```
+
+First, lets just look at the data using "?rpjdl".
+
+```{r}
+coa1<-dudi.coa(rpjdl$fau,scannf=FALSE,nf=4)
+s.hist(coa1$li)
+```
+
+Finally, just a word of advice about making figures for publication. While R is very flexible, making publication ready figures can be very time consuming in R. If you have any possibility of using Adobe Illustrator, I *highly* suggest using R to get your figure 90% correct, and then exporting it as an .eps (Encapsulated Postscript) to Illustrator. 
+
+Except is very rare cases where you have an actual photo or image in your figure, you want to keep your figures as vector graphics throughout the entire process. Postscript (.ps) and Encapsulated Postscript (.eps) are vector file formats, but .tiff, .jpeg, and .png are not. Vector file formats will preserve the clarity pf your figure at any size scale, so your figure remains crisp and clear throughout the creation process. 
+
+In Illustrator, you can relabel everything (in whatever font the editor prefers), fix the line widths, tweak the colors as needed, arrange multiple panels as needed, add arrows and legends or other details, make one figure an inset of another, or do anything else you could possibly want to do. Illustrator has a learning curve of its own but is well worth the investment.
+

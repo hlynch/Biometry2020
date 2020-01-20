@@ -1,0 +1,458 @@
+Week 13 Lab
+=============
+
+```{r include=FALSE, warning=FALSE}
+library(MASS,warn.conflicts=F,quietly=T)
+library(lmtest,warn.conflicts=F,quietly=T)
+library(MuMIn,warn.conflicts=F,quietly=T)
+library(car,warn.conflicts=F,quietly=T)
+library(gvlma,warn.conflicts=F,quietly=T)
+text.size <- 16
+```
+
+In lab we'll go through 
+
+1. Model selection / model comparison
+
+2. Model criticism
+
+Part 1: Model selection / model comparison
+------------------------
+
+There is a frog dataset on the distribution of the Southern Corroboree frog that we are going to attach. 
+
+```{r}
+frogs<-read.csv("~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/frogs.csv",header=T)
+head(frogs)
+attach(frogs)
+plot(northing ~ easting, pch=c(1,16)[frogs$pres.abs+1],xlab="Meters east", ylab="Meters north")
+```
+
+Make sure you understand how the pch command is working in the above plot command.
+
+```{r}
+pairs(cbind(altitude,distance,NoOfPools,NoOfSites,avrain,meanmin,meanmax))
+```
+
+Looking at the data in this way, are there any covariates that might benefit from transformation?
+
+Let's try log-transforming "distance" and "Number of Pools".
+
+```{r}
+pairs(cbind(altitude,log(distance),log(NoOfPools),NoOfSites,avrain,meanmin,meanmax))
+```
+
+Let's fit a GLM with all the variables.
+
+Why a GLM? Because the response variable is binary 0/1.
+
+```{r}
+frogs.glm0<-glm(pres.abs~altitude+log(distance)+log(NoOfPools)+NoOfSites+avrain+meanmin+meanmax,family=binomial,data=frogs,na.action=na.fail)
+summary(frogs.glm0)
+```
+
+(The na.action flag is so MuMIn won't complain further down.)
+
+Anything look funny? Well, for one, meanmin is highly significant but meanmax and altitude are not - but we would expect these three variables to be highly correlated.
+
+Use the vif() function to explore this further
+
+```{r}
+vif(frogs.glm0)
+```
+
+It appears that the variances for altitude and meanmax are inflated. Why?
+
+Plot the data:
+
+```{r}
+par(mfrow=c(2,1))
+plot(altitude,meanmax)
+plot(altitude,meanmin)
+cor(altitude,meanmax)
+cor(altitude,meanmin)
+```
+
+Question: So...what do we do?
+
+Answer: Let's try removing the least biologically significant variable first. I suggest we remove altitude.
+
+```{r}
+frogs.glm1<-glm(pres.abs~log(distance)+log(NoOfPools)+NoOfSites+avrain+meanmin+meanmax,family=binomial,data=frogs)
+summary(frogs.glm1)
+```
+
+Better, but we still have a lot of multicollinearity between meanmin and meanmax.
+
+We could choose one or the other but at this point, let's leave them both in and try and find the best model we can.
+
+First, let's do a little review of the four comparison criteria we discussed on Tuesday:
+
+1. Likelihood (specifically, likelihood ratio)
+
+2. Mallows Cp
+
+3. Akaike's Information Criteria (AIC)
+
+4. Bayesian Information Criterion (BIC)
+
+We get the log-likelihood of a model in R using the logLik command
+
+```{r}
+logLik(frogs.glm0)
+logLik(frogs.glm1)
+```
+
+How do we do the likelihood ratio test?
+
+Remember that
+
+$$
+-2*(LL(smaller)-LL(bigger))
+\sim \chi^{2}_{\mbox{difference in parameters}}
+$$
+
+In R we can do this with
+
+```{r}
+test.stat<--2*(logLik(frogs.glm1)-logLik(frogs.glm0))
+as.numeric(test.stat) # as.numeric is just to suppress the labels which can be misleading
+as.numeric(1-pchisq(test.stat,df=1))
+```
+
+Question: How do we interpret that p-value?
+
+Answer: This p-value is the probability that the larger model fits the data better only by the amount expected by its additional degree of freedom. In this case, we can not reject the null hypothesis that the two models are equivalent, and so we would prefer the smaller model on the basis of parsimony.
+
+We can actually get R to do the LRT automatically using the 'lrtest' function in the 'lmtest' package.
+
+```{r}
+library('lmtest')
+lrtest(frogs.glm0,frogs.glm1)
+```
+
+This gives us exactly the same result we got before.
+
+We could also have also compared these models by looking at the ANOVA table for comparison
+
+```{r}
+anova(frogs.glm0,frogs.glm1)
+```
+
+How do we get Mallows Cp?
+
+We can use the 'anova' function again...
+
+```{r}
+anova(frogs.glm0,frogs.glm1,test="Cp")
+```
+
+How do we calculate AIC for these two models?
+
+```{r}
+logLik(frogs.glm0)
+k<-8
+AIC.glm0<-as.numeric(-2*logLik(frogs.glm0)+2*k)
+AIC.glm0
+AIC(frogs.glm0)
+AIC(frogs.glm1)
+```
+
+Question: Are these significantly different? 
+
+Answer: This is a trick question. In an Information Theoretic context, we avoid the term "significant" because it is implied that we mean "statistically significant" in the context of hypothesis testing, and no hypothesis test is being performed. AIC simply gives us information on the weight of evidence for one model over another. There are no theoretically justified guidelines (although Burnham and Anderson suggest some as we discussed in lecture). It is better (in my opinion) to convert AICs into model weights and, if it makes sense in the context, to do model averaging.
+
+How about BIC? USe the AIC function with a different flag for the penalty.
+
+```{r}
+AIC(frogs.glm0,k=log(nrow(frogs)))
+AIC(frogs.glm1,k=log(nrow(frogs)))
+```
+
+We could also do this with the BIC() function
+
+```{r}
+BIC(frogs.glm0)
+BIC(frogs.glm1)
+```
+
+Exercise: Work in groups to find a small set (3-5) of candidate models, calculate the AIC for each of these models, and calculate model weights.
+
+Model selection via step-wise regression
+--------------------
+
+Let's start with an Information Theoretic approach:
+
+We could calculate the AIC for every possible model, but this is probably not necessary. We can narrow down the set of candidate models just thinking about the biology.
+
+Now compare this to what you would get from
+
+```{r}
+step(frogs.glm0)
+step(frogs.glm0,direction="forward")
+step(frogs.glm0,direction="backward")
+```
+
+Why does the forward process give you more parameters? Probably because forward selection is like a ratchet - once variables get added, they never get removed, even if something is added that explains that portion of the variance better.
+
+Note that we can also do stepwise regression using stepAIC
+
+```{r}
+stepAIC(frogs.glm0)
+```
+
+but this is a bit like putting lipstick on a pig, so its not often used.
+
+The real magic comes when we use a package like 'MuMIn' (Multimodel Inference)
+
+```{r}
+dredge(frogs.glm0)
+```
+
+We can make a table to compare a hand-selected set of models.
+
+```{r}
+model.sel(frogs.glm0,frogs.glm1)
+```
+
+We can do model averaging
+
+```{r}
+summary(model.avg(frogs.glm0,frogs.glm1))
+```
+
+What does the output mean "with shrinkage"? These estimates include a zero value when a parameter does not actually appear in a model. In this case 'altitude' appears in only one of the two models and so the estimate "with shrinkage" is signicantly smaller than the parameter value estimated only from a weighting of the models including the covariate 'altitude'.
+
+Part 2: Model criticism
+------------------------
+
+We are going to use a dataset that comes from the journal Ecology, which was posted on Blackboard.
+
+STOP: Let's read the abstract so we know what we are modelling.
+
+The goal is to create the best possible, most parsimonious model for maximum longevity in non-volant mammals. The covariates we have in this dataset to consider are:
+
+Order           
+Family                   
+Genus               
+Species              
+Mass (g)              
+Gestation (mo)            
+Newborn weight (g)            
+Weaning age (mo)             
+Weaning mass (g)             
+Age of first reproduction (mo)            
+Litter size                
+Litters/year                  
+
+First, we will load the data and the 'car' package, and use 'names' to see what the columns are named
+
+```{r}
+data<-read.csv("~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/Mammal life history.csv")
+attach(data)
+names(data)
+```
+
+Before fitting any models, let's just look at each potential covariate vs. maximum longevity to get a sense for which variables need to be transformed. I list get the first few here...
+
+```{r}
+plot(MaxLifespan~Order)
+plot(MaxLifespan~Family)
+plot(MaxLifespan~Genus)
+plot(MaxLifespan~Species)
+plot(MaxLifespan~Mass)
+plot(MaxLifespan~Gestation)
+```
+
+Note that most of the covariates need to be transformed to linearize the relationship. The easiest transformation to try is the log() - the covariates that should probably be transformed relate to mass and time periods: Mass, Gestation, Newborn,Weaning,WeanMass,AFR,LittersPerYear (possible, not clear what the best transmation is for this). In other words, look at:
+
+```{r}
+plot(MaxLifespan~log10(Mass))
+plot(MaxLifespan~log10(Gestation))
+```
+
+etc.
+
+For now, let's ignore the taxonomic covariates and focus on just three covariates: Mass, AFR, and LitterSize.
+
+*Fitting the model using 'lm'*
+
+Let's fit the model with Mass,AFR, and LitterSize. We will consider this the full model.
+
+```{r}
+fit<-lm(MaxLifespan~log10(Mass)+log10(AFR)+LitterSize)
+summary(fit)
+```
+
+*Model diagnostics*
+
+Let's look at the residuals as a function of the fitted values:
+
+```{r}
+plot(fitted(fit),residuals(fit))
+```
+
+Let's look at the residuals using the 'car' package function 'residualPlots'. This command produces scatterplots of the residuals versus each of the predictors and versus the final fitted value. Note that what we did manually above is reproduced as the final panel here.
+
+```{r}
+residualPlots(fit)
+```
+
+We can assess the normality of the residuals by histogramming the studentized residuals. We can pull these out from the fitted model using the 'studres' function from the 'MASS' package.
+
+```{r}
+sresid<-studres(fit)
+hist(sresid,freq=FALSE)
+xfit<-seq(min(sresid),max(sresid),length=40)
+yfit<-dnorm(xfit)
+lines(xfit,yfit)
+```
+
+A variation on the basic residual plot is the marginal model plot.
+
+```{r}
+marginalModelPlots(fit)
+```
+
+Note that loess smoothers have been added showing the non-parametric regression between the actual data (solid line) and the model prediction (dashed line) against each of the predictor variables. If these two lines are close together, that is an indication of good model fit.
+
+Note that the marginal plots display the relationship between the response and each covariates IGNORING the other covariates. We can also look at the relationship between the response and each covariates CONTROLLING for the other covariates. We do this through "added variable plots".
+
+Let's say we have the following model
+
+$$
+Y \sim X_{1} + X_{2} + X_{3}
+$$
+
+There are two steps in building the added-variable plot for $X_{1}$:
+
+1. Regress
+
+$$
+Y \sim X_{2} + X_{3}
+$$
+
+The residuals from this plot reflect all the variation that is not otherwise explained in the model (i.e. by all the covariates except $X_{1}$).
+
+2. Regress
+
+$$
+X_{1} \sim X_{2} + X_{3}
+$$
+
+The residuals from this plot represent the part of $X_{1}$ not explained by the other covariates.
+
+The added variable plot is simply a plot of the residuals from #1 on the y-axis and the residuals from #2 on the x-axis.
+
+We can do this in R using the function 'avPlots' from the 'car' package
+
+```{r}
+avPlots(fit,id.n=2)
+```
+
+The id.n option will cause the plot to identify the two points that are furthest from the mean on the x axis and the two with the largest absolute residuals.
+
+The added variable plot allows us to visualize the effect of each covariate after adjusting for all the other covariates in the model.
+
+We can also look at leverage by using the command 'leveragePlots'
+
+```{r}
+leveragePlots(fit)
+```
+
+For covariates with only a single degree of freedom (i.e. not different levels of a factor), this will simply be a rescaled version of the added-variable plots.
+
+*Outliers*
+
+Let's look for outliers using the 'car' function 'outlierTest' which reports the Bonferroni p-values for Studentized residuals:
+
+```{r}
+outlierTest(fit)
+```
+
+Plot the qqplot for the studentized residuals using the 'car' package function qqPlot. WARNING: This is not the same as qqplot (lower case p); this is a specialized function in the 'car' package that will plot the appropriate qqplot for the studentized residuals given a fitted model as input.
+
+```{r}
+qqPlot(fit)
+```
+
+To identify points with high leverage, we want to calculate the hat values for each of the points. We can do this using the 'hatvalues" command in the 'car' package.
+
+```{r}
+hatvalues(fit)
+```
+
+Note that the 'stats' package has a function called 'lm.influence' that provides much the same information.
+
+We can make a plot that highlights highly influential values. We will use John Fox's suggested cut-off of 4/(n-p-1) where n=number of data points and p=number of estimated parameters.
+
+```{r}
+cutoff<-4/((nrow(data)-length(fit$coefficients)-2))
+plot(fit,which=4,cook.levels=cutoff)
+```
+
+Another useful plot is created by 'influencePlot' which creates a "bubble" plot of studentized residuals by hat values, with the areas of the circles representing the observations proportional to Cook's distances. Vertical reference lines are drawn at twice and three times the average hat value, horizontal reference lines at -2,0,2 on the studentized-residual scale.
+
+```{r}
+influencePlot(fit,id.method="identify")
+```
+
+*Heteroskedacity*
+
+Although we can often pick up heteroskedacity graphically, we can test for it formally by using the 'ncvTest' function in the 'car' package
+
+```{r}
+ncvTest(fit)
+```
+
+We can also use the function 'spreadLevelPlot' from the 'car' package to create plots for examining potential heteroskedacity in the data.
+
+```{r}
+spreadLevelPlot(fit)
+```
+
+*Multicollinearity*
+
+We can calculate the variance inflation factors using the function 'vif'
+
+```{r}
+vif(fit)
+```
+
+*Serially correlated residuals*
+
+Remember, linear modelling assumes that the residuals independent and identically distributed. You can test whether the residuals are serially autocorrelated using the Durban-Watson statistic
+
+$$
+d=\frac{\sum^{T}_{t=2}(e_{t}-e_{t-1})^{2}}{\sum^{T}_{t=1}e^{2}_{t}}
+$$
+
+where T is the number of data points.
+
+We can calculate the Durban-Watson test as follows:
+
+```{r}
+durbinWatsonTest(fit)
+```
+
+*More help with model diagnostics*
+
+There is another package that can help with model diagnostics called the 'gvlma' or "Global Validation of Linear Model Assumptions".
+
+Install 'gvlma'
+
+```{r}
+library(gvlma)
+gvmodel<-gvlma(fit)
+summary(gvmodel)
+```
+
+Yet another package we won't discuss but may prove helpful is the 'lmtest' package.
+
+
+
+
+
+
+
+

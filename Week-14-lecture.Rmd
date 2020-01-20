@@ -1,0 +1,240 @@
+Week 14 Lecture
+=============
+
+```{r include=FALSE, warning=FALSE}
+library(factoextra)
+library(vegan)
+library(MASS)
+text.size <- 14
+```
+
+## What does 'multivariate' mean?
+
+Multivariate data includes more than one variable recorded from each experimental unit (replicate). For example, Lovett et al. (2000) measured many water chemistry variables (e.g., concentration of nitrate, ammonia, organic N) in each of 39 streams in the Catskill Mountains. 
+
+We've already worked with multivariate data when we fit multiple regressions or ANOVA models with more than one factors. We will be looking into some other commonly used multivariate analyses.
+
+## Multivariate associations
+
+Wwe are familiar with the process of measuring **variation within a variable** in linear regression using sums of squares and variances (which are equivalent to scaled sums of squares). For covariate 1, $X_1$:
+
+$$
+\text{SS} (X_1) = \sum_{j = 1}^n ( X_{1j} - \bar{X}_{1} ) ^2
+$$
+
+$$
+\mathrm{Var} (X_1) = \frac{1}{n - 1} \sum_{j = 1}^n ( X_{1j} - \bar{X}_{1} ) ^2
+$$
+With multivariate data, we also look at the **covariation between variables**, as the sums of cross products or the covariances. For covariates 1 and 2, $X_1, X_2$:
+
+$$
+\text{SCP} (X_1, X_2) = \sum_{i = 1}^n ( X_{1j} - \bar{X}_{1} ) ( X_{2j} - \bar{X}_{2} )
+$$
+
+$$
+\mathrm{Cov} (X_1, X_2) = \frac{1}{n - 1} \sum_{i = 1}^n ( X_{1j} - \bar{X}_{1} ) ( X_{2j} - \bar{X}_{2} )
+$$
+
+We can do this for all of our covariates and get a matrix of the sums of squares and sums of cross products or a matrix of the variances and covariances. We could also standardize the variances and covariances by their standard deviations and get a matrix of correlations ($r$).
+
+For multivariate analyses, we use the matrix of associations to find **linear combinations of the covariates in the original dataset**. We do this in order to summarize the variation in the original data set using new derived covariates (each new covariate involves all of the original covariates). Only the first couple of the new derived covariates may explain a lot of the variation in the data, which is useful when we have a lot of covariates. 
+
+When we have $n$ observations and $p$ covariates, our new covariate $z_{j}$ for observation $j$ is:
+
+$$z_j = c_1 X_{1j} + c_2 X_{2j} + \dots + c_p X_{pj}$$
+
+$c_1$ through $c_p$ are coefficients that describe how much each original covariate contributes to the new covariate, $z$. There will be as many new covariates $z$ as there were original ones ($z_{1j}, z_{2j}, \dots, z_{pj}$). 
+
+*Note that you could also calculate $z$ and $c$ using the original matrix of data rather than the matrix of associations (check your R package information to see which method is used).*
+
+What do we estimate in a multivariate analysis?
+
+$$
+z_j = c_1 X_{1j} + c_2 X_{2j} + \dots + c_p X_{pj}
+$$
+
+Each $z_j$ (remember, there are $p$ of these for each observation $j$) is called a **score**. The entire equation above (again, there are $p$ of these), is called a **component**. 
+
+The set of coefficients for each $z$, $c$, are called **eigenvectors**. So, there are $p$ eigenvectors, each of length $p$. They are often scaled, depending on your multivariate method.
+
+The total amount of variation explained by each eigenvector is called the **eigenvalue**, $\lambda$. There are $p$ eigenvalues.
+
+The eigenvectors and eigenvalues of the $p$ components is what we use in a principal components analysis, canonical correlaion analysis, or a correspondence analysis. 
+
+If we have data that can be grouped, we can estimate the components in order to maximize between-group differences relative to within-group differences. This is what we get out of multivariate ANOVA (MANOVA) or discriminant function analysis.
+
+Note that if you are working with species abundances, species presence-absences, or genetic data, we might calculate the dissimilarity between observations using a dissimilarity matrix. 
+
+For example, we might have the species abundances of aquatic invertebrates sampled from 30 ponds. Each pond has different species and abundances of species. We can calculate the dissimilarity of each pond to every other pond based on the species composition of each (for example, using Bray-Curtis distance, or another metric of distance). Then, we can use a multivariate analysis to summarize the variation among all ponds. Ponds that share species and have similar abundances will be closer together in multivariate space.
+
+```{r fig.height=4, fig.width=4}
+library(vegan)
+library(MASS)
+data(varespec)  # % cover of lichen spp. in 24 sites
+vare.dis <- vegdist(varespec)
+vare.dis
+```
+
+## Model criticism for multivariate analyses
+
+### Transforming your data
+
+Just like last week, we are still looking at the linear relationships. The only difference is that now we are looking at the relationships among covariates (last week, we looked for a linear relationship between the response and the covariate). This means that we may need to transform covariates that do not have linear relationships with one another.
+
+## Standardizing your data
+
+You may want to standardize your data (divide by the standard deviation) if the covariates are on different scales from one another, or have very different variances.
+
+However, if the scales are comparable, leaving the data unstandardized can be informative. You may want to conduct your multivariate analyses on both standardized and unstandardized data. The default behavior in R packages is not obvious, be sure to check the help files.
+
+## Multivariate outliers
+
+Outliers can have a lot of influence in multivariate analyses too. You can look for outliers in multivariate space (values far away from most of the density of the dataset) by calculating the Mahalanobis distances of each observation and comparing it to the null distribution (chi-square distribution with *p* degrees of freedom).
+
+Other than using a different criterion to determine what points are outliers, the procedures for dealing with outliers are the same.
+
+## Brief overview of multivariate analyses
+
+If you plan on using multivariate analyses in your work, I recommend chapters 15 through 18 in Quinn and Keough 2002 (the previous textbook for this course, available for free online through the SBU library). Multivariate analyses are much easier to implement in R than they are to understand, and Quinn and Keough give a detailed but readable overview of these methods. The goal in lecture today is to make sure that you are aware of these methods.
+
+## MANOVA and DFA
+
+If you have two or more response variables and one or more categorical covariates, you may be tempted to fit multiple ANOVAs. Though a single ANOVA is an omnibus test that controls for Type I error, fitting multiple ANOVAs risks inflating Type I error. You could account for this using a correction for familywise error rate. However, this reduces power.
+
+Instead, you could fit a multivariate analysis of variance (MANOVA), which fits a linear combination of the response variables in a way that maximizes the between-group to within-group variances. Discriminant function analysis uses the same methods, but the goal is instead to predict group membership.
+
+## Scaling or ordination techniques
+
+The goals of these types of analyses (principal components analysis, correspondence analysis, canonical correspondence analysis, multidimensional scaling) are (1) to reduce a large set of covariates to a smaller number of derived covariates, and (2) to reveal patterns in the data in multidimensional space. We will only be able to go over PCA today, but the other methods are covered in Quinn and Keough (2002).
+
+```{r fig.height=4, fig.width=4, message=FALSE}
+# example of MDS using lichen data by site
+vare.mds0 <- isoMDS(vare.dis, trace = FALSE)
+ordiplot(vare.mds0, type = "t")
+```
+
+## Principal components analysis (PCA)
+
+The goal of PCA is to reduce a set of variables to a smaller set that captures most of the variability in your data. Mathematically, PCA represents a transformation of your original axes to a new set of **orthogonal** axes which are ordered in terms of how much variation they explain (the $z$ components from before). Each axis is called a principal component (PC). You will have as many PCs as you have covariates.
+
+The first principal component (PC1) is the axis which explains the most variation in the data. PC2 is the axis which is orthogonal (perpendicular) to PC1 and explains the next greatest amount of remaining variation. PC3 the axis orthogonal to both PC1 and PC2 and explains the next greatest amount of remaining variation, etc.
+
+## Principal components analysis (PCA)
+
+Using the example I described at the beginning of the lecture, Lovett et al. (2000) measured  water chemistry variables in each of 39 streams in the Catskill Mountains. Lovett and colleagues looked at each covariate and decided to log transform dissolved organic C, Cl, and H.
+
+```{r}
+streams.init <- read.csv("~/Dropbox/Biometry/Week 14 Multivariate analyses and Review/Week 14 Lecture/lovett2.csv")
+streams <- streams.init[, c(6:8, 16, 9, 11, 17, 13, 14, 18)]
+row.names(streams) <- streams.init[, 1]
+str(streams)
+```
+
+Some of the covariates are correlated, and would be collinear in a regression. The components from a PCA are orthogonal, removing multicollinearity.
+
+```{r fig.width=6, fig.height=6}
+pairs(streams)
+```
+
+## PCA in R
+
+We can fit a PCA using `prcomp()`. There are a lot of functions for PCAs, carefully read the help files to understand how the function is fitting the PCA before using in your own analyses.
+
+The variances of the water chemistry covariates are very variable. It is probably best if we scale our data with the argument `scale = TRUE` (note this is not the default in R!). 
+
+```{r}
+apply(X = streams, MARGIN = 2, var)  # variance of each covariate
+pca.streams <- prcomp(streams, scale = TRUE)
+```
+
+We can look at our eigenvalues in R using `summary()`. The square root of the eigenvalue is labeled `Standard deviation`. We can also see the proportion of variation explained in each component (labeled `Proportion of Variance`).
+
+```{r}
+summary(pca.streams)
+```
+
+We have as many eigenvalues as covariates (10). PC1 explains 34% of the variation in the data, PC2 explains 25%, and PC3 explains 12%. So, we can use just the first three components to describe over 70% of the total variance in the data.
+
+We can look at PC1 more closely by looking at the eigenvectors, or the vector of the coefficients of the component equation. The further away each coefficient is from 0, the greater contribution that variable makes to the component.
+
+$$z_j = c_1 (\text{NO}_3)_j + c_2 (\text{total organic N})_j + c_3 (\text{total N})_j + \\
+c_4 (\text{NH}_4)_j + c_5 (\text{log dis. organic C})_j + c_6 (\text{SO}_4)_j \\
+c_7 (\text{log Cl})_j + c_8 (\text{Ca})_j + c_9 (\text{Mg})_j + c_{10} (\text{log H})_j$$
+
+```{r}
+round(pca.streams$rotation[, 1], digits = 2)
+```
+
+Large values of PC1 are associated with having higher Mg, higher log Cl, higher S04, and lower log H.
+
+We can visualize our PCA using either the `biplot()` function in base R or `fviz_pca_biplot()` in the package `factoextra`. 
+
+```{r fig.width = 6, fig.height=6, message=FALSE}
+library(factoextra)
+fviz_pca_biplot(pca.streams, axes = c(1, 2), repel = TRUE,
+                col.var = "dodgerblue3", col.ind = "gray60", title = NULL)
+```
+
+The coordinates of each stream $j$ are equal to the scores $z_j$ for PC1 and PC2 ($z_{1j}, z_{2j}$).
+
+```{r}
+# PCA scores for PC1 and PC2 of the first five streams
+pca.streams$x[1:5, 1:2]
+```
+
+The vectors are proportional to the eigenvectors, or the contribution of each covariate to the component.
+
+```{r}
+# Eigenvectors for PC1 and PC2
+pca.streams$rotation[, 1:2]
+```
+
+It is possible to fit  linear regression in which the covariates are principal components from a PCA. This way, the covariates are not collinear. The problem is that the regression coefficients are particularly difficult to interpret. However, if you have a PCA with easily interpretable eigenvectors, this might be a useful method.
+
+Additionally, be aware that the components that explain most of the variance in the covariates may not explain the variation in the response variable.
+
+## Missing data
+
+In large, multivariate data sets, you may have observations that are missing values for some of the covariates. We saw this in lab last week.
+
+```{r}
+mammal <- read.csv("~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/Mammal life history.csv",header=T)
+carnivore.init <- mammal[which(mammal$Order == "Carnivora"), ]
+carnivore.init$AFR[1:12]
+```
+
+Last week, we removed the entire row for observations with one or more missing values for covariates. This is the default behavior in R, for example, when fitting multiple regressions with `lm()`. However, this is throwing away all of the information we do have for the observation.
+
+## Imputing missing data
+
+In problem set 13, you were asked to impute missing data by sampling with replacement from the nonmissing data. There are other ways of dealing with missing data too.
+
+You could replace the missing data with the mean value for that covariate. This means that the missing point won't contribute to the estimate of the partial slope for the missing covariate. However, it will lead to an underestimate of the variance for the estimate (doesn't add to SSE). For the regression:
+
+$$
+\text{Maximum lifespan} \sim \text{Intercept} + \text{AFR}
+$$
+
+We could impute missing values of AFR with the mean value of AFR.
+
+```{r}
+carnivore <- carnivore.init
+missing.AFR <- which(is.na(carnivore.init$AFR))
+mean.AFR <- mean(carnivore.init$AFR, na.rm = TRUE)
+carnivore$AFR[missing.AFR] <- mean.AFR
+```
+
+You could also use a regression to predict the missing value for one covariate given the other covariates in the data. Using the same example, we could impute missing values of AFR using the coefficients estimated from a regression where AFR is the response variable with one or more other covariates as the predictors. For example:
+
+$$
+\text{AFR} \sim \text{Intercept} + \text{Litter size}
+$$
+
+```{r}
+imputation.lm <- lm(formula = AFR ~ LitterSize, data = carnivore.init)
+predicted.AFR <- imputation.lm$coefficients[1] + imputation.lm$coefficients[2] * 
+  carnivore.init$LitterSize[missing.AFR] 
+carnivore$AFR[missing.AFR] <- predicted.AFR
+```
+
+

@@ -518,14 +518,13 @@ Prestige$type
 ```
 
 ```
-##   [1] prof prof prof prof prof prof prof prof prof prof prof prof prof prof
-##  [15] prof prof prof prof prof prof prof prof prof prof prof prof prof bc  
-##  [29] prof prof wc   prof wc   <NA> wc   wc   wc   wc   wc   wc   wc   wc  
-##  [43] wc   wc   wc   wc   wc   wc   wc   wc   wc   wc   <NA> bc   wc   wc  
-##  [57] wc   bc   bc   bc   bc   bc   <NA> bc   bc   bc   <NA> bc   bc   bc  
-##  [71] bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc  
-##  [85] bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   prof bc   bc  
-##  [99] bc   bc   bc   bc  
+##   [1] prof prof prof prof prof prof prof prof prof prof prof prof prof prof prof
+##  [16] prof prof prof prof prof prof prof prof prof prof prof prof bc   prof prof
+##  [31] wc   prof wc   <NA> wc   wc   wc   wc   wc   wc   wc   wc   wc   wc   wc  
+##  [46] wc   wc   wc   wc   wc   wc   wc   <NA> bc   wc   wc   wc   bc   bc   bc  
+##  [61] bc   bc   <NA> bc   bc   bc   <NA> bc   bc   bc   bc   bc   bc   bc   bc  
+##  [76] bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc   bc  
+##  [91] bc   bc   bc   bc   bc   prof bc   bc   bc   bc   bc   bc  
 ## Levels: bc prof wc
 ```
 
