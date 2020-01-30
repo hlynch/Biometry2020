@@ -8,7 +8,7 @@ Reading Material
     + Foundational and Applied Statistics for Biologists Using R
     + Biostatistical Design and Analysis Using R
 
-- Papers from prmiary literature
+- Papers from primary literature
 
 
 Basic Outline
@@ -73,94 +73,85 @@ Today's Agenda
 5. Introduction to statistical inference
 
 
-Basic Probability Theory
-----------------------------
+##Basic Probability Theory
 
-- A bag with a mix of regular and peanut M&Ms
-
-- Each M&M has two traits: Color and Type
+Let's imagine that we have a bag with a mix of regular and peanut M&Ms. Each M&M has two traits: Color and Type.
 
 $$ \sum_{all \: colors} P(color) = 1 $$
 $$ \sum_{all \: types} P(types) = ? $$
 
-Basic Probability Theory | Intersection
+###Intersection
 
-![](inter.png)
+<div class="figure" style="text-align: center">
+<img src="inter.png" alt="Red shading represents the intersection. Source: Wikimedia Commons" width="25%" />
+<p class="caption">(\#fig:unnamed-chunk-1)Red shading represents the intersection. Source: Wikimedia Commons</p>
+</div>
 
-\ 
-
-- Pull one M&M out of the bag
+Now let's pull one M&M out of the bag
 
 $$ P(Green \: AND \:  Peanut) = P(Green \cap Peanut) = P(Green) \cdot P(Peanut) $$
 
-- This is called a Joint Probability: $P(Green,Peanut)$
+This is called a Joint Probability and we usually write it as $P(Green,Peanut)$.
 
+###Union
 
-Union:
-
-![](union.png)
-
-\ 
+<div class="figure" style="text-align: center">
+<img src="union.png" alt="Red shading represents the union. Source: Wikimedia Commons" width="25%" />
+<p class="caption">(\#fig:unnamed-chunk-2)Red shading represents the union. Source: Wikimedia Commons</p>
+</div>
+ 
 
 $$ \begin{align*} 
 P(Green \: OR \: Peanut) &= P(Green \cup Peanut) \\ 
 &= P(Green) + P(Peanut) - P(Green \cap Peanut) \end{align*} $$ 
 
 
-Complement:
+###Complement:
 
-![](comp.png)
+The complement of a trait represents everything that does *not* have that trait.
 
-\ 
+<div class="figure" style="text-align: center">
+<img src="comp.png" alt="Red shading represents the complement. Source: Wikimedia Commons" width="25%" />
+<p class="caption">(\#fig:unnamed-chunk-3)Red shading represents the complement. Source: Wikimedia Commons</p>
+</div>
 
 $$ P(Green^c) = 1 - P(Green)  $$
 
 
-Multiple events
---------------------------------
+##Multiple events
 
-- Pull 2 M&Ms out of the bag
+Let's consider what happens when we pull 2 M&Ms out of the bag
 
 $$ P (Green \: AND \: THEN \: Blue) = P(Green) \cdot P(Blue) $$
 
-- What if we didn't care about the order?
+What if we didn't care about the order?
 
 
-Conditionals
---------------------------------
+##Conditionals
 
 $$ P(A \mid B) = P(A \: conditional \: on \: B) $$
-
-\ 
 
 $$ \begin{align*}  P(A,B) = P(A \cap B) &= P(A \mid B) \cdot P(B) \\
 &= P(B \mid A) \cdot P(A) \end{align*} $$
 
-
-Bayes Theorem
---------------------------------
+##Bayes Theorem
 
 $$ P(A \mid B) \cdot P(B) = P(B \mid A) \cdot P(A) $$
-
-\ 
 
 $$ P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$$
 
 
 $$ P(parameters \mid data) \cdot P(data) = P(data \mid parameters) \cdot P(parameters) $$
 
-\ 
-
 $$ P(parameters \mid data) = \frac{P(data \mid parameters) \cdot P(parameters)}{P(data)}$$
 
-A few foundational ideas
------------------------
+##A few foundational ideas
 
-There are a few statistics (a statistic is just something calculated from data) that we will need to know right at the beginning.
+There are a few statistics (a *statistic* is just something calculated from data) that we will need to know right at the beginning.
 
 For illustration purposes, lets assume we have the following (sorted) series of data points: (1,3,3,4,7,8,13)
 
-There are three statistics relating the "central tendancy": the mean (the average value; 5.57), the mode (the most common value; 3), and the median (the "middle" value; 4). We often denote the mean of a variable with a bar, as in $\bar{x}$. There are also two statistics relating to how much variation there is in the data. The variance measures the average squared distance between each point and the mean. For reasons that we will discuss in lab, we estimate the variance using the following formula
+There are three statistics relating the "central tendancy": the *mean* (the average value; 5.57), the *mode* (the most common value; 3), and the *median* (the "middle" value; 4). We often denote the mean of a variable with a bar, as in $\bar{x}$. There are also two statistics relating to how much variation there is in the data. The *variance* measures the average squared distance between each point and the mean. For reasons that we will discuss in lab, we estimate the variance using the following formula
 
 $$
 \mbox{variance}_{unbiased} = \frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}
@@ -173,7 +164,7 @@ $$
 
 Keep in mind that variance measures a distance *squared*. So if your data represent heights in m, than the variance will have units $m^{2}$ or square-meters.
 
-The standard deviation is simply the square-root of variance, and is often denoted by the symbol $\sigma$.
+The *standard deviation* is simply the square-root of variance, and is often denoted by the symbol $\sigma$.
 
 $$
 \sigma = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}}
@@ -219,12 +210,12 @@ What can you ask of a distribution?
 Note that the CDF is the integration of the PDF, and the PDF is the derivative of the CDF, so if you have one of these you can always get the other. Likewise, you can always get from the quantiles to the CDF (and then to the PDF). These three things are all equally informative about the shape of the distribution.
 
 
-Expected Value of a Random Variable
+###Expected Value of a Random Variable
 
 In probability theory the expected value of a random variable is the weighted average of all possible values that this random variable can take on. The weights used in computing this average correspond to the probabilities in case of a discrete random variable, or densities in case of continious random variable.
 
 
-Expected Value of a Random Variable | Discrete Case
+###Discrete Case
 
 $$ X = \{X_1, X_2,...,X_k\} \\
 E[X] = \sum_{i=1}^n{X_i \cdot P(X_i)}$$
@@ -234,13 +225,12 @@ E[X] = \sum_{i=1}^n{X_i \cdot P(X_i)}$$
 $$ \begin{align*} E[X] &= (0.1 \cdot 1) + (0.1 \cdot 2) + (0.1 \cdot 3) + (0.1 \cdot 4) + (0.6 \cdot 5) \\ &=4 \end{align*}$$
 
 
-Expected Value of a Random Variable | Continuous Case
+###Continuous Case
 
 $$ E[X] = \int_{-\infty}^{\infty}{X \cdot f(X)dX}$$
 
 
-A Brief Introduction to Scientific Method 
---------------------------------
+##A Brief Introduction to Scientific Method 
 
 INDUCTIVE reasoning:
 
@@ -271,11 +261,18 @@ Some terminology:
 - We use a hyprid approach
 
 
+<div class="figure" style="text-align: center">
+<img src="popper.png" alt="Hypothetico-deductive view of the scientific method. Photo Source: LSE Library" width="75%" />
+<p class="caption">(\#fig:unnamed-chunk-4)Hypothetico-deductive view of the scientific method. Photo Source: LSE Library</p>
+</div>
 
+Not all hypotheses are created equal. Consider the following two hypotheses:
 
-![](popper.png)
+H$_{1}$: There are vultures in the local park
 
+H$_{2}$: There are no vultures in the local park
 
+Which of these two ways of framing the null hypothesis can be rejected by data?
 
 **Hypothesis can only be rejected, they can never be accepted!**
 

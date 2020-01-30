@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-01-20" />
+<meta name="date" content="2020-01-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,13 +111,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.1" data-path="week-1-lecture.html"><a href="week-1-lecture.html#reading-material"><i class="fa fa-check"></i><b>1.1</b> Reading Material</a></li>
 <li class="chapter" data-level="1.2" data-path="week-1-lecture.html"><a href="week-1-lecture.html#basic-outline"><i class="fa fa-check"></i><b>1.2</b> Basic Outline</a></li>
 <li class="chapter" data-level="1.3" data-path="week-1-lecture.html"><a href="week-1-lecture.html#todays-agenda"><i class="fa fa-check"></i><b>1.3</b> Today’s Agenda</a></li>
-<li class="chapter" data-level="1.4" data-path="week-1-lecture.html"><a href="week-1-lecture.html#basic-probability-theory"><i class="fa fa-check"></i><b>1.4</b> Basic Probability Theory</a></li>
+<li class="chapter" data-level="1.4" data-path="week-1-lecture.html"><a href="week-1-lecture.html#basic-probability-theory"><i class="fa fa-check"></i><b>1.4</b> Basic Probability Theory</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="week-1-lecture.html"><a href="week-1-lecture.html#intersection"><i class="fa fa-check"></i><b>1.4.1</b> Intersection</a></li>
+<li class="chapter" data-level="1.4.2" data-path="week-1-lecture.html"><a href="week-1-lecture.html#union"><i class="fa fa-check"></i><b>1.4.2</b> Union</a></li>
+<li class="chapter" data-level="1.4.3" data-path="week-1-lecture.html"><a href="week-1-lecture.html#complement"><i class="fa fa-check"></i><b>1.4.3</b> Complement:</a></li>
+</ul></li>
 <li class="chapter" data-level="1.5" data-path="week-1-lecture.html"><a href="week-1-lecture.html#multiple-events"><i class="fa fa-check"></i><b>1.5</b> Multiple events</a></li>
 <li class="chapter" data-level="1.6" data-path="week-1-lecture.html"><a href="week-1-lecture.html#conditionals"><i class="fa fa-check"></i><b>1.6</b> Conditionals</a></li>
 <li class="chapter" data-level="1.7" data-path="week-1-lecture.html"><a href="week-1-lecture.html#bayes-theorem"><i class="fa fa-check"></i><b>1.7</b> Bayes Theorem</a></li>
 <li class="chapter" data-level="1.8" data-path="week-1-lecture.html"><a href="week-1-lecture.html#a-few-foundational-ideas"><i class="fa fa-check"></i><b>1.8</b> A few foundational ideas</a></li>
 <li class="chapter" data-level="1.9" data-path="week-1-lecture.html"><a href="week-1-lecture.html#overview-of-univariate-distributions"><i class="fa fa-check"></i><b>1.9</b> Overview of Univariate Distributions</a></li>
-<li class="chapter" data-level="1.10" data-path="week-1-lecture.html"><a href="week-1-lecture.html#what-can-you-ask-of-a-distribution"><i class="fa fa-check"></i><b>1.10</b> What can you ask of a distribution?</a></li>
+<li class="chapter" data-level="1.10" data-path="week-1-lecture.html"><a href="week-1-lecture.html#what-can-you-ask-of-a-distribution"><i class="fa fa-check"></i><b>1.10</b> What can you ask of a distribution?</a><ul>
+<li class="chapter" data-level="1.10.1" data-path="week-1-lecture.html"><a href="week-1-lecture.html#expected-value-of-a-random-variable"><i class="fa fa-check"></i><b>1.10.1</b> Expected Value of a Random Variable</a></li>
+<li class="chapter" data-level="1.10.2" data-path="week-1-lecture.html"><a href="week-1-lecture.html#discrete-case"><i class="fa fa-check"></i><b>1.10.2</b> Discrete Case</a></li>
+<li class="chapter" data-level="1.10.3" data-path="week-1-lecture.html"><a href="week-1-lecture.html#continuous-case"><i class="fa fa-check"></i><b>1.10.3</b> Continuous Case</a></li>
+</ul></li>
 <li class="chapter" data-level="1.11" data-path="week-1-lecture.html"><a href="week-1-lecture.html#a-brief-introduction-to-scientific-method"><i class="fa fa-check"></i><b>1.11</b> A Brief Introduction to Scientific Method</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="week-1-lab-handout.html"><a href="week-1-lab-handout.html"><i class="fa fa-check"></i><b>2</b> Week 1 Lab Handout</a><ul>
@@ -404,9 +412,9 @@ B &lt;-<span class="st"> </span>B <span class="op">*</span><span class="st"> </s
 r = \frac{Cov(A,B)}{\sqrt{Var(A) \times Var(B)}}
 \]</span> Pearson’s product moment correlation is bounded between -1 and 1. Correlation coefficients of 1 or -1 occur when you set deviations in sample <span class="math inline">\(B\)</span> to be exactly matched in sample <span class="math inline">\(A\)</span>. These measures are unitless.</p>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-1.png" width="240" /></p>
-<pre><code>## [1] 0.2307588</code></pre>
+<pre><code>## [1] -0.1215289</code></pre>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-2.png" width="240" /></p>
-<pre><code>## [1] 0.9222755</code></pre>
+<pre><code>## [1] 0.936128</code></pre>
 </div>
 <div id="hypothesis-testing---pearsons-r" class="section level2">
 <h2><span class="header-section-number">16.2</span> Hypothesis testing - Pearson’s <em>r</em></h2>
@@ -450,7 +458,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> A, <span class="dt">y =</span> B)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size))</code></pre></div>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-5-1.png" width="288" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(df<span class="op">$</span>A, df<span class="op">$</span>B)</code></pre></div>
-<pre><code>## [1] 0.2948338</code></pre>
+<pre><code>## [1] 0.01221815</code></pre>
 <p>Even though <em>A</em> and <em>B</em> clearly have a strong relationship, correlation is only effective if the relationship is <strong>linear</strong>.</p>
 <p>Other considerations:</p>
 <p>What if the data are not bivariate normal? If sample size is large, you’re probably okay.</p>
@@ -469,7 +477,7 @@ cor.boot &lt;-<span class="st"> </span><span class="kw">c</span>()
   cor.boot[i] &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="dt">x =</span> dat.boot<span class="op">$</span>A, <span class="dt">y =</span> dat.boot<span class="op">$</span>B)
 }
 <span class="kw">paste</span>(<span class="st">&quot;The 95% confidence interval for the estimated correlation coefficient, &quot;</span>, <span class="kw">round</span>(cor.obs, <span class="dt">digits =</span> <span class="dv">3</span>), <span class="st">&quot; is (&quot;</span>, <span class="kw">round</span>(<span class="kw">quantile</span>(cor.boot, <span class="fl">0.025</span>), <span class="dt">digits =</span> <span class="dv">3</span>), <span class="st">&quot;, &quot;</span>, <span class="kw">round</span>(<span class="kw">quantile</span>(cor.boot, <span class="fl">0.975</span>), <span class="dt">digits =</span> <span class="dv">3</span>), <span class="st">&quot;)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;The 95% confidence interval for the estimated correlation coefficient, 0.882 is (0.825, 0.921)&quot;</code></pre>
+<pre><code>## [1] &quot;The 95% confidence interval for the estimated correlation coefficient, 0.915 is (0.878, 0.941)&quot;</code></pre>
 <p></span> </details></p>
 <p><strong>Question: How would we conduct a permutation test for the correlation coefficient (with <span class="math inline">\(H_0: \rho = 0\)</span>)?</strong></p>
 <p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> Shuffle <em>A</em> independently of <em>B</em> and calculate the correlation of the shuffled data to create a null distribution of correlations. Compare the observed correlation to this distribution. </span> </details></p>
@@ -494,11 +502,11 @@ r.obs &lt;-<span class="st"> </span><span class="kw">cor</span>(A, B)
 <span class="co"># using z as test statistic</span>
 z.obs &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>r.obs) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>r.obs)) <span class="co"># note that z under the null distribution is 0</span>
 <span class="kw">pnorm</span>(<span class="dt">q =</span> z.obs, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="kw">sqrt</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">100</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span>)), <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 4.001522e-46</code></pre>
+<pre><code>## [1] 4.86102e-48</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># using transformed test statistic, T*</span>
 test.stat &lt;-<span class="st"> </span>z.obs <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">100</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span>))
 <span class="kw">pnorm</span>(<span class="dt">q =</span> test.stat, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 4.001522e-46</code></pre>
+<pre><code>## [1] 4.86102e-48</code></pre>
 <p>To simply the notation, let us define</p>
 <p><span class="math display">\[
 \zeta_{0} = \frac{1}{2}ln\left(\frac{1+\rho_{0}}{1-\rho_{0}}\right)
