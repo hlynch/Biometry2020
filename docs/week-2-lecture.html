@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-01-29" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -385,11 +385,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Note that the data may reject the null hypothesis (for example, finding vultures in the park), or the data may fail to reject the null hypothesis, but it can never prove the null hypothesis. We cannot prove there are no vultures in the park. We can only say that we were not able to find any vultures in the park, and therefore cannot reject the null hypothesis.</p>
 <p>Fisher’s original context for developing significance testing was agricultural experiments that could be easily replicated. Fisher’s threshold of 0.05 was an arbitrary threshold for an effect to be considered worthy of continued experimentation. Any experiment that failed to reach this threshold would not be pursued. Experiments that gave “significant” results would be subject to additional experiments. These additional experiments may prove the original effect to be a fluke (and experiments would cease) or the additional experiments may provide confirmatory evidence that the effect was real.</p>
 <p>Null hypothesis testing (as I will teach it) involves 6 steps.</p>
-<p><strong>Step #1</strong>: Specify a null hypothesis <span class="math inline">\(H_{0}\)</span> (Note that I do not include specification of the alternative hypothesis <span class="math inline">\(H_{A}\)</span> here. While the alternative hypothesis is useful as a mental construct, the basic approach deals only with <span class="math inline">\(H_{0}\)</span> and does not require a <span class="math inline">\(H_{A}\)</span>.</p>
+<p><strong>Step #1</strong>: Specify a null hypothesis <span class="math inline">\(H_{0}\)</span> (Note that I do not include specification of the alternative hypothesis <span class="math inline">\(H_{A}\)</span> here. While the alternative hypothesis is useful as a mental construct, the basic approach deals only with <span class="math inline">\(H_{0}\)</span> and does not require a <span class="math inline">\(H_{A}\)</span>.)</p>
 <p><strong>Step #2</strong>: Specific an appropriate test statistic T. A test statistic is some summary of your data that pertains to the null hypothesis. For testing simple hypotheses, there are test statistics known to be ideal in certain situations. However, even in these simple cases, there are other test statistics that could be used. In more complex situations, YOU will have to determine the most appropriate test statistic.</p>
 <p>generic=T=f(X)</p>
 <p>specific <span class="math inline">\(T^{*}\)</span>=T(<span class="math inline">\(X_{1}\)</span>,<span class="math inline">\(X_{2}\)</span>,…,<span class="math inline">\(X_{n}\)</span>)</p>
-<p>We will introduce many more test statistics in the weeks to come but a simple example of a test statistic would be the use of <span class="math inline">\(\bar{X}\)</span>̅ (the mean of your sample) as a measure of the mean of the normally distributed population from which the sample was derived.</p>
+<p>We will introduce many more test statistics in the weeks to come but a simple example of a test statistic would be the use of <span class="math inline">\(\bar{X}\)</span> (the mean of your sample) as a measure of the mean of the normally distributed population from which the sample was derived.</p>
 <p><strong>Step #3</strong>: Determine the distribution of the test statistic under the null hypothesis <span class="math inline">\(H_{0}\)</span>. A test statistic is a statistical quantity that has a statistical distribution.</p>
 <p><span class="math inline">\(f(T│H_{0})\)</span></p>
 <p>Notice that this is the probability of obtaining the test statistic T GIVEN the null distribution, it is NOT <span class="math inline">\(f(H_{0}│T)\)</span>.</p>
@@ -414,7 +414,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><span class="math inline">\(H_{0}\)</span>: T=0 (no change in deaths)</p>
 <p><span class="math inline">\(H_{A}\)</span>: T <span class="math inline">\(\neq\)</span> 0 (increase or decline in deaths)</p>
 <p>Why does it matter?</p>
-<p>Consider the first case. To reject the null hypothesis, you would have to show that the measured decline T^*was so large as to be very unlikely to have occurred by random chance assuming there was no true change in death rate. Therefore, you would require</p>
+<p>Consider the first case. To reject the null hypothesis, you would have to show that the measured decline <span class="math inline">\(T^*\)</span> was so large as to be very unlikely to have occurred by random chance assuming there was no true change in death rate. Therefore, you would require</p>
 <p><span class="math inline">\(P(T \geq T^{*}│H_{0})&lt;0.05\)</span></p>
 <p>to be true for you to decide to reject the null hypothesis. This is a one-tailed test.</p>
 <p>Consider the second case. To reject the null hypothesis, you would accept values of <span class="math inline">\(T^{*}\)</span> as significant if they were either very large or very small, and would divide the 5% critical region between the two tails</p>
@@ -427,7 +427,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>Before using the more “lenient” one-tailed test, make sure you really believe that results opposite to what you expect are only random</p></li>
 </ol>
 <p>You cannot do a one-tailed test, find the answer to have the wrong sign and then do a two-tailed test. While probably quite common, this is not statistically valid. You cannot use the data to generate the test! Not all tests are created equal!! Tests differ in their power to detect differences, and their efficiency. The balance between power and efficiency depends on the specific situation; we will discuss this more next week.</p>
-<p>We are going to introduce the idea of hypothesis testing through the practice of permutation tests, because it allows us to get into the flow of testing hypotheses without the burden of a lot of complicated mathematics. Moreover, in doing so, we introduce the more general concept of “generative models”, which generate outcomes through simulation. for example, we can think of the statement <span class="math inline">\(X \sim Pois(\lambda)\)</span> as a generative model because it allows us to generate datasets that follow the distribution <span class="math inline">\(Pois(\lambda)\)</span>. If we had a dataset and we wanted to know whether it came from a Poisson distribution, we could imagine generating lots of datasets using a generative model (i.e. drawn from <span class="math inline">\(Pois(\lambda)\)</span>) and asking ourselves whether any of the generated datasets look anything like the dataset we have. In the same way, we can think about testing a null hypothesis <span class="math inline">\(H_{0}\)</span> by generating data under that null hypothesis, calculating some test statistics from that generated data, and asking whether our geneterated test statsitics “look like” the test statistic obtained from our real data. If not, then we can reject the null hypothesis. Simulations like this are enormously powerful tools for testing hypotheses and are often far more intuitive than the alternative “parametric” statistical tests we will learn in Weeks 3 and 4.</p>
+<p>We are going to introduce the idea of hypothesis testing through the practice of permutation tests, because it allows us to get into the flow of testing hypotheses without the burden of a lot of complicated mathematics. Moreover, in doing so, we introduce the more general concept of “generative models”, which generate outcomes through simulation. For example, we can think of the statement <span class="math inline">\(X \sim Pois(\lambda)\)</span> as a generative model because it allows us to generate datasets that follow the distribution <span class="math inline">\(Pois(\lambda)\)</span>. If we had a dataset and we wanted to know whether it came from a Poisson distribution, we could imagine generating lots of datasets using a generative model (i.e. drawn from <span class="math inline">\(Pois(\lambda)\)</span>) and asking ourselves whether any of the generated datasets look anything like the dataset we have. In the same way, we can think about testing a null hypothesis <span class="math inline">\(H_{0}\)</span> by generating data under that null hypothesis, calculating some test statistics from that generated data, and asking whether our geneterated test statsitics “look like” the test statistic obtained from our real data. If not, then we can reject the null hypothesis. Simulations like this are enormously powerful tools for testing hypotheses and are often far more intuitive than the alternative “parametric” statistical tests we will learn in Weeks 3 and 4.</p>
 </div>
 <div id="permutation-tests" class="section level2">
 <h2><span class="header-section-number">3.2</span> Permutation tests</h2>
@@ -437,10 +437,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Having observed z and y, we wish to test the null hypothesis <span class="math inline">\(H_{0}\)</span> of no difference between F and G, <span class="math inline">\(H_{0}:F=G\)</span>. Note that the equality F=G means that the two distributions are exactly the same across their entire distribution, not just that their means are the same. If <span class="math inline">\(H_{0}\)</span> is true, than there is no probabilistic difference between drawing random values from F and drawing random values from G.</p>
 <p><em>What are some possible test statistics that we might use in this case?</em></p>
 <p>There are many test statistics that we could use to test this null hypothesis but lets use the difference in means as the test statistic. If there is a large difference in their means, than we can probably reject the null hypothesis that they represent the same underlying distribution.</p>
-<p><span class="math inline">\(T=E[F]-E[G]=\bar{x}-\bar{y}\)</span></p>
-<p>The way to do this is to lump all the data together with their “label” (and here I will use the example from the problem set and test whether males and females have different blood sugar distributions), and to randomly permute the labels so that the gender identity of the data points is randomized. In other words, if there are 10 males and 15 females, then you would randomly select 10 of the blood sugar levels and label them “male” and the remaining 15 would be labeled “female”.</p>
-<p>NOTE: We are not sampling with replacement here. We are simply permuting the gender labels to “erase” the correlation between gender and blood sugar.</p>
-<p>We then calculate the mean of the “fake male” group and the mean of the “fake female” group and take the difference. That is the result of ONE permutation. If we do that many many times (say, 10000 times) then the distribution of those differences reflects the distribution under the null hypothesis of no correlation between gender and blood sugar.</p>
+<p><span class="math inline">\(T=E[F]-E[G]=\bar{z}-\bar{y}\)</span></p>
+<p>The way to do this is to lump all the data together and to randomly permute the labels so that data are randomly assigned to a group (z vs. y). NOTE: We are <strong>not</strong> sampling with replacement here. We are simply permuting the labels to “erase” any possible correlation between group and the values of the data.</p>
+<p>We then calculate the mean of the “fake z” group and the mean of the “fake y” group and take the difference. That is the result of ONE permutation. If we do that many many times (say, 10000 times) then the distribution of those differences reflects the distribution under the null hypothesis of no difference between F and G.</p>
 <p>We will do an example like this in the problem set.</p>
 </div>
 <div id="parameter-estimation" class="section level2">
@@ -469,12 +468,14 @@ X \sim N(\mu,\sigma^{2})
 <li><p>Standard error: Each individual estimate may be too low or too high from the true value (this can occur even if the long run average value is correct, i.e. unbiased)</p></li>
 </ol>
 <p>Why are estimators associated with a standard error? If you were to do your experiment all over again, say 1000 times, the value of your estimate would be different each time. Your 1000 estimates would have a statistical distribution with some spread, and the spread of these 1000 estimates is quantified by the standard error.</p>
+<p>(A good example of this from the Week 1 problem set is the question asking you the probability of getting <em>your</em> bag of M&amp;Ms from a random sample of M&amp;Ms. Let’s say you calculated this probability by sampling 100,000 times and you got 4 “matches”. This gives you an estimate of 0.00004. But if you repeated this experiement a second time, with <em>another</em> sample of 100,000 bags, you might get 7 matches or 2 matches or none at all! So 0.00004 is your estimate of the probability, but it is an estimate with some uncertainty because you don’t know how variable that probability would be if you did the experiment multiple times. This “spread” of the estimates is the standard error of your estimate. Computationally, we can calculate the standard error by doing lots of experiments, but in practice, this is not always possible. Therefore, as we’ll see in the next few weeks, we usually use the properties of statistical distributions to calculate the standard error of an estimate.)</p>
 <p>How do we estimate the bias and variance (related to standard error) of an estimator?</p>
 <p>While there are other methods that we will discuss in a few weeks, now we are going to introduce the idea through two non-parametric approaches: bootstrap and jackknife.</p>
 <p>First we need to stop and discuss what it means to sample from an empirical distribution.</p>
 <p>Let’s say I have a bunch of lotto balls in an urn</p>
 <p><span class="math inline">\(X=\{X_{1},X_{2},X_{3},...,X_{n}\}\)</span></p>
-<p>and I want to draw sets of 5 lotto numbers from that urn. I can sample with replacement or without replacement. If you sample with replacement, we may get some numbers more than once. It also means that if you draw n balls out of an urn with n numbers, there are some numbers you will never draw.</p>
+<p>and I want to draw sets of 5 lotto numbers from that urn. I can sample with replacement or without replacement.</p>
+<p>If you sample with replacement, we may get some numbers more than once. It also means that if you draw n balls out of an urn with n numbers, there are some numbers you will never draw.</p>
 <p><strong>STOP: Do you understand sample-with-replacement and sample-without-replacement?</strong></p>
 </div>
 <div id="method-1-non-parametric-bootstrap" class="section level2">
@@ -569,9 +570,11 @@ X_{k}^{*}=\{\mbox{n values drawn with replacement from } X\}
 <p>NB: If you are going to go through the trouble of doing the bootstrap sampling, I don’t know why you would make a normal approximation at the very end to construct the CIs. I recommend Method #2.</p>
 <p><strong>Example 2</strong>:</p>
 <p>Knowing how to draw bootstrap replicates gets more complicated when you have multivariate datasets. For example, lets start with a dataset comparing average LSAT scores and GPA for the incoming classes for 15 law schools</p>
-<div class="figure">
-<img src="LSAT_info.png" />
-
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="LSAT_info.png" alt="Source: Efron and Tibshirani (1994)" width="40%" />
+<p class="caption">
+Figure 1.1: Source: Efron and Tibshirani (1994)
+</p>
 </div>
 <p>Lets say we want to estimate the true correlation coefficient between LSAT scores and GPA. We haven’t covered this yet, but one estimator for the true correlation coefficient is Pearson’s product moment correlation coefficient r</p>
 <p><span class="math display">\[
@@ -600,14 +603,18 @@ X_{2}^{*}=(LSAT_{i},GPA_{i}), \mbox{where i=sample with replacement 1...n}
 <p>Even better, we can calculate the 95th percentile confidence interval of this distribution: quantile(all.cor,c(0.025,0.975)) (VERSION 2)</p>
 <p>Note that while VERSION 1 is common, VERSION 2 is preferred because there is no guarantee that the distribution of bootstrap statistics is even vaguely Normal.</p>
 <p>Bootstrapping can deal with even more complex cases, and is particularly useful when dealing with spatial or temporal autocorrelation. Take for instance a time series of hormone levels:</p>
-<div class="figure">
-<img src="Hormone_timeseries.png" />
-
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="Hormone_timeseries.png" alt="Source: Efron and Tibshirani (1994)" width="40%" />
+<p class="caption">
+Figure 1.2: Source: Efron and Tibshirani (1994)
+</p>
 </div>
 <p>If you wanted to do some time series analysis of this data, say to calculate the correlation between each datapoint and the last datapoint, you would have a difficult time doing so because of the complex temporal autocorrelation. Bootstrap can help in this case, but its not at all obvious how to bootstrap from this time series and preserve the essential temporal autocorrelation structure of the data. One approach would be to do a “moving blocks” bootstrap.</p>
-<div class="figure">
-<img src="Moving_blocks.png" />
-
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="Moving_blocks.png" alt="Source: Efron and Tibshirani (1994)" width="40%" />
+<p class="caption">
+Figure 1.3: Source: Efron and Tibshirani (1994)
+</p>
 </div>
 <p>This is more advanced, but it makes the point that a) bootstrap can be enormously useful in a variety of complicated analyses and b) you have to think carefully about what to sample in order to preserve the essential element of the data.</p>
 <p>R has numerous functions for doing bootstrapping, although bootstrapping is so easy its often just as easy (and more transparent) to simply write your own code to do it. We will go over some examples in lab.</p>

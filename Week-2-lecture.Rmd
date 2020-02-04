@@ -23,7 +23,7 @@ Fisher’s original context for developing significance testing was agricultural
 Null hypothesis testing (as I will teach it) involves 6 steps.
 
 **Step #1**: Specify a null hypothesis $H_{0}$
-(Note that I do not include specification of the alternative hypothesis $H_{A}$ here. While the alternative hypothesis is useful as a mental construct, the basic approach deals only with $H_{0}$ and does not require a $H_{A}$.
+(Note that I do not include specification of the alternative hypothesis $H_{A}$ here. While the alternative hypothesis is useful as a mental construct, the basic approach deals only with $H_{0}$ and does not require a $H_{A}$.)
 
 **Step #2**: Specific an appropriate test statistic T.
 A test statistic is some summary of your data that pertains to the null hypothesis. For testing simple hypotheses, there are test statistics known to be ideal in certain situations. However, even in these simple cases, there are other test statistics that could be used. In more complex situations, YOU will have to determine the most appropriate test statistic. 
@@ -32,7 +32,7 @@ generic=T=f(X)
 
 specific $T^{*}$=T($X_{1}$,$X_{2}$,…,$X_{n}$)
 
-We will introduce many more test statistics in the weeks to come but a simple example of a test statistic would be the use of $\bar{X}$̅ (the mean of your sample) as a measure of the mean of the normally distributed population from which the sample was derived.
+We will introduce many more test statistics in the weeks to come but a simple example of a test statistic would be the use of $\bar{X}$ (the mean of your sample) as a measure of the mean of the normally distributed population from which the sample was derived.
 
 **Step #3**: Determine the distribution of the test statistic under the null hypothesis $H_{0}$.
 A test statistic is a statistical quantity that has a statistical distribution. 
@@ -88,7 +88,7 @@ $H_{A}$: T $\neq$ 0 (increase or decline in deaths)
 
 Why does it matter?
 
-Consider the first case. To reject the null hypothesis, you would have to show that the measured decline T^*was so large as to be very unlikely to have occurred by random chance assuming there was no true change in death rate. Therefore, you would require
+Consider the first case. To reject the null hypothesis, you would have to show that the measured decline $T^*$ was so large as to be very unlikely to have occurred by random chance assuming there was no true change in death rate. Therefore, you would require
 
 $P(T \geq T^{*}│H_{0})<0.05$
 
@@ -111,7 +111,7 @@ TWO KEY POINTS:
 You cannot do a one-tailed test, find the answer to have the wrong sign and then do a two-tailed test. While probably quite common, this is not statistically valid. You cannot use the data to generate the test!
 Not all tests are created equal!! Tests differ in their power to detect differences, and their efficiency. The balance between power and efficiency depends on the specific situation; we will discuss this more next week.
 
-We are going to introduce the idea of hypothesis testing through the practice of permutation tests, because it allows us to get into the flow of testing hypotheses without the burden of a lot of complicated mathematics. Moreover, in doing so, we introduce the more general concept of "generative models", which generate outcomes through simulation. for example, we can think of the statement $X \sim Pois(\lambda)$ as a generative model because it allows us to generate datasets that follow the distribution $Pois(\lambda)$. If we had a dataset and we wanted to know whether it came from a Poisson distribution, we could imagine generating lots of datasets using a generative model (i.e. drawn from $Pois(\lambda)$) and asking ourselves whether any of the generated datasets look anything like the dataset we have. In the same way, we can think about testing a null hypothesis $H_{0}$ by generating data under that null hypothesis, calculating some test statistics from that generated data, and asking whether our geneterated test statsitics "look like" the test statistic obtained from our real data. If not, then we can reject the null hypothesis. Simulations like this are enormously powerful tools for testing hypotheses and are often far more intuitive than the alternative "parametric" statistical tests we will learn in Weeks 3 and 4.
+We are going to introduce the idea of hypothesis testing through the practice of permutation tests, because it allows us to get into the flow of testing hypotheses without the burden of a lot of complicated mathematics. Moreover, in doing so, we introduce the more general concept of "generative models", which generate outcomes through simulation. For example, we can think of the statement $X \sim Pois(\lambda)$ as a generative model because it allows us to generate datasets that follow the distribution $Pois(\lambda)$. If we had a dataset and we wanted to know whether it came from a Poisson distribution, we could imagine generating lots of datasets using a generative model (i.e. drawn from $Pois(\lambda)$) and asking ourselves whether any of the generated datasets look anything like the dataset we have. In the same way, we can think about testing a null hypothesis $H_{0}$ by generating data under that null hypothesis, calculating some test statistics from that generated data, and asking whether our geneterated test statsitics "look like" the test statistic obtained from our real data. If not, then we can reject the null hypothesis. Simulations like this are enormously powerful tools for testing hypotheses and are often far more intuitive than the alternative "parametric" statistical tests we will learn in Weeks 3 and 4.
 
 Permutation tests 
 ------------------------
@@ -129,13 +129,11 @@ Note that the equality F=G means that the two distributions are exactly the same
 
 There are many test statistics that we could use to test this null hypothesis but lets use the difference in means as the test statistic. If there is a large difference in their means, than we can probably reject the null hypothesis that they represent the same underlying distribution.
 
-$T=E[F]-E[G]=\bar{x}-\bar{y}$ 
+$T=E[F]-E[G]=\bar{z}-\bar{y}$ 
 
-The way to do this is to lump all the data together with their "label" (and here I will use the example from the problem set and test whether males and females have different blood sugar distributions), and to randomly permute the labels so that the gender identity of the data points is randomized. In other words, if there are 10 males and 15 females, then you would randomly select 10 of the blood sugar levels and label them "male" and the remaining 15 would be labeled "female".
+The way to do this is to lump all the data together and to randomly permute the labels so that data are randomly assigned to a group (z vs. y). NOTE: We are **not** sampling with replacement here. We are simply permuting the labels to "erase" any possible correlation between group and the values of the data.
 
-NOTE: We are not sampling with replacement here. We are simply permuting the gender labels to "erase" the correlation between gender and blood sugar.
-
-We then calculate the mean of the "fake male" group and the mean of the "fake female" group and take the difference. That is the result of ONE permutation. If we do that many many times (say, 10000 times) then the distribution of those differences reflects the distribution under the null hypothesis of no correlation between gender and blood sugar.
+We then calculate the mean of the "fake z" group and the mean of the "fake y" group and take the difference. That is the result of ONE permutation. If we do that many many times (say, 10000 times) then the distribution of those differences reflects the distribution under the null hypothesis of no difference between F and G.
 
 We will do an example like this in the problem set.
 
@@ -181,6 +179,8 @@ Estimators are IMPERFECT tools.
 
 Why are estimators associated with a standard error? If you were to do your experiment all over again, say 1000 times, the value of your estimate would be different each time. Your 1000 estimates would have a statistical distribution with some spread, and the spread of these 1000 estimates is quantified by the standard error.
 
+(A good example of this from the Week 1 problem set is the question asking you the probability of getting *your* bag of M&Ms from a random sample of M&Ms. Let's say you calculated this probability by sampling 100,000 times and you got 4 "matches". This gives you an estimate of 0.00004. But if you repeated this experiement a second time, with *another* sample of 100,000 bags, you might get 7 matches or 2 matches or none at all! So 0.00004 is your estimate of the probability, but it is an estimate with some uncertainty because you don't know how variable that probability would be if you did the experiment multiple times. This "spread" of the estimates is the standard error of your estimate. Computationally, we can calculate the standard error by doing lots of experiments, but in practice, this is not always possible. Therefore, as we'll see in the next few weeks, we usually use the properties of statistical distributions to calculate the standard error of an estimate.)
+
 How do we estimate the bias and variance (related to standard error) of an estimator?
 
 While there are other methods that we will discuss in a few weeks, now we are going to introduce the idea through two non-parametric approaches: bootstrap and jackknife.
@@ -192,6 +192,7 @@ Let’s say I have a bunch of lotto balls in an urn
 $X=\{X_{1},X_{2},X_{3},...,X_{n}\}$
 
 and I want to draw sets of 5 lotto numbers from that urn. I can sample with replacement or without replacement.
+
 If you sample with replacement, we may get some numbers more than once. It also means that if you draw n balls out of an urn with n numbers, there are some numbers you will never draw.
 
 **STOP: Do you understand sample-with-replacement and sample-without-replacement?**
@@ -356,7 +357,9 @@ NB: If you are going to go through the trouble of doing the bootstrap sampling, 
 Knowing how to draw bootstrap replicates gets more complicated when you have multivariate datasets.
 For example, lets start with a dataset comparing average LSAT scores and GPA for the incoming classes for 15 law schools 
 
-![](LSAT_info.png)
+```{r echo=FALSE, fig.align='center', fig.cap='Source: Efron and Tibshirani (1994)', out.width='40%'}
+knitr::include_graphics('LSAT_info.png')
+```
 
 
 Lets say we want to estimate the true correlation coefficient between LSAT scores and GPA. We haven’t covered this yet, but one estimator for the true correlation coefficient is Pearson’s product moment correlation coefficient r
@@ -405,11 +408,15 @@ Note that while VERSION 1 is common, VERSION 2 is preferred because there is no 
 
 Bootstrapping can deal with even more complex cases, and is particularly useful when dealing with spatial or temporal autocorrelation. Take for instance a time series of hormone levels:
 
-![](Hormone_timeseries.png)
+```{r echo=FALSE, fig.align='center', fig.cap='Source: Efron and Tibshirani (1994)', out.width='40%'}
+knitr::include_graphics('Hormone_timeseries.png')
+```
 
 If you wanted to do some time series analysis of this data, say to calculate the correlation between each datapoint and the last datapoint, you would have a difficult time doing so because of the complex temporal autocorrelation. Bootstrap can help in this case, but its not at all obvious how to bootstrap from this time series and preserve the essential temporal autocorrelation structure of the data. One approach would be to do a “moving blocks” bootstrap. 
 
-![](Moving_blocks.png)
+```{r echo=FALSE, fig.align='center', fig.cap='Source: Efron and Tibshirani (1994)', out.width='40%'}
+knitr::include_graphics('Moving_blocks.png')
+```
 
 This is more advanced, but it makes the point that a) bootstrap can be enormously useful in a variety of complicated analyses and b) you have to think carefully about what to sample in order to preserve the essential element of the data.
 
