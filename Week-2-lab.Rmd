@@ -19,7 +19,7 @@ Testing hypotheses through permutation
 
 We'll start off by working through two examples from Phillip Good's book "Introduction to Statistics Through Resampling Methods and R/S-PLUS":
 
-Example #1: Use permutation methods to test the null hypothesis that the treatment does not increase survival time (in other word: $H_{0}$: No difference in survival between the treated and control groups):
+**Example #1**: Use permutation methods to test the null hypothesis that the treatment does not increase survival time (in other word: $H_{0}$: No difference in survival between the treated and control groups):
 
 Survival.treated=$\{94,197,16,38,99,141,23 \}$
 
@@ -30,7 +30,7 @@ Survival.control=$\{52,104,146,10,51,30,40,27,46 \}$
 Make sure that you understand what is being done here, as this example is very closely related to the problem set.
 
 
-Example #2: Using the same data, provide a 95% confidence interval for the difference in mean survival days based on 1000 bootstrap samples
+**Example #2**: Using the same data, provide a 95% confidence interval for the difference in mean survival days based on 1000 bootstrap samples
 
 Note that these two approaches are very closely related. Do you see why either approach can be used to test the null hypothesis? (What is the null hypothesis here?)
 
@@ -38,11 +38,15 @@ Now we will do one slightly more complicated example from Phillip Good's book "P
 
 Holmes and Williams (1954) studied tonsil size in children to verify a possible association with the virus \textit{S. pyrogenes}. Test for an association between \textit{S. pyrogenes} status and tonsil size. (Note that you will need to come up with a reasonable test statistic.)
 
-![](Table2categories.png)
+```{r echo=FALSE, fig.align='center', fig.cap='Data on tonsil size and S. pyrogenes status. Source: Good (1994)', out.width='40%'}
+knitr::include_graphics('Table2categories.png')
+```
 
 Now lets consider the full dataset, where tonsil size is divided into three categories. How would we do the test now? What is the new test statistic? (There are many options.) What 'labels' do you permute?
 
-![](Table3categories.png)
+```{r echo=FALSE, fig.align='center', fig.cap='Fill dataset on tonsil size and S. pyrogenes status. Source: Good (1994)', out.width='50%'}
+knitr::include_graphics('Table3categories.png')
+```
 
 Basics of bootstrap and jackknife
 ------------------------------------
