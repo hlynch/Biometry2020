@@ -57,17 +57,21 @@ The shape of the Normal distribution can be illustrated by a few examples
 
 The expected value of the Normal distribution is given by
 
-$$ \begin{align} E[X] &= \int_{-\infty}^{\infty}{X \cdot f(X)dX} \\
-&= \int_{-\infty}^{\infty} x \cdot f(x \mid \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \\ &= \mu \end{align}$$
+$$ 
+\begin{align} E[X] &= \int_{-\infty}^{\infty}{X \cdot f(X)dX} \\
+&= \int_{-\infty}^{\infty} x \cdot f(x \mid \mu, \sigma) = \int_{-\infty}^{\infty}\frac{x}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \\ &= \mu \end{align}
+$$
 
 
 The variance of the Normal distribution is given by
  
-$$ \begin{align} Var[X] &= E[(X- E[X])^2] \\ 
+$$ 
+\begin{align} Var[X] &= E[(X- E[X])^2] \\ 
 &= E[(X - \mu)^2] \\ 
 &= E[X^2] - \mu^2 \\ 
-&= \left( \int_{-\infty}^{\infty} x^2 \cdot f(x \mid \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \right) - \mu^2 \\ 
-&= \sigma^2 \end{align} $$
+&= \left( \int_{-\infty}^{\infty} x^2 \cdot f(x \mid \mu, \sigma) = \int_{-\infty}^{\infty}\frac{x^{2}}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \right) - \mu^2 \\ 
+&= \sigma^2 \end{align} 
+$$
 
 
 Standard Normal Distribution
@@ -288,7 +292,7 @@ $$ \begin{align} E[X] &= \int_0^\infty x\frac{1}{\beta^\alpha \Gamma(\alpha)} x^
 $$ Var[X] = \alpha\beta^2 $$
 
 
-The relationship between the Gamma sistribution and the Normal distribution is
+The relationship between the Gamma distribution and the Normal distribution is
 
 $$ \lim_{\alpha \to \infty} Gamma(\alpha,\beta) \to N(\alpha \beta,\alpha\beta^2) $$
 

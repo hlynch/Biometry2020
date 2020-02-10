@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-05" />
+<meta name="date" content="2020-02-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -405,14 +405,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The shape of the Normal distribution can be illustrated by a few examples</p>
 <p><img src="Week-3-lecture_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>The expected value of the Normal distribution is given by</p>
-<p><span class="math display">\[ \begin{align} E[X] &amp;= \int_{-\infty}^{\infty}{X \cdot f(X)dX} \\
-&amp;= \int_{-\infty}^{\infty} x \cdot f(x \mid \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \\ &amp;= \mu \end{align}\]</span></p>
+<p><span class="math display">\[ 
+\begin{align} E[X] &amp;= \int_{-\infty}^{\infty}{X \cdot f(X)dX} \\
+&amp;= \int_{-\infty}^{\infty} x \cdot f(x \mid \mu, \sigma) = \int_{-\infty}^{\infty}\frac{x}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \\ &amp;= \mu \end{align}
+\]</span></p>
 <p>The variance of the Normal distribution is given by</p>
-<p><span class="math display">\[ \begin{align} Var[X] &amp;= E[(X- E[X])^2] \\ 
+<p><span class="math display">\[ 
+\begin{align} Var[X] &amp;= E[(X- E[X])^2] \\ 
 &amp;= E[(X - \mu)^2] \\ 
 &amp;= E[X^2] - \mu^2 \\ 
-&amp;= \left( \int_{-\infty}^{\infty} x^2 \cdot f(x \mid \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \right) - \mu^2 \\ 
-&amp;= \sigma^2 \end{align} \]</span></p>
+&amp;= \left( \int_{-\infty}^{\infty} x^2 \cdot f(x \mid \mu, \sigma) = \int_{-\infty}^{\infty}\frac{x^{2}}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx \right) - \mu^2 \\ 
+&amp;= \sigma^2 \end{align} 
+\]</span></p>
 </div>
 <div id="standard-normal-distribution" class="section level2">
 <h2><span class="header-section-number">5.3</span> Standard Normal Distribution</h2>
@@ -554,7 +558,7 @@ x&gt;0\]</span></p>
 <p><span class="math display">\[ \begin{align} E[X] &amp;= \int_0^\infty x\frac{1}{\beta^\alpha \Gamma(\alpha)} x^{(\alpha-1)} e^\frac{-x}{\beta} \\
 &amp;= \alpha\beta \end{align} \]</span></p>
 <p><span class="math display">\[ Var[X] = \alpha\beta^2 \]</span></p>
-<p>The relationship between the Gamma sistribution and the Normal distribution is</p>
+<p>The relationship between the Gamma distribution and the Normal distribution is</p>
 <p><span class="math display">\[ \lim_{\alpha \to \infty} Gamma(\alpha,\beta) \to N(\alpha \beta,\alpha\beta^2) \]</span></p>
 </div>
 <div id="some-additional-notes" class="section level2">
