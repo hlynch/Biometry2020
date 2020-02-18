@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-10" />
+<meta name="date" content="2020-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -411,11 +411,11 @@ lim_{n \rightarrow \infty} \bar{X} \rightarrow N(\mu,\frac{\sigma^{2}}{n})
 lim_{n \rightarrow \infty} \frac{\bar{X}-\mu}{\sqrt{\sigma^{2}/n}} \rightarrow N(0,1)
 \]</span></p>
 <p>(Note that I could use <span class="math inline">\(s^{2}\)</span> synonymously with <span class="math inline">\(\sigma^{2}\)</span> here because <span class="math inline">\(s^{2}\)</span> is an unbiased estimator of <span class="math inline">\(\sigma^{2}\)</span>, which means that <span class="math inline">\(lim_{n \rightarrow \infty} s^{2}\rightarrow \sigma^{2}\)</span>.)</p>
-<p>But what is the distribution of <span class="math inline">\(\bar{X}\)</span> for finite n when we don’t know what the population variance <span class="math inline">\(\sigma^{2}\)</span> is and have to substitute <span class="math inline">\(s^{2}\)</span> instead?</p>
+<p>But what is the distribution of <span class="math inline">\(\bar{X}\)</span> for finite n when we don’t know what the population variance <span class="math inline">\(\sigma^{2}\)</span> is and have to substitute <span class="math inline">\(s^{2}\)</span> instead? The t-distribution.</p>
 <p>The t-distribution has one parameter, n-1, where n=the number of degrees of freedom.</p>
 <p>(Just like <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^{2}\)</span> are the parameters of the Normal, the parameter of the t is called the “degrees of freedom”. Do not let the name confuse you. )</p>
 <p>Notice that as n gets large, both the numerator and the denominator get small. The ratio of these two small numbers is the t-distribution, which is symmetric about 0 because the sample mean could end up either slightly too low or slightly too high.</p>
-<p>Where did we lose the degree of freedom? We Lost one degree of freedom because we had to use the sample mean in the estimation of the sample variance.</p>
+<p>Where did we lose the degree of freedom? We lost one degree of freedom because we had to use the sample mean in the estimation of the sample variance.</p>
 <p>Sometimes <span class="math inline">\(s^{2}\)</span> is smaller than <span class="math inline">\(\sigma^{2}\)</span>, and sometimes it is larger, which explains why the t-distribution is flatter in the middle but has longer tails.</p>
 <p><img src="Week-4-lecture_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>For large sample sizes, the t-distribution is indistinguishable from the normal distribution, but for small sample sizes, the t-distribution is flatter in the middle and fatter in the tails.</p>
@@ -540,7 +540,7 @@ s^2(n-1) = \sum_{i=1}^n(X_i-\bar{X})^2
 <div id="parameter-estimation-1" class="section level2">
 <h2><span class="header-section-number">7.5</span> Parameter estimation</h2>
 <p>We will now learn how to fit a model to data, that is, to estimate the parameter values for the distribution being used to model the data. Since parameter estimates are useful without their corresponding confidence intervals, we will also learn out to estimate confidence intervals for these parameters.</p>
-<p>Let’s review for a second what is meant by a confidence interval. A 95th percentile confidence interval is an interval estimated from the data that we are 95<span class="math inline">\(%\)</span> certain contains the true but unknown value for the paameter. Because this interval is estimated from data, it has its own confidence interval. While we usually we don’t worry too much about this, keep in mind that a different dataset would also produce a different parameter estimate and a different confidence interval.</p>
+<p>Let’s review for a second what is meant by a confidence interval. A 95th percentile confidence interval is an interval estimated from the data that we are 95<span class="math inline">\(\%\)</span> certain contains the true but unknown value for the paameter. Because this interval is estimated from data, it has its own confidence interval. While we usually we don’t worry too much about this, keep in mind that a different dataset would also produce a different parameter estimate and a different confidence interval.</p>
 <p>How do we calculate confidence intervals when we are using a parametric distribution to model some data? We are going to use what we know about these distributions to derive an analytical expression for the distribution of the parameter of interest, and then use the quantiles of that distribution to calculate the appropriate confidence intervals (typically we use the <span class="math inline">\(\alpha⁄2\)</span> and 1-<span class="math inline">\(\alpha⁄2\)</span> confidence intervals, where <span class="math inline">\(\alpha\)</span>=0.05).</p>
 <p>The following four examples use the same methodology:</p>
 <p><em>Step #1</em>: Start with an expression involving the parameter of interest that you know is true based on what we already know about the properties of the univariate distributions</p>

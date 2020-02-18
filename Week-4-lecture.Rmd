@@ -59,7 +59,7 @@ $$
 
 (Note that I could use $s^{2}$ synonymously with $\sigma^{2}$ here because $s^{2}$ is an unbiased estimator of $\sigma^{2}$, which means that $lim_{n \rightarrow \infty} s^{2}\rightarrow \sigma^{2}$.)
 
-But what is the distribution of $\bar{X}$ for finite n when we don’t know what the population variance $\sigma^{2}$ is and have to substitute $s^{2}$ instead?
+But what is the distribution of $\bar{X}$ for finite n when we don’t know what the population variance $\sigma^{2}$ is and have to substitute $s^{2}$ instead? The t-distribution.
 
 The t-distribution has one parameter, n-1, where n=the number of degrees of freedom.
 
@@ -67,7 +67,7 @@ The t-distribution has one parameter, n-1, where n=the number of degrees of free
 
 Notice that as n gets large, both the numerator and the denominator get small. The ratio of these two small numbers is the t-distribution, which is symmetric about 0 because the sample mean could end up either slightly too low or slightly too high.
 
-Where did we lose the degree of freedom? We Lost one degree of freedom because we had to use the sample mean in the estimation of the sample variance.
+Where did we lose the degree of freedom? We lost one degree of freedom because we had to use the sample mean in the estimation of the sample variance.
 
 Sometimes $s^{2}$ is smaller than $\sigma^{2}$, and sometimes it is larger, which explains why the t-distribution is flatter in the middle but has longer tails.
 
@@ -319,7 +319,7 @@ Once you decide on a distribution for your data, you need some way of estimating
 
 We will now learn how to fit a model to data, that is, to estimate the parameter values for the distribution being used to model the data. Since parameter estimates are useful without their corresponding confidence intervals, we will also learn out to estimate confidence intervals for these parameters.
 
-Let's review for a second what is meant by a confidence interval. A 95th percentile confidence interval is an interval estimated from the data that we are 95$%$ certain contains the true but unknown value for the paameter. Because this interval is estimated from data, it has its own confidence interval. While we usually we don't worry too much about this, keep in mind that a different dataset would also produce a different parameter estimate and a different confidence interval.
+Let's review for a second what is meant by a confidence interval. A 95th percentile confidence interval is an interval estimated from the data that we are 95$\%$ certain contains the true but unknown value for the paameter. Because this interval is estimated from data, it has its own confidence interval. While we usually we don't worry too much about this, keep in mind that a different dataset would also produce a different parameter estimate and a different confidence interval.
 
 How do we calculate confidence intervals when we are using a parametric distribution to model some data? We are going to use what we know about these distributions to derive an analytical expression for the distribution of the parameter of interest, and then use the quantiles of that distribution to calculate the appropriate confidence intervals (typically we use the $\alpha⁄2$ and 1-$\alpha⁄2$ confidence intervals, where $\alpha$=0.05).
 

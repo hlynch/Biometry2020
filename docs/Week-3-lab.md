@@ -91,7 +91,7 @@ head(data)
 ```
 
 ```
-## [1]  0.2047715  0.2366625  0.1632544 -0.8157704  1.4755247  1.5953885
+## [1] -0.4058414 -1.2193885 -0.7635383  0.2371440  0.4749208 -2.1591322
 ```
 
 Note that you could have left off the "mean" and "sd" since R knows the order of inputs, that is you could simply write 
@@ -102,7 +102,7 @@ head(rnorm(100,0,1))
 ```
 
 ```
-## [1]  2.3584796  0.5913899 -0.4103863  0.1330608  0.5186207 -1.1383755
+## [1] -0.9512034  0.8938254  0.8542230  2.6406343  1.1432360 -0.7462545
 ```
 
 or even
@@ -113,7 +113,7 @@ head(rnorm(100))
 ```
 
 ```
-## [1]  0.6439034 -3.5280544  0.1445905  1.7074887  0.9451179  1.9414635
+## [1]  0.3761649  0.9607165  1.9899782 -0.8901003  0.5169162  0.9886733
 ```
 
 since mean=0, sd=1 is the default. Until you are 100% comfortable with R, its better to leave all the options spelled out. 
@@ -160,18 +160,18 @@ hist(rnorm(1000,mean=0,sd=1),plot=F)
 
 ```
 ## $breaks
-##  [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
+##  [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0
 ## 
 ## $counts
-##  [1]   2   6  19  56  99 136 188 186 164  75  42  20   5   2
+##  [1]   1   1  13  51  94 139 214 196 138  91  39  14   9
 ## 
 ## $density
-##  [1] 0.004 0.012 0.038 0.112 0.198 0.272 0.376 0.372 0.328 0.150 0.084 0.040
-## [13] 0.010 0.004
+##  [1] 0.002 0.002 0.026 0.102 0.188 0.278 0.428 0.392 0.276 0.182 0.078 0.028
+## [13] 0.018
 ## 
 ## $mids
 ##  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-## [13]  2.75  3.25
+## [13]  2.75
 ## 
 ## $xname
 ## [1] "rnorm(1000, mean = 0, sd = 1)"
@@ -244,8 +244,8 @@ table(count)
 
 ```
 ## count
-##   0   1   2   3   4   5   6   7   8 
-##  22  83 109 107  97  44  25   8   5
+##   0   1   2   3   4   5   6   7   8   9  10 
+##  26  68 119 101  80  55  29  15   4   2   1
 ```
 
 ```r
@@ -253,7 +253,7 @@ mean(count)
 ```
 
 ```
-## [1] 2.952
+## [1] 3.086
 ```
 
 ```r
@@ -261,7 +261,7 @@ var(count)
 ```
 
 ```
-## [1] 2.783263
+## [1] 3.29319
 ```
 
 Standard deviation vs. Standard error
@@ -295,7 +295,7 @@ sd(sample1)
 ```
 
 ```
-## [1] 1.740346
+## [1] 1.742134
 ```
 
 ```r
@@ -303,7 +303,7 @@ sd(sample2)
 ```
 
 ```
-## [1] 1.726921
+## [1] 1.734424
 ```
 
 ```r
@@ -311,7 +311,7 @@ sd(sample3)
 ```
 
 ```
-## [1] 1.732893
+## [1] 1.735202
 ```
 
 Notice that the standard deviation has not appreciably changed as we have increased the sample size.
@@ -338,7 +338,7 @@ s.e.1
 ```
 
 ```
-## [1] 0.05713352
+## [1] 0.05489995
 ```
 
 ```r
@@ -346,7 +346,7 @@ s.e.2
 ```
 
 ```
-## [1] 0.05476452
+## [1] 0.05427288
 ```
 
 Note that the number of experiments I looped through (2000 in this case) is not relevant. It just has to be big enough that you get a sense of what the distribution of means looks like. Now go back and modify the code so that sample.size=10000 - how does that change the result?
@@ -424,9 +424,9 @@ fit
 ```
 
 ```
-##       shape         scale   
-##   18.95822830    1.06112209 
-##  ( 0.84040296) ( 0.04766556)
+##      shape        scale   
+##   18.3043921    1.1038898 
+##  ( 0.8112301) ( 0.0495988)
 ```
 
 (Sometimes you get a warnings message about NAs when using fitdistr. The best explanation I can find says that this means R "encountered some difficulties during fitting". I can find no difference in the fits when you get the warning and when you don't, and the same sample.pois will sometimes give a warning and sometimes not, so it appears independent of the data itself. Do not ignore warnings() in R but don't be paralized by them, especially in a context where R is searching parameter space during an optimization. Be sure to search around for an explanation and make sure you are confident that R is still giving reasonable answers.)
@@ -454,8 +454,8 @@ fit$estimate
 ```
 
 ```
-##     shape     scale 
-## 18.958228  1.061122
+##    shape    scale 
+## 18.30439  1.10389
 ```
 
 and notice that we can pull out the two estimates as
@@ -467,7 +467,7 @@ fit$estimate[1]
 
 ```
 ##    shape 
-## 18.95823
+## 18.30439
 ```
 
 ```r
@@ -475,8 +475,8 @@ fit$estimate[2]
 ```
 
 ```
-##    scale 
-## 1.061122
+##   scale 
+## 1.10389
 ```
 
 Now we want to plot the data, and the best fit line:
