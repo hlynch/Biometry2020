@@ -331,7 +331,7 @@ The following four examples use the same methodology:
 
 *Step #3*: Replace the distribution with the appropriate quantiles to generate the lower bound and upper bound of interest.
 
-Example 1: Let's say that we have some data $X_{1},X_{2},X_{3},....,X_{n}$. To use a concrete example, let's say that these data represent the population growth rate of some bird colonies that I am monitoring. I am going to model growth rate by a Normal distribution:
+**Example 1: Confidence intervals for $\mu$ assuming $\sigma$ is known.** Let's say that we have some data $X_{1},X_{2},X_{3},....,X_{n}$. To use a concrete example, let's say that these data represent the population growth rate of some bird colonies that I am monitoring. I am going to model growth rate by a Normal distribution:
 
 $$
 X \sim N(\mu,\sigma^{2})
@@ -405,7 +405,7 @@ from which we arrive at a form for the confidence interval that might look famil
 
 *Note*: We often use this approach for the population mean even if we do not know the exact distribution because the CLT tells us that for large sample sizes, the mean of the distribution is normally distributed. But this approach is quite limited because it doesn’t tell us how to get estimates and CIs for other parameters, nor does it address the problem of estimates when the sample size is small and the CLT doesn’t apply.
 
-Example #2: What about a (much more common) situation where you need to use the data to estimate both the mean and the variance? In this case we have to use the sample variance $s^{2}$ to estimate the parametric variance $\sigma^{2}$. We start with the following fact
+**Example #2: Confidence intervals for $\mu$ assuming $\sigma$ is unknown.** What about a (much more common) situation where you need to use the data to estimate both the mean and the variance? In this case we have to use the sample variance $s^{2}$ to estimate the parametric variance $\sigma^{2}$. We start with the following fact
 
 $$
 \frac{\bar{X}-\mu}{\sqrt{\frac{s^{2}}{n}}} \sim t_{n-1}
@@ -423,7 +423,7 @@ $$
 
 It is almost never the case that you know $\sigma^{2}$, so you should always use the quantiles of the t-distribution for building confidence intervals for $\bar{X}$. People incorrectly use the normal approximation because back in the day of tables, the normal distribution was easier. *In the age of computers, no excuse – use the t-distribution.*
 
-Example #3: Estimating the parametric variance $\sigma^{2}$ using the $\chi^{2}$ distribution
+**Example #3: Estimating the confidence intervals for the variance $\sigma^{2}$.**
 
 $$
 \frac{1}{\sigma^{2}}\sum_{i=1}^{n}(X_{i}-\bar{X})^{2} \sim \chi^{2}_{n-1}
@@ -451,7 +451,7 @@ $$
 P(\frac{(n-1)s^{2}}{\chi^{2}_{(1-\alpha/2)[n-1]}} \leq \sigma^{2} \leq \frac{(n-1)s^{2}}{\chi^{2}_{(\alpha/2)[n-1]}}) = 1-\alpha
 $$
 
-Example #4: Estimating the parametric variance $\sigma^{2}$ using the $\chi^{2}$ distribution
+**Example #4: Estimating the ratio of two variances $\sigma^{2}_{A}/\sigma^{2}_{B}$**
 
 First, it helps to know that if $X \sim F_{n-1,m-1}$, then $1/X \sim F_{m-1,n-1}$.
 We re-arrange the equation above to get
@@ -462,7 +462,9 @@ $$
 
 To recap:
 
-We used the t-distribution to derive the confidence interval for the parametric mean $\mu$.
+We used the Normal distribution to derive the confidence interval for the parametric mean $\mu$ when $\sigma$ is known. 
+
+We used the t-distribution to derive the confidence interval for the parametric mean $\mu$ when $\sigma$ is unknown (much more common).
 
 We used the $\chi^{2}$ distribution to derive the confidence interval for the parametric variance $\sigma^{2}$.
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-16" />
+<meta name="date" content="2020-02-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -546,7 +546,7 @@ s^2(n-1) = \sum_{i=1}^n(X_i-\bar{X})^2
 <p><em>Step #1</em>: Start with an expression involving the parameter of interest that you know is true based on what we already know about the properties of the univariate distributions</p>
 <p><em>Step #2</em>: Algebraically re-arrange that expression to isolate the parameter of interest on one side of the equation. You now have an expression for the statistical distribution describing the estimate of that parameter</p>
 <p><em>Step #3</em>: Replace the distribution with the appropriate quantiles to generate the lower bound and upper bound of interest.</p>
-<p>Example 1: Let’s say that we have some data <span class="math inline">\(X_{1},X_{2},X_{3},....,X_{n}\)</span>. To use a concrete example, let’s say that these data represent the population growth rate of some bird colonies that I am monitoring. I am going to model growth rate by a Normal distribution:</p>
+<p><strong>Example 1: Confidence intervals for <span class="math inline">\(\mu\)</span> assuming <span class="math inline">\(\sigma\)</span> is known.</strong> Let’s say that we have some data <span class="math inline">\(X_{1},X_{2},X_{3},....,X_{n}\)</span>. To use a concrete example, let’s say that these data represent the population growth rate of some bird colonies that I am monitoring. I am going to model growth rate by a Normal distribution:</p>
 <p><span class="math display">\[
 X \sim N(\mu,\sigma^{2})
 \]</span> Let’s assume for the moment that I already know what the variance of growth rate is, so <span class="math inline">\(\sigma\)</span> is already known and does not have to be estimated from the data, but I do need to use the data to estimate the mean of the distribution <span class="math inline">\(\mu\)</span>.</p>
@@ -592,7 +592,7 @@ z_{1-\alpha/2}=qnorm(0.975)=1.96
 \]</span></p>
 <p>from which we arrive at a form for the confidence interval that might look familiar, that is, estimate <span class="math inline">\(\pm\)</span> 2 <span class="math inline">\(\times\)</span> SE (the standard error).</p>
 <p><em>Note</em>: We often use this approach for the population mean even if we do not know the exact distribution because the CLT tells us that for large sample sizes, the mean of the distribution is normally distributed. But this approach is quite limited because it doesn’t tell us how to get estimates and CIs for other parameters, nor does it address the problem of estimates when the sample size is small and the CLT doesn’t apply.</p>
-<p>Example #2: What about a (much more common) situation where you need to use the data to estimate both the mean and the variance? In this case we have to use the sample variance <span class="math inline">\(s^{2}\)</span> to estimate the parametric variance <span class="math inline">\(\sigma^{2}\)</span>. We start with the following fact</p>
+<p><strong>Example #2: Confidence intervals for <span class="math inline">\(\mu\)</span> assuming <span class="math inline">\(\sigma\)</span> is unknown.</strong> What about a (much more common) situation where you need to use the data to estimate both the mean and the variance? In this case we have to use the sample variance <span class="math inline">\(s^{2}\)</span> to estimate the parametric variance <span class="math inline">\(\sigma^{2}\)</span>. We start with the following fact</p>
 <p><span class="math display">\[
 \frac{\bar{X}-\mu}{\sqrt{\frac{s^{2}}{n}}} \sim t_{n-1}
 \]</span></p>
@@ -604,7 +604,7 @@ z_{1-\alpha/2}=qnorm(0.975)=1.96
 P(\bar{X}-\sqrt{\frac{s^{2}}{n}}t_{(1-\alpha/2)[n-1]} \leq \mu \leq \bar{X}+\sqrt{\frac{s^{2}}{n}}t_{(1-\alpha/2)[n-1]}) = 1-\alpha
 \]</span></p>
 <p>It is almost never the case that you know <span class="math inline">\(\sigma^{2}\)</span>, so you should always use the quantiles of the t-distribution for building confidence intervals for <span class="math inline">\(\bar{X}\)</span>. People incorrectly use the normal approximation because back in the day of tables, the normal distribution was easier. <em>In the age of computers, no excuse – use the t-distribution.</em></p>
-<p>Example #3: Estimating the parametric variance <span class="math inline">\(\sigma^{2}\)</span> using the <span class="math inline">\(\chi^{2}\)</span> distribution</p>
+<p><strong>Example #3: Estimating the confidence intervals for the variance <span class="math inline">\(\sigma^{2}\)</span>.</strong></p>
 <p><span class="math display">\[
 \frac{1}{\sigma^{2}}\sum_{i=1}^{n}(X_{i}-\bar{X})^{2} \sim \chi^{2}_{n-1}
 \]</span></p>
@@ -622,13 +622,14 @@ P(\bar{X}-\sqrt{\frac{s^{2}}{n}}t_{(1-\alpha/2)[n-1]} \leq \mu \leq \bar{X}+\sqr
 <p><span class="math display">\[
 P(\frac{(n-1)s^{2}}{\chi^{2}_{(1-\alpha/2)[n-1]}} \leq \sigma^{2} \leq \frac{(n-1)s^{2}}{\chi^{2}_{(\alpha/2)[n-1]}}) = 1-\alpha
 \]</span></p>
-<p>Example #4: Estimating the parametric variance <span class="math inline">\(\sigma^{2}\)</span> using the <span class="math inline">\(\chi^{2}\)</span> distribution</p>
+<p><strong>Example #4: Estimating the ratio of two variances <span class="math inline">\(\sigma^{2}_{A}/\sigma^{2}_{B}\)</span></strong></p>
 <p>First, it helps to know that if <span class="math inline">\(X \sim F_{n-1,m-1}\)</span>, then <span class="math inline">\(1/X \sim F_{m-1,n-1}\)</span>. We re-arrange the equation above to get</p>
 <p><span class="math display">\[
 \frac{s_{A}^{2}}{s_{B}^{2}}F_{(\alpha/2)[m-1,n-1]} \leq \frac{\sigma_{A}^{2}}{\sigma_{B}^{2}} \leq \frac{s_{A}^{2}}{s_{B}^{2}}F_{(1-\alpha/2)[m-1,n-1]}
 \]</span></p>
 <p>To recap:</p>
-<p>We used the t-distribution to derive the confidence interval for the parametric mean <span class="math inline">\(\mu\)</span>.</p>
+<p>We used the Normal distribution to derive the confidence interval for the parametric mean <span class="math inline">\(\mu\)</span> when <span class="math inline">\(\sigma\)</span> is known.</p>
+<p>We used the t-distribution to derive the confidence interval for the parametric mean <span class="math inline">\(\mu\)</span> when <span class="math inline">\(\sigma\)</span> is unknown (much more common).</p>
 <p>We used the <span class="math inline">\(\chi^{2}\)</span> distribution to derive the confidence interval for the parametric variance <span class="math inline">\(\sigma^{2}\)</span>.</p>
 <p>We used the F distribution to derive the confidence interval for the ratio of two variances.</p>
 
