@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-17" />
+<meta name="date" content="2020-02-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -176,6 +176,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3" data-path="week-4-lecture.html"><a href="week-4-lecture.html#chi-squared-distribution"><i class="fa fa-check"></i><b>7.3</b> Chi-squared distribution</a></li>
 <li class="chapter" data-level="7.4" data-path="week-4-lecture.html"><a href="week-4-lecture.html#f-distribution"><i class="fa fa-check"></i><b>7.4</b> F distribution</a></li>
 <li class="chapter" data-level="7.5" data-path="week-4-lecture.html"><a href="week-4-lecture.html#parameter-estimation-1"><i class="fa fa-check"></i><b>7.5</b> Parameter estimation</a></li>
+<li class="chapter" data-level="7.6" data-path="week-4-lecture.html"><a href="week-4-lecture.html#to-recap"><i class="fa fa-check"></i><b>7.6</b> To recap</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="week-4-lab.html"><a href="week-4-lab.html"><i class="fa fa-check"></i><b>8</b> Week 4 Lab</a></li>
 <li class="chapter" data-level="9" data-path="week-5-lecture.html"><a href="week-5-lecture.html"><i class="fa fa-check"></i><b>9</b> Week 5 Lecture</a><ul>
@@ -604,33 +605,76 @@ z_{1-\alpha/2}=qnorm(0.975)=1.96
 P(\bar{X}-\sqrt{\frac{s^{2}}{n}}t_{(1-\alpha/2)[n-1]} \leq \mu \leq \bar{X}+\sqrt{\frac{s^{2}}{n}}t_{(1-\alpha/2)[n-1]}) = 1-\alpha
 \]</span></p>
 <p>It is almost never the case that you know <span class="math inline">\(\sigma^{2}\)</span>, so you should always use the quantiles of the t-distribution for building confidence intervals for <span class="math inline">\(\bar{X}\)</span>. People incorrectly use the normal approximation because back in the day of tables, the normal distribution was easier. <em>In the age of computers, no excuse – use the t-distribution.</em></p>
-<p><strong>Example #3: Estimating the confidence intervals for the variance <span class="math inline">\(\sigma^{2}\)</span>.</strong></p>
+<p><strong>Example #3: Estimating the confidence intervals for the variance <span class="math inline">\(\sigma^{2}\)</span> assuming <span class="math inline">\(\mu\)</span> is known.</strong></p>
+<p>Based on the definition of a <span class="math inline">\(\chi^{2}\)</span> distribution, we know that if we have data <span class="math inline">\(X \sim N(\mu,\sigma^{2})\)</span>, than</p>
+<p><span class="math display">\[
+\frac{1}{\sigma^{2}}\sum_{i=1}^{n}(X_{i}-\mu)^{2} \sim \chi^{2}_{n}
+\]</span></p>
+<p>here we will use the fact that if <span class="math inline">\(\mu\)</span> is <em>known</em>, than the sample variance is calculated as</p>
+<p><span class="math display">\[
+\frac{1}{n}\sum_{i=1}^{n}(X_{i}-\mu)^{2} = s^{2}
+\]</span> Notice that because <span class="math inline">\(\mu\)</span> is known and does not have to be estimated from the data, we retain all n degrees of freedom in the denominator.</p>
+<p>We can re-arrange this equation to get</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n}(X_{i}-\mu)^{2} = ns^{2}
+\]</span> which we plug into our <span class="math inline">\(\chi^{2}\)</span> expression to yield</p>
+<p><span class="math display">\[
+\frac{1}{\sigma^{2}}ns^{2} \sim \chi^{2}_{n}
+\]</span> We then re-arrange a bit further to isolate <span class="math inline">\(\sigma^{2}\)</span></p>
+<p><span class="math display">\[
+\sigma^{2} \sim \frac{ns^{2}}{\chi^{2}_{n}}
+\]</span></p>
+<p>Now that we have the sampling distribution for <span class="math inline">\(\sigma^{2}\)</span> we can simply insert the appropriate quantiles to get the lower and upper limits of the confidence interval. Note that because the <span class="math inline">\(\chi^{2}\)</span> is in the denominator, the <em>larger</em> quantile is associated with the lower limit, and vice versa.</p>
+<p><span class="math display">\[
+P(\frac{ns^{2}}{\chi^{2}_{(1-\alpha/2)[n]}} \leq \sigma^{2} \leq \frac{ns^{2}}{\chi^{2}_{(\alpha/2)[n]}}) = 1-\alpha
+\]</span></p>
+<p><strong>Example #4: Estimating the confidence intervals for the variance <span class="math inline">\(\sigma^{2}\)</span> assuming <span class="math inline">\(\mu\)</span> is unknown.</strong></p>
+<p>This example proceeds similarly to the one above, except we now need to estimate <span class="math inline">\(\mu\)</span> from the data, and this means we lose of degree of freedom both in the <span class="math inline">\(\chi^{2}\)</span> distribution and in the estimate of the sample variance.</p>
 <p><span class="math display">\[
 \frac{1}{\sigma^{2}}\sum_{i=1}^{n}(X_{i}-\bar{X})^{2} \sim \chi^{2}_{n-1}
 \]</span></p>
 <p>Why n-1? Because we lost a degree of freedom when we had to estimate <span class="math inline">\(\bar{X}\)</span>.</p>
-<p>This is exactly analogous to what we did before. Before we substituted <span class="math inline">\(s^{2}\)</span> for <span class="math inline">\(\sigma^{2}\)</span> to get a confidence interval for <span class="math inline">\(\mu\)</span>. Now we substitute <span class="math inline">\(\bar{X}\)</span> for <span class="math inline">\(\mu\)</span> to find a confidence interval on <span class="math inline">\(\sigma^{2}\)</span>.</p>
-<p>The basic process is similar to what we did before. Remember that</p>
+<p>As before (except with <span class="math inline">\(\mu\)</span> unknown, and estimated by <span class="math inline">\(\bar{X}\)</span>)</p>
 <p><span class="math display">\[
 \frac{1}{(n-1)}\sum_{i=1}^{n}(X_{i}-\bar{X})^{2} = s^{2}
 \]</span></p>
 <p>so we can rearrange to show that</p>
 <p><span class="math display">\[
 \frac{1}{\sigma^{2}}\sum_{i=1}^{n}(X_{i}-\bar{X})^{2}=\frac{(n-1)s^{2}}{\sigma^{2}} \sim \chi^{2}_{n-1}
+\]</span> Using the above expression, we re-arrange to get the sampling distribution of <span class="math inline">\(\sigma^{2}\)</span></p>
+<p><span class="math display">\[
+\sigma^{2} \sim \frac{(n-1)s^{2}}{\chi^{2}_{n-1}}
 \]</span></p>
-<p>We can rearrange the above equation to find the confidence limits on an estimate of the population variance</p>
+<p>from which we get the confidence intervals</p>
 <p><span class="math display">\[
 P(\frac{(n-1)s^{2}}{\chi^{2}_{(1-\alpha/2)[n-1]}} \leq \sigma^{2} \leq \frac{(n-1)s^{2}}{\chi^{2}_{(\alpha/2)[n-1]}}) = 1-\alpha
 \]</span></p>
-<p><strong>Example #4: Estimating the ratio of two variances <span class="math inline">\(\sigma^{2}_{A}/\sigma^{2}_{B}\)</span></strong></p>
-<p>First, it helps to know that if <span class="math inline">\(X \sim F_{n-1,m-1}\)</span>, then <span class="math inline">\(1/X \sim F_{m-1,n-1}\)</span>. We re-arrange the equation above to get</p>
+<p><strong>Example #5: Estimating the ratio of two variances <span class="math inline">\(\sigma^{2}_{A}/\sigma^{2}_{B}\)</span></strong></p>
+<p>We start with this expression, which we derived above:</p>
+<p><span class="math display">\[ 
+\frac{s^2_A/\sigma^2_A}{s^2_B/\sigma^2_B} \sim F_{n-1,m-1}
+\]</span> We can rewrite this equation as</p>
+<p><span class="math display">\[ 
+\frac{s^2_A/s^2_B}{\sigma_{A}^{2}/\sigma^2_B} \sim F_{n-1,m-1}
+\]</span> Now we are going to invert the fraction on the left hand side in order to get the <span class="math inline">\(\sigma\)</span>s in the numerator. The right hand side is still an F-distribution, but because we have flipped numerator and denominator, we need to switch the order of the two parameters</p>
+<p><span class="math display">\[ 
+\frac{\sigma_{A}^{2}/\sigma^2_B}{s^2_A/s^2_B} \sim F_{m-1,n-1}
+\]</span></p>
+<p>We isolate the ratio of <span class="math inline">\(\sigma\)</span>s in the numerator by multiplying the sample variances across, as follows</p>
+<p><span class="math display">\[ 
+\frac{\sigma_{A}^{2}}{\sigma^2_B} \sim \frac{s^2_A}{s^2_B} F_{m-1,n-1}
+\]</span></p>
+<p>Now, as before, we have the sampling distribution for the quantity we want, and we obtain the confidence intervals by substituting in the appropriate quantiles.</p>
 <p><span class="math display">\[
 \frac{s_{A}^{2}}{s_{B}^{2}}F_{(\alpha/2)[m-1,n-1]} \leq \frac{\sigma_{A}^{2}}{\sigma_{B}^{2}} \leq \frac{s_{A}^{2}}{s_{B}^{2}}F_{(1-\alpha/2)[m-1,n-1]}
 \]</span></p>
-<p>To recap:</p>
+</div>
+<div id="to-recap" class="section level2">
+<h2><span class="header-section-number">7.6</span> To recap</h2>
 <p>We used the Normal distribution to derive the confidence interval for the parametric mean <span class="math inline">\(\mu\)</span> when <span class="math inline">\(\sigma\)</span> is known.</p>
 <p>We used the t-distribution to derive the confidence interval for the parametric mean <span class="math inline">\(\mu\)</span> when <span class="math inline">\(\sigma\)</span> is unknown (much more common).</p>
-<p>We used the <span class="math inline">\(\chi^{2}\)</span> distribution to derive the confidence interval for the parametric variance <span class="math inline">\(\sigma^{2}\)</span>.</p>
+<p>We used the <span class="math inline">\(\chi^{2}\)</span> distribution to derive the confidence interval for the parametric variance <span class="math inline">\(\sigma^{2}\)</span> when <span class="math inline">\(\mu\)</span> is known.</p>
+<p>We used the <span class="math inline">\(\chi^{2}\)</span> distribution to derive the confidence interval for the parametric variance <span class="math inline">\(\sigma^{2}\)</span> when <span class="math inline">\(\mu\)</span> is unknown (much more common).</p>
 <p>We used the F distribution to derive the confidence interval for the ratio of two variances.</p>
 
 </div>

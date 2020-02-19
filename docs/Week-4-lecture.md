@@ -367,7 +367,46 @@ $$
 
 It is almost never the case that you know $\sigma^{2}$, so you should always use the quantiles of the t-distribution for building confidence intervals for $\bar{X}$. People incorrectly use the normal approximation because back in the day of tables, the normal distribution was easier. *In the age of computers, no excuse – use the t-distribution.*
 
-**Example #3: Estimating the confidence intervals for the variance $\sigma^{2}$.**
+**Example #3: Estimating the confidence intervals for the variance $\sigma^{2}$ assuming $\mu$ is known.**
+
+Based on the definition of a $\chi^{2}$ distribution, we know that if we have data $X \sim N(\mu,\sigma^{2})$, than 
+
+$$
+\frac{1}{\sigma^{2}}\sum_{i=1}^{n}(X_{i}-\mu)^{2} \sim \chi^{2}_{n}
+$$
+
+here we will use the fact that if $\mu$ is *known*, than the sample variance is calculated as
+
+$$
+\frac{1}{n}\sum_{i=1}^{n}(X_{i}-\mu)^{2} = s^{2}
+$$
+Notice that because $\mu$ is known and does not have to be estimated from the data, we retain all n degrees of freedom in the denominator.
+
+We can re-arrange this equation to get
+
+$$
+\sum_{i=1}^{n}(X_{i}-\mu)^{2} = ns^{2}
+$$
+which we plug into our $\chi^{2}$ expression to yield
+
+$$
+\frac{1}{\sigma^{2}}ns^{2} \sim \chi^{2}_{n}
+$$
+We then re-arrange a bit further to isolate $\sigma^{2}$
+
+$$
+\sigma^{2} \sim \frac{ns^{2}}{\chi^{2}_{n}}
+$$
+
+Now that we have the sampling distribution for $\sigma^{2}$ we can simply insert the appropriate quantiles to get the lower and upper limits of the confidence interval. Note that because the $\chi^{2}$ is in the denominator, the *larger* quantile is associated with the lower limit, and vice versa.
+
+$$
+P(\frac{ns^{2}}{\chi^{2}_{(1-\alpha/2)[n]}} \leq \sigma^{2} \leq \frac{ns^{2}}{\chi^{2}_{(\alpha/2)[n]}}) = 1-\alpha
+$$
+
+**Example #4: Estimating the confidence intervals for the variance $\sigma^{2}$ assuming $\mu$ is unknown.**
+
+This example proceeds similarly to the one above, except we now need to estimate $\mu$ from the data, and this means we lose of degree of freedom both in the $\chi^{2}$ distribution and in the estimate of the sample variance.
 
 $$
 \frac{1}{\sigma^{2}}\sum_{i=1}^{n}(X_{i}-\bar{X})^{2} \sim \chi^{2}_{n-1}
@@ -375,9 +414,7 @@ $$
 
 Why n-1? Because we lost a degree of freedom when we had to estimate $\bar{X}$.
 
-This is exactly analogous to what we did before. Before we substituted $s^{2}$ for $\sigma^{2}$ to get a confidence interval for $\mu$. Now we substitute $\bar{X}$ for $\mu$ to find a confidence interval on $\sigma^{2}$.
-
-The basic process is similar to what we did before. Remember that
+As before (except with $\mu$ unknown, and estimated by $\bar{X}$)
 
 $$
 \frac{1}{(n-1)}\sum_{i=1}^{n}(X_{i}-\bar{X})^{2} = s^{2}
@@ -388,29 +425,57 @@ so we can rearrange to show that
 $$
 \frac{1}{\sigma^{2}}\sum_{i=1}^{n}(X_{i}-\bar{X})^{2}=\frac{(n-1)s^{2}}{\sigma^{2}} \sim \chi^{2}_{n-1}
 $$
+Using the above expression, we re-arrange to get the sampling distribution of $\sigma^{2}$
 
-We can rearrange the above equation to find the confidence limits on an estimate of the population variance
+$$
+\sigma^{2} \sim \frac{(n-1)s^{2}}{\chi^{2}_{n-1}}
+$$
+
+from which we get the confidence intervals
 
 $$
 P(\frac{(n-1)s^{2}}{\chi^{2}_{(1-\alpha/2)[n-1]}} \leq \sigma^{2} \leq \frac{(n-1)s^{2}}{\chi^{2}_{(\alpha/2)[n-1]}}) = 1-\alpha
 $$
 
-**Example #4: Estimating the ratio of two variances $\sigma^{2}_{A}/\sigma^{2}_{B}$**
+**Example #5: Estimating the ratio of two variances $\sigma^{2}_{A}/\sigma^{2}_{B}$**
 
-First, it helps to know that if $X \sim F_{n-1,m-1}$, then $1/X \sim F_{m-1,n-1}$.
-We re-arrange the equation above to get
+We start with this expression, which we derived above:
+
+$$ 
+\frac{s^2_A/\sigma^2_A}{s^2_B/\sigma^2_B} \sim F_{n-1,m-1}
+$$
+We can rewrite this equation as
+
+$$ 
+\frac{s^2_A/s^2_B}{\sigma_{A}^{2}/\sigma^2_B} \sim F_{n-1,m-1}
+$$
+Now we are going to invert the fraction on the left hand side in order to get the $\sigma$s in the numerator. The right hand side is still an F-distribution, but because we have flipped numerator and denominator, we need to switch the order of the two parameters
+
+$$ 
+\frac{\sigma_{A}^{2}/\sigma^2_B}{s^2_A/s^2_B} \sim F_{m-1,n-1}
+$$
+
+We isolate the ratio of $\sigma$s in the numerator by multiplying the sample variances across, as follows
+
+$$ 
+\frac{\sigma_{A}^{2}}{\sigma^2_B} \sim \frac{s^2_A}{s^2_B} F_{m-1,n-1}
+$$
+
+Now, as before, we have the sampling distribution for the quantity we want, and we obtain the confidence intervals by substituting in the appropriate quantiles. 
 
 $$
 \frac{s_{A}^{2}}{s_{B}^{2}}F_{(\alpha/2)[m-1,n-1]} \leq \frac{\sigma_{A}^{2}}{\sigma_{B}^{2}} \leq \frac{s_{A}^{2}}{s_{B}^{2}}F_{(1-\alpha/2)[m-1,n-1]}
 $$
 
-To recap:
+##To recap
 
 We used the Normal distribution to derive the confidence interval for the parametric mean $\mu$ when $\sigma$ is known. 
 
 We used the t-distribution to derive the confidence interval for the parametric mean $\mu$ when $\sigma$ is unknown (much more common).
 
-We used the $\chi^{2}$ distribution to derive the confidence interval for the parametric variance $\sigma^{2}$.
+We used the $\chi^{2}$ distribution to derive the confidence interval for the parametric variance $\sigma^{2}$ when $\mu$ is known.
+
+We used the $\chi^{2}$ distribution to derive the confidence interval for the parametric variance $\sigma^{2}$ when $\mu$ is unknown (much more common).
 
 We used the F distribution to derive the confidence interval for the ratio of two variances.
 
