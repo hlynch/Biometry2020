@@ -563,17 +563,17 @@ Y_5 = \alpha_{2(5)} + \epsilon_5 \text{, where } \epsilon_5 \sim N(0, \sigma^2)
 <span class="kw">model.matrix</span>( <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>iris.sub<span class="op">$</span>Species)</code></pre></div>
 <pre><code>##    iris.sub$Speciessetosa iris.sub$Speciesversicolor iris.sub$Speciesvirginica
 ## 1                       1                          0                         0
-## 2                       1                          0                         0
-## 3                       1                          0                         0
-## 4                       0                          1                         0
+## 2                       0                          1                         0
+## 3                       0                          0                         1
+## 4                       0                          0                         1
 ## 5                       1                          0                         0
-## 6                       1                          0                         0
+## 6                       0                          0                         1
 ## 7                       1                          0                         0
 ## 8                       0                          1                         0
 ## 9                       0                          1                         0
-## 10                      1                          0                         0
-## 11                      0                          0                         1
-## 12                      1                          0                         0
+## 10                      0                          1                         0
+## 11                      0                          1                         0
+## 12                      0                          1                         0
 ## attr(,&quot;assign&quot;)
 ## [1] 1 1 1
 ## attr(,&quot;contrasts&quot;)
@@ -583,9 +583,9 @@ Y_5 = \alpha_{2(5)} + \epsilon_5 \text{, where } \epsilon_5 \sim N(0, \sigma^2)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dummy &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(iris.sub<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>iris.sub<span class="op">$</span>Species))
 dummy<span class="op">$</span>coefficients</code></pre></div>
 <pre><code>##                            Estimate Std. Error  t value     Pr(&gt;|t|)
-## iris.sub$Speciessetosa     4.937500  0.1003755 49.19031 2.974119e-12
-## iris.sub$Speciesversicolor 5.633333  0.1639124 34.36795 7.379073e-11
-## iris.sub$Speciesvirginica  6.500000  0.2839047 22.89501 2.747603e-09</code></pre>
+## iris.sub$Speciessetosa     4.800000  0.1926104 24.92077 1.294949e-09
+## iris.sub$Speciesversicolor 6.150000  0.1361961 45.15547 6.406966e-12
+## iris.sub$Speciesvirginica  6.933333  0.1926104 35.99667 4.877660e-11</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris.fig &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris.sub, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> iris.means, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">col =</span> Species), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Sepal length&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> font.size))
@@ -988,17 +988,17 @@ Y_i = \alpha_{\text{control}} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsi
 <span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species)</code></pre></div>
 <pre><code>##    (Intercept) iris.sub$Speciesversicolor iris.sub$Speciesvirginica
 ## 1            1                          0                         0
-## 2            1                          0                         0
-## 3            1                          0                         0
-## 4            1                          1                         0
+## 2            1                          1                         0
+## 3            1                          0                         1
+## 4            1                          0                         1
 ## 5            1                          0                         0
-## 6            1                          0                         0
+## 6            1                          0                         1
 ## 7            1                          0                         0
 ## 8            1                          1                         0
 ## 9            1                          1                         0
-## 10           1                          0                         0
-## 11           1                          0                         1
-## 12           1                          0                         0
+## 10           1                          1                         0
+## 11           1                          1                         0
+## 12           1                          1                         0
 ## attr(,&quot;assign&quot;)
 ## [1] 0 1 1
 ## attr(,&quot;contrasts&quot;)
@@ -1006,10 +1006,10 @@ Y_i = \alpha_{\text{control}} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsi
 ## [1] &quot;contr.treatment&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">treatment &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(iris.sub<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species))
 treatment<span class="op">$</span>coefficients</code></pre></div>
-<pre><code>##                             Estimate Std. Error   t value     Pr(&gt;|t|)
-## (Intercept)                4.9375000  0.1003755 49.190314 2.974119e-12
-## iris.sub$Speciesversicolor 0.6958333  0.1922044  3.620279 5.569335e-03
-## iris.sub$Speciesvirginica  1.5625000  0.3011264  5.188852 5.725267e-04</code></pre>
+<pre><code>##                            Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept)                4.800000  0.1926104 24.920773 1.294949e-09
+## iris.sub$Speciesversicolor 1.350000  0.2358986  5.722798 2.859425e-04
+## iris.sub$Speciesvirginica  2.133333  0.2723922  7.831843 2.621863e-05</code></pre>
 <p>In this case, you can see that the model is estimating the mean of the first group (setosa) and then the difference between the second and first group and the difference between the third and first groups. This allows you to test hypotheses about the differences, which is often more meaningful than testing hypotheses about the group means themselves.</p>
 </div>
 <div id="helmert-contrasts" class="section level2">
@@ -1078,17 +1078,17 @@ Y_i = \bar{\alpha}_{&lt; j} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilo
 <span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species)</code></pre></div>
 <pre><code>##    (Intercept) iris.sub$Species1 iris.sub$Species2
 ## 1            1                -1                -1
-## 2            1                -1                -1
-## 3            1                -1                -1
-## 4            1                 1                -1
+## 2            1                 1                -1
+## 3            1                 0                 2
+## 4            1                 0                 2
 ## 5            1                -1                -1
-## 6            1                -1                -1
+## 6            1                 0                 2
 ## 7            1                -1                -1
 ## 8            1                 1                -1
 ## 9            1                 1                -1
-## 10           1                -1                -1
-## 11           1                 0                 2
-## 12           1                -1                -1
+## 10           1                 1                -1
+## 11           1                 1                -1
+## 12           1                 1                -1
 ## attr(,&quot;assign&quot;)
 ## [1] 0 1 1
 ## attr(,&quot;contrasts&quot;)
@@ -1097,9 +1097,9 @@ Y_i = \bar{\alpha}_{&lt; j} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilo
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">helmert &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(iris.sub<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species))
 helmert<span class="op">$</span>coefficients</code></pre></div>
 <pre><code>##                    Estimate Std. Error   t value     Pr(&gt;|t|)
-## (Intercept)       5.6902778 0.11428248 49.791340 2.667156e-12
-## iris.sub$Species1 0.3479167 0.09610218  3.620279 5.569335e-03
-## iris.sub$Species2 0.4048611 0.09990967  4.052271 2.875105e-03</code></pre>
+## (Intercept)       5.9611111 0.10151459 58.721716 6.068076e-13
+## iris.sub$Species1 0.6750000 0.11794930  5.722798 2.859425e-04
+## iris.sub$Species2 0.4861111 0.07528524  6.456925 1.171894e-04</code></pre>
 </div>
 <div id="sum-to-zero-contrasts" class="section level2">
 <h2><span class="header-section-number">14.7</span> Sum-to-zero contrasts</h2>
@@ -1169,17 +1169,17 @@ Y_i = \bar{\alpha} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilon_i \sim 
 <span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species)</code></pre></div>
 <pre><code>##    (Intercept) iris.sub$Species1 iris.sub$Species2
 ## 1            1                 1                 0
-## 2            1                 1                 0
-## 3            1                 1                 0
-## 4            1                 0                 1
+## 2            1                 0                 1
+## 3            1                -1                -1
+## 4            1                -1                -1
 ## 5            1                 1                 0
-## 6            1                 1                 0
+## 6            1                -1                -1
 ## 7            1                 1                 0
 ## 8            1                 0                 1
 ## 9            1                 0                 1
-## 10           1                 1                 0
-## 11           1                -1                -1
-## 12           1                 1                 0
+## 10           1                 0                 1
+## 11           1                 0                 1
+## 12           1                 0                 1
 ## attr(,&quot;assign&quot;)
 ## [1] 0 1 1
 ## attr(,&quot;contrasts&quot;)
@@ -1187,10 +1187,10 @@ Y_i = \bar{\alpha} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilon_i \sim 
 ## [1] &quot;contr.sum&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sumtozero &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(iris.sub<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species))
 sumtozero<span class="op">$</span>coefficients</code></pre></div>
-<pre><code>##                      Estimate Std. Error    t value     Pr(&gt;|t|)
-## (Intercept)        5.69027778  0.1142825 49.7913396 2.667156e-12
-## iris.sub$Species1 -0.75277778  0.1281362 -5.8748234 2.363430e-04
-## iris.sub$Species2 -0.05694444  0.1483787 -0.3837777 7.100523e-01</code></pre>
+<pre><code>##                     Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept)        5.9611111  0.1015146 58.721716 6.068076e-13
+## iris.sub$Species1 -1.1611111  0.1505705 -7.711413 2.964998e-05
+## iris.sub$Species2  0.1888889  0.1284069  1.471018 1.753646e-01</code></pre>
 <p>There is one final “off-the-shelf” contrast that we will learn, and that is polynomial contrasts.</p>
 </div>
 <div id="polynomial-contrasts" class="section level2">

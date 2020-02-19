@@ -133,10 +133,10 @@ To reiterate, it is important to remember the following properties of the chi-sq
 
 2. If $X_{p1}^{2},X_{p2}^{2},X_{p3}^{2}... \sim \chi^{2}$ distribution, then $\sum_{i}{X_{pi}} \sim \chi^{2}_{\sum{p_{i}}}$. In other words, independent chi-squared random variables sum to a chi-squared random variable, and the degrees of freedom also add.
 
-The chi-squared distribution has an ugly pdf, which I include here for completeness.
+While above I used the symbol "n" to designate the parameter of the $\chi^{2}$ distribution because it is intuitive how that parameter is equal to the number of (squared) random variables are being summed, here I will switch to the letter $\nu$, which is slightly more traditional. The chi-squared distribution has an ugly pdf, which I include here for completeness.
 
 $$ 
-f(x \mid \nu) = \frac{1}{2^\frac{\nu}{2} \Gamma(\frac{\nu}{2})} x^{(\frac{\nu}{2}-1)} e^\frac{-x}{2}
+f(x \mid \nu=n) = \frac{1}{2^\frac{\nu}{2} \Gamma(\frac{\nu}{2})} x^{(\frac{\nu}{2}-1)} e^\frac{-x}{2}
 $$
 Remembering that the Gamma distribution is given by
 
@@ -171,7 +171,7 @@ $$
 f(x|r=n-1,s=m-1)=\frac{r\Gamma(\frac{1}{2}(r+s))}{s\Gamma(\frac{1}{2}r)\Gamma(\frac{1}{2}s)}\frac{\frac{rx}{s}^{\frac{r}{2}-1}}{(1+\frac{rx}{s})^{\frac{r+s}{2}}}
 $$
 
-and the shape of the F distribution looks like
+(noting that I have used r=n-1 and s=m-1 to make the equation slightly more readable) and the shape of the F distribution looks like
 
 <img src="Week-4-lecture_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
