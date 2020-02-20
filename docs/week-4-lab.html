@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-18" />
+<meta name="date" content="2020-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -395,6 +395,13 @@ L(\mu,\sigma|X_{1},X_{2},...,X_{n}) = \prod^{n}_{i=1}\frac{1}{\sqrt{2\pi\sigma^{
 <p>The likelihood specifies the probability of obtaining the known data <span class="math inline">\({X_{1},X_{2},...,X_{n}}\)</span> by a certain combination of the unknown parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</p>
 <p>pdf: parameters known, data varies<br />
 likelihood: data known, parameters vary</p>
+<p>In this way, the relationship between the joint probability density and the likelihood function is a bit like the relationship between the young woman and the old maid in this famous optical illusion:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="Optical_illusion.png" alt="Optical illusion known as &quot;My Wife and my Mother-in-Law&quot;. Source: Wikimedia Commons" width="25%" />
+<p class="caption">
+Figure 1.1: Optical illusion known as “My Wife and my Mother-in-Law”. Source: Wikimedia Commons
+</p>
+</div>
 <p>Parameter estimates may be found by maximum likelihood simply by finding those parameters that make your data most likely (among all possible data sets).</p>
 <p>Conceptually, it helps to remember the Week #1 problem set. The likelihood of obtaining your exact set of colors was very small even when using the true underlying probabilities of each color. Likelihoods are always VERY SMALL - even the maximum likelihood estimates (MLEs) are very unlikely to produce your dataset, simply because there are so many possible datasets that could be produced. The MLEs are simply those parameters that make your dataset more likely than any other dataset.</p>
 <p>The magnitude of the likelihood means NOTHING. The actual value of the likelihood depends on the size of the “sample space” (how many possible datasets could you imagine getting?), so we can only assign meaning to the relative size of likelihoods among different combinations of parameter values. We can say whether one set of parameter values is more likely to be the “true” population values than other possible sets of parameter values.</p>
@@ -443,7 +450,7 @@ n-\frac{1}{\hat{A}}\sum_{i}\left((X_{i}-\mu)^{2}\right)=0
 \hat{A}=\hat{\sigma^{2}}=\frac{1}{n}\sum_{i}(X_{i}-\mu)^{2}
 \]</span></p>
 <p>The MLEs are not necessarily the best estimates, or even unbised estimates. In fact, the MLE for <span class="math inline">\(\sigma^{2}\)</span> is biased (the unbiased estimator replaces n with n-1).</p>
-<p>Another way of finding parameter estimates is to use resampling methods. We will discuss this in Week 6.</p>
+<p>Another way of finding parameter estimates is to use resampling methods. We learned about this method back in Week 2.</p>
 <p>In practice, we almost never do these calculations by hand (which isn’t to say I wouldn’t ask you to do it on an exam).</p>
 <p>To do this in R, we have to write a function to define the NLL:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">neg.ll&lt;-<span class="cf">function</span>(x,mu,sigma2)
@@ -471,12 +478,12 @@ sigma2.test.values&lt;-<span class="kw">seq</span>(<span class="dv">1</span>,<sp
 max.element&lt;-<span class="kw">which</span>(likelihood.matrix<span class="op">==</span><span class="kw">min</span>(likelihood.matrix),<span class="dt">arr.ind=</span>T)
 <span class="kw">points</span>(mu.test.values[max.element[<span class="dv">1</span>]],sigma2.test.values[max.element[<span class="dv">2</span>]],<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">cex=</span><span class="dv">2</span>)
 <span class="kw">points</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dt">pch=</span><span class="st">&#39;x&#39;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="Week-4-lab_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="Week-4-lab_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Now we can plot the likelihood “slices”, which show cross sections across the search grid for fixed values of <span class="math inline">\(\mu\)</span> or <span class="math inline">\(\sigma^{2}\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
 <span class="kw">plot</span>(mu.test.values,likelihood.matrix[,max.element[<span class="dv">2</span>]],<span class="dt">typ=</span><span class="st">&quot;b&quot;</span>)
 <span class="kw">plot</span>(sigma2.test.values,likelihood.matrix[max.element[<span class="dv">1</span>],],<span class="dt">typ=</span><span class="st">&quot;b&quot;</span>)</code></pre></div>
-<p><img src="Week-4-lab_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="Week-4-lab_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Notice how the likelihood curve for <span class="math inline">\(\sigma^{2}\)</span> is not symmetric. While we will not discuss the likelihood ratio test more formally until next week, notice how a horizontal line drawn at some higher value (which represents the likelihood of an alternative hypothesis) yields a fairly symmetric confidence interval for <span class="math inline">\(\mu\)</span> but a highly assymetric confidence interval for <span class="math inline">\(\sigma^{2}\)</span>. Confidence intervals do not have to be symmatric!</p>
 <p>In this case, the bivariate likelihood surface shows no correlation between <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^{2}\)</span>, but this is not always the case. Sometimes you get strong correlations among parameter estimates and get diagonal “ridges” in parameter space. In this case, it is important to distinguish between the likelihood profile and likellihood slices. (see Bolker!) The likelihood surface need not even have a single maximum; there could be several peaks which makes it difficult to define the MLE or its confidence intervals. If there are strong tradeoffs between parameter values, it is often better to discuss the MLEs in terms of a confidence region, which is the envelop of parameter space that you are [insert confidence limit here] percent certain contains the true combination of population parameter values.</p>
 <p>R has a function ‘optim’ which optimizes functions (and is thus much better than a simple grid search ‘brute force’ approach we just did) and is very handy for minimizing the LL. We take advantage of the R function that gives us the probability density function, which saves us having to hard code that into R. Make sure the use of ‘dnorm’ in the code below makes sense!</p>
@@ -491,14 +498,14 @@ sigma=params[<span class="dv">2</span>]
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opt1&lt;-<span class="kw">optim</span>(<span class="dt">par=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">fn=</span>neg.ll.v2,<span class="dt">x=</span>x)
 opt1</code></pre></div>
 <pre><code>## $par
-## [1] 0.9213884 2.0402214
+## [1] 0.907663 1.947475
 ## 
 ## $value
-## [1] 2132.091
+## [1] 2085.607
 ## 
 ## $counts
 ## function gradient 
-##       71       NA 
+##       59       NA 
 ## 
 ## $convergence
 ## [1] 0
@@ -509,8 +516,8 @@ opt1</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
 <span class="kw">fitdistr</span>(x,<span class="st">&quot;normal&quot;</span>)</code></pre></div>
 <pre><code>##       mean          sd    
-##   0.92135215   2.04041249 
-##  (0.06452351) (0.04562501)</code></pre>
+##   0.90775107   1.94773800 
+##  (0.06159288) (0.04355275)</code></pre>
 <p>Notice that this function outputs the SE as well, whereas our function and ‘optim’ only give the MLE. You will learn how to put CI on estimators in Problem Set #3.</p>
 <p>The likelihood is a relative concept that only makes sense relative to other possible datasets. The absolute magnitude depends on the “sample space” of the data and sometimes even the maximum likelihood is a very small value. So all we can do is compare relative likelihoods. We could base our confidence intervals on any likelihood cut-off, but we can use the fact that the NLL (in the asymptotic case of having lots of data) follows a chi-squared distribution</p>
 <p><span class="math display">\[

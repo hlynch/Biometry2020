@@ -32,6 +32,13 @@ The likelihood specifies the probability of obtaining the known data ${X_{1},X_{
 pdf: parameters known, data varies            
 likelihood: data known, parameters vary
 
+In this way, the relationship between the joint probability density and the likelihood function is a bit like the relationship between the young woman and the old maid in this famous optical illusion:
+
+<div class="figure" style="text-align: center">
+<img src="Optical_illusion.png" alt="Optical illusion known as &quot;My Wife and my Mother-in-Law&quot;. Source: Wikimedia Commons" width="25%" />
+<p class="caption">(\#fig:unnamed-chunk-1)Optical illusion known as "My Wife and my Mother-in-Law". Source: Wikimedia Commons</p>
+</div>
+
 Parameter estimates may be found by maximum likelihood simply by finding those parameters that make your data most likely (among all possible data sets).
 
 Conceptually, it helps to remember the Week #1 problem set. The likelihood of obtaining your exact set of colors was very small even when using the true underlying probabilities of each color. Likelihoods are always VERY SMALL - even the maximum likelihood estimates (MLEs) are very unlikely to produce your dataset, simply because there are so many possible datasets that could be produced. The MLEs are simply those parameters that make your dataset more likely than any other dataset.
@@ -104,10 +111,9 @@ $$
 
 The MLEs are not necessarily the best estimates, or even unbised estimates. In fact, the MLE for $\sigma^{2}$ is biased (the unbiased estimator replaces n with n-1).
 
-Another way of finding parameter estimates is to use resampling methods. We will discuss this in Week 6.
+Another way of finding parameter estimates is to use resampling methods. We learned about this method back in Week 2.
 
 In practice, we almost never do these calculations by hand (which isn't to say I wouldn't ask you to do it on an exam).
-
 
 To do this in R, we have to write a function to define the NLL:
 
@@ -160,7 +166,7 @@ points(mu.test.values[max.element[1]],sigma2.test.values[max.element[2]],pch=16,
 points(1,4,pch='x',cex=2)
 ```
 
-<img src="Week-4-lab_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="Week-4-lab_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 Now we can plot the likelihood "slices", which show cross sections across the search grid for fixed values of $\mu$ or $\sigma^{2}$.
 
@@ -171,7 +177,7 @@ plot(mu.test.values,likelihood.matrix[,max.element[2]],typ="b")
 plot(sigma2.test.values,likelihood.matrix[max.element[1],],typ="b")
 ```
 
-<img src="Week-4-lab_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="Week-4-lab_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 Notice how the likelihood curve for $\sigma^{2}$ is not symmetric. While we will not discuss the likelihood ratio test more formally until next week, notice how a horizontal line drawn at some higher value (which represents the likelihood of an alternative hypothesis) yields a fairly symmetric confidence interval for $\mu$ but a highly assymetric confidence interval for $\sigma^{2}$. Confidence intervals do not have to be symmatric!
 
@@ -202,14 +208,14 @@ opt1
 
 ```
 ## $par
-## [1] 0.9213884 2.0402214
+## [1] 0.907663 1.947475
 ## 
 ## $value
-## [1] 2132.091
+## [1] 2085.607
 ## 
 ## $counts
 ## function gradient 
-##       71       NA 
+##       59       NA 
 ## 
 ## $convergence
 ## [1] 0
@@ -228,8 +234,8 @@ fitdistr(x,"normal")
 
 ```
 ##       mean          sd    
-##   0.92135215   2.04041249 
-##  (0.06452351) (0.04562501)
+##   0.90775107   1.94773800 
+##  (0.06159288) (0.04355275)
 ```
 
 Notice that this function outputs the SE as well, whereas our function and 'optim' only give the MLE. You will learn how to put CI on estimators in Problem Set #3.

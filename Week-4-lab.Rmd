@@ -32,6 +32,12 @@ The likelihood specifies the probability of obtaining the known data ${X_{1},X_{
 pdf: parameters known, data varies            
 likelihood: data known, parameters vary
 
+In this way, the relationship between the joint probability density and the likelihood function is a bit like the relationship between the young woman and the old maid in this famous optical illusion:
+
+```{r echo=FALSE, fig.align='center', fig.cap='Optical illusion known as "My Wife and my Mother-in-Law". Source: Wikimedia Commons', out.width='25%'}
+knitr::include_graphics('Optical_illusion.png')
+```
+
 Parameter estimates may be found by maximum likelihood simply by finding those parameters that make your data most likely (among all possible data sets).
 
 Conceptually, it helps to remember the Week #1 problem set. The likelihood of obtaining your exact set of colors was very small even when using the true underlying probabilities of each color. Likelihoods are always VERY SMALL - even the maximum likelihood estimates (MLEs) are very unlikely to produce your dataset, simply because there are so many possible datasets that could be produced. The MLEs are simply those parameters that make your dataset more likely than any other dataset.
@@ -104,10 +110,9 @@ $$
 
 The MLEs are not necessarily the best estimates, or even unbised estimates. In fact, the MLE for $\sigma^{2}$ is biased (the unbiased estimator replaces n with n-1).
 
-Another way of finding parameter estimates is to use resampling methods. We will discuss this in Week 6.
+Another way of finding parameter estimates is to use resampling methods. We learned about this method back in Week 2.
 
 In practice, we almost never do these calculations by hand (which isn't to say I wouldn't ask you to do it on an exam).
-
 
 To do this in R, we have to write a function to define the NLL:
 
