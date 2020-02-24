@@ -270,10 +270,12 @@ Binomial Distribution
 
 The probability mass function of the Binomial distribution is given by
 
-$$ P(x \mid p,n) = \frac{n!}{x!-(n-x)!}p^x(1-p)^x \\
+$$
+P(x \mid p,n) = \frac{n!}{x!(n-x)!}p^x(1-p)^{n-x} \\
 n \in \mathbb{N} \cup \{0\} \\ 
 x \in \{1,2,3,...,n\} \\
-p \in [0,1] $$
+p \in [0,1] 
+$$
 
 
 The shape of the Binomial distribution is illustrated by the following examples
@@ -307,9 +309,11 @@ ggplot(n.data, aes(x=x, y=y)) +
 
 The expected value and variance of the Binomial distribution is given by
 
-$$ \begin{align} E[X] &= \sum_{x=1}^n x \frac{n!}{x!-(n-x)!}p^x(1-p)^x \\ 
+$$
+\begin{align} E[X] &= \sum_{x=1}^n x \frac{n!}{x!(n-x)!}p^x(1-p)^{n-x} \\ 
 &=np \\
-Var[X] &= np(1-p) \end{align} $$
+Var[X] &= np(1-p) \end{align} 
+$$
 
 
 The Binomial distribution has the following relationship to the Normal distribution

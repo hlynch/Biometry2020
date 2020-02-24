@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-19" />
+<meta name="date" content="2020-02-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -506,16 +506,20 @@ Y &amp;\sim N(\lambda, \lambda) \end{align} \]</span></p>
 <div id="binomial-distribution" class="section level2">
 <h2><span class="header-section-number">5.7</span> Binomial Distribution</h2>
 <p>The probability mass function of the Binomial distribution is given by</p>
-<p><span class="math display">\[ P(x \mid p,n) = \frac{n!}{x!-(n-x)!}p^x(1-p)^x \\
+<p><span class="math display">\[
+P(x \mid p,n) = \frac{n!}{x!(n-x)!}p^x(1-p)^{n-x} \\
 n \in \mathbb{N} \cup \{0\} \\ 
 x \in \{1,2,3,...,n\} \\
-p \in [0,1] \]</span></p>
+p \in [0,1] 
+\]</span></p>
 <p>The shape of the Binomial distribution is illustrated by the following examples</p>
 <p><img src="Week-3-lecture_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>The expected value and variance of the Binomial distribution is given by</p>
-<p><span class="math display">\[ \begin{align} E[X] &amp;= \sum_{x=1}^n x \frac{n!}{x!-(n-x)!}p^x(1-p)^x \\ 
+<p><span class="math display">\[
+\begin{align} E[X] &amp;= \sum_{x=1}^n x \frac{n!}{x!(n-x)!}p^x(1-p)^{n-x} \\ 
 &amp;=np \\
-Var[X] &amp;= np(1-p) \end{align} \]</span></p>
+Var[X] &amp;= np(1-p) \end{align} 
+\]</span></p>
 <p>The Binomial distribution has the following relationship to the Normal distribution</p>
 <p><span class="math display">\[ \lim_{n \to \infty} Binom(n,p) \to N(np,np(1-p)) \]</span></p>
 </div>

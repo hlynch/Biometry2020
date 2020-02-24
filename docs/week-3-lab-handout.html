@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-19" />
+<meta name="date" content="2020-02-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -432,13 +432,13 @@ Poisson: dpois, ppois, qpois, rpois</p>
 <p>First, lets draw a couple of random values from the standard normal. We can take 100 random draws from the Standard Normal N(0,1) using the R function ‘rnorm’.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data&lt;-<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dt">mean=</span><span class="dv">0</span>,<span class="dt">sd=</span><span class="dv">1</span>)
 <span class="kw">head</span>(data)</code></pre></div>
-<pre><code>## [1] -0.6283886  0.7322372 -1.5347495 -0.5257354 -1.4657096  0.3795479</code></pre>
+<pre><code>## [1] -1.21321202  0.36326913 -1.64197011 -0.92792631  0.03981689  0.20282428</code></pre>
 <p>Note that you could have left off the “mean” and “sd” since R knows the order of inputs, that is you could simply write</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>)) </code></pre></div>
-<pre><code>## [1]  0.3033421 -0.5504373 -0.3077433 -1.1847062 -0.1937628 -0.2597565</code></pre>
+<pre><code>## [1]  0.9914568 -0.1008985  0.3543398 -0.6623780 -1.1108405  0.6251737</code></pre>
 <p>or even</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>)) </code></pre></div>
-<pre><code>## [1]  0.7718881  0.4591759 -0.9791058  0.4171061  0.1806165  1.5279602</code></pre>
+<pre><code>## [1]  0.7063167 -0.5973804  0.7739118 -0.2309063 -0.3961492 -0.8765833</code></pre>
 <p>since mean=0, sd=1 is the default. Until you are 100% comfortable with R, its better to leave all the options spelled out.</p>
 <p>Make a histogram of data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(data)</code></pre></div>
@@ -455,18 +455,18 @@ Poisson: dpois, ppois, qpois, rpois</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span>,<span class="dt">mean=</span><span class="dv">0</span>,<span class="dt">sd=</span><span class="dv">1</span>),<span class="dt">plot=</span>F)</code></pre></div>
 <pre><code>## $breaks
 ##  [1] -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5
-## [16]  4.0  4.5
+## [16]  4.0
 ## 
 ## $counts
-##  [1]   1   4  15  37  99 130 177 223 151  98  41  18   4   1   0   1
+##  [1]   3   7  16  45  89 147 189 214 159  84  26  11   7   2   1
 ## 
 ## $density
-##  [1] 0.002 0.008 0.030 0.074 0.198 0.260 0.354 0.446 0.302 0.196 0.082 0.036
-## [13] 0.008 0.002 0.000 0.002
+##  [1] 0.006 0.014 0.032 0.090 0.178 0.294 0.378 0.428 0.318 0.168 0.052 0.022
+## [13] 0.014 0.004 0.002
 ## 
 ## $mids
 ##  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
-## [13]  2.75  3.25  3.75  4.25
+## [13]  2.75  3.25  3.75
 ## 
 ## $xname
 ## [1] &quot;rnorm(1000, mean = 0, sd = 1)&quot;
@@ -503,12 +503,12 @@ quantiles&lt;-<span class="kw">qnorm</span>(probability,<span class="dt">mean=</
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">count&lt;-<span class="kw">rpois</span>(<span class="dv">500</span>,<span class="dt">lambda=</span><span class="dv">3</span>)
 <span class="kw">table</span>(count)</code></pre></div>
 <pre><code>## count
-##   0   1   2   3   4   5   6   7   8  10 
-##  13  85 123 121  83  44  20   7   3   1</code></pre>
+##   0   1   2   3   4   5   6   7   8   9 
+##  18  75 115  96 105  57  22   9   1   2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(count)</code></pre></div>
-<pre><code>## [1] 2.898</code></pre>
+<pre><code>## [1] 3.038</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(count)</code></pre></div>
-<pre><code>## [1] 2.504605</code></pre>
+<pre><code>## [1] 2.70196</code></pre>
 </div>
 <div id="standard-deviation-vs.standard-error" class="section level2">
 <h2><span class="header-section-number">6.3</span> Standard deviation vs. Standard error</h2>
@@ -526,11 +526,11 @@ sample3&lt;-<span class="kw">rpois</span>(<span class="dv">100000</span>,<span c
 <span class="kw">hist</span>(sample3)</code></pre></div>
 <p><img src="Week-3-lab_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(sample1)</code></pre></div>
-<pre><code>## [1] 1.680026</code></pre>
+<pre><code>## [1] 1.81069</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(sample2)</code></pre></div>
-<pre><code>## [1] 1.730489</code></pre>
+<pre><code>## [1] 1.728235</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(sample3)</code></pre></div>
-<pre><code>## [1] 1.727451</code></pre>
+<pre><code>## [1] 1.731351</code></pre>
 <p>Notice that the standard deviation has not appreciably changed as we have increased the sample size.</p>
 <p>Now lets run some code to calculate the standard error of the mean:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample.size&lt;-<span class="dv">1000</span>
@@ -544,9 +544,9 @@ means&lt;-<span class="kw">c</span>()
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.e.<span class="dv">1</span>&lt;-<span class="kw">sqrt</span>(<span class="kw">var</span>(<span class="kw">rpois</span>(sample.size,<span class="dt">lambda=</span><span class="dv">3</span>))<span class="op">/</span>sample.size)
 s.e.<span class="dv">2</span>&lt;-<span class="kw">sd</span>(means)
 s.e.<span class="dv">1</span></code></pre></div>
-<pre><code>## [1] 0.05519992</code></pre>
+<pre><code>## [1] 0.05410455</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.e.<span class="dv">2</span></code></pre></div>
-<pre><code>## [1] 0.05435383</code></pre>
+<pre><code>## [1] 0.05381567</code></pre>
 <p>Note that the number of experiments I looped through (2000 in this case) is not relevant. It just has to be big enough that you get a sense of what the distribution of means looks like. Now go back and modify the code so that sample.size=10000 - how does that change the result?</p>
 <p>On Tuesday we discussed the probability mass function for the binomial. While an individual flip of the coin can be thought of as a success/failure, the binomial is answering the question “How many succesess do I expect if I try n times.”</p>
 <p>We can plot this for varying numbers of trials assuming p=0.5</p>
@@ -598,11 +598,16 @@ p=<span class="fl">0.1</span>
 <p>First, install the library ‘MASS’.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS) <span class="co">#this loads the library into the workspace</span>
 sample.pois&lt;-<span class="kw">rpois</span>(<span class="dv">1000</span>,<span class="dt">lambda=</span><span class="dv">20</span>)
-fit&lt;-<span class="kw">fitdistr</span>(sample.pois,<span class="st">&quot;gamma&quot;</span>,<span class="dt">start=</span><span class="kw">list</span>(<span class="dt">shape=</span><span class="dv">20</span>,<span class="dt">scale=</span><span class="dv">1</span>))
-fit</code></pre></div>
+fit&lt;-<span class="kw">fitdistr</span>(sample.pois,<span class="st">&quot;gamma&quot;</span>,<span class="dt">start=</span><span class="kw">list</span>(<span class="dt">shape=</span><span class="dv">20</span>,<span class="dt">scale=</span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced
+
+## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced
+
+## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit</code></pre></div>
 <pre><code>##       shape         scale   
-##   18.61279066    1.07834526 
-##  ( 0.82499126) ( 0.04844543)</code></pre>
+##   20.47234644    0.97526685 
+##  ( 0.90808962) ( 0.04379325)</code></pre>
 <p>(Sometimes you get a warnings message about NAs when using fitdistr. The best explanation I can find says that this means R “encountered some difficulties during fitting”. I can find no difference in the fits when you get the warning and when you don’t, and the same sample.pois will sometimes give a warning and sometimes not, so it appears independent of the data itself. Do not ignore warnings() in R but don’t be paralized by them, especially in a context where R is searching parameter space during an optimization. Be sure to search around for an explanation and make sure you are confident that R is still giving reasonable answers.)</p>
 <p>Notice that we are fitting a gamma distribution to this data, and we specify what distribution we want to fit using the name of the distribution in quotes. <em>Remember that rgamma can take as inputs shape,scale or shape,rate=1/scale. I am using scale as the input because it is consistent with the way I introduced the gamma distribution in class. Be aware that some people will use rate and some will use scale and you always have to check.</em></p>
 <p>When we print the object fit, we get the estimates and the standard errors, but at first it isn’t obvious how to extract the estimates (and errors) so we can use them in other calculations.</p>
@@ -611,15 +616,15 @@ fit</code></pre></div>
 <pre><code>## [1] &quot;estimate&quot; &quot;sd&quot;       &quot;vcov&quot;     &quot;loglik&quot;   &quot;n&quot;</code></pre>
 <p>We now look at</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>estimate</code></pre></div>
-<pre><code>##     shape     scale 
-## 18.612791  1.078345</code></pre>
+<pre><code>##      shape      scale 
+## 20.4723464  0.9752668</code></pre>
 <p>and notice that we can pull out the two estimates as</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>estimate[<span class="dv">1</span>]</code></pre></div>
 <pre><code>##    shape 
-## 18.61279</code></pre>
+## 20.47235</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>estimate[<span class="dv">2</span>]</code></pre></div>
-<pre><code>##    scale 
-## 1.078345</code></pre>
+<pre><code>##     scale 
+## 0.9752668</code></pre>
 <p>Now we want to plot the data, and the best fit line:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.vals&lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">5</span>,<span class="dt">to=</span><span class="dv">40</span>,<span class="dt">by=</span><span class="dv">1</span>)
 <span class="kw">hist</span>(sample.pois,<span class="dt">breaks=</span>x.vals)
