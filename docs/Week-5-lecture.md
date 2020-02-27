@@ -167,7 +167,7 @@ $$
 Now all we need is the distribution of the test statistics under the null hypothesis which is, by definition (this is a t-test after all) the t distribution. The degress of freedom for this distribution is a bit complicated:
 
 $$
-dof = \frac{\left(\frac{s_{A}^{2}}{n_{A}}+\frac{s_{B}^{2}}{n_{B}}\right)^{2}}{\left(\frac{\left[\frac{s_{A}^{2}}{n_{A}}\right]^2}{n_A-1}+\frac{\left[\frac{s_{B}^{2}}{n_{B}}\right]^2}{n_B-1}\right)^{2}}
+dof = \frac{\left(\frac{s_{A}^{2}}{n_{A}}+\frac{s_{B}^{2}}{n_{B}}\right)^{2}}{\frac{\left[\frac{s_{A}^{2}}{n_{A}}\right]^2}{n_A-1}+\frac{\left[\frac{s_{B}^{2}}{n_{B}}\right]^2}{n_B-1}}
 $$
 
 Note that there are some simpler formulas that apply if you assume equal sample size and/or equal variances. In the case of equal variances, you can pool the data to find a pooled estimate of the common variance $s^{2}$, but I will not go into the details here. Note that the default for R is to assume unequal sample sizes and unequal variances.
