@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-27" />
+<meta name="date" content="2020-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -639,7 +639,7 @@ pca.streams<span class="op">$</span>rotation[, <span class="dv">1</span><span cl
 <div id="missing-data" class="section level2">
 <h2><span class="header-section-number">26.12</span> Missing data</h2>
 <p>In large, multivariate data sets, you may have observations that are missing values for some of the covariates. We saw this in lab last week.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mammal &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/Mammal life history.csv&quot;</span>,<span class="dt">header=</span>T)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mammal &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/MammalLifeHistory.csv&quot;</span>,<span class="dt">header=</span>T)
 carnivore.init &lt;-<span class="st"> </span>mammal[<span class="kw">which</span>(mammal<span class="op">$</span>Order <span class="op">==</span><span class="st"> &quot;Carnivora&quot;</span>), ]
 carnivore.init<span class="op">$</span>AFR[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>]</code></pre></div>
 <pre><code>##  [1] 24.00    NA 12.00 10.50 12.00 10.50    NA 12.00    NA    NA    NA 16.81</code></pre>

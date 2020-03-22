@@ -373,7 +373,7 @@ In large, multivariate data sets, you may have observations that are missing val
 
 
 ```r
-mammal <- read.csv("~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/Mammal life history.csv",header=T)
+mammal <- read.csv("~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/MammalLifeHistory.csv",header=T)
 carnivore.init <- mammal[which(mammal$Order == "Carnivora"), ]
 carnivore.init$AFR[1:12]
 ```

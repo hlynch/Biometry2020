@@ -35,7 +35,7 @@ Read in the following dataset describing fox fur production as a function of yea
 
 ```{r}
 setwd("~/Dropbox/Biometry/Week 7 Graphical methods/Week 7 Lecture")
-fox.data<-read.csv("Fox fur production.csv", header=F)
+fox.data<-read.csv("FoxFurProduction.csv", header=F)
 ```
 
 We could do our entire analysis referring to the two columns as [,1] and [,2] but to make our code more readable, lets add some column names

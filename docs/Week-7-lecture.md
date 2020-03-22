@@ -57,7 +57,7 @@ Read in the following dataset describing fox fur production as a function of yea
 
 ```r
 setwd("~/Dropbox/Biometry/Week 7 Graphical methods/Week 7 Lecture")
-fox.data<-read.csv("Fox fur production.csv", header=F)
+fox.data<-read.csv("FoxFurProduction.csv", header=F)
 ```
 
 We could do our entire analysis referring to the two columns as [,1] and [,2] but to make our code more readable, lets add some column names
@@ -425,8 +425,8 @@ jitter(rep(0, 7))
 ```
 
 ```
-## [1]  0.007154561  0.019583824 -0.016105129  0.013050174  0.007204062
-## [6] -0.016133518 -0.005329340
+## [1]  0.011462658  0.012083738 -0.007604287 -0.002206975 -0.001952660
+## [6] -0.002416777  0.016960861
 ```
 
 Before we launch into three-dimensional plotting, we should introduce 'ggplot2' which is quickly becoming "industry standard" for making plots in R. There is *so* much that can be done with ggplot2 that we will only scratch the surface today, but at least this introduction will illustrate some of the things that ggplot2 can do.
@@ -498,8 +498,8 @@ hist2d(x,y, same.scale=TRUE)
 ## 
 ## Number of data points:  2000 
 ## Number of grid bins:  200 x 200 
-## X range: ( -14.95005 , 12.95987 )
-## Y range: ( -14.95005 , 12.95987 )
+## X range: ( -13.01476 , 13.59521 )
+## Y range: ( -13.01476 , 13.59521 )
 ```
 
 Notice that we had to use "same.scale=T" to make sure that distances along the x and y axes were comparable.

@@ -1032,7 +1032,7 @@ First, we will load the data and the 'car' package, and use 'names' to see what 
 
 
 ```r
-data<-read.csv("~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/Mammal life history.csv")
+data<-read.csv("~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lab/MammalLifeHistory.csv")
 attach(data)
 names(data)
 ```

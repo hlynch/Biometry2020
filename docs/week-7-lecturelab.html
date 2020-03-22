@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-02-27" />
+<meta name="date" content="2020-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -399,7 +399,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">13.2</span> PART II: Two-dimensional data</h2>
 <p>Read in the following dataset describing fox fur production as a function of year.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;~/Dropbox/Biometry/Week 7 Graphical methods/Week 7 Lecture&quot;</span>)
-fox.data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;Fox fur production.csv&quot;</span>, <span class="dt">header=</span>F)</code></pre></div>
+fox.data&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;FoxFurProduction.csv&quot;</span>, <span class="dt">header=</span>F)</code></pre></div>
 <p>We could do our entire analysis referring to the two columns as [,1] and [,2] but to make our code more readable, lets add some column names</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(fox.data)&lt;-<span class="kw">c</span>(<span class="st">&quot;year&quot;</span>,<span class="st">&quot;production&quot;</span>)</code></pre></div>
 <p>Now we can refer to the two columns of data as $year and $production.</p>
@@ -680,8 +680,8 @@ mypalette&lt;-<span class="kw">brewer.pal</span>(<span class="dv">7</span>,<span
 <p><img src="Week-7-lecture_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Be aware of overplotting (points that overlap) especially when data are discrete or rounded. One strategy for overcoming this is jittering the points so the density of points can be displayed without overly distorting the underlying relationships. You can use the ‘jitter’ command in the base package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jitter</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">7</span>))</code></pre></div>
-<pre><code>## [1]  0.007154561  0.019583824 -0.016105129  0.013050174  0.007204062
-## [6] -0.016133518 -0.005329340</code></pre>
+<pre><code>## [1]  0.011462658  0.012083738 -0.007604287 -0.002206975 -0.001952660
+## [6] -0.002416777  0.016960861</code></pre>
 <p>Before we launch into three-dimensional plotting, we should introduce ‘ggplot2’ which is quickly becoming “industry standard” for making plots in R. There is <em>so</em> much that can be done with ggplot2 that we will only scratch the surface today, but at least this introduction will illustrate some of the things that ggplot2 can do.</p>
 <p>The basic function to make plots using ggplot2 is ‘qplot’. We can recreate the scatterplot of the mtcars data using ggplot2 as follows</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
@@ -722,8 +722,8 @@ y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2
 ## 
 ## Number of data points:  2000 
 ## Number of grid bins:  200 x 200 
-## X range: ( -14.95005 , 12.95987 )
-## Y range: ( -14.95005 , 12.95987 )</code></pre>
+## X range: ( -13.01476 , 13.59521 )
+## Y range: ( -13.01476 , 13.59521 )</code></pre>
 <p>Notice that we had to use “same.scale=T” to make sure that distances along the x and y axes were comparable.</p>
 <p>Now we will use the hisr2d function to create inputs for a three-dimensional perspective plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h2d &lt;-<span class="st"> </span><span class="kw">hist2d</span>(x,y,<span class="dt">show=</span><span class="ot">FALSE</span>, <span class="dt">same.scale=</span><span class="ot">TRUE</span>, <span class="dt">nbins=</span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">30</span>))
