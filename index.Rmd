@@ -20,11 +20,11 @@ This eBook contains all of the lecture notes and lab exercises that we will do t
 
 Here are the datasets used in this course. You can download the data set from the course GitHub page and then save it to your local directory. 
 
-* `clouds` (csv): [link](https://github.com/hlynch/Biometry2020/blob/master/_data/clouds.csv)
-* `clouds` (txt): [link](https://github.com/hlynch/Biometry2020/blob/master/_data/clouds.txt)
-* `Prestige`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Prestige.csv)
-* `skulls`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/skulls.txt)
-* `diabetes`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/diabetes.csv)
+* `clouds` (csv): [link](https://github.com/hlynch/Biometry2020/blob/master/_data/clouds.csv) [1]
+* `clouds` (txt): [link](https://github.com/hlynch/Biometry2020/blob/master/_data/clouds.txt) [1]
+* `Prestige`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Prestige.csv) [2]
+* `skulls`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/skulls.txt) [3]
+* `diabetes`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/diabetes.csv) [4]
 * `WaterData`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/WaterData.csv)
 * `FoxFurProduction`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/FoxFurProduction.csv)   
 * `fish`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/fish.txt) 
@@ -50,4 +50,12 @@ Here are the datasets used in this course. You can download the data set from th
 * `Lichen-sites-area`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Lichen-sites-area.xls) 
 * `Temperature_and_isolation`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Temperature_and_isolation.xls) 
 * `lovett2`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/lovett2.csv) 
+
+[1] Source: Chambers, Cleveland, Kleiner, and Tukey. (1983). Graphical Methods for Data Analysis. Wadsworth International Group, Belmont, CA, 351. Original Source: Simpson, Alsen, and Eden. (1975). A Bayesian analysis of a multiplicative treatment effect in weather modification. Technometrics 17, 161-166.
+
+[2] Fox, John, and Harvey Sanford Weisberg. 2011. An R Companion to Applied Regression. 2nd ed. Thousand Oaks, CA: Sage Publications.
+
+[3] Thomson, A. and Randall-Maciver, R. (1905) Ancient Races of the Thebaid, Oxford: Oxford University Press. Also found in: Hand, D.J., et al. (1994) A Handbook of Small Data Sets, New York: Chapman & Hall, pp. 299-301. Manly, B.F.J. (1986) Multivariate Statistical Methods, New York: Chapman & Hall.
+
+[4] Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997 Schorling JB, Roach J, Siegel M, Baturka N, Hunt DE, Guterbock TM, Stewart HL: A trial of church-based smoking cessation interventions for rural African Americans. Preventive Medicine 26:92-101; 1997.
 
