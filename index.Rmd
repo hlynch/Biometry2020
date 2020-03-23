@@ -20,36 +20,36 @@ This eBook contains all of the lecture notes and lab exercises that we will do t
 
 Here are the datasets used in this course. You can download the data set from the course GitHub page and then save it to your local directory. 
 
-* `clouds` (csv): [link](https://github.com/hlynch/Biometry2020/blob/master/_data/clouds.csv) [1]
-* `clouds` (txt): [link](https://github.com/hlynch/Biometry2020/blob/master/_data/clouds.txt) [1]
-* `Prestige`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Prestige.csv) [2]
-* `skulls`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/skulls.txt) [3]
-* `diabetes`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/diabetes.csv) [4]
-* `WaterData`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/WaterData.csv)
-* `FoxFurProduction`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/FoxFurProduction.csv)   
-* `fish`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/fish.txt) 
-* `Week-9-Data`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Week-9-Data.txt) 
-* `bomregions2012`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/bomregions2012.csv) 
-* `Challenger_data`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/challenger_data.csv) 
-* `Challenger_data_fieldandnozzle`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Challenger_data_fieldandnozzle.csv) 
-* `Brogan_et_al_2013_Fig1Data`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Brogan_et_al_2013_Fig1Data.xlsx) 
-* `fruit_flies`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/fruit_flies.csv) 
-* `medley`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/medley.csv) 
-* `quinn`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/quinn.csv) 
-* `TwoWayANOVAdata_balanced`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/TwoWayANOVAdata_balanced.csv) 
-* `TwoWayANOVAdata`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/TwoWayANOVAdata.csv) 
-* `TwoWayANOVAdata`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/TwoWayANOVAdata.csv) 
-* `flatworms`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/flatworms.csv) 
-* `flies`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/flies.txt) 
-* `rats`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/rats.txt) 
-* `tobacco`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/tobacco.csv) 
-* `crabs`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/crabs.csv) 
-* `frogs`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/frogs.csv) 
-* `MammalLifeHistory`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/MammalLifeHistory.csv) 
-* `Historic-lichen_data`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Historic-lichen-data.xls) 
-* `Lichen-sites-area`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Lichen-sites-area.xls) 
-* `Temperature_and_isolation`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/Temperature_and_isolation.xls) 
-* `lovett2`: [link](https://github.com/hlynch/Biometry2020/blob/master/_data/lovett2.csv) 
+* `clouds` (csv): [link](https://github.com/hlynch/Biometry2020/tree/master/_data/clouds.csv) [1]
+* `clouds` (txt): [link](https://github.com/hlynch/Biometry2020/tree/master/_data/clouds.txt) [1]
+* `Prestige`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Prestige.csv) [2]
+* `skulls`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/skulls.txt) [3]
+* `diabetes`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/diabetes.csv) [4]
+* `WaterData`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/WaterData.csv)
+* `FoxFurProduction`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/FoxFurProduction.csv)   
+* `fish`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/fish.txt) 
+* `Week-9-Data`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Week-9-Data.txt) 
+* `bomregions2012`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/bomregions2012.csv) 
+* `Challenger_data`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/challenger_data.csv) 
+* `Challenger_data_fieldandnozzle`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Challenger_data_fieldandnozzle.csv) 
+* `Brogan_et_al_2013_Fig1Data`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Brogan_et_al_2013_Fig1Data.xlsx) 
+* `fruit_flies`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/fruit_flies.csv) 
+* `medley`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/medley.csv) 
+* `quinn`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/quinn.csv) 
+* `TwoWayANOVAdata_balanced`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/TwoWayANOVAdata_balanced.csv) 
+* `TwoWayANOVAdata`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/TwoWayANOVAdata.csv) 
+* `TwoWayANOVAdata`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/TwoWayANOVAdata.csv) 
+* `flatworms`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/flatworms.csv) 
+* `flies`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/flies.txt) 
+* `rats`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/rats.txt) 
+* `tobacco`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/tobacco.csv) 
+* `crabs`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/crabs.csv) 
+* `frogs`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/frogs.csv) 
+* `MammalLifeHistory`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/MammalLifeHistory.csv) 
+* `Historic-lichen_data`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Historic-lichen-data.xls) 
+* `Lichen-sites-area`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Lichen-sites-area.xls) 
+* `Temperature_and_isolation`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Temperature_and_isolation.xls) 
+* `lovett2`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/lovett2.csv) 
 
 [1] Source: Chambers, Cleveland, Kleiner, and Tukey. (1983). Graphical Methods for Data Analysis. Wadsworth International Group, Belmont, CA, 351. Original Source: Simpson, Alsen, and Eden. (1975). A Bayesian analysis of a multiplicative treatment effect in weather modification. Technometrics 17, 161-166.
 
