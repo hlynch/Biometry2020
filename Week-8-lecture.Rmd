@@ -221,7 +221,7 @@ $$
 We can expand this model for every data point ($i$), for a total of five data points:
 
 $$
-Y_1 = \beta_0 + \beta_1 X_1 + \epsilon_1 \text{, where } \epsilon_2 \sim N(0, \sigma^2)
+Y_1 = \beta_0 + \beta_1 X_1 + \epsilon_1 \text{, where } \epsilon_1 \sim N(0, \sigma^2)
 $$
 
 $$
