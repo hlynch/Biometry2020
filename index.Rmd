@@ -18,7 +18,11 @@ This eBook contains all of the lecture notes and lab exercises that we will do t
 
 *Data sets*
 
-Here are the datasets used in this course. You can download the data set from the course GitHub page and then save it to your local directory. 
+Here are the datasets used in this course. You can download the data set from the course GitHub page and then save it to your local directory. To do that, right-click or control-click on the "raw" button; this will allow you to download the file in its original format.
+
+```{r echo=FALSE, fig.align='center', fig.cap='The dataset links take you here. The "raw" button allows you to download the file', out.width='100%'}
+knitr::include_graphics('download.png')
+```
 
 * `clouds` (csv): [link](https://github.com/hlynch/Biometry2020/tree/master/_data/clouds.csv) [1]
 * `clouds` (txt): [link](https://github.com/hlynch/Biometry2020/tree/master/_data/clouds.txt) [1]

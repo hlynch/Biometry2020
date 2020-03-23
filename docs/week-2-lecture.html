@@ -574,7 +574,7 @@ X_{k}^{*}=\{\mbox{n values drawn with replacement from } X\}
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="LSAT_info.png" alt="Source: Efron and Tibshirani (1994)" width="40%" />
 <p class="caption">
-Figure 1.1: Source: Efron and Tibshirani (1994)
+Figure 0.1: Source: Efron and Tibshirani (1994)
 </p>
 </div>
 <p>Lets say we want to estimate the true correlation coefficient between LSAT scores and GPA. We haven’t covered this yet, but one estimator for the true correlation coefficient is Pearson’s product moment correlation coefficient r</p>
@@ -607,14 +607,14 @@ X_{2}^{*}=(LSAT_{i},GPA_{i}), \mbox{where i=sample with replacement 1...n}
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="Hormone_timeseries.png" alt="Source: Efron and Tibshirani (1994)" width="40%" />
 <p class="caption">
-Figure 1.2: Source: Efron and Tibshirani (1994)
+Figure 1.1: Source: Efron and Tibshirani (1994)
 </p>
 </div>
 <p>If you wanted to do some time series analysis of this data, say to calculate the correlation between each datapoint and the last datapoint, you would have a difficult time doing so because of the complex temporal autocorrelation. Bootstrap can help in this case, but its not at all obvious how to bootstrap from this time series and preserve the essential temporal autocorrelation structure of the data. One approach would be to do a “moving blocks” bootstrap.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="Moving_blocks.png" alt="Source: Efron and Tibshirani (1994)" width="40%" />
 <p class="caption">
-Figure 1.3: Source: Efron and Tibshirani (1994)
+Figure 1.2: Source: Efron and Tibshirani (1994)
 </p>
 </div>
 <p>This is more advanced, but it makes the point that a) bootstrap can be enormously useful in a variety of complicated analyses and b) you have to think carefully about what to sample in order to preserve the essential element of the data.</p>
