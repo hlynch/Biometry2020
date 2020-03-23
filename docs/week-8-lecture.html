@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-03-22" />
+<meta name="date" content="2020-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -387,15 +387,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>Predictive models</strong> fit data solely to predict new outcomes. Models either work for prediction or don’t. Predictive models may involve parameters that are uninterpretable (e.g., Generalized Additive Models, spline fits, etc.). These models are used for <em>prediction.</em></p>
 <p><strong>Descriptive models</strong> summarize data, and that’s the only goal. These models are used to <em>describe</em> data.</p>
 <p><strong>Question: What are the differences among these three types of model?</strong></p>
-<p><details> <summary>Click for Answer</summary> ‘’Explanatory modeling refers…to the application of statistical models to data for testing causal hypotheses about theoretical constructs.’’ (Shmueli 2010) Using this definition, explanatory modeling is testing a hypothesis or a theory and therefore can never be confirmed and are also harder (than predictive models) to contradict. We have been referring to these models as “inferential models” or models used for “inference”.</p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> ‘’Explanatory modeling refers…to the application of statistical models to data for testing causal hypotheses about theoretical constructs.’’ (Shmueli 2010) Using this definition, explanatory modeling is testing a hypothesis or a theory and therefore can never be confirmed and are also harder (than predictive models) to contradict. We have been referring to these models as “inferential models” or models used for “inference”.</p>
 <p>Predictive models are concerned only with the ability to predict new (measurable) outcomes. Either the models works for prediction or it doesn’t. Predictive models are therefore more utilitarian than explanatory models (use whatever works!). Predictive models may involve predictors that are uninterpretable (more on this later when we discuss Generalized Additive Models and other curve fitting techniques).</p>
-<p>Example: We can think back to our discussion of population statistics and sample statistics. If we are measuring every individual of a population and we want to summarize the data, we are doing <em>descriptive</em> statistics. Descriptive modeling is aimed at succinctly summarizing a body of data. If we want to use that data to make some inference about a larger population, we are doing <em>inferential</em> statistics. If we want to use our sample to predict a new sample from that larger population, we are doing <em>predictive</em> statistics.</p>
-<p></details></p>
+<p>Example: We can think back to our discussion of population statistics and sample statistics. If we are measuring every individual of a population and we want to summarize the data, we are doing <em>descriptive</em> statistics. Descriptive modeling is aimed at succinctly summarizing a body of data. If we want to use that data to make some inference about a larger population, we are doing <em>inferential</em> statistics. If we want to use our sample to predict a new sample from that larger population, we are doing <em>predictive</em> statistics. </span> </details></p>
 <p>As noted by Shmeuli, prediction and explanation are conflated in the hypothetical-deductive paradigm of null hypothesis significance testing, because we are saying in essence “If it predicts the data, then it explains the data”. Does everyone see why this is the case?</p>
 <p>The critical distinction between explanation and prediction can be seen by looking at the Expected Prediction Error (Shmeuli 2010; page 293), which we will discuss in more detail below.</p>
 <p>This distinction is at the core of model selection because, when faced with a number of competing models, we must decide whether we prefer the most accurate model (in terms of capturing the underlying mechanism) or the one that will yield the best predictions. It is also important to note that predictive models are restricted to variables which can actually be measured ahead of time. For example, a model to predict wine quality at the time of harvest cannot depend on the type of cask because the type of cask hasn’t been measured at the time the model is to be run. Likewise, the cost of running an aircraft may depend on the cost of fuel on the day of the flight, but fuel costs on the day of flight cannot be used in a predictive model because it is not possible to know what the cost of fuel will be on that day.</p>
 <p><strong>Question: If you have to choose one or the other, do you want the most accurate model that captures the underlying mechanism, or the model that will give the best predictions?</strong></p>
-<p><details> <summary>Click for Answer</summary> If we describe “real life” as, <span class="math inline">\(\mathscr{Y} = \mathscr{F}(\mathscr{X})\)</span>, where <span class="math inline">\(\mathscr{F}\)</span> is the <em>mechanism</em>, then in model space, we write, <span class="math inline">\(Y = F(X)\)</span>, where <span class="math inline">\(F\)</span> is the <em>model</em>. With explanatory modeling, the goal is <span class="math inline">\(F = \mathscr{F}\)</span>, while with predictive modeling, the goal is <span class="math inline">\(Y = \mathscr{Y}\)</span>.</p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> If we describe “real life” as, <span class="math inline">\(\mathscr{Y} = \mathscr{F}(\mathscr{X})\)</span>, where <span class="math inline">\(\mathscr{F}\)</span> is the <em>mechanism</em>, then in model space, we write, <span class="math inline">\(Y = F(X)\)</span>, where <span class="math inline">\(F\)</span> is the <em>model</em>. With explanatory modeling, the goal is <span class="math inline">\(F = \mathscr{F}\)</span>, while with predictive modeling, the goal is <span class="math inline">\(Y = \mathscr{Y}\)</span>.</p>
 <p>The expected prediction error (<span class="math inline">\(EPE\)</span>)</p>
 <p><span class="math display">\[\text{EPE} = \mathrm{E} [ (Y - \hat{f} (X))^2 ]\]</span></p>
 <p>can be broken down into three components:</p>
@@ -403,23 +402,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \text{EPE} = \mathrm{Var}(Y) + \text{bias}^2 + \mathrm{Var} (\hat{f} (X))
 \]</span></p>
 <p>1.The variance in the response, or the underlying stochasticity in the process (<span class="math inline">\(\mathrm{Var} (Y)\)</span>), 2. the bias, which describes to what degree the model is misspecified (<span class="math inline">\(\text{bias}^2\)</span>), and 3. the estimation variance, which arises because the model is developed from a sample of the data (<span class="math inline">\(\mathrm{Var} (\hat{f} (X))\)</span>).</p>
-<p>While the goal of predictive modeling is to minimize EPE, the goal of explanatory modeling is to minimize bias. </details></p>
+<p>While the goal of predictive modeling is to minimize EPE, the goal of explanatory modeling is to minimize bias. </span> </details></p>
 <p><strong>Question: Shmeuli makes the case that predictive modeling requires a larger sample size than explanatory modeling. Why?</strong></p>
-<p><details> <summary>Click for Answer</summary> In explanatory modeling, you only need enough data to “see whats going on” – in essence, you just need to understand the mean behavior. On the other hand, in predictive modeling, you actually want to be able to make good predictions, which means you need to understand the mean behavior AND the variability around the mean. Understanding the variability requires more data. Also, if the method for testing predictive models is to withhold some of the data at the model building stage, then you need more data. </details></p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> In explanatory modeling, you only need enough data to “see whats going on” – in essence, you just need to understand the mean behavior. On the other hand, in predictive modeling, you actually want to be able to make good predictions, which means you need to understand the mean behavior AND the variability around the mean. Understanding the variability requires more data. Also, if the method for testing predictive models is to withhold some of the data at the model building stage, then you need more data. </span> </details></p>
 <p><strong>Question: What is data partitioning? When/why is it used?</strong></p>
-<p><details> <summary>Click for Answer</summary> Data partitioning is when you partition the data into a “training” dataset and a “validation” dataset. The model is fit on the “training dataset” and its predictive accuracy tested on the “validation dataset”. Data partitioning is less used in explanatory modeling because by reducing the sample size, it reduces the power of the test. </details></p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> Data partitioning is when you partition the data into a “training” dataset and a “validation” dataset. The model is fit on the “training dataset” and its predictive accuracy tested on the “validation dataset”. Data partitioning is less used in explanatory modeling because by reducing the sample size, it reduces the power of the test. </span> </details></p>
 <p><strong>Question: How do explanatory and predictive models differ in their use of “dimension reduction”. (First, what is meant by “dimension reduction”.)</strong></p>
-<p><details> <summary>Click for Answer</summary> Sometimes we want to combine a number of related predictors into a smaller set of predictors that are uncorrelated. The classic example of this would be Principal Components Analysis (PCA). Dimension reduction is often used for predictive modeling, because we can reduce the variance of our predictions by reducing the number of predictors used in the model. However, we do so at the expense of interpretability, since the new predictors are linear combinations of the original variables and can be difficult to interpret. (More on this in the last week of the semester.) The important point here is that in predictive modeling, we don’t care what goes into the model, only that what comes out of the model is optimal is terms of the accuracy of its predictions for new data. </details></p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> Sometimes we want to combine a number of related predictors into a smaller set of predictors that are uncorrelated. The classic example of this would be Principal Components Analysis (PCA). Dimension reduction is often used for predictive modeling, because we can reduce the variance of our predictions by reducing the number of predictors used in the model. However, we do so at the expense of interpretability, since the new predictors are linear combinations of the original variables and can be difficult to interpret. (More on this in the last week of the semester.) The important point here is that in predictive modeling, we don’t care what goes into the model, only that what comes out of the model is optimal is terms of the accuracy of its predictions for new data. </span> </details></p>
 <p><strong>Question: Shmeuli discusses “algorithmic modeling”. What is it?</strong></p>
-<p><details> <summary>Click for Answer</summary> There are many data mining techniques which can produce predictive models that are useless for explanatory models. One example would be “neural networks”. </details></p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> There are many data mining techniques which can produce predictive models that are useless for explanatory models. One example would be “neural networks”. </span> </details></p>
 <p><strong>Question: What are ensemble methods?</strong></p>
-<p><details> <summary>Click for Answer</summary> Ensemble models exploit multiple models simultaneously to achieve predictive accuracy. These models might be completely incompatible (using different predictors for example) but their predictions can be merged into a distribution of predictions, the ensemble of which is better than any of the individual models. Examples include climate change models in which predictions from multiple climate models are combined, and hurricane models where you can look at multiple predicted storm tracks to get an idea of where the storm is most likely to go.</p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> Ensemble models exploit multiple models simultaneously to achieve predictive accuracy. These models might be completely incompatible (using different predictors for example) but their predictions can be merged into a distribution of predictions, the ensemble of which is better than any of the individual models. Examples include climate change models in which predictions from multiple climate models are combined, and hurricane models where you can look at multiple predicted storm tracks to get an idea of where the storm is most likely to go.</p>
 <p>Shmueli distinguishes between three types of model checking:</p>
 <p>“Model validation”: How well does the model fit the underlying causal relationships?</p>
 <p>“Model fit”: How well does the model fit the data you have?</p>
-<p>“Generalization”: How well does the model fit new data? </details></p>
+<p>“Generalization”: How well does the model fit new data? </span> </details></p>
 <p><strong>Question: This brings us to the problem of overfitting – what is overfitting?</strong></p>
-<p><details> <summary>Click for Answer</summary> Overfitting is when models are fit to the noise in the data as well as the underlying “signal”. This can happen when too many predictor variables are used and is the basis for the idea behind model “parsimony” (use the simplest model that works). </details></p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> Overfitting is when models are fit to the noise in the data as well as the underlying “signal”. This can happen when too many predictor variables are used and is the basis for the idea behind model “parsimony” (use the simplest model that works). </span> </details></p>
 <p>Model selection depends on a clear idea of purpose – i.e. whether the model is explanatory or predictive. In explanatory models, predictors that have a theoretical justification may be left in the model even if they are not statistically significant because they are thought to be part of the true underlying model F. On the other hand, predictive models may drop predictors even if they are statistically significant, if their effect size is so small than leaving them out of the model actually increases predictive accuracy.</p>
 <p>Shmeuli illustrates these ideas with two examples:</p>
 <p>Example #1: The Netflix prize</p>
@@ -562,18 +561,18 @@ Y_5 = \alpha_{2(5)} + \epsilon_5 \text{, where } \epsilon_5 \sim N(0, \sigma^2)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris.sub &lt;-<span class="st"> </span>iris[<span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(iris), <span class="dt">size =</span> <span class="dv">12</span>), ]
 <span class="kw">model.matrix</span>( <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>iris.sub<span class="op">$</span>Species)</code></pre></div>
 <pre><code>##    iris.sub$Speciessetosa iris.sub$Speciesversicolor iris.sub$Speciesvirginica
-## 1                       0                          1                         0
-## 2                       1                          0                         0
+## 1                       0                          0                         1
+## 2                       0                          1                         0
 ## 3                       0                          0                         1
-## 4                       0                          1                         0
-## 5                       0                          1                         0
-## 6                       0                          1                         0
-## 7                       1                          0                         0
+## 4                       1                          0                         0
+## 5                       1                          0                         0
+## 6                       0                          0                         1
+## 7                       0                          0                         1
 ## 8                       0                          1                         0
-## 9                       0                          1                         0
+## 9                       0                          0                         1
 ## 10                      1                          0                         0
-## 11                      1                          0                         0
-## 12                      0                          0                         1
+## 11                      0                          1                         0
+## 12                      1                          0                         0
 ## attr(,&quot;assign&quot;)
 ## [1] 1 1 1
 ## attr(,&quot;contrasts&quot;)
@@ -583,9 +582,9 @@ Y_5 = \alpha_{2(5)} + \epsilon_5 \text{, where } \epsilon_5 \sim N(0, \sigma^2)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dummy &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(iris.sub<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>iris.sub<span class="op">$</span>Species))
 dummy<span class="op">$</span>coefficients</code></pre></div>
 <pre><code>##                            Estimate Std. Error  t value     Pr(&gt;|t|)
-## iris.sub$Speciessetosa     5.000000  0.2822692 17.71358 2.641554e-08
-## iris.sub$Speciesversicolor 6.316667  0.2304719 27.40754 5.557490e-10
-## iris.sub$Speciesvirginica  7.000000  0.3991890 17.53555 2.886231e-08</code></pre>
+## iris.sub$Speciessetosa     4.825000  0.2310704 20.88108 6.205675e-09
+## iris.sub$Speciesversicolor 5.833333  0.2668171 21.86267 4.134241e-09
+## iris.sub$Speciesvirginica  6.580000  0.2066756 31.83733 1.461284e-10</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris.fig &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris.sub, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> iris.means, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">col =</span> Species), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Sepal length&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> font.size))
@@ -987,18 +986,18 @@ Y_i = \alpha_{\text{control}} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsi
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(iris.sub<span class="op">$</span>Species) &lt;-<span class="st"> &quot;contr.treatment&quot;</span>
 <span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species)</code></pre></div>
 <pre><code>##    (Intercept) iris.sub$Speciesversicolor iris.sub$Speciesvirginica
-## 1            1                          1                         0
-## 2            1                          0                         0
+## 1            1                          0                         1
+## 2            1                          1                         0
 ## 3            1                          0                         1
-## 4            1                          1                         0
-## 5            1                          1                         0
-## 6            1                          1                         0
-## 7            1                          0                         0
+## 4            1                          0                         0
+## 5            1                          0                         0
+## 6            1                          0                         1
+## 7            1                          0                         1
 ## 8            1                          1                         0
-## 9            1                          1                         0
+## 9            1                          0                         1
 ## 10           1                          0                         0
-## 11           1                          0                         0
-## 12           1                          0                         1
+## 11           1                          1                         0
+## 12           1                          0                         0
 ## attr(,&quot;assign&quot;)
 ## [1] 0 1 1
 ## attr(,&quot;contrasts&quot;)
@@ -1007,9 +1006,9 @@ Y_i = \alpha_{\text{control}} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsi
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">treatment &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(iris.sub<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species))
 treatment<span class="op">$</span>coefficients</code></pre></div>
 <pre><code>##                            Estimate Std. Error   t value     Pr(&gt;|t|)
-## (Intercept)                5.000000  0.2822692 17.713584 2.641554e-08
-## iris.sub$Speciesversicolor 1.316667  0.3644080  3.613166 5.631435e-03
-## iris.sub$Speciesvirginica  2.000000  0.4889047  4.090777 2.713879e-03</code></pre>
+## (Intercept)                4.825000  0.2310704 20.881084 6.205675e-09
+## iris.sub$Speciesversicolor 1.008333  0.3529658  2.856745 1.888034e-02
+## iris.sub$Speciesvirginica  1.755000  0.3100134  5.661045 3.092243e-04</code></pre>
 <p>In this case, you can see that the model is estimating the mean of the first group (setosa) and then the difference between the second and first group and the difference between the third and first groups. This allows you to test hypotheses about the differences, which is often more meaningful than testing hypotheses about the group means themselves.</p>
 </div>
 <div id="helmert-contrasts" class="section level2">
@@ -1077,18 +1076,18 @@ Y_i = \bar{\alpha}_{&lt; j} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilo
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(iris.sub<span class="op">$</span>Species) &lt;-<span class="st"> &quot;contr.helmert&quot;</span>
 <span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species)</code></pre></div>
 <pre><code>##    (Intercept) iris.sub$Species1 iris.sub$Species2
-## 1            1                 1                -1
-## 2            1                -1                -1
+## 1            1                 0                 2
+## 2            1                 1                -1
 ## 3            1                 0                 2
-## 4            1                 1                -1
-## 5            1                 1                -1
-## 6            1                 1                -1
-## 7            1                -1                -1
+## 4            1                -1                -1
+## 5            1                -1                -1
+## 6            1                 0                 2
+## 7            1                 0                 2
 ## 8            1                 1                -1
-## 9            1                 1                -1
+## 9            1                 0                 2
 ## 10           1                -1                -1
-## 11           1                -1                -1
-## 12           1                 0                 2
+## 11           1                 1                -1
+## 12           1                -1                -1
 ## attr(,&quot;assign&quot;)
 ## [1] 0 1 1
 ## attr(,&quot;contrasts&quot;)
@@ -1097,9 +1096,9 @@ Y_i = \bar{\alpha}_{&lt; j} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilo
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">helmert &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(iris.sub<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species))
 helmert<span class="op">$</span>coefficients</code></pre></div>
 <pre><code>##                    Estimate Std. Error   t value     Pr(&gt;|t|)
-## (Intercept)       6.1055556  0.1801682 33.888096 8.367124e-11
-## iris.sub$Species1 0.6583333  0.1822040  3.613166 5.631435e-03
-## iris.sub$Species2 0.4472222  0.1462685  3.057544 1.362563e-02</code></pre>
+## (Intercept)       5.7461111 0.13634095 42.145160 1.188945e-11
+## iris.sub$Species1 0.5041667 0.17648291  2.856745 1.888034e-02
+## iris.sub$Species2 0.4169444 0.09059129  4.602478 1.285982e-03</code></pre>
 </div>
 <div id="sum-to-zero-contrasts" class="section level2">
 <h2><span class="header-section-number">14.7</span> Sum-to-zero contrasts</h2>
@@ -1168,18 +1167,18 @@ Y_i = \bar{\alpha} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilon_i \sim 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(iris.sub<span class="op">$</span>Species) &lt;-<span class="st"> &quot;contr.sum&quot;</span>
 <span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species)</code></pre></div>
 <pre><code>##    (Intercept) iris.sub$Species1 iris.sub$Species2
-## 1            1                 0                 1
-## 2            1                 1                 0
+## 1            1                -1                -1
+## 2            1                 0                 1
 ## 3            1                -1                -1
-## 4            1                 0                 1
-## 5            1                 0                 1
-## 6            1                 0                 1
-## 7            1                 1                 0
+## 4            1                 1                 0
+## 5            1                 1                 0
+## 6            1                -1                -1
+## 7            1                -1                -1
 ## 8            1                 0                 1
-## 9            1                 0                 1
+## 9            1                -1                -1
 ## 10           1                 1                 0
-## 11           1                 1                 0
-## 12           1                -1                -1
+## 11           1                 0                 1
+## 12           1                 1                 0
 ## attr(,&quot;assign&quot;)
 ## [1] 0 1 1
 ## attr(,&quot;contrasts&quot;)
@@ -1187,10 +1186,10 @@ Y_i = \bar{\alpha} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilon_i \sim 
 ## [1] &quot;contr.sum&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sumtozero &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(iris.sub<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris.sub<span class="op">$</span>Species))
 sumtozero<span class="op">$</span>coefficients</code></pre></div>
-<pre><code>##                     Estimate Std. Error    t value     Pr(&gt;|t|)
-## (Intercept)        6.1055556  0.1801682 33.8880959 8.367124e-11
-## iris.sub$Species1 -1.1055556  0.2429387 -4.5507596 1.384434e-03
-## iris.sub$Species2  0.2111111  0.2239784  0.9425512 3.705217e-01</code></pre>
+<pre><code>##                      Estimate Std. Error    t value     Pr(&gt;|t|)
+## (Intercept)        5.74611111  0.1363409 42.1451598 1.188945e-11
+## iris.sub$Species1 -0.92111111  0.1907530 -4.8288167 9.354408e-04
+## iris.sub$Species2  0.08722222  0.2057166  0.4239922 6.815255e-01</code></pre>
 <p>There is one final “off-the-shelf” contrast that we will learn, and that is polynomial contrasts.</p>
 </div>
 <div id="polynomial-contrasts" class="section level2">

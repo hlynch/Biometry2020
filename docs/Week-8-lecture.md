@@ -19,12 +19,13 @@ Before we launch into the technical details of building linear models, let’s d
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
     ''Explanatory modeling refers…to the application of statistical models to data for testing causal hypotheses about theoretical constructs.'' (Shmueli 2010) Using this definition, explanatory modeling is testing a hypothesis or a theory and therefore can never be confirmed and are also harder (than predictive models) to contradict. We have been referring to these models as “inferential models” or models used for “inference”.
 
 Predictive models are concerned only with the ability to predict new (measurable) outcomes. Either the models works for prediction or it doesn’t.  Predictive models are therefore more utilitarian than explanatory models (use whatever works!). Predictive models may involve predictors that are uninterpretable (more on this later when we discuss Generalized Additive Models and other curve fitting techniques).
 
 Example: We can think back to our discussion of population statistics and sample statistics. If we are measuring every individual of a population and we want to summarize the data, we are doing *descriptive* statistics. Descriptive modeling is aimed at succinctly summarizing a body of data. If we want to use that data to make some inference about a larger population, we are doing *inferential* statistics. If we want to use our sample to predict a new sample from that larger population, we are doing *predictive* statistics. 
-
+</span>
 </details> 
 
 
@@ -39,6 +40,7 @@ This distinction is at the core of model selection because, when faced with a nu
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 If we describe "real life" as, $\mathscr{Y} = \mathscr{F}(\mathscr{X})$, where $\mathscr{F}$ is the *mechanism*, then in model space, we write, $Y = F(X)$, where $F$ is the *model*. With explanatory modeling, the goal is $F = \mathscr{F}$, while with predictive modeling, the goal is $Y = \mathscr{Y}$. 
 
 The expected prediction error ($EPE$)
@@ -55,40 +57,50 @@ $$
 3. the estimation variance, which arises because the model is developed from a sample of the data ($\mathrm{Var} (\hat{f} (X))$).
 
 While the goal of predictive modeling is to minimize EPE, the goal of explanatory modeling is to minimize bias.
+</span>
 </details> 
 
 **Question: Shmeuli makes the case that predictive modeling requires a larger sample size than explanatory modeling. Why?**
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 In explanatory modeling, you only need enough data to “see whats going on” – in essence, you just need to understand the mean behavior. On the other hand, in predictive modeling, you actually want to be able to make good predictions, which means you need to understand the mean behavior AND the variability around the mean. Understanding the variability requires more data. Also, if the method for testing predictive models is to withhold some of the data at the model building stage, then you need more data.
+</span>
 </details> 
 
 **Question: What is data partitioning? When/why is it used?**
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 Data partitioning is when you partition the data into a “training” dataset and a “validation” dataset. The model is fit on the “training dataset” and its predictive accuracy tested on the “validation dataset”. Data partitioning is less used in explanatory modeling because by reducing the sample size, it reduces the power of the test.
+</span>
 </details> 
 
 **Question: How do explanatory and predictive models differ in their use of “dimension reduction”. (First, what is meant by “dimension reduction”.)**
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 Sometimes we want to combine a number of related predictors into a smaller set of predictors that are uncorrelated. The classic example of this would be Principal Components Analysis (PCA). Dimension reduction is often used for predictive modeling, because we can reduce the variance of our predictions by reducing the number of predictors used in the model. However, we do so at the expense of interpretability, since the new predictors are linear combinations of the original variables and can be difficult to interpret. (More on this in the last week of the semester.) The important point here is that in predictive modeling, we don’t care what goes into the model, only that what comes out of the model is optimal is terms of the accuracy of its predictions for new data.
+</span>
 </details> 
 
 **Question: Shmeuli discusses “algorithmic modeling”. What is it?**
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 There are many data mining techniques which can produce predictive models that are useless for explanatory models. One example would be “neural networks”. 
+</span>
 </details> 
 
 **Question: What are ensemble methods?**
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 Ensemble models exploit multiple models simultaneously to achieve predictive accuracy. These models might be completely incompatible (using different predictors for example) but their predictions can be merged into a distribution of predictions, the ensemble of which is better than any of the individual models. Examples include climate change models in which predictions from multiple climate models are combined, and hurricane models where you can look at multiple predicted storm tracks to get an idea of where the storm is most likely to go.
 
 Shmueli distinguishes between three types of model checking:
@@ -98,13 +110,16 @@ Shmueli distinguishes between three types of model checking:
 "Model fit": How well does the model fit the data you have?
 
 "Generalization": How well does the model fit new data?
+</span>
 </details> 
 
 **Question: This brings us to the problem of overfitting – what is overfitting?**
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 Overfitting is when models are fit to the noise in the data as well as the underlying “signal”. This can happen when too many predictor variables are used and is the basis for the idea behind model “parsimony” (use the simplest model that works).
+</span>
 </details> 
   
 Model selection depends on a clear idea of purpose – i.e. whether the model is explanatory or predictive. In explanatory models, predictors that have a theoretical justification may be left in the model even if they are not statistically significant because they are thought to be part of the true underlying model F. On the other hand, predictive models may drop predictors even if they are statistically significant, if their effect size is so small than leaving them out of the model actually increases predictive accuracy.
@@ -310,18 +325,18 @@ model.matrix( ~ -1 + iris.sub$Species)
 
 ```
 ##    iris.sub$Speciessetosa iris.sub$Speciesversicolor iris.sub$Speciesvirginica
-## 1                       0                          1                         0
-## 2                       1                          0                         0
+## 1                       0                          0                         1
+## 2                       0                          1                         0
 ## 3                       0                          0                         1
-## 4                       0                          1                         0
-## 5                       0                          1                         0
-## 6                       0                          1                         0
-## 7                       1                          0                         0
+## 4                       1                          0                         0
+## 5                       1                          0                         0
+## 6                       0                          0                         1
+## 7                       0                          0                         1
 ## 8                       0                          1                         0
-## 9                       0                          1                         0
+## 9                       0                          0                         1
 ## 10                      1                          0                         0
-## 11                      1                          0                         0
-## 12                      0                          0                         1
+## 11                      0                          1                         0
+## 12                      1                          0                         0
 ## attr(,"assign")
 ## [1] 1 1 1
 ## attr(,"contrasts")
@@ -341,9 +356,9 @@ dummy$coefficients
 
 ```
 ##                            Estimate Std. Error  t value     Pr(>|t|)
-## iris.sub$Speciessetosa     5.000000  0.2822692 17.71358 2.641554e-08
-## iris.sub$Speciesversicolor 6.316667  0.2304719 27.40754 5.557490e-10
-## iris.sub$Speciesvirginica  7.000000  0.3991890 17.53555 2.886231e-08
+## iris.sub$Speciessetosa     4.825000  0.2310704 20.88108 6.205675e-09
+## iris.sub$Speciesversicolor 5.833333  0.2668171 21.86267 4.134241e-09
+## iris.sub$Speciesvirginica  6.580000  0.2066756 31.83733 1.461284e-10
 ```
 
 ```r
@@ -619,18 +634,18 @@ model.matrix(~ iris.sub$Species)
 
 ```
 ##    (Intercept) iris.sub$Speciesversicolor iris.sub$Speciesvirginica
-## 1            1                          1                         0
-## 2            1                          0                         0
+## 1            1                          0                         1
+## 2            1                          1                         0
 ## 3            1                          0                         1
-## 4            1                          1                         0
-## 5            1                          1                         0
-## 6            1                          1                         0
-## 7            1                          0                         0
+## 4            1                          0                         0
+## 5            1                          0                         0
+## 6            1                          0                         1
+## 7            1                          0                         1
 ## 8            1                          1                         0
-## 9            1                          1                         0
+## 9            1                          0                         1
 ## 10           1                          0                         0
-## 11           1                          0                         0
-## 12           1                          0                         1
+## 11           1                          1                         0
+## 12           1                          0                         0
 ## attr(,"assign")
 ## [1] 0 1 1
 ## attr(,"contrasts")
@@ -646,9 +661,9 @@ treatment$coefficients
 
 ```
 ##                            Estimate Std. Error   t value     Pr(>|t|)
-## (Intercept)                5.000000  0.2822692 17.713584 2.641554e-08
-## iris.sub$Speciesversicolor 1.316667  0.3644080  3.613166 5.631435e-03
-## iris.sub$Speciesvirginica  2.000000  0.4889047  4.090777 2.713879e-03
+## (Intercept)                4.825000  0.2310704 20.881084 6.205675e-09
+## iris.sub$Speciesversicolor 1.008333  0.3529658  2.856745 1.888034e-02
+## iris.sub$Speciesvirginica  1.755000  0.3100134  5.661045 3.092243e-04
 ```
 
 In this case, you can see that the model is estimating the mean of the first group (setosa) and then the difference between the second and first group and the difference between the third and first groups. This allows you to test hypotheses about the differences, which is often more meaningful than testing hypotheses about the group means themselves.
@@ -704,18 +719,18 @@ model.matrix(~ iris.sub$Species)
 
 ```
 ##    (Intercept) iris.sub$Species1 iris.sub$Species2
-## 1            1                 1                -1
-## 2            1                -1                -1
+## 1            1                 0                 2
+## 2            1                 1                -1
 ## 3            1                 0                 2
-## 4            1                 1                -1
-## 5            1                 1                -1
-## 6            1                 1                -1
-## 7            1                -1                -1
+## 4            1                -1                -1
+## 5            1                -1                -1
+## 6            1                 0                 2
+## 7            1                 0                 2
 ## 8            1                 1                -1
-## 9            1                 1                -1
+## 9            1                 0                 2
 ## 10           1                -1                -1
-## 11           1                -1                -1
-## 12           1                 0                 2
+## 11           1                 1                -1
+## 12           1                -1                -1
 ## attr(,"assign")
 ## [1] 0 1 1
 ## attr(,"contrasts")
@@ -731,9 +746,9 @@ helmert$coefficients
 
 ```
 ##                    Estimate Std. Error   t value     Pr(>|t|)
-## (Intercept)       6.1055556  0.1801682 33.888096 8.367124e-11
-## iris.sub$Species1 0.6583333  0.1822040  3.613166 5.631435e-03
-## iris.sub$Species2 0.4472222  0.1462685  3.057544 1.362563e-02
+## (Intercept)       5.7461111 0.13634095 42.145160 1.188945e-11
+## iris.sub$Species1 0.5041667 0.17648291  2.856745 1.888034e-02
+## iris.sub$Species2 0.4169444 0.09059129  4.602478 1.285982e-03
 ```
 
 ##Sum-to-zero contrasts
@@ -790,18 +805,18 @@ model.matrix(~ iris.sub$Species)
 
 ```
 ##    (Intercept) iris.sub$Species1 iris.sub$Species2
-## 1            1                 0                 1
-## 2            1                 1                 0
+## 1            1                -1                -1
+## 2            1                 0                 1
 ## 3            1                -1                -1
-## 4            1                 0                 1
-## 5            1                 0                 1
-## 6            1                 0                 1
-## 7            1                 1                 0
+## 4            1                 1                 0
+## 5            1                 1                 0
+## 6            1                -1                -1
+## 7            1                -1                -1
 ## 8            1                 0                 1
-## 9            1                 0                 1
+## 9            1                -1                -1
 ## 10           1                 1                 0
-## 11           1                 1                 0
-## 12           1                -1                -1
+## 11           1                 0                 1
+## 12           1                 1                 0
 ## attr(,"assign")
 ## [1] 0 1 1
 ## attr(,"contrasts")
@@ -816,10 +831,10 @@ sumtozero$coefficients
 ```
 
 ```
-##                     Estimate Std. Error    t value     Pr(>|t|)
-## (Intercept)        6.1055556  0.1801682 33.8880959 8.367124e-11
-## iris.sub$Species1 -1.1055556  0.2429387 -4.5507596 1.384434e-03
-## iris.sub$Species2  0.2111111  0.2239784  0.9425512 3.705217e-01
+##                      Estimate Std. Error    t value     Pr(>|t|)
+## (Intercept)        5.74611111  0.1363409 42.1451598 1.188945e-11
+## iris.sub$Species1 -0.92111111  0.1907530 -4.8288167 9.354408e-04
+## iris.sub$Species2  0.08722222  0.2057166  0.4239922 6.815255e-01
 ```
 
 There is one final “off-the-shelf” contrast that we will learn, and that is polynomial contrasts.
