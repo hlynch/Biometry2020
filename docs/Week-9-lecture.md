@@ -85,13 +85,13 @@ Pearson's product moment correlation is bounded between -1 and 1. Correlation co
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-1.png" width="240" />
 
 ```
-## [1] -0.07881847
+## [1] 0.07226881
 ```
 
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-2.png" width="240" />
 
 ```
-## [1] 0.9177645
+## [1] 0.922234
 ```
 
 ## Hypothesis testing - Pearson's *r*
@@ -184,7 +184,7 @@ cor(df$A, df$B)
 ```
 
 ```
-## [1] -0.1460919
+## [1] 0.05963443
 ```
 
 Even though *A* and *B* clearly have a strong relationship, correlation is only effective if the relationship is **linear**.
@@ -218,7 +218,7 @@ paste("The 95% confidence interval for the estimated correlation coefficient, ",
 ```
 
 ```
-## [1] "The 95% confidence interval for the estimated correlation coefficient, 0.894 is (0.852, 0.925)"
+## [1] "The 95% confidence interval for the estimated correlation coefficient, 0.885 is (0.834, 0.921)"
 ```
 </span>
 </details> 
@@ -264,7 +264,7 @@ pnorm(q = z.obs, mean = 0, sd = sqrt(1 / (100 - 3)), lower.tail = FALSE)
 ```
 
 ```
-## [1] 1.584119e-37
+## [1] 8.855212e-37
 ```
 
 ```r
@@ -274,7 +274,7 @@ pnorm(q = test.stat, lower.tail = FALSE)
 ```
 
 ```
-## [1] 1.584119e-37
+## [1] 8.855212e-37
 ```
 
 To simply the notation, let us define

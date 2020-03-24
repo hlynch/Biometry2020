@@ -20,7 +20,7 @@ Before we launch into the technical details of building linear models, let’s d
 <details>
   <summary>Click for Answer</summary>
 <span style="color: blueviolet;">
-    ''Explanatory modeling refers…to the application of statistical models to data for testing causal hypotheses about theoretical constructs.'' (Shmueli 2010) Using this definition, explanatory modeling is testing a hypothesis or a theory and therefore can never be confirmed and are also harder (than predictive models) to contradict. We have been referring to these models as “inferential models” or models used for “inference”.
+    "Explanatory modeling refers…to the application of statistical models to data for testing causal hypotheses about theoretical constructs." (Shmueli 2010) Using this definition, explanatory modeling is testing a hypothesis or a theory and therefore can never be confirmed and are also harder (than predictive models) to contradict. We have been referring to these models as “inferential models” or models used for “inference”.
 
 Predictive models are concerned only with the ability to predict new (measurable) outcomes. Either the models works for prediction or it doesn’t.  Predictive models are therefore more utilitarian than explanatory models (use whatever works!). Predictive models may involve predictors that are uninterpretable (more on this later when we discuss Generalized Additive Models and other curve fitting techniques).
 
@@ -30,7 +30,7 @@ Example: We can think back to our discussion of population statistics and sample
 
 
 
-As noted by Shmeuli, prediction and explanation are conflated in the hypothetical-deductive paradigm of null hypothesis significance testing, because we are saying in essence “If it predicts the data, then it explains the data”. Does everyone see why this is the case?
+As noted by Shmeuli, prediction and explanation are conflated in the hypothetical-deductive paradigm of null hypothesis significance testing, because we are saying in essence "If it predicts the data, then it explains the data". Does everyone see why this is the case?
 
 The critical distinction between explanation and prediction can be seen by looking at the Expected Prediction Error (Shmeuli 2010; page 293), which we will discuss in more detail below.
 
@@ -65,7 +65,7 @@ While the goal of predictive modeling is to minimize EPE, the goal of explanator
 <details>
   <summary>Click for Answer</summary>
 <span style="color: blueviolet;">
-In explanatory modeling, you only need enough data to “see whats going on” – in essence, you just need to understand the mean behavior. On the other hand, in predictive modeling, you actually want to be able to make good predictions, which means you need to understand the mean behavior AND the variability around the mean. Understanding the variability requires more data. Also, if the method for testing predictive models is to withhold some of the data at the model building stage, then you need more data.
+In explanatory modeling, you only need enough data to "see whats going on" – in essence, you just need to understand the mean behavior. On the other hand, in predictive modeling, you actually want to be able to make good predictions, which means you need to understand the mean behavior AND the variability around the mean. Understanding the variability requires more data. Also, if the method for testing predictive models is to withhold some of the data at the model building stage, then you need more data.
 </span>
 </details> 
 
@@ -74,7 +74,7 @@ In explanatory modeling, you only need enough data to “see whats going on” �
 <details>
   <summary>Click for Answer</summary>
 <span style="color: blueviolet;">
-Data partitioning is when you partition the data into a “training” dataset and a “validation” dataset. The model is fit on the “training dataset” and its predictive accuracy tested on the “validation dataset”. Data partitioning is less used in explanatory modeling because by reducing the sample size, it reduces the power of the test.
+Data partitioning is when you partition the data into a "training" dataset and a "validation" dataset. The model is fit on the "training dataset" and its predictive accuracy tested on the "validation dataset". Data partitioning is less used in explanatory modeling because by reducing the sample size, it reduces the power of the test.
 </span>
 </details> 
 
@@ -92,7 +92,7 @@ Sometimes we want to combine a number of related predictors into a smaller set o
 <details>
   <summary>Click for Answer</summary>
 <span style="color: blueviolet;">
-There are many data mining techniques which can produce predictive models that are useless for explanatory models. One example would be “neural networks”. 
+There are many data mining techniques which can produce predictive models that are useless for explanatory models. One example would be "neural networks". 
 </span>
 </details> 
 
@@ -118,7 +118,7 @@ Shmueli distinguishes between three types of model checking:
 <details>
   <summary>Click for Answer</summary>
 <span style="color: blueviolet;">
-Overfitting is when models are fit to the noise in the data as well as the underlying “signal”. This can happen when too many predictor variables are used and is the basis for the idea behind model “parsimony” (use the simplest model that works).
+Overfitting is when models are fit to the noise in the data as well as the underlying "signal". This can happen when too many predictor variables are used and is the basis for the idea behind model "parsimony" (use the simplest model that works).
 </span>
 </details> 
   
@@ -152,7 +152,7 @@ Example #2: Online auctions.
 
 1.	Prediction, explanation, and description are three very different goals for a statistical analysis.
 2.	R2 is a measure of explanatory power but does not tell you anything about predictive power because you may have fit the model to noise in the original sample. Also, explanatory models tend to be overly optimistic with regards to predictive power.
-3. ''Checking the model'' can include three component: 1) Model validation: how well does the model fit the underlying causal mechanism?; 2) Model fit: how well does the model fit the data you have? (e.g., $R^2$); 3) Generalization: how well does the model fit new data? (not $R^2$).
+3. "Checking the model" can include three component: 1) Model validation: how well does the model fit the underlying causal mechanism?; 2) Model fit: how well does the model fit the data you have? (e.g., $R^2$); 3) Generalization: how well does the model fit new data? (not $R^2$).
 
 *Final discussion questions:*
 
@@ -162,7 +162,7 @@ Example #2: Online auctions.
 ##Introduction to linear models
 \subsection{Continuous covariates}
 
-In the first half of the semester, we were discussing how to identify distributions, and how to fit distributions to data (i.e. parameter estimation). This is a very simple application of fitting a ``statistical model''.  For example, we would write
+In the first half of the semester, we were discussing how to identify distributions, and how to fit distributions to data (i.e. parameter estimation). This is a very simple application of fitting a "statistical model".  For example, we would write
 
 $$
 Y \sim N(\mu,\sigma^{2})
@@ -172,7 +172,7 @@ and then we would use MLE (or other methods) to estimate the two parameters of t
 $$
 Y = \mu + \epsilon \mbox{ where } \epsilon \sim N(0,\sigma^{2}) 
 $$
-Note that the equation on the left has an equal sign, since Y is strictly equal to the sum of $\mu$ and $\epsilon$ and it is $\epsilon$ that is drawn from a statistical distribution. In essence, we have decomposed Y into a component that is fixed ($\mu$) and a component that is stochastic ($\epsilon$). We read this equation as ''Y is modeled as having a mean $\mu$ and a random error that is Normally distributed''.
+Note that the equation on the left has an equal sign, since Y is strictly equal to the sum of $\mu$ and $\epsilon$ and it is $\epsilon$ that is drawn from a statistical distribution. In essence, we have decomposed Y into a component that is fixed ($\mu$) and a component that is stochastic ($\epsilon$). We read this equation as "Y is modeled as having a mean $\mu$ and a random error that is Normally distributed".
 
 This illustrates nicely the general format of a linear model:
 
@@ -182,7 +182,7 @@ Some authors will write this as:
 
 Response = Model + Error
 
-but I dislike this for two reasons. 1) Your "model" is not just the deterministic function. A model for your data includes the deterministic component and the stochastic component. 2) I don't like referring to the stochastic component as ''error'' because that implies that your model is faulty in some way. This stochasticity may be built into the system that you are trying to model, it may be irreducible variability that is not your ''fault'' and therefore should be considered a legitimate part of what you are trying to model rather than a mistake or an error.
+but I dislike this for two reasons. 1) Your "model" is not just the deterministic function. A model for your data includes the deterministic component and the stochastic component. 2) I don't like referring to the stochastic component as "error" because that implies that your model is faulty in some way. This stochasticity may be built into the system that you are trying to model, it may be irreducible variability that is not your "fault" and therefore should be considered a legitimate part of what you are trying to model rather than a mistake or an error.
 
 Going back for a moment to our original model $Y \sim N(\mu,\sigma^{2})$, we can either leave $\mu$ as a constant to be estimated or we can try and improve our model by adding complexity to $\mu$. In other words, if Y represents the size of individuals in a collection of gentoo penguins, we might model mean size as being a function of a continuous variable like age. In that case, our model looks like:
 
@@ -272,10 +272,10 @@ $$\begin{bmatrix}
 where $Y$ is the response vector, $X$ is the design matrix, $\beta$ is the vector of parameters, and $\epsilon$ is the error vector. The design matrix tells us which combination of parameters are used to predict each data point. We can simply this notation even further by writing it as
 
 $$
-\overrightarrow{Y} = \overleftrightarrow{X}\overrightarrow{\beta} + \overrightarrow{\epsilon}
+\overrightarrow{Y} = \overleftrightarrow{X}\overrightarrow{\alpha} + \overrightarrow{\epsilon}
 $$
 
-where $\overrightarrow{Y}$ is the response vector, $\overleftrightarrow{X}$ is design matrix, $\overrightarrow{\beta}$ is the vector of parameters (coefficients), $\overrightarrow{\epsilon}$ is the vector of residuals (i.e. the remaining stochastic component).
+where $\overrightarrow{Y}$ is the response vector, $\overleftrightarrow{X}$ is design matrix, $\overrightarrow{\alpha}$ is the vector of parameters (coefficients), $\overrightarrow{\epsilon}$ is the vector of residuals (i.e. the remaining stochastic component). (Note: Keeping with traditional mathematical notation, vectors have a single headed arrow whereas as matrices have a double headed arrow. Also, here I use $\overrightarrow{\alpha}$ to represent the vector of model coefficients. More traditional would be to use the Greek letter $\overrightarrow{\beta}$, but in keeping with my notation above I will stick with $\overrightarrow{\alpha}$.)
 
 The design matrix is the crucial element here. It tells us what combination of parameters are used to predict each data point (the Ys).
 
@@ -325,18 +325,18 @@ model.matrix( ~ -1 + iris.sub$Species)
 
 ```
 ##    iris.sub$Speciessetosa iris.sub$Speciesversicolor iris.sub$Speciesvirginica
-## 1                       1                          0                         0
+## 1                       0                          0                         1
 ## 2                       0                          1                         0
-## 3                       0                          1                         0
+## 3                       1                          0                         0
 ## 4                       0                          1                         0
 ## 5                       0                          1                         0
 ## 6                       1                          0                         0
-## 7                       1                          0                         0
-## 8                       0                          0                         1
-## 9                       1                          0                         0
+## 7                       0                          0                         1
+## 8                       0                          1                         0
+## 9                       0                          0                         1
 ## 10                      1                          0                         0
-## 11                      1                          0                         0
-## 12                      0                          0                         1
+## 11                      0                          1                         0
+## 12                      1                          0                         0
 ## attr(,"assign")
 ## [1] 1 1 1
 ## attr(,"contrasts")
@@ -356,9 +356,9 @@ dummy$coefficients
 
 ```
 ##                            Estimate Std. Error  t value     Pr(>|t|)
-## iris.sub$Speciessetosa         5.00  0.2663192 18.77446 1.584750e-08
-## iris.sub$Speciesversicolor     5.75  0.3261731 17.62868 2.755254e-08
-## iris.sub$Speciesvirginica      6.40  0.4612784 13.87448 2.216728e-07
+## iris.sub$Speciessetosa     4.875000  0.1752908 27.81093 4.879493e-10
+## iris.sub$Speciesversicolor 6.060000  0.1567848 38.65170 2.580370e-11
+## iris.sub$Speciesvirginica  6.433333  0.2024083 31.78393 1.483347e-10
 ```
 
 ```r
@@ -370,7 +370,7 @@ iris.fig
 
 <img src="Week-8-lecture_files/figure-html/unnamed-chunk-3-1.png" width="480" />
 
-Don't worry about the syntax, but look closely at the figure. The figure is illustrating the values for each group, and the red, green, and blue filled circles represent the mean within each group. Our simple "dummy coding" model simply states that each value (the individual black dots) can be modelled as the mean for that group PLUS the residual difference (i.e. $\epsilon$) between the group mean and that individual value.
+Don't worry about the syntax, but look closely at the figure. The figure is illustrating the values for each group, and the red, green, and blue filled circles represent the mean within each group. Our simple "dummy coding" model simply states that each value (the individual black dots) can be modelled as the mean for that group PLUS the residual difference (i.e. $\epsilon$) between the group mean and that individual value. Note that the function we use to fit the linear model 'lm' is one that we haven't formally introduced yet (but that will come soon). For now, just observe how the output of the model represents the parameters we are interested in (in this case, the group means).
 
 We write the equation in matrix form as
 
@@ -477,7 +477,7 @@ Notice that now we have introduced a fourth parameter without changing the data.
 
 **Question:** What parameter was removed/aliased in the dummy coding scheme? In that case, $\bar{\alpha}$ was removed/aliased.
 
-We have now introduced two perfectly ''correct'' ways of writing this linear model with different design matrices and correspondingly different interpretations of the model coefficients. These different ways of parametrizing the model for categorical variables are called ''coding schemes''. While the models represent the same math, the different ways of writing the models down permits different hypothesis tests about the model parameters.
+We have now introduced two perfectly "correct" ways of writing this linear model with different design matrices and correspondingly different interpretations of the model coefficients. These different ways of parametrizing the model for categorical variables are called "coding schemes". While the models represent the same math, the different ways of writing the models down permits different hypothesis tests about the model parameters.
 
 In the case where we are looking at group means
 
@@ -500,13 +500,13 @@ the same null hypothesis
 $$
 H_{0}: \alpha_{j} = 0
 $$
-means something very different. Therefore, we need to make sure to use coding schemes that will allow us to most directly test the hypothesis of interest. (This is why there is no one “correct” approach.)
+means something very different. Therefore, we need to make sure to use coding schemes that will allow us to most directly test the hypothesis of interest. (This is why there is no one "correct" approach.)
 
 ## Resolving overparameterization using contrasts
 
 We can reduce the number of parameters in our model by creating a new set of parameters, each of which is a linear combination of groups, rather than a single group effect. Each parameter can include contributions from any number of the groups. We will now introduce of series of potential options for doing this, each of which is designed to test a specific hypothesis about how groups may differ. It is occassionally the case that none of these "off the shelf" options are appropriate for your analysis and you may need to design a design matrix that is tailored specifically for your research question, so the options we introduce here are just a few of the options and meant to illustrate the overall idea. The following decision tree is designed to help you choose the correct coding scheme for your specific analysis.
 
-We know now that there are many ways in which to write a linear model with categorical predictors, and that the choices made about how to contrast the various levels of the factors is important for interpreting the results. In addition to the “dummy” or “cell means” coding scheme introduced above, we will go over 4 common “off-the-shelf” coding schemes that are used. Keep in mind that these are not all the possible coding schemes that could be used to write a model. Many others exist, and often it is necessary to write your own custom coding schemes to answer a particular question of interest. 
+We know now that there are many ways in which to write a linear model with categorical predictors, and that the choices made about how to contrast the various levels of the factors is important for interpreting the results. In addition to the "dummy" or "cell means" coding scheme introduced above, we will go over 4 common "off-the-shelf" coding schemes that are used. Keep in mind that these are not all the possible coding schemes that could be used to write a model. Many others exist, and often it is necessary to write your own custom coding schemes to answer a particular question of interest. 
 
 Before getting into the math that describes the various options, we'll work through a simple example. Lets say we have a study in which we measure the average lifespan of four species of penguins. For arguments sake, lets say we track 10 individuals in each of four species (40 penguins total). The mean lifespan in each group is 13, 12, 9, and 6. One way to write this model would be to simply estimate the mean of each group. This is the 'cell means' coding we described above. Nothing is being contrasted here. In other words, no group is being compared to any other group.
 
@@ -549,11 +549,12 @@ Finally, imagine we want to compare each group to the grand mean ($\mu$). In thi
 | $\alpha_{4}$       | 6               |  -7            |   -1.3333      |    aliased  |
 
 As a review, the first way of writing the model does not contrast anything. It simply estimates the group means, and the model for group $j$ is simply the group mean for $j$ plus an error term. The other three model parameterizations explicitly contrast the groups, but in different ways.
+
 Hopefully, by working through a few examples, you can see that there are many ways we can write a model, and that each way contrasts different things and allows for an explicit hypothesis test on differences that are of interest. In this example, Method #1 is the 'cell means' coding that we started with, Method #2 is called 'effect coding' or 'treatment contrasts', Method #3 is called Helmert contrasts, and Method #4 is called the 'sum-to-zero' contrast we already briefly introduced. We'll walk through a more formal introduction of these contrasts now.
 
 ##Effect coding/Treatment constrast
 
-In effect coding or treatment contrasts, you set aside one group as the "control"" and estimate the difference of every other group from that control group. The estimated parameters therefore represent the "effect"" of moving from the control group to any other group (which often represents the impact of a "treatment"" relative to the control group).
+In effect coding or treatment contrasts, you set aside one group as the "control" and estimate the difference of every other group from that control group. The estimated parameters therefore represent the "effect" of moving from the control group to any other group (which often represents the impact of a "treatment" relative to the control group).
 
 $$
 Y_i = \alpha_{\text{control}} + \alpha_{j(i)} + \epsilon_i \text{, where } \epsilon_i \sim N(0, \sigma^2)
@@ -634,18 +635,18 @@ model.matrix(~ iris.sub$Species)
 
 ```
 ##    (Intercept) iris.sub$Speciesversicolor iris.sub$Speciesvirginica
-## 1            1                          0                         0
+## 1            1                          0                         1
 ## 2            1                          1                         0
-## 3            1                          1                         0
+## 3            1                          0                         0
 ## 4            1                          1                         0
 ## 5            1                          1                         0
 ## 6            1                          0                         0
-## 7            1                          0                         0
-## 8            1                          0                         1
-## 9            1                          0                         0
+## 7            1                          0                         1
+## 8            1                          1                         0
+## 9            1                          0                         1
 ## 10           1                          0                         0
-## 11           1                          0                         0
-## 12           1                          0                         1
+## 11           1                          1                         0
+## 12           1                          0                         0
 ## attr(,"assign")
 ## [1] 0 1 1
 ## attr(,"contrasts")
@@ -661,9 +662,9 @@ treatment$coefficients
 
 ```
 ##                            Estimate Std. Error   t value     Pr(>|t|)
-## (Intercept)                    5.00  0.2663192 18.774462 1.584750e-08
-## iris.sub$Speciesversicolor     0.75  0.4210877  1.781102 1.085871e-01
-## iris.sub$Speciesvirginica      1.40  0.5326384  2.628425 2.742941e-02
+## (Intercept)                4.875000  0.1752908 27.810935 4.879493e-10
+## iris.sub$Speciesversicolor 1.185000  0.2351772  5.038753 7.009733e-04
+## iris.sub$Speciesvirginica  1.558333  0.2677611  5.819865 2.531027e-04
 ```
 
 In this case, you can see that the model is estimating the mean of the first group (setosa) and then the difference between the second and first group and the difference between the third and first groups. This allows you to test hypotheses about the differences, which is often more meaningful than testing hypotheses about the group means themselves.
@@ -719,18 +720,18 @@ model.matrix(~ iris.sub$Species)
 
 ```
 ##    (Intercept) iris.sub$Species1 iris.sub$Species2
-## 1            1                -1                -1
+## 1            1                 0                 2
 ## 2            1                 1                -1
-## 3            1                 1                -1
+## 3            1                -1                -1
 ## 4            1                 1                -1
 ## 5            1                 1                -1
 ## 6            1                -1                -1
-## 7            1                -1                -1
-## 8            1                 0                 2
-## 9            1                -1                -1
+## 7            1                 0                 2
+## 8            1                 1                -1
+## 9            1                 0                 2
 ## 10           1                -1                -1
-## 11           1                -1                -1
-## 12           1                 0                 2
+## 11           1                 1                -1
+## 12           1                -1                -1
 ## attr(,"assign")
 ## [1] 0 1 1
 ## attr(,"contrasts")
@@ -746,9 +747,9 @@ helmert$coefficients
 
 ```
 ##                    Estimate Std. Error   t value     Pr(>|t|)
-## (Intercept)       5.7166667  0.2081913 27.458719 5.465940e-10
-## iris.sub$Species1 0.3750000  0.2105438  1.781102 1.085871e-01
-## iris.sub$Species2 0.3416667  0.1690189  2.021470 7.394624e-02
+## (Intercept)       5.7894444 0.10342870 55.975220 9.328512e-13
+## iris.sub$Species1 0.5925000 0.11758862  5.038753 7.009733e-04
+## iris.sub$Species2 0.3219444 0.07802864  4.125978 2.574882e-03
 ```
 
 ##Sum-to-zero contrasts
@@ -805,18 +806,18 @@ model.matrix(~ iris.sub$Species)
 
 ```
 ##    (Intercept) iris.sub$Species1 iris.sub$Species2
-## 1            1                 1                 0
+## 1            1                -1                -1
 ## 2            1                 0                 1
-## 3            1                 0                 1
+## 3            1                 1                 0
 ## 4            1                 0                 1
 ## 5            1                 0                 1
 ## 6            1                 1                 0
-## 7            1                 1                 0
-## 8            1                -1                -1
-## 9            1                 1                 0
+## 7            1                -1                -1
+## 8            1                 0                 1
+## 9            1                -1                -1
 ## 10           1                 1                 0
-## 11           1                 1                 0
-## 12           1                -1                -1
+## 11           1                 0                 1
+## 12           1                 1                 0
 ## attr(,"assign")
 ## [1] 0 1 1
 ## attr(,"contrasts")
@@ -831,13 +832,13 @@ sumtozero$coefficients
 ```
 
 ```
-##                      Estimate Std. Error    t value     Pr(>|t|)
-## (Intercept)        5.71666667  0.2081913 27.4587190 5.465940e-10
-## iris.sub$Species1 -0.71666667  0.2588158 -2.7690225 2.178830e-02
-## iris.sub$Species2  0.03333333  0.2807251  0.1187401 9.080893e-01
+##                     Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept)        5.7894444  0.1034287 55.975220 9.328512e-13
+## iris.sub$Species1 -0.9144444  0.1447058 -6.319333 1.377866e-04
+## iris.sub$Species2  0.2705556  0.1374457  1.968454 8.054216e-02
 ```
 
-There is one final “off-the-shelf” contrast that we will learn, and that is polynomial contrasts.
+There is one final "off-the-shelf" contrast that we will learn, and that is polynomial contrasts.
 
 ##Polynomial contrasts
 
@@ -914,7 +915,11 @@ iris.fig.baselines
 
 ## Orthogonal vs. Non-orthogonal contrasts
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Perpendicular-coloured.svg/1024px-Perpendicular-coloured.svg.png"; style="max-width:250px;float:right;"/> <figcaption>The segment AB is orthogonal to the segement CD. Source: Wikipedia.</figcaption>
+
+<div class="figure" style="text-align: center">
+<img src="perpendicular.png" alt="The segment AB is orthogonal to the segement CD. Source: Wikipedia" width="50%" />
+<p class="caption">(\#fig:unnamed-chunk-11)The segment AB is orthogonal to the segement CD. Source: Wikipedia</p>
+</div>
 
 In a broad sense, orthogonal refers to things that are perpendicular. For some cases, that's easy to think about. But what does it mean with respect to categorical comparisons in linear models? 
 
