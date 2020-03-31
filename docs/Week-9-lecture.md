@@ -26,7 +26,7 @@ Sample variance is the squared deviation of a random variable from its expected 
 
 Let's say $A_1 = 12$ and $\bar{A} = 14$. The squared deviation is then $(12 - 14)^2 = 4$. Now let's say $A_2 = 30$. The squared deviation is then $(30 - 14)^2 = 256$. When using squared deviations, values far away from the mean contribute greatly to the variance (they have a large influence).
 
-By extension, the sample covariance of A and B (i.e. Cov(A,V)) is given by
+By extension, the sample covariance of A and B (i.e. Cov(A,B)) is given by
 
 $$
 Cov(A,B) = \frac{1}{n-1}\sum_{i=1}^{n}(A_{i}-\bar{A})(B_{i}-\bar{B})
@@ -80,18 +80,20 @@ This is why to calculate $r$ we scale the covariance by the geometric mean of th
 $$
 r = \frac{Cov(A,B)}{\sqrt{Var(A) \times Var(B)}}
 $$
-Pearson's product moment correlation is bounded between -1 and 1. Correlation coefficients of 1 or -1 occur when you set deviations in sample $B$ to be exactly matched in sample $A$. These measures are unitless.
+Pearson's product moment correlation is bounded between -1 and 1. Correlation coefficients of 1 or -1 occur when you set deviations in sample $B$ to be exactly matched in sample $A$. These measures are unitless. 
+
+Let's look at a feew examples...
 
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-1.png" width="240" />
 
 ```
-## [1] 0.07226881
+## [1] -0.04949152
 ```
 
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-2.png" width="240" />
 
 ```
-## [1] 0.922234
+## [1] 0.9206109
 ```
 
 ## Hypothesis testing - Pearson's *r*
@@ -99,6 +101,7 @@ Pearson's product moment correlation is bounded between -1 and 1. Correlation co
 Before getting into hypothesis testing, some terminology:
 
 $\rho$=true (population) correlation coefficient of A and B
+
 $r$=empirical (sample) correlation coefficient of A and B
 
 How can we test hypotheses about correlation?
@@ -184,7 +187,7 @@ cor(df$A, df$B)
 ```
 
 ```
-## [1] 0.05963443
+## [1] -0.1368163
 ```
 
 Even though *A* and *B* clearly have a strong relationship, correlation is only effective if the relationship is **linear**.
@@ -218,7 +221,7 @@ paste("The 95% confidence interval for the estimated correlation coefficient, ",
 ```
 
 ```
-## [1] "The 95% confidence interval for the estimated correlation coefficient, 0.885 is (0.834, 0.921)"
+## [1] "The 95% confidence interval for the estimated correlation coefficient, 0.883 is (0.839, 0.917)"
 ```
 </span>
 </details> 
@@ -264,7 +267,7 @@ pnorm(q = z.obs, mean = 0, sd = sqrt(1 / (100 - 3)), lower.tail = FALSE)
 ```
 
 ```
-## [1] 8.855212e-37
+## [1] 1.779189e-49
 ```
 
 ```r
@@ -274,7 +277,7 @@ pnorm(q = test.stat, lower.tail = FALSE)
 ```
 
 ```
-## [1] 8.855212e-37
+## [1] 1.779189e-49
 ```
 
 To simply the notation, let us define
@@ -383,7 +386,7 @@ We will note at the outset that there are two distinct kinds of regression.
 
 “Type I” regression assumes that the purpose of the analysis is to use x to predict y. Therefore, we assume x is without uncertainty and we want to minimize the error with which we predict y given x.
 
-“Type II” regression, or major axis regression (or standardized major axis regression), assumes a symmetry between X and Y and that the goal is in fidning a correlation between them. Type II regression is often used when X (as well as Y) is measured with error, although see Smith (2009) for a full discussion of this interpretation.
+“Type II” regression, or major axis regression (or standardized major axis regression), assumes a symmetry between X and Y and that the goal is in finding a correlation between them. Type II regression is often used when X (as well as Y) is measured with error, although see Smith (2009) for a full discussion of this interpretation.
 
 We will start by talking about “Type I” regression which is much more common, and come back to discussing Type II regression later. I have assigned a reading for this week that goes over all of this is some more detail. Before discussing regression, it is important to note that there is a distinction between **regression** and **correlation**. In regression, you are using one or more variables to predict another variable because you believe there is a cause-and-effect relationship (X causes Y). Correlation does not imply the same cause-and-effect type relationship, it just addresses whether two variables are associated with one another (X and Y covary).
 
@@ -553,10 +556,10 @@ $E[(\epsilon_{i})(\epsilon_{j})]=0 \mbox{, where } i \neq j$
 **If** these conditions are met, then the OLS estimators we just derived are the best linear unbiased estimators (BLUE) and the sampling distributions for the slope and intercept are as follows:
 
 $$
-\hat{\beta_0} \sim \mathrm{N}( \beta_0, \frac{\sigma_\epsilon^2 \sum_{i = 1}^n X_i^2}{n \sum_{i = 1}^n (X_i - \bar{X})^2} \text{, where } \sigma_\epsilon^2 = \mathrm{E}(\epsilon_i^2)
+\hat{\beta_0} \sim \mathrm{N}\left( \beta_0, \frac{\sigma_\epsilon^2 \sum_{i = 1}^n X_i^2}{n \sum_{i = 1}^n (X_i - \bar{X})^2}\right) \text{, where } \sigma_\epsilon^2 = \mathrm{E}(\epsilon_i^2)
 $$
 $$
-\hat{\beta_1} \sim \mathrm{N}( \beta_1, \frac{\sigma_\epsilon^2}{\sum_{i = 1}^n (X_i - \bar{X})^2} \text{, where } \sigma_\epsilon^2 = \mathrm{E}(\epsilon_i^2)
+\hat{\beta_1} \sim \mathrm{N}\left( \beta_1, \frac{\sigma_\epsilon^2}{\sum_{i = 1}^n (X_i - \bar{X})^2}\right) \text{, where } \sigma_\epsilon^2 = \mathrm{E}(\epsilon_i^2)
 $$
 *FYI:* these distributions for $\beta$ can be derived using the second derivatives of the NLL (but you don't need to be able to do this).
 
@@ -594,28 +597,6 @@ $\beta_1 | H_0 = 0$. The slope of the regression equals 0, $X$ has no linear eff
 </span>
 </details> 
 
-<img src="Week-9-lecture_files/figure-html/unnamed-chunk-16-1.png" width="384" />
-
-```
-## 
-## Call:
-## lm(formula = Murder ~ Population, data = state)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -4.9855 -3.0119 -0.3128  2.4986  7.9014 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 6.1713934  0.6869410   8.984 7.49e-12 ***
-## Population  0.0002841  0.0001121   2.535   0.0146 *  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 3.503 on 48 degrees of freedom
-## Multiple R-squared:  0.1181,	Adjusted R-squared:  0.09972 
-## F-statistic: 6.427 on 1 and 48 DF,  p-value: 0.01455
-```
 
 The test statistic and standard error for estimating $\beta_1$:
 
@@ -689,7 +670,7 @@ ggplot(data = webs, aes(x = temp.C, y = length)) + geom_point(col = "gray37") +
   labs(x = "Temperature (in C)", y = "Relative length of spider webs") + theme_classic() + theme(text = element_text(size = text.size))
 ```
 
-<img src="Week-9-lecture_files/figure-html/unnamed-chunk-17-1.png" width="576" />
+<img src="Week-9-lecture_files/figure-html/unnamed-chunk-16-1.png" width="576" />
 
 Remember: Confidence intervals represent our uncertainty about where the line should be (the mean behavior). Prediction intervals represent our certainty about the predicted values you could expect (the mean behavior + the variance).
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-03-24" />
+<meta name="date" content="2020-03-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -233,7 +233,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="16.8" data-path="week-9-lecture.html"><a href="week-9-lecture.html#robust-regression-1"><i class="fa fa-check"></i><b>16.8</b> Robust regression</a></li>
 <li class="chapter" data-level="16.9" data-path="week-9-lecture.html"><a href="week-9-lecture.html#type-i-and-type-ii-regression"><i class="fa fa-check"></i><b>16.9</b> Type I and Type II Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="week-9-lab.html"><a href="week-9-lab.html"><i class="fa fa-check"></i><b>17</b> Week 9 Lab</a></li>
+<li class="chapter" data-level="17" data-path="week-9-lab.html"><a href="week-9-lab.html"><i class="fa fa-check"></i><b>17</b> Week 9 Lab</a><ul>
+<li class="chapter" data-level="17.1" data-path="week-9-lab.html"><a href="week-9-lab.html#correlation-1"><i class="fa fa-check"></i><b>17.1</b> Correlation</a></li>
+<li class="chapter" data-level="17.2" data-path="week-9-lab.html"><a href="week-9-lab.html#linear-modelling"><i class="fa fa-check"></i><b>17.2</b> Linear modelling</a></li>
+<li class="chapter" data-level="17.3" data-path="week-9-lab.html"><a href="week-9-lab.html#weighted-regression"><i class="fa fa-check"></i><b>17.3</b> Weighted regression</a></li>
+<li class="chapter" data-level="17.4" data-path="week-9-lab.html"><a href="week-9-lab.html#robust-regression-2"><i class="fa fa-check"></i><b>17.4</b> Robust regression</a></li>
+<li class="chapter" data-level="17.5" data-path="week-9-lab.html"><a href="week-9-lab.html#bootstrapping-standard-errors-for-robust-regression"><i class="fa fa-check"></i><b>17.5</b> Bootstrapping standard errors for robust regression</a></li>
+<li class="chapter" data-level="17.6" data-path="week-9-lab.html"><a href="week-9-lab.html#type-i-vs.type-ii-regression-the-smatr-package"><i class="fa fa-check"></i><b>17.6</b> Type I vs. Type II regression: The ‘smatr’ package</a></li>
+</ul></li>
 <li class="chapter" data-level="18" data-path="week-10-lecture.html"><a href="week-10-lecture.html"><i class="fa fa-check"></i><b>18</b> Week 10 Lecture</a><ul>
 <li class="chapter" data-level="18.1" data-path="week-10-lecture.html"><a href="week-10-lecture.html#an-example"><i class="fa fa-check"></i><b>18.1</b> An example</a></li>
 <li class="chapter" data-level="18.2" data-path="week-10-lecture.html"><a href="week-10-lecture.html#generalized-linear-models"><i class="fa fa-check"></i><b>18.2</b> Generalized linear models</a></li>
@@ -395,7 +402,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 
 ##     logit</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(smatr)</code></pre></div>
-<p><em>Part 1: Correlation</em></p>
+<div id="correlation-1" class="section level2">
+<h2><span class="header-section-number">17.1</span> Correlation</h2>
 <p>We will first go over how to test for correlation between two variables. We will use a dataset of July mean temperatures at an Alaskan weather station (Prudhoe Bay) over a period of 12 years.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Temperature&lt;-<span class="kw">c</span>(<span class="fl">5.1</span>,<span class="fl">5.6</span>,<span class="fl">5.7</span>,<span class="fl">6.6</span>,<span class="fl">6.7</span>)
 Year&lt;-<span class="kw">c</span>(<span class="dv">1979</span>,<span class="dv">1982</span>,<span class="dv">1985</span>,<span class="dv">1988</span>,<span class="dv">1991</span>)</code></pre></div>
@@ -481,7 +489,9 @@ UL.r</code></pre></div>
 ## tau 
 ##   1</code></pre>
 <p>Does it make sense why Kendall’s tau=1.0?</p>
-<p><em>Part 2: Linear modelling</em></p>
+</div>
+<div id="linear-modelling" class="section level2">
+<h2><span class="header-section-number">17.2</span> Linear modelling</h2>
 <p>Linear modeling in R occurs primarily through two functions ‘lm’ and ‘glm’. The first is reserved for linear regression in the form we have been discussing this week. The second function is for generalized linear models; we will discuss these in the next few weeks.</p>
 <p>The syntax of ‘lm’ is straightforward. We will run through some examples using a dataset on Old Faithful eruptions. The dataset is built into the MASS library, so we just have to load it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(faithful) <span class="co">#A rare exception to the rule of avoiding &#39;attach&#39;</span>
@@ -624,7 +634,9 @@ R^{2} = \frac{SSR}{SST} = 1-\frac{SSE}{SST} = 1-\frac{\Sigma{(Y_{i}-\hat{Y_{i}})
 R^{2} = 1-\frac{\Sigma{(Y_{i}-\hat{Y_{i}})^{2}}}{\Sigma{Y_{i}^{2}}}
 \]</span></p>
 <p>Why does R do that? In the first case, you have a slope and an intercept, and R is comparing the model you have against an alternate model which includes only an intercept. When you have an intercept-only model, that intercept is going to be the mean <span class="math inline">\(\bar{Y}\)</span>. (Does it make sense why that is?) However, when you have supressed the intercept, the original alternate model (intercept only) no longer makes sense. So R chooses a new alternate model which is one of just random noise with <span class="math inline">\(\bar{Y}=0\)</span>. If we look at the expression above, the effect of this is to increase the residuals going into SSE and the total sum of squares SST. However, the increase in SST is generally larger than the increase in SSE, which means that the R2 actually increases. The bottom line is that funny things happy when you suppress the intercept and while the outut (effect sizes and standard errors) is still perfectly valid, the metrics of model fit become different and the with-intercept and without-intercept models can no longer be compared sensibly.</p>
-<p><em>Part 3: Weighted regression</em></p>
+</div>
+<div id="weighted-regression" class="section level2">
+<h2><span class="header-section-number">17.3</span> Weighted regression</h2>
 <p>In lecture, we introduced the idea that ordinary least squares regression involves minimizing the sum-of-squares error</p>
 <p><span class="math display">\[
 SSE = \sum^{n}_{i=1}(Y_{i}-\hat{Y}_{i})^{2}
@@ -645,7 +657,9 @@ eruption.lm.wt&lt;-<span class="kw">lm</span>(eruptions<span class="op">~</span>
 eruption.lm.wt&lt;-<span class="kw">lm</span>(eruptions<span class="op">~</span>waiting,<span class="dt">weights=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dt">times=</span><span class="dv">272</span>)<span class="op">+</span><span class="dv">9</span><span class="op">*</span><span class="kw">as.numeric</span>(short))
 <span class="kw">abline</span>(<span class="dt">a=</span>eruption.lm.wt<span class="op">$</span>coef[<span class="dv">1</span>],<span class="dt">b=</span>eruption.lm.wt<span class="op">$</span>coef[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="Week-9-lab_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<p><em>Part 4: Robust regression</em></p>
+</div>
+<div id="robust-regression-2" class="section level2">
+<h2><span class="header-section-number">17.4</span> Robust regression</h2>
 <p>Weighted linear regression would be one method that could be used for downweighting the influence of certain data points. Robust regression is a another method for making sure that your linear model fit is not unduly influenced by outliers (points with large residuals).</p>
 <p>We will use the Duncan occupational dataset we used once before</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car) <span class="co"># for Duncan data and (later) data.ellipse)</span>
@@ -750,7 +764,9 @@ Duncan.model2&lt;-<span class="kw">lm</span>(income[<span class="op">-</span>out
 ## 
 ## Residual standard error: 13.06 on 43 degrees of freedom</code></pre>
 <p>The residuals are much more similar to what we got from ‘lm’ when we excluded the outlying datapoints. Robust methods are generally preferred over removing outliers.</p>
-<p><em>Part 5: Bootstrapping standard errros for robust regression</em></p>
+</div>
+<div id="bootstrapping-standard-errors-for-robust-regression" class="section level2">
+<h2><span class="header-section-number">17.5</span> Bootstrapping standard errors for robust regression</h2>
 <p>The standard errors reported by ‘rlm’ rely on asymptomatic approximations that may not be particularly reliable in this case because our sample size is only 45. We will use bootstrapping to construct more appropriate standard errors.</p>
 <p>There are two ways to do bootstrapping for calculating the standard errors of regression model parameters.</p>
 <ol style="list-style-type: decimal">
@@ -787,10 +803,12 @@ duncan.boot</code></pre></div>
 ## 
 ## Bootstrap Statistics :
 ##      original       bias    std. error
-## t1* 6.3002197  0.194913278  4.53202767
-## t2* 0.6615263 -0.006249513  0.07366484</code></pre>
+## t1* 6.3002197  0.061644709  4.66552588
+## t2* 0.6615263 -0.003360513  0.07604889</code></pre>
 <p>Question: How would we know if the bias is significant (i.e., how would we calculate the standard error of the bias)?</p>
-<p><em>Part 6: Type I vs. Type II regression: The ‘smatr’ package</em></p>
+</div>
+<div id="type-i-vs.type-ii-regression-the-smatr-package" class="section level2">
+<h2><span class="header-section-number">17.6</span> Type I vs. Type II regression: The ‘smatr’ package</h2>
 <p>The two main functions in the smatr package are ‘sma’ and ‘ma’ regression for doing standardized major axis regression. Look at the help file for sma to see what some of the options are.</p>
 <pre><code>?sma</code></pre>
 <p>Let’s say we wanted to look at the Duncan dataset again, but instead of asking whether we can use income to predict education, we can ask instead simply whether the two are correlated.</p>
@@ -825,6 +843,7 @@ Duncan.model.sma</code></pre></div>
 <p>sma(y~x,robust=T) will fit a robust SMA for y vs. x using Huber’s M estimation, and will report (approximate) confidence intervals for the slope and elevation.</p>
 <p>ma(y~x*groups-1) will fit MA lines for y vs. x that are forced through the origin (because we explicitly removed the intercept) with a separate MA line fit to each of several samples as specifed by the argument groups. It will also report results from a test of the hypothesis that the true MA slope is equal across all samples.</p>
 
+</div>
 </div>
             </section>
 

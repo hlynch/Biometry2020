@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-03-24" />
+<meta name="date" content="2020-03-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -233,7 +233,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="16.8" data-path="week-9-lecture.html"><a href="week-9-lecture.html#robust-regression-1"><i class="fa fa-check"></i><b>16.8</b> Robust regression</a></li>
 <li class="chapter" data-level="16.9" data-path="week-9-lecture.html"><a href="week-9-lecture.html#type-i-and-type-ii-regression"><i class="fa fa-check"></i><b>16.9</b> Type I and Type II Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="week-9-lab.html"><a href="week-9-lab.html"><i class="fa fa-check"></i><b>17</b> Week 9 Lab</a></li>
+<li class="chapter" data-level="17" data-path="week-9-lab.html"><a href="week-9-lab.html"><i class="fa fa-check"></i><b>17</b> Week 9 Lab</a><ul>
+<li class="chapter" data-level="17.1" data-path="week-9-lab.html"><a href="week-9-lab.html#correlation-1"><i class="fa fa-check"></i><b>17.1</b> Correlation</a></li>
+<li class="chapter" data-level="17.2" data-path="week-9-lab.html"><a href="week-9-lab.html#linear-modelling"><i class="fa fa-check"></i><b>17.2</b> Linear modelling</a></li>
+<li class="chapter" data-level="17.3" data-path="week-9-lab.html"><a href="week-9-lab.html#weighted-regression"><i class="fa fa-check"></i><b>17.3</b> Weighted regression</a></li>
+<li class="chapter" data-level="17.4" data-path="week-9-lab.html"><a href="week-9-lab.html#robust-regression-2"><i class="fa fa-check"></i><b>17.4</b> Robust regression</a></li>
+<li class="chapter" data-level="17.5" data-path="week-9-lab.html"><a href="week-9-lab.html#bootstrapping-standard-errors-for-robust-regression"><i class="fa fa-check"></i><b>17.5</b> Bootstrapping standard errors for robust regression</a></li>
+<li class="chapter" data-level="17.6" data-path="week-9-lab.html"><a href="week-9-lab.html#type-i-vs.type-ii-regression-the-smatr-package"><i class="fa fa-check"></i><b>17.6</b> Type I vs. Type II regression: The ‘smatr’ package</a></li>
+</ul></li>
 <li class="chapter" data-level="18" data-path="week-10-lecture.html"><a href="week-10-lecture.html"><i class="fa fa-check"></i><b>18</b> Week 10 Lecture</a><ul>
 <li class="chapter" data-level="18.1" data-path="week-10-lecture.html"><a href="week-10-lecture.html#an-example"><i class="fa fa-check"></i><b>18.1</b> An example</a></li>
 <li class="chapter" data-level="18.2" data-path="week-10-lecture.html"><a href="week-10-lecture.html#generalized-linear-models"><i class="fa fa-check"></i><b>18.2</b> Generalized linear models</a></li>
@@ -680,8 +687,8 @@ mypalette&lt;-<span class="kw">brewer.pal</span>(<span class="dv">7</span>,<span
 <p><img src="Week-7-lecture_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Be aware of overplotting (points that overlap) especially when data are discrete or rounded. One strategy for overcoming this is jittering the points so the density of points can be displayed without overly distorting the underlying relationships. You can use the ‘jitter’ command in the base package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jitter</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">7</span>))</code></pre></div>
-<pre><code>## [1]  0.0063980614 -0.0083106780 -0.0081810654  0.0025843719  0.0123644904
-## [6] -0.0005915178 -0.0109571998</code></pre>
+<pre><code>## [1] -0.018502977  0.005448234  0.018153798 -0.013066229  0.018204854
+## [6]  0.000731533 -0.016095598</code></pre>
 <p>Before we launch into three-dimensional plotting, we should introduce ‘ggplot2’ which is quickly becoming “industry standard” for making plots in R. There is <em>so</em> much that can be done with ggplot2 that we will only scratch the surface today, but at least this introduction will illustrate some of the things that ggplot2 can do.</p>
 <p>The basic function to make plots using ggplot2 is ‘qplot’. We can recreate the scatterplot of the mtcars data using ggplot2 as follows</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
@@ -722,8 +729,8 @@ y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2
 ## 
 ## Number of data points:  2000 
 ## Number of grid bins:  200 x 200 
-## X range: ( -14.73641 , 14.02172 )
-## Y range: ( -14.73641 , 14.02172 )</code></pre>
+## X range: ( -13.91421 , 12.66186 )
+## Y range: ( -13.91421 , 12.66186 )</code></pre>
 <p>Notice that we had to use “same.scale=T” to make sure that distances along the x and y axes were comparable.</p>
 <p>Now we will use the hisr2d function to create inputs for a three-dimensional perspective plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h2d &lt;-<span class="st"> </span><span class="kw">hist2d</span>(x,y,<span class="dt">show=</span><span class="ot">FALSE</span>, <span class="dt">same.scale=</span><span class="ot">TRUE</span>, <span class="dt">nbins=</span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">30</span>))
