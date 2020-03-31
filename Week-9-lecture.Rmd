@@ -441,7 +441,7 @@ $$
 Then, we solve for $\hat{\beta_1}$ by plugging in what we know back into the equation for SSE:
 
 $$
-\text{SSE} = \sum_{i = 1}^n{(Y_i - \hat{Y}_i)^2} = \sum_{i = 1}^n{(Y_i - \hat{\beta_0} + \hat{\beta_1} X_i)^2} = \sum_{i = 1}^n{(Y_i - \bar{Y} - \hat{\beta_1} \bar{X} + \hat{\beta_1} X_i)^2}
+\text{SSE} = \sum_{i = 1}^n{(Y_i - \hat{Y}_i)^2} = \sum_{i = 1}^n{(Y_i - \hat{\beta_0} - \hat{\beta_1} X_i)^2} = \sum_{i = 1}^n{(Y_i - \bar{Y} + \hat{\beta_1} \bar{X} - \hat{\beta_1} X_i)^2}
 $$
 
 Then we only have one unknown left $\text{SSE} = f(\hat{\beta_1})$, so we can minimize the function by taking the derivative with respect to $\hat{\beta_1}$ and set it equal to 0.
@@ -486,6 +486,8 @@ $$
 \hat{\beta_1} \sim \mathrm{N}\left( \beta_1, \frac{\sigma_\epsilon^2}{\sum_{i = 1}^n (X_i - \bar{X})^2}\right) \text{, where } \sigma_\epsilon^2 = \mathrm{E}(\epsilon_i^2)
 $$
 *FYI:* these distributions for $\beta$ can be derived using the second derivatives of the NLL (but you don't need to be able to do this).
+
+These equations may look complex, but there are some features that should make sense. One: The expected value of $\hat{\beta_{0}}$ is $\beta_{0}$, as you would expect for an unbiased estimator. Moreover, if $\sigma_\epsilon^2$ goes to zero, the uncertainty in the estimates go to zero. In other words, if there is no variation in the data (all data points lie exactly on the regression line), than there is no uncertainty in the value of the parameters. Also, note that as $n \rightarrow \infty$, the uncertainty goes to zero as well (again, as we would expect).
 
 Because we do not know the population (true) error variance $\sigma_\epsilon^2$, we estimate it from the data using:
 
@@ -559,15 +561,17 @@ One way is to ask about variability in our predicted values is: “What are the 
 We calculate the CIs using
 
 $$
-\hat{Y} \pm t_{(1 - \frac{\alpha}{2}) [n - p]} \sqrt{s_\epsilon^2 {\left(\frac{1}{n} + \frac{(X_h - \bar{X})^2}{\sum_{i = 1}^n (X_i - \bar{X})^2}\right)}}
+\hat{Y^*} \pm t_{(1 - \frac{\alpha}{2}) [n - p]} \sqrt{s_\epsilon^2 {\left(\frac{1}{n} + \frac{(X^* - \bar{X})^2}{\sum_{i = 1}^n (X_i - \bar{X})^2}\right)}}
 $$
+
+Note the notation here. The above equation represents the confidence intervals on $Y$ associated with the value $X^*$. The "hat" on Y reflects the fact that Y is an estimate based on the data, and the "star" is just meant to remind you that this interval is associated with the specific X value $X^*$.
 
 However, there is a second way to think about uncertainty in the response value. In stead of wanting to know our uncertainty in the MEAN predicted value, we may want an estimate for the variation expected for a future value of $Y$ for a given $X^{*}$. Our estimates of uncertainty for the predicted values take into account both the mean of $\hat{Y_h}$ (uncertainty in the regression line itself) as well as the variance in $\hat{Y_h}$. These are called **prediction intervals** (PIs).
 
 We calculate PIs using
 
 $$
-\hat{Y_h} \pm t_{(1 - \frac{\alpha}{2}) [n - p]} \sqrt{s_\epsilon^2 {\left( 1 + \frac{1}{n} + \frac{(X_h - \bar{X})^2}{\sum_{i = 1}^n (X_i - \bar{X})^2}\right)}}
+\hat{Y^*} \pm t_{(1 - \frac{\alpha}{2}) [n - p]} \sqrt{s_\epsilon^2 {\left( 1 + \frac{1}{n} + \frac{(X^* - \bar{X})^2}{\sum_{i = 1}^n (X_i - \bar{X})^2}\right)}}
 $$
 
 **Question: What is the difference between these two formulas? Does it make sense why they are different?**

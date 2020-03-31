@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-03-30" />
+<meta name="date" content="2020-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -505,14 +505,14 @@ sigma=params[<span class="dv">2</span>]
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opt1&lt;-<span class="kw">optim</span>(<span class="dt">par=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">fn=</span>neg.ll.v2,<span class="dt">x=</span>x)
 opt1</code></pre></div>
 <pre><code>## $par
-## [1] 0.9759896 2.0040763
+## [1] 0.9960337 2.0115343
 ## 
 ## $value
-## [1] 2114.063
+## [1] 2117.812
 ## 
 ## $counts
 ## function gradient 
-##       55       NA 
+##       53       NA 
 ## 
 ## $convergence
 ## [1] 0
@@ -523,8 +523,8 @@ opt1</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
 <span class="kw">fitdistr</span>(x,<span class="st">&quot;normal&quot;</span>)</code></pre></div>
 <pre><code>##       mean          sd    
-##   0.97620522   2.00395913 
-##  (0.06337075) (0.04480989)</code></pre>
+##   0.99634878   2.01148570 
+##  (0.06360876) (0.04497819)</code></pre>
 <p>Notice that this function outputs the SE as well, whereas our function and ‘optim’ only give the MLE. You will learn how to put CI on estimators in Problem Set #3.</p>
 <p>The likelihood is a relative concept that only makes sense relative to other possible datasets. The absolute magnitude depends on the “sample space” of the data and sometimes even the maximum likelihood is a very small value. So all we can do is compare relative likelihoods. We could base our confidence intervals on any likelihood cut-off, but we can use the fact that the NLL (in the asymptotic case of having lots of data) follows a chi-squared distribution</p>
 <p><span class="math display">\[
