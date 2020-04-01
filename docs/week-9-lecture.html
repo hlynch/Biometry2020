@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-03-31" />
+<meta name="date" content="2020-04-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -421,9 +421,9 @@ r = \frac{Cov(A,B)}{\sqrt{Var(A) \times Var(B)}}
 \]</span> Pearson’s product moment correlation is bounded between -1 and 1. Correlation coefficients of 1 or -1 occur when you set deviations in sample <span class="math inline">\(B\)</span> to be exactly matched in sample <span class="math inline">\(A\)</span>. These measures are unitless.</p>
 <p>Let’s look at a feew examples…</p>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-1.png" width="240" /></p>
-<pre><code>## [1] 0.03746525</code></pre>
+<pre><code>## [1] 0.01455385</code></pre>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-2.png" width="240" /></p>
-<pre><code>## [1] 0.9295212</code></pre>
+<pre><code>## [1] 0.9281796</code></pre>
 </div>
 <div id="hypothesis-testing---pearsons-r" class="section level2">
 <h2><span class="header-section-number">16.2</span> Hypothesis testing - Pearson’s <em>r</em></h2>
@@ -468,7 +468,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> A, <span class="dt">y =</span> B)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size))</code></pre></div>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-5-1.png" width="288" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(df<span class="op">$</span>A, df<span class="op">$</span>B)</code></pre></div>
-<pre><code>## [1] -0.3832822</code></pre>
+<pre><code>## [1] -0.1115013</code></pre>
 <p>Even though <em>A</em> and <em>B</em> clearly have a strong relationship, correlation is only effective if the relationship is <strong>linear</strong>.</p>
 <p>Other considerations:</p>
 <p>What if the data are not bivariate normal? If sample size is large, you’re probably okay.</p>
@@ -487,7 +487,7 @@ cor.boot &lt;-<span class="st"> </span><span class="kw">c</span>()
   cor.boot[i] &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="dt">x =</span> dat.boot<span class="op">$</span>A, <span class="dt">y =</span> dat.boot<span class="op">$</span>B)
 }
 <span class="kw">paste</span>(<span class="st">&quot;The 95% confidence interval for the estimated correlation coefficient, &quot;</span>, <span class="kw">round</span>(cor.obs, <span class="dt">digits =</span> <span class="dv">3</span>), <span class="st">&quot; is (&quot;</span>, <span class="kw">round</span>(<span class="kw">quantile</span>(cor.boot, <span class="fl">0.025</span>), <span class="dt">digits =</span> <span class="dv">3</span>), <span class="st">&quot;, &quot;</span>, <span class="kw">round</span>(<span class="kw">quantile</span>(cor.boot, <span class="fl">0.975</span>), <span class="dt">digits =</span> <span class="dv">3</span>), <span class="st">&quot;)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;The 95% confidence interval for the estimated correlation coefficient, 0.896 is (0.855, 0.929)&quot;</code></pre>
+<pre><code>## [1] &quot;The 95% confidence interval for the estimated correlation coefficient, 0.906 is (0.87, 0.937)&quot;</code></pre>
 <p></span> </details></p>
 <p><strong>Question: How would we conduct a permutation test for the correlation coefficient (with <span class="math inline">\(H_0: \rho = 0\)</span>)?</strong></p>
 <p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> Shuffle <em>A</em> independently of <em>B</em> and calculate the correlation of the shuffled data to create a null distribution of correlations. Compare the observed correlation to this distribution. </span> </details></p>
@@ -512,11 +512,11 @@ r.obs &lt;-<span class="st"> </span><span class="kw">cor</span>(A, B)
 <span class="co"># using z as test statistic</span>
 z.obs &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>r.obs) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>r.obs)) <span class="co"># note that z under the null distribution is 0</span>
 <span class="kw">pnorm</span>(<span class="dt">q =</span> z.obs, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="kw">sqrt</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">100</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span>)), <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 9.499015e-42</code></pre>
+<pre><code>## [1] 2.230702e-46</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># using transformed test statistic, T*</span>
 test.stat &lt;-<span class="st"> </span>z.obs <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">100</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span>))
 <span class="kw">pnorm</span>(<span class="dt">q =</span> test.stat, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 9.499015e-42</code></pre>
+<pre><code>## [1] 2.230702e-46</code></pre>
 <p>To simply the notation, let us define</p>
 <p><span class="math display">\[
 \zeta_{0} = \frac{1}{2}ln\left(\frac{1+\rho_{0}}{1-\rho_{0}}\right)
@@ -627,12 +627,11 @@ Y_{i} = \beta_{0}+\beta_{1}X_{i} + \epsilon_{i} \mbox{, where } \epsilon_{i} \si
 <img src="Regression.png" />
 
 </div>
-<p>To determine how to specifically fit slope and intercept parameters, we need to talk about partitioning variance (a goal of modeling in general, and a major part of ANOVA). When modeling, variation is either explained or unexplained.</p>
-<p>Let’s start from the beginning with this dataset of the relative length of spider webs. Of course, our data are not all exactly the same value, there is some variation:</p>
+<p>To determine how to specifically fit slope and intercept parameters, we need to talk about partitioning variance (a goal of modeling in general, and a major part of ANOVA). When modeling, variation is either explained or unexplained. Let’s start from the beginning with this dataset of the relative length of spider webs. Of course, our data are not all exactly the same value, there is some variation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(webs)
 <span class="kw">ggplot</span>(<span class="dt">data =</span> webs, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">y =</span> temp.C)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">col =</span> <span class="st">&quot;gray37&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Relative length of spider webs&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.ticks.x =</span> <span class="kw">element_blank</span>(), <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size))</code></pre></div>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-11-1.png" width="288" /></p>
-<p>Next, we fit a model with one parameter that describes the mean behavior of the system, e.g., <span class="math inline">\(Y \sim \mathrm{N}(\mu, \sigma^2)\)</span>, where we estimate <span class="math inline">\(\mu\)</span> using <span class="math inline">\(\overline{Y}\)</span> (there are two parameters, but only <span class="math inline">\(\mu\)</span> describes the mean). Using this parameter, we have explained some of that variation in our data.</p>
+<p>Next, we fit a model with two parameters, one parameter to describe the mean behavior of the system and one parameter to describe the amount of variation around that mean, e.g., <span class="math inline">\(Y \sim \mathrm{N}(\mu, \sigma^2)\)</span>, where we estimate <span class="math inline">\(\mu\)</span> using <span class="math inline">\(\overline{Y}\)</span> (there are two parameters, but only <span class="math inline">\(\mu\)</span> describes the mean). Using this parameter <span class="math inline">\(\mu\)</span>, we have explained some of that variation in our data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y.bar &lt;-<span class="st"> </span><span class="kw">mean</span>(webs[, <span class="dv">2</span>])
 <span class="kw">ggplot</span>(<span class="dt">data =</span> webs, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">col =</span> <span class="st">&quot;gray37&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="kw">mean</span>(length)), <span class="dt">col =</span> <span class="st">&quot;dodgerblue1&quot;</span>) <span class="op">+</span><span class="st"> </span>
@@ -640,7 +639,7 @@ Y_{i} = \beta_{0}+\beta_{1}X_{i} + \epsilon_{i} \mbox{, where } \epsilon_{i} \si
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Relative length of spider webs&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.ticks.x =</span> <span class="kw">element_blank</span>(), <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size))</code></pre></div>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-12-1.png" width="288" /></p>
-<p>Now, if we fit a regression, which explains the mean behavior of the data using two parameters, e.g., <span class="math inline">\(Y \sim \mathrm{N}(\beta_0 + \beta_1 X, \sigma^2)\)</span>, we have explained even more of the variation in our data (again, there are three total parameters, but only two that describe the mean). But still not all of the variation, as the regression line doesn’t match up with every point specifically. This means there is still <strong>residual variation</strong>.</p>
+<p>Now, we might be able to explain more of this variation in the data if we add a covariate to the mean, so as to allow the mean to vary. This will “capture” some of the variability in the data and will leave less unexplained variation to be assigned to <span class="math inline">\(\sigma\)</span>. There are three total parameters in this more complicated model, two that describe the mean and one to describe the <strong>residual variation</strong>. (The parameter <span class="math inline">\(\sigma^2\)</span> is playing the same role in the model as before, but because we hope that at least some of the variation is explained by the covariate, we now refer to whats left as <strong>residual variation</strong>.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">web.fit &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> length <span class="op">~</span><span class="st"> </span>temp.C, <span class="dt">data =</span> webs)
 <span class="kw">ggplot</span>(<span class="dt">data =</span> webs, <span class="kw">aes</span>(<span class="dt">x =</span> temp.C, <span class="dt">y =</span> length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">col =</span> <span class="st">&quot;gray37&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="kw">mean</span>(length)), <span class="dt">col =</span> <span class="st">&quot;dodgerblue1&quot;</span>) <span class="op">+</span><span class="st"> </span>
@@ -648,19 +647,16 @@ Y_{i} = \beta_{0}+\beta_{1}X_{i} + \epsilon_{i} \mbox{, where } \epsilon_{i} \si
 <span class="st">  </span><span class="kw">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="dt">x =</span> <span class="dv">12</span>, <span class="dt">y =</span> y.bar, <span class="dt">label =</span> <span class="st">&quot;bar(Y)&quot;</span>, <span class="dt">parse =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">col =</span><span class="st">&quot;dodgerblue1&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Temperature (in C)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Relative length of spider webs&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size))</code></pre></div>
 <p><img src="Week-9-lecture_files/figure-html/unnamed-chunk-13-1.png" width="480" /></p>
-<p>The variance can be partitioned in specific ways. The most common metric we use to measure the variance is the “sum of squares,” where the deviation from an estimated parameter is squared. This way, all deviations are positive, and very large deviations are penalized. <em>Note that this is not the only way to define your “best” model, we will briefly discuss other methods later.</em> Using our previous example of the model with the mean behavior represented with one parameter (mean):</p>
+<p>The total amount of variation to be explained is called the “SST” for “sums of squares total”.</p>
 <p><span class="math display">\[
-\text{Sum of squared errors}_{\bar{Y}} = \sum_{i = 1}^n (Y_i - \bar{Y})^2
+\text{Sums of squares total} = \sum_{i = 1}^n (Y_i - \bar{Y})^2
 \]</span></p>
-<p>(<span class="math inline">\(n\)</span> is the total number of data points)</p>
-<p>Now thinking specifically about regression, the <strong>sum of squares regression</strong> is the amount of variation expained by the regression line, or the squared deviations from the points estimated in the regression <span class="math inline">\(\hat{Y}_i\)</span>, which is described by <span class="math inline">\(\hat{Y}_i = \hat{\beta_0} + \hat{\beta_1} X_i\)</span>, and the estimated mean $ {Y}$:</p>
-<p><span class="math display">\[
-\text{SSR} = \sum_{i = 1}^n{(\hat{Y}_i - \bar{Y})^2}
-\]</span></p>
-<p>You can think of the sum of squares regression like the additional amount of variation explained when going from a one parameter model describing the mean behavior (<span class="math inline">\(\mu\)</span> only) to the regression model (here, two parameters describing the mean behavior of the model, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>).</p>
+<p>(<span class="math inline">\(n\)</span> is the total number of data points.)</p>
+<p>We can partition this total sums of squares into the component explain by the regression model and that which is left over as unexplained variation (which we often refer to as “error”, but it is “error” in the sense that it is not explained in the model and not “error” in the sense that we have done something wrong). Note that different sources/books will use different acronyms for partitioning variation and you should not be too invested in the notation I am presenting here. The important thing is to remember the equations and the idea behind partitioning variation. The <strong>sum of squares regression</strong> is the amount of variation expained by the regression line, or the squared deviations from the points estimated in the regression <span class="math inline">\(\hat{Y}_i\)</span>, which is described by <span class="math inline">\(\hat{Y}_i = \hat{\beta_0} + \hat{\beta_1} X_i\)</span>, and the estimated mean <span class="math inline">\(\bar{Y}\)</span>:</p>
 <p><span class="math display">\[
 \text{SSR} = \sum_{i = 1}^n{(\hat{Y}_i - \bar{Y})^2}
 \]</span></p>
+<p>You can think of the sum of squares regression as the amount of variation explained when going from a one parameter model describing the mean behavior (<span class="math inline">\(\mu\)</span> only) to the regression model (here, two parameters describing the mean behavior of the model, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.i &lt;-<span class="st"> </span>webs[<span class="dv">36</span>, <span class="dv">3</span>]
 y.i.hat &lt;-<span class="st"> </span>web.fit<span class="op">$</span>coefficients[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>web.fit<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>x.i
 <span class="kw">ggplot</span>(<span class="dt">data =</span> webs, <span class="kw">aes</span>(<span class="dt">x =</span> temp.C, <span class="dt">y =</span> length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">col =</span> <span class="st">&quot;gray37&quot;</span>) <span class="op">+</span><span class="st"> </span>

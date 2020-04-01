@@ -87,13 +87,13 @@ Let's look at a feew examples...
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-1.png" width="240" />
 
 ```
-## [1] 0.03746525
+## [1] 0.01455385
 ```
 
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-4-2.png" width="240" />
 
 ```
-## [1] 0.9295212
+## [1] 0.9281796
 ```
 
 ## Hypothesis testing - Pearson's *r*
@@ -187,7 +187,7 @@ cor(df$A, df$B)
 ```
 
 ```
-## [1] -0.3832822
+## [1] -0.1115013
 ```
 
 Even though *A* and *B* clearly have a strong relationship, correlation is only effective if the relationship is **linear**.
@@ -221,7 +221,7 @@ paste("The 95% confidence interval for the estimated correlation coefficient, ",
 ```
 
 ```
-## [1] "The 95% confidence interval for the estimated correlation coefficient, 0.896 is (0.855, 0.929)"
+## [1] "The 95% confidence interval for the estimated correlation coefficient, 0.906 is (0.87, 0.937)"
 ```
 </span>
 </details> 
@@ -267,7 +267,7 @@ pnorm(q = z.obs, mean = 0, sd = sqrt(1 / (100 - 3)), lower.tail = FALSE)
 ```
 
 ```
-## [1] 9.499015e-42
+## [1] 2.230702e-46
 ```
 
 ```r
@@ -277,7 +277,7 @@ pnorm(q = test.stat, lower.tail = FALSE)
 ```
 
 ```
-## [1] 9.499015e-42
+## [1] 2.230702e-46
 ```
 
 To simply the notation, let us define
@@ -416,7 +416,6 @@ To make any further progress with this question, we need to “partition the var
 ![](Regression.png)
 
 To determine how to specifically fit slope and intercept parameters, we need to talk about partitioning variance (a goal of modeling in general, and a major part of ANOVA). When modeling, variation is either explained or unexplained. 
-
 Let's start from the beginning with this dataset of the relative length of spider webs. Of course, our data are not all exactly the same value, there is some variation:
 
 
@@ -427,7 +426,7 @@ ggplot(data = webs, aes(x = 1, y = temp.C)) + geom_point(col = "gray37") + labs(
 
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-11-1.png" width="288" />
 
-Next, we fit a model with one parameter that describes the mean behavior of the system, e.g., $Y \sim \mathrm{N}(\mu, \sigma^2)$, where we estimate $\mu$ using $\overline{Y}$ (there are two parameters, but only $\mu$ describes the mean). Using this parameter, we have explained some of that variation in our data.
+Next, we fit a model with two parameters, one parameter to describe the mean behavior of the system and one parameter to describe the amount of variation around that mean, e.g., $Y \sim \mathrm{N}(\mu, \sigma^2)$, where we estimate $\mu$ using $\overline{Y}$ (there are two parameters, but only $\mu$ describes the mean). Using this parameter $\mu$, we have explained some of that variation in our data.
 
 
 ```r
@@ -441,7 +440,7 @@ ggplot(data = webs, aes(x = 0, y = length)) + geom_point(col = "gray37") +
 
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-12-1.png" width="288" />
 
-Now, if we fit a regression, which explains the mean behavior of the data using two parameters, e.g., $Y \sim \mathrm{N}(\beta_0 + \beta_1 X, \sigma^2)$, we have explained even more of the variation in our data (again, there are three total parameters, but only two that describe the mean). But still not all of the variation, as the regression line doesn't match up with every point specifically. This means there is still **residual variation**.
+Now, we might be able to explain more of this variation in the data if we add a covariate to the mean, so as to allow the mean to vary. This will "capture" some of the variability in the data and will leave less unexplained variation to be assigned to $\sigma$. There are three total parameters in this more complicated model, two that describe the mean and one to describe the **residual variation**. (The parameter $\sigma^2$ is playing the same role in the model as before, but because we hope that at least some of the variation is explained by the covariate, we now refer to whats left as **residual variation**.)
 
 
 ```r
@@ -455,25 +454,21 @@ ggplot(data = webs, aes(x = temp.C, y = length)) + geom_point(col = "gray37") +
 
 <img src="Week-9-lecture_files/figure-html/unnamed-chunk-13-1.png" width="480" />
 
-The variance can be partitioned in specific ways. The most common metric we use to measure the variance is the "sum of squares," where the deviation from an estimated parameter is squared. This way, all deviations are positive, and very large deviations are penalized. *Note that this is not the only way to define your "best" model, we will briefly discuss other methods later.* Using our previous example of the model with the mean behavior represented with one parameter (mean):
+The total amount of variation to be explained is called the "SST" for "sums of squares total". 
 
 $$
-\text{Sum of squared errors}_{\bar{Y}} = \sum_{i = 1}^n (Y_i - \bar{Y})^2
+\text{Sums of squares total} = \sum_{i = 1}^n (Y_i - \bar{Y})^2
 $$
 
-($n$ is the total number of data points)
+($n$ is the total number of data points.)
 
-Now thinking specifically about regression, the **sum of squares regression** is the amount of variation expained by the regression line, or the squared deviations from the points estimated in the regression $\hat{Y}_i$, which is described by $\hat{Y}_i = \hat{\beta_0} + \hat{\beta_1} X_i$, and the estimated mean $ \bar{Y}$:
-
-$$
-\text{SSR} = \sum_{i = 1}^n{(\hat{Y}_i - \bar{Y})^2}
-$$
-
-You can think of the sum of squares regression like the additional amount of variation explained when going from a one parameter model describing the mean behavior ($\mu$ only) to the regression model (here, two parameters describing the mean behavior of the model, $\beta_0$ and $\beta_1$).
+We can partition this total sums of squares into the component explain by the regression model and that which is left over as unexplained variation (which we often refer to as "error", but it is "error" in the sense that it is not explained in the model and not "error" in the sense that we have done something wrong). Note that different sources/books will use different acronyms for partitioning variation and you should not be too invested in the notation I am presenting here. The important thing is to remember the equations and the idea behind partitioning variation. The **sum of squares regression** is the amount of variation expained by the regression line, or the squared deviations from the points estimated in the regression $\hat{Y}_i$, which is described by $\hat{Y}_i = \hat{\beta_0} + \hat{\beta_1} X_i$, and the estimated mean $\bar{Y}$:
 
 $$
 \text{SSR} = \sum_{i = 1}^n{(\hat{Y}_i - \bar{Y})^2}
 $$
+
+You can think of the sum of squares regression as the amount of variation explained when going from a one parameter model describing the mean behavior ($\mu$ only) to the regression model (here, two parameters describing the mean behavior of the model, $\beta_0$ and $\beta_1$).
 
 
 ```r
