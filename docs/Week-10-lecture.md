@@ -232,8 +232,6 @@ ggplot(data = beetle, aes(x = Wood.density, y = ANAT)) + geom_point(col = "gray5
 
 <img src="Week-10-lecture_files/figure-html/unnamed-chunk-7-1.png" width="480" />
 
-<img src="Week-10-lecture_files/figure-html/unnamed-chunk-8-1.png" width="480" />
-
 **Question: How do we interpret this GLM?**
 
 <details>
@@ -297,7 +295,7 @@ The log odds (logit) of the event occurring: $\text{log odds} = \ln \frac{0.3}{0
 
 The probability of the event (which we already knew) can be obtained using the logit using the inverse logit: $\frac{\exp(\text{log odds})}{1 + \exp(\text{log odds})}$
 
-<img src="Week-10-lecture_files/figure-html/unnamed-chunk-11-1.png" width="384" />
+<img src="Week-10-lecture_files/figure-html/unnamed-chunk-10-1.png" width="384" />
 
 Adapted from [this website](http://www.montana.edu/rotella/documents/502/Prob_odds_log-odds.pdf). 
 
@@ -441,6 +439,7 @@ $$
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 If you fit a normal linear regression to Poisson data, your regression might predict values that are negative. Also, the variance for Poisson is equal to the mean (the Normal has no such restriction).
 </span>
 </details> 
@@ -573,7 +572,7 @@ ggplot(data = bomregions2012, aes(x = Year, y = northRain)) + geom_point() + geo
   theme(text = element_text(size = text.size)) + theme_classic()
 ```
 
-<img src="Week-10-lecture_files/figure-html/unnamed-chunk-15-1.png" width="384" />
+<img src="Week-10-lecture_files/figure-html/unnamed-chunk-14-1.png" width="384" />
 
 ###Splines
 
@@ -591,7 +590,7 @@ ggplot(data = bomregions2012, aes(x = Year, y = northRain)) + geom_point() +
   theme(text = element_text(size = text.size)) + theme_classic()
 ```
 
-<img src="Week-10-lecture_files/figure-html/unnamed-chunk-16-1.png" width="384" />
+<img src="Week-10-lecture_files/figure-html/unnamed-chunk-15-1.png" width="384" />
 
 ###GAMs
 
@@ -609,7 +608,7 @@ ggplot(data = bomregions2012, aes(x = Year, y = northRain)) + geom_point() +
   theme(text = element_text(size = text.size)) + theme_classic()
 ```
 
-<img src="Week-10-lecture_files/figure-html/unnamed-chunk-17-1.png" width="384" />
+<img src="Week-10-lecture_files/figure-html/unnamed-chunk-16-1.png" width="384" />
 
 Personally, I really dislike GAMs and would discourage their use. GAMs rarely if ever provide information that you couldn't see with the naked eye, and their use lends an air of statistical rigor to an analysis that is usually unjustified. I often see GAMs used as a crutch to avoid thinking seriously about the statistical model, and it tends to produce features that are artifacts of the data rather than meaningful information about the underlying process.
 

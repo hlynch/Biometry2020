@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-01" />
+<meta name="date" content="2020-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -521,7 +521,6 @@ beetle.glm.predict &lt;-<span class="st"> </span><span class="kw">data.frame</sp
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Wood density (g cm&quot;</span> <span class="op">^</span><span class="st"> &quot;-3&quot;</span>, <span class="st">&quot;)&quot;</span>)), <span class="dt">y =</span> <span class="st">&quot;Presence of wood-boring beetle&quot;</span>, <span class="dt">parse =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size))</code></pre></div>
 <p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-7-1.png" width="480" /></p>
-<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-8-1.png" width="480" /></p>
 <p><strong>Question: How do we interpret this GLM?</strong></p>
 <p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> With increasing wood density, the probability of finding wood-boring beetles decreases. </span> </details></p>
 <p>And let’s see our predictions of the response again:</p>
@@ -544,7 +543,7 @@ beetle.glm.predict &lt;-<span class="st"> </span><span class="kw">data.frame</sp
 <p>The odds of the event occurring: <span class="math inline">\(\text{odds} = \frac{0.3}{0.7} = 0.43\)</span></p>
 <p>The log odds (logit) of the event occurring: <span class="math inline">\(\text{log odds} = \ln \frac{0.3}{0.7} = -0.85\)</span></p>
 <p>The probability of the event (which we already knew) can be obtained using the logit using the inverse logit: <span class="math inline">\(\frac{\exp(\text{log odds})}{1 + \exp(\text{log odds})}\)</span></p>
-<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-11-1.png" width="384" /></p>
+<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-10-1.png" width="384" /></p>
 <p>Adapted from <a href="http://www.montana.edu/rotella/documents/502/Prob_odds_log-odds.pdf">this website</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(beetle.glm.fit)</code></pre></div>
 <pre><code>## 
@@ -631,7 +630,7 @@ Y_i \sim Binomial(n_i,p_i)
 Y_i \sim \mathrm{Poisson}(\lambda_i)
 \]</span></p>
 <p><strong>Question: What are the issues with modeling Poisson data as Normal?</strong></p>
-<p><details> <summary>Click for Answer</summary> If you fit a normal linear regression to Poisson data, your regression might predict values that are negative. Also, the variance for Poisson is equal to the mean (the Normal has no such restriction). </span> </details></p>
+<p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> If you fit a normal linear regression to Poisson data, your regression might predict values that are negative. Also, the variance for Poisson is equal to the mean (the Normal has no such restriction). </span> </details></p>
 <p>For Poisson data, the link function <span class="math inline">\(g()\)</span> is</p>
 <p><span class="math display">\[
 g (\lambda_i) = \log (\lambda_i)
@@ -715,7 +714,7 @@ Y_i = \beta_0 + w_1(X_i - X_0) + w_2 (X_i - X_0)^2 + ... + w_p (X_i - X_0)^p + \
 <span class="kw">ggplot</span>(<span class="dt">data =</span> bomregions2012, <span class="kw">aes</span>(<span class="dt">x =</span> Year, <span class="dt">y =</span> northRain)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Northern rainfall&quot;</span>, <span class="dt">parse =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>()</code></pre></div>
-<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-15-1.png" width="384" /></p>
+<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-14-1.png" width="384" /></p>
 </div>
 <div id="splines" class="section level3">
 <h3><span class="header-section-number">18.7.2</span> Splines</h3>
@@ -726,7 +725,7 @@ Y_i = \beta_0 + w_1(X_i - X_0) + w_2 (X_i - X_0)^2 + ... + w_p (X_i - X_0)^p + \
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">bs</span>(x, <span class="dv">10</span>), <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Northern rainfall&quot;</span>, <span class="dt">parse =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>()</code></pre></div>
-<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-16-1.png" width="384" /></p>
+<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-15-1.png" width="384" /></p>
 </div>
 <div id="gams" class="section level3">
 <h3><span class="header-section-number">18.7.3</span> GAMs</h3>
@@ -737,7 +736,7 @@ Y_i = \beta_0 + w_1(X_i - X_0) + w_2 (X_i - X_0)^2 + ... + w_p (X_i - X_0)^p + \
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;gam&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span><span class="kw">s</span>(x, <span class="dt">bs =</span> <span class="st">&quot;cs&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Northern rainfall&quot;</span>, <span class="dt">parse =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> text.size)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>()</code></pre></div>
-<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-17-1.png" width="384" /></p>
+<p><img src="Week-10-lecture_files/figure-html/unnamed-chunk-16-1.png" width="384" /></p>
 <p>Personally, I really dislike GAMs and would discourage their use. GAMs rarely if ever provide information that you couldn’t see with the naked eye, and their use lends an air of statistical rigor to an analysis that is usually unjustified. I often see GAMs used as a crutch to avoid thinking seriously about the statistical model, and it tends to produce features that are artifacts of the data rather than meaningful information about the underlying process.</p>
 </div>
 <div id="multiple-regression" class="section level3">

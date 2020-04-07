@@ -215,16 +215,6 @@ ggplot(data = beetle, aes(x = Wood.density, y = ANAT)) + geom_point(col = "gray5
   theme_classic() + theme(text = element_text(size = text.size))
 ```
 
-```{r fig.height=4, fig.width=5, echo=FALSE}
-beetle.glm.fit <- glm(formula = ANAT ~ Wood.density, data = beetle, family = "binomial")
-beetle.glm.vals <- predict(beetle.glm.fit, newdata = new.predictor, type = "response")
-beetle.glm.predict <- data.frame(WoodDensity = new.predictor[[1]], Presence = beetle.glm.vals)
-ggplot(data = beetle, aes(x = Wood.density, y = ANAT)) + geom_point(col = "gray55") + 
-  geom_line(data = beetle.glm.predict, aes(x = WoodDensity, y = Presence)) +
-  labs(x = expression(paste("Wood density (g cm" ^ "-3", ")")), y = "Presence of wood-boring beetle", parse = TRUE) + 
-  theme_classic() + theme(text = element_text(size = text.size))
-```
-
 **Question: How do we interpret this GLM?**
 
 <details>
@@ -363,6 +353,7 @@ $$
 
 <details>
   <summary>Click for Answer</summary>
+<span style="color: blueviolet;">
 If you fit a normal linear regression to Poisson data, your regression might predict values that are negative. Also, the variance for Poisson is equal to the mean (the Normal has no such restriction).
 </span>
 </details> 
