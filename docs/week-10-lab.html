@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-06" />
+<meta name="date" content="2020-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -701,7 +701,7 @@ challenger.larger.model &lt;-<span class="st"> </span><span class="kw">glm</span
 <span class="co"># Calculate the deviance difference of the two models </span>
 dev_diff &lt;-<span class="st"> </span><span class="kw">deviance</span>(challenger.smaller.model) <span class="op">-</span><span class="st"> </span><span class="kw">deviance</span>(challenger.larger.model)
 dev_diff</code></pre></div>
-<pre><code>## [1] 0.0003004153</code></pre>
+<pre><code>## [1] 0.8851266</code></pre>
 <p>Notice that even though the covariate that we added is just noise, it still decreases the deviance.</p>
 <p>Now we need to repeat those steps a number of times to generate a distribution of expected deviance differences</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dev_diff &lt;-<span class="st"> </span><span class="kw">c</span>()

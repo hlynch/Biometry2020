@@ -1,7 +1,7 @@
 --- 
 title: "Biometry Lecture and Lab Notes"
 author: "Heather Lynch"
-date: "2020-04-06"
+date: "2020-04-13"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -35,7 +35,7 @@ Here are the datasets used in this course. You can download the data set from th
 * `fish`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/fish.txt) 
 * `Week-9-Data`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Week-9-Data.txt) 
 * `bomregions2012`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/bomregions2012.csv) 
-* `Challenger_data`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/challenger_data.csv) 
+* `Challenger_data`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Challenger_data.csv) 
 * `Challenger_data_fieldandnozzle`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Challenger_data_fieldandnozzle.csv) 
 * `Brogan_et_al_2013_Fig1Data`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Brogan_et_al_2013_Fig1Data.xlsx) 
 * `fruit_flies`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/fruit_flies.csv) 
