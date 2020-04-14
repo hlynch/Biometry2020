@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-13" />
+<meta name="date" content="2020-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -580,12 +580,7 @@ d.o.f.^{*} = \frac{\left[\frac{s^{2}_{A}}{n_{A}}+\frac{s_{B}^{2}}{n_{B}}\right]^
 </div>
 <div id="follow-up-analyses-to-anova" class="section level2">
 <h2><span class="header-section-number">21.3</span> Follow up analyses to ANOVA</h2>
-<p>The “studentized” range is based on samples <span class="math inline">\(X_{1},X_{2},X_{3},...,X_{r} \sim N()\)</span></p>
-<p><span class="math display">\[
-q_{r,\nu} = \frac{Max(X)-Min(X)}{\mbox{standard deviation}}
-\]</span></p>
-<p>Let’s simulate draws from this new statistical distribution to get some sense for it. In the case of the Educational data, we have three groups, each with 12 data points. Let’s start by randomly drawing 36 datapoints from a normal distribution with mean 0 and with a standard deviation that equals the empirical standard deviation. Under the null hypothesis, the three groups are arbitrary subsets of the full data and so we randomly divide them up into three groups of 12:</p>
-<p>Let’s put this in a loop and histogram it to get a sense for the full distribution (each iteration through the loop is one draw from the studentized range distribution)</p>
+<p>On Tuesday, we introduced the studentized range distribution q. Unfortunately, R does not have a function to draw from this distribution (i.e. there is no ‘rtukey’). However, we can easy simulate draws from this distribution. In the case of the Educational data, we have three groups, each with 12 data points. Let’s start by randomly drawing 36 datapoints from a normal distribution with mean 0 and with a standard deviation that equals the empirical standard deviation. Under the null hypothesis, the three groups are arbitrary subsets of the full data and so we randomly divide them up into three groups of 12. Let’s put this in a loop and histogram it to get a sense for the full distribution (each iteration through the loop is one draw from the studentized range distribution). Note that because this is a balanced design, <span class="math inline">\(n_{A}=n_{B}=n_{C}=12\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(salaries)
 q&lt;-<span class="kw">c</span>()
 <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>)
@@ -598,7 +593,7 @@ q&lt;-<span class="kw">c</span>()
   }
 <span class="kw">hist</span>(q)</code></pre></div>
 <p><img src="Week-11-lab_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>This is a histogram of the studentized range distribution. While R does not provide a function to sample rnadomly from this distribution (i.e. there is no ‘rtukey’), R does provide functions for calculating the cumulative distribution, and so we can check that our simulation works by plotting the empiricle distribution against that which is output by ptukey.</p>
+<p>This is a histogram of the studentized range distribution. While R does not provide a function to sample randomly from this distribution, R does provide functions for calculating the cumulative distribution, and so we can check that our simulation works by plotting the empirical distribution against that which is output by ‘ptukey’.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">ecdf</span>(q))
 <span class="kw">lines</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.01</span>),<span class="kw">ptukey</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.01</span>),<span class="dv">3</span>,<span class="dv">33</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
 <p><img src="Week-11-lab_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
@@ -610,10 +605,11 @@ A&gt;B&gt;C
 \]</span></p>
 <p>then Tukey’s HSD test is</p>
 <p><span class="math display">\[
-\frac{\bar{X}_{A} - \bar{X}_{C}}{\sqrt{MS_{within}\frac{\left(\frac{1}{n_{A}}+\frac{1}{n_{C}}\right)}{2}}} \sim q_{num.groups,d.o.f.}
+\frac{\bar{X}_{A} - \bar{X}_{C}}{\sqrt{MS_{within}\frac{\left(\frac{1}{n_{A}}+\frac{1}{n_{C}}\right)}{2}}} \sim q_{a,DOF_{\text{within}}}
 \]</span></p>
-<p>num.groups = # of treatment groups = 3 (in this case)<br />
-d.o.f. = # of degrees of freedom used in the calculation of <span class="math inline">\(MS_{within}\)</span> = 33 (in this case)</p>
+<p>a = # of treatment groups = 3 (in this case)</p>
+<p><span class="math inline">\(DOF_{\text{within}}\)</span> = # of degrees of freedom used in the calculation of <span class="math inline">\(MS_{within}\)</span> = 33 (in this case)</p>
+<p><span class="math inline">\(n_{A}=n_{C}\)</span> = number of samples within groups A and C = 12</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(Salary<span class="op">~</span>Education,<span class="dt">data=</span>salaries))</code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
@@ -625,19 +621,19 @@ d.o.f. = # of degrees of freedom used in the calculation of <span class="math in
 ## Masters-No degree 7.583333  5.0708578 10.095809 0.000000
 ## PhD-No degree     9.666667  7.1541912 12.179142 0.000000
 ## PhD-Masters       2.083333 -0.4291422  4.595809 0.119761</code></pre>
-<p>Where are the confidence intervals coming from? We use the same basic procedure as in Week #3, we use the quantiles of the distribution to create upper and lower confidence intervals:</p>
+<p>Where are the confidence intervals coming from? We use the same basic procedure as in Week #4, we use the quantiles of the distribution to create upper and lower confidence intervals:</p>
 <p><span class="math display">\[
-q_{r,\nu} \sim \frac{max(results)-min(results)}{\sqrt{MS_{within}*\frac{1}{12}}}
+q_{a,DOF_{\text{within}}} \sim \frac{max(results)-min(results)}{\sqrt{MS_{within}*\frac{1}{12}}}
 \]</span></p>
 <p>then</p>
 <p><span class="math display">\[
-\mbox{LL for max(results)-min(results)} = max(results)-min(results) - q_{(r,\nu)[0.95]}\sqrt{MS_{within}*\frac{1}{12}}
+\mbox{LL for max(results)-min(results)} = max(results)-min(results) - q_{(a,DOF)[0.95]}\sqrt{MS_{\text{within}}*\frac{1}{12}}
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-\mbox{UL for max(results)-min(results)} = max(results)-min(results) + q_{(r,\nu)[0.95]}\sqrt{MS_{within}*\frac{1}{12}}
+\mbox{UL for max(results)-min(results)} = max(results)-min(results) + q_{(a,DOF)[0.95]}\sqrt{MS_{\text{within}}*\frac{1}{12}}
 \]</span></p>
-<p>where <span class="math inline">\(q_{(r,\nu)[0.95]}\)</span> is the 95th quantile of the q-distribution.</p>
+<p>where <span class="math inline">\(q_{(a,DOF)[0.95]}\)</span> is the 95th quantile of the q-distribution.</p>
 <p>First, let’s make sure the estimates for the group differences make sense. We’ll do the PhD-No degree as an example, since these groups make up the largest and smallest responses, respectively.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(Salary[Education<span class="op">==</span><span class="st">&quot;PhD&quot;</span>])<span class="op">-</span><span class="kw">mean</span>(Salary[Education<span class="op">==</span><span class="st">&quot;No degree&quot;</span>])</code></pre></div>
 <pre><code>## [1] 9.666667</code></pre>

@@ -491,7 +491,7 @@ dev_diff
 ```
 
 ```
-## [1] 0.04941869
+## [1] 0.03360112
 ```
 
 Notice that even though the covariate that we added is just noise, it still decreases the deviance.
@@ -517,13 +517,6 @@ for (i in 1:1000){
   
   dev_diff <- c(dev_diff, dev_diff_rand)
 }
-```
-
-```
-## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-```
-
-```r
 # plot the distribution and add a line for a chi-square with df=1 
 hist(dev_diff, xlab="Deviance Difference", main="Expected distribution", freq=FALSE,breaks=30)
 lines(seq(0,20,0.1), dchisq(seq(0,20,0.1),df=1), col="red",lwd=2)

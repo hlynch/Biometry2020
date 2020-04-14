@@ -2,6 +2,7 @@ Week 11 Lecture
 =============
 
 Outline:
+
 1. Basic idea behind ANOVA
 
 2. Single-factor ANOVA
@@ -434,8 +435,8 @@ pf(5.11, df1 = 2, df2 = 9, lower.tail = FALSE)
 | Source of variation | SS        | DOF       | MS        | F         | *P*       |
 | ------------------- |:---------:|:---------:|:---------:|:---------:|:---------:|
 | Among groups | $\sum^a_{i = 1} \sum^n_{j = 1} (\bar{Y}_{i} - \bar{Y})^2 = 22.17$ | $a - 1 = 2$ | $\frac{\text{SS}_{\text{among groups}}}{\text{DOF}_{\text{among groups}}} = 11.08$ | $\frac{\text{MS}_{\text{among groups}}}{\text{MS}_{\text{within groups}}} = 5.11$ | $0.033$ |
-| Within groups | $\sum^a_{i = 1} \sum^n_{j = 1} (Y_{ij} - \bar{Y}_i)^2 = 19.50$ | $a \times n = 9$ | $\frac{\text{SS}_{\text{within groups}}}{\text{DOF}_{\text{within groups}}} = 2.17$ | | |
-| Total | $\sum^a_{i = 1} \sum^n_{j = 1} (Y_{ij} - \bar{Y})^2 = 41.67$ | $a \times n - 1 = 11$ | | | |
+| Within groups | $\sum^a_{i = 1} \sum^n_{j = 1} (Y_{ij} - \bar{Y}_i)^2 = 19.50$ | $(a \times n) - a = 9$ | $\frac{\text{SS}_{\text{within groups}}}{\text{DOF}_{\text{within groups}}} = 2.17$ | | |
+| Total | $\sum^a_{i = 1} \sum^n_{j = 1} (Y_{ij} - \bar{Y})^2 = 41.67$ | $(a \times n) - 1 = 11$ | | | |
 
 How do we report our findings in a manuscripts/thesis/report/etc.?
 
@@ -527,24 +528,22 @@ With the *t*-test, we use a **null distribution for the difference between two m
 
 With Tukey's HSD, we use the **null distribution for the range of an arbitrary number of means**, or the distribution for the largest pairwise differences to be expected under the null model for a given number of comparisons, $q^* | H_0 \sim q_{n_{\text{groups}}, \text{DOF}}$. 
 
-This is a new distribution called the **studentized range distribution**.
+This is a new distribution called the **studentized range distribution**. We will simulate draws from the studentized range distribution on Thursday. For now, its fine to think of this like any other univariate distribution. The q distribution has two parameters, the first representing the number of groups being compared and the second representing the degrees of freedom left over after calculating all the group means.
 
-The studentized range distribution is based on samples $X_1, X_2, ..., X_n$ from a normal distribution, where:
+We will get into more details on Tukey's HSD and the q distribution on Thursday. For now, imagine that you have four groups for your ANOVA and the p-value of the ANOVA is sufficiently low that you reject the null hypothesis. We now want to do an additional (post-hoc) analysis to determine which pairs of groups are actually significantly different. 
 
-$$
-q_{n, v} = \frac{\max(X) - \min(X)}{s}
-$$
-
-The numerator is the range between the maximum and minimum $X$ and the denominator $s$ is the pooled standard deviation. There are $n$ samples and $v$ degrees of freedom.
-
-For Tukey's HSD, $X$ are the means of the groups in our ANOVA, $n$ is the number of groups ($a$), and $v$ is the degrees of freedom (the number of data points minus the number of groups, $n - a$).
-
-If we rank hypothetical group means A through D from largest value to smallest: $B > D > A > C$, then we compare:
+In our hypothestical example of having four groups in our analysis (a=4), we can rank hypothetical group means A through D from largest value to smallest: $B > D > A > C$. We then calculate our test statistic as
 
 $$
-q^* = \frac{\bar{X}_B - \bar{X}_C}{\sqrt{\text{MS}_{\text{within}} \frac{\frac{1}{n_B} + \frac{1}{n_C}}{2}}} \sim q_{n_{\text{groups}}, \text{DOF}}
+q^* = \frac{\bar{X}_B - \bar{X}_C}{\sqrt{\text{MS}_{\text{within}} \frac{\frac{1}{n_B} + \frac{1}{n_C}}{2}}} \sim q_{a, \text{DOF_within}}
 $$
 
-Where the estimate of pooled variance is the mean squares within groups. The factor of two is used to construct the harmonic mean of sample sizes. This test statistic goes as the studentized range distribution. 
+Note that $n_{B}$ and $n_{C}$ are the number of data points in each group, and because we are assuming a balenced design, we can simplify this a bit to
+
+$$
+q^* = \frac{\bar{X}_B - \bar{X}_C}{\sqrt{\frac{\text{MS}_{\text{within}}}{n}}} \sim q_{a, \text{DOF_within=an-a}}
+$$
+
+$MS_{within}$ is the mean squares within groups and is directly analogous to the pooled variance when we were doing two-sample t-tests.
 
 After comparing the largest mean to the smallest, you compare the second largest mean to the smallest, and so on, until you find nonsignificant differences.

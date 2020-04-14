@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-13" />
+<meta name="date" content="2020-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -382,8 +382,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="week-11-lecture" class="section level1">
 <h1><span class="header-section-number">20</span> Week 11 Lecture</h1>
-<p>Outline: 1. Basic idea behind ANOVA</p>
-<ol start="2" style="list-style-type: decimal">
+<p>Outline:</p>
+<ol style="list-style-type: decimal">
+<li><p>Basic idea behind ANOVA</p></li>
 <li><p>Single-factor ANOVA</p></li>
 <li><p>Fixed effects (Model I ANOVA) vs. Random effects (Model II ANOVA)</p></li>
 <li><p>Follow up analyses to ANOVA</p></li>
@@ -846,7 +847,7 @@ dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class
 <tr class="even">
 <td>Within groups</td>
 <td align="center"><span class="math inline">\(\sum^a_{i = 1} \sum^n_{j = 1} (Y_{ij} - \bar{Y}_i)^2 = 19.50\)</span></td>
-<td align="center"><span class="math inline">\(a \times n = 9\)</span></td>
+<td align="center"><span class="math inline">\((a \times n) - a = 9\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\text{SS}_{\text{within groups}}}{\text{DOF}_{\text{within groups}}} = 2.17\)</span></td>
 <td align="center"></td>
 <td align="center"></td>
@@ -854,7 +855,7 @@ dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class
 <tr class="odd">
 <td>Total</td>
 <td align="center"><span class="math inline">\(\sum^a_{i = 1} \sum^n_{j = 1} (Y_{ij} - \bar{Y})^2 = 41.67\)</span></td>
-<td align="center"><span class="math inline">\(a \times n - 1 = 11\)</span></td>
+<td align="center"><span class="math inline">\((a \times n) - 1 = 11\)</span></td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
@@ -949,18 +950,17 @@ Y_{ij} = \mu + A_i + \epsilon_{ij}
 <p>Tukey’s HSD is one of the most common <em>post hoc</em> tests. It is very similar to an unpaired two-sample <em>t</em>-test assuming equal variances.</p>
 <p>With the <em>t</em>-test, we use a <strong>null distribution for the difference between two means</strong>, <span class="math inline">\(T | H_0 \sim t_{n_A + n_B - 2}\)</span>.</p>
 <p>With Tukey’s HSD, we use the <strong>null distribution for the range of an arbitrary number of means</strong>, or the distribution for the largest pairwise differences to be expected under the null model for a given number of comparisons, <span class="math inline">\(q^* | H_0 \sim q_{n_{\text{groups}}, \text{DOF}}\)</span>.</p>
-<p>This is a new distribution called the <strong>studentized range distribution</strong>.</p>
-<p>The studentized range distribution is based on samples <span class="math inline">\(X_1, X_2, ..., X_n\)</span> from a normal distribution, where:</p>
+<p>This is a new distribution called the <strong>studentized range distribution</strong>. We will simulate draws from the studentized range distribution on Thursday. For now, its fine to think of this like any other univariate distribution. The q distribution has two parameters, the first representing the number of groups being compared and the second representing the degrees of freedom left over after calculating all the group means.</p>
+<p>We will get into more details on Tukey’s HSD and the q distribution on Thursday. For now, imagine that you have four groups for your ANOVA and the p-value of the ANOVA is sufficiently low that you reject the null hypothesis. We now want to do an additional (post-hoc) analysis to determine which pairs of groups are actually significantly different.</p>
+<p>In our hypothestical example of having four groups in our analysis (a=4), we can rank hypothetical group means A through D from largest value to smallest: <span class="math inline">\(B &gt; D &gt; A &gt; C\)</span>. We then calculate our test statistic as</p>
 <p><span class="math display">\[
-q_{n, v} = \frac{\max(X) - \min(X)}{s}
+q^* = \frac{\bar{X}_B - \bar{X}_C}{\sqrt{\text{MS}_{\text{within}} \frac{\frac{1}{n_B} + \frac{1}{n_C}}{2}}} \sim q_{a, \text{DOF_within}}
 \]</span></p>
-<p>The numerator is the range between the maximum and minimum <span class="math inline">\(X\)</span> and the denominator <span class="math inline">\(s\)</span> is the pooled standard deviation. There are <span class="math inline">\(n\)</span> samples and <span class="math inline">\(v\)</span> degrees of freedom.</p>
-<p>For Tukey’s HSD, <span class="math inline">\(X\)</span> are the means of the groups in our ANOVA, <span class="math inline">\(n\)</span> is the number of groups (<span class="math inline">\(a\)</span>), and <span class="math inline">\(v\)</span> is the degrees of freedom (the number of data points minus the number of groups, <span class="math inline">\(n - a\)</span>).</p>
-<p>If we rank hypothetical group means A through D from largest value to smallest: <span class="math inline">\(B &gt; D &gt; A &gt; C\)</span>, then we compare:</p>
+<p>Note that <span class="math inline">\(n_{B}\)</span> and <span class="math inline">\(n_{C}\)</span> are the number of data points in each group, and because we are assuming a balenced design, we can simplify this a bit to</p>
 <p><span class="math display">\[
-q^* = \frac{\bar{X}_B - \bar{X}_C}{\sqrt{\text{MS}_{\text{within}} \frac{\frac{1}{n_B} + \frac{1}{n_C}}{2}}} \sim q_{n_{\text{groups}}, \text{DOF}}
+q^* = \frac{\bar{X}_B - \bar{X}_C}{\sqrt{\frac{\text{MS}_{\text{within}}}{n}}} \sim q_{a, \text{DOF_within=an-a}}
 \]</span></p>
-<p>Where the estimate of pooled variance is the mean squares within groups. The factor of two is used to construct the harmonic mean of sample sizes. This test statistic goes as the studentized range distribution.</p>
+<p><span class="math inline">\(MS_{within}\)</span> is the mean squares within groups and is directly analogous to the pooled variance when we were doing two-sample t-tests.</p>
 <p>After comparing the largest mean to the smallest, you compare the second largest mean to the smallest, and so on, until you find nonsignificant differences.</p>
 
 </div>
