@@ -3,8 +3,11 @@ Week 11 Lecture
 
 Outline:
 1. Basic idea behind ANOVA
+
 2. Single-factor ANOVA
+
 3. Fixed effects (Model I ANOVA) vs. Random effects (Model II ANOVA)
+
 4. Follow up analyses to ANOVA
 
 The model structure of ANOVA is identical to a linear regression of categorical covariate(s). Specifically, ANOVA involves statistics used to estimate group/treatment effects. 
@@ -119,7 +122,7 @@ Compare the value of the test statistic to the distribution of the test statisti
 <details>
   <summary>Click for Answer</summary>
 <span style="color: blueviolet;">
-The F distribution (see Week 4 lecture)
+The F distribution (see Week 5 lecture)
 </span>
 </details>  
 
@@ -129,7 +132,7 @@ Another way we can phrase the statistical question is to ask whether the differe
 
 1) Variation among groups
 
-Under $H_0$, the data in each group are an independent sample from the same underlying population. We can calculate a mean for each of the $a$ samples. 
+Under $H_0$, the data in each group are an independent sample from the same underlying population. We can calculate a mean for each of the $a$ groups. Here we are assuming that each group has the same number ($n$) of data points. (This is called a "balanced design". More on this in a bit.) 
 
 We can use the Central Limit Theorem to estimate the variance **among groups**. We calculate the variation in means as: $\sigma^2_{\bar{Y}} = \frac{\sigma^2}{n}$, where $\sigma^2_{\bar{Y}}$ is our estimated variance of the group means and $\frac{\sigma^2}{n}$ is our overall uncertainty divided by $n$ (thus, our ability to estimate $\mu$ with $\bar{Y}$ improves with increasing sample size). 
 
@@ -471,7 +474,7 @@ The difference between the data points $Y_{ij}$ and the group mean $\mu_i$, $\ep
 
 ## Fixed effects vs. random effects
 
-We have so far assumed that factors are fixed effects. **Fixed effects** represent all the states in the system you would ever be interested in. Our null hypothesis for a fixed effects factor is $H_0: \text{all treatment effects, } A_i = 0$ (e.g.,, the three experimental, pre-planned nitrogen treatments as in our plant example). ANOVA models with only fixed effects are sometimes called Model I ANOVAs.
+We have so far assumed that factors are fixed effects. **Fixed effects** represent all the states in the system you would ever be interested in. Our null hypothesis for a fixed effects factor is $H_0: \text{all treatment effects, } A_i = 0$ (e.g., the three experimental, pre-planned nitrogen treatments as in our plant example). ANOVA models with only fixed effects are sometimes called Model I ANOVAs.
 
 **Random effects** represent a random sample of some larger population about which you want to make inference. For example, you are studying literacy in a human population, and in your sample you have English, French, Spanish, and Russian speakers. You are not interested in the specific effect of Russian vs. English, you just want to be able to include in your model variability that may come from the fact that different languages are represented. Random effects are also useful to extrapolate your findings to other languages that were not included in your sample. Our null hypothesis for a random effects factor is $H_0: \mathrm{Var}(\text{All treatment effects, } A_i) = 0$. ANOVA models with only random effects are sometimes called Model II ANOVAs.
 
