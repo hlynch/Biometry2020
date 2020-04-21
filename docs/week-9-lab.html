@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-20" />
+<meta name="date" content="2020-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -293,8 +293,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22.6" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-designs"><i class="fa fa-check"></i><b>22.6</b> Unbalanced designs</a></li>
 <li class="chapter" data-level="22.7" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-design-different-sample-sizes"><i class="fa fa-check"></i><b>22.7</b> Unbalanced design – Different sample sizes</a><ul>
 <li class="chapter" data-level="22.7.1" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-i-sequential-sums-of-squares"><i class="fa fa-check"></i><b>22.7.1</b> Type I (sequential) sums of squares</a></li>
-<li class="chapter" data-level="22.7.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-iii-marginal-sums-of-squares"><i class="fa fa-check"></i><b>22.7.2</b> Type III (marginal) sums of squares</a></li>
-<li class="chapter" data-level="22.7.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#comparing-type-i-ii-and-iii-ss"><i class="fa fa-check"></i><b>22.7.3</b> Comparing type I, II, and III SS</a></li>
+<li class="chapter" data-level="22.7.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-ii-hierarchical-sums-of-squares"><i class="fa fa-check"></i><b>22.7.2</b> Type II (hierarchical) sums of squares</a></li>
+<li class="chapter" data-level="22.7.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-iii-marginal-sums-of-squares"><i class="fa fa-check"></i><b>22.7.3</b> Type III (marginal) sums of squares</a></li>
+<li class="chapter" data-level="22.7.4" data-path="week-12-lecture.html"><a href="week-12-lecture.html#comparing-type-i-ii-and-iii-ss"><i class="fa fa-check"></i><b>22.7.4</b> Comparing type I, II, and III SS</a></li>
 </ul></li>
 <li class="chapter" data-level="22.8" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-design-missing-cells"><i class="fa fa-check"></i><b>22.8</b> Unbalanced design – Missing cells</a></li>
 <li class="chapter" data-level="22.9" data-path="week-12-lecture.html"><a href="week-12-lecture.html#two-factor-nested-anova"><i class="fa fa-check"></i><b>22.9</b> Two factor nested ANOVA</a><ul>
@@ -304,6 +305,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22.10.1" data-path="week-12-lecture.html"><a href="week-12-lecture.html#completely-randomized-design"><i class="fa fa-check"></i><b>22.10.1</b> Completely randomized design</a></li>
 <li class="chapter" data-level="22.10.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#randomized-block-design"><i class="fa fa-check"></i><b>22.10.2</b> Randomized block design</a></li>
 <li class="chapter" data-level="22.10.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#latin-square-design"><i class="fa fa-check"></i><b>22.10.3</b> Latin square design</a></li>
+<li class="chapter" data-level="22.10.4" data-path="week-12-lecture.html"><a href="week-12-lecture.html#split-plot-design"><i class="fa fa-check"></i><b>22.10.4</b> Split plot design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="week-12-lab.html"><a href="week-12-lab.html"><i class="fa fa-check"></i><b>23</b> Week 12 Lab</a><ul>
@@ -802,9 +804,9 @@ duncan.boot</code></pre></div>
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original      bias    std. error
-## t1* 6.3002197  0.42411713  4.60931681
-## t2* 0.6615263 -0.01017486  0.07412458</code></pre>
+##      original       bias    std. error
+## t1* 6.3002197  0.276206066  4.47041017
+## t2* 0.6615263 -0.006388389  0.07232302</code></pre>
 <p>Question: How would we know if the bias is significant (i.e., how would we calculate the standard error of the bias)?</p>
 </div>
 <div id="type-i-vs.type-ii-regression-the-smatr-package" class="section level2">

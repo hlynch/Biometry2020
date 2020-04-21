@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-20" />
+<meta name="date" content="2020-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -293,8 +293,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22.6" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-designs"><i class="fa fa-check"></i><b>22.6</b> Unbalanced designs</a></li>
 <li class="chapter" data-level="22.7" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-design-different-sample-sizes"><i class="fa fa-check"></i><b>22.7</b> Unbalanced design – Different sample sizes</a><ul>
 <li class="chapter" data-level="22.7.1" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-i-sequential-sums-of-squares"><i class="fa fa-check"></i><b>22.7.1</b> Type I (sequential) sums of squares</a></li>
-<li class="chapter" data-level="22.7.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-iii-marginal-sums-of-squares"><i class="fa fa-check"></i><b>22.7.2</b> Type III (marginal) sums of squares</a></li>
-<li class="chapter" data-level="22.7.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#comparing-type-i-ii-and-iii-ss"><i class="fa fa-check"></i><b>22.7.3</b> Comparing type I, II, and III SS</a></li>
+<li class="chapter" data-level="22.7.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-ii-hierarchical-sums-of-squares"><i class="fa fa-check"></i><b>22.7.2</b> Type II (hierarchical) sums of squares</a></li>
+<li class="chapter" data-level="22.7.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-iii-marginal-sums-of-squares"><i class="fa fa-check"></i><b>22.7.3</b> Type III (marginal) sums of squares</a></li>
+<li class="chapter" data-level="22.7.4" data-path="week-12-lecture.html"><a href="week-12-lecture.html#comparing-type-i-ii-and-iii-ss"><i class="fa fa-check"></i><b>22.7.4</b> Comparing type I, II, and III SS</a></li>
 </ul></li>
 <li class="chapter" data-level="22.8" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-design-missing-cells"><i class="fa fa-check"></i><b>22.8</b> Unbalanced design – Missing cells</a></li>
 <li class="chapter" data-level="22.9" data-path="week-12-lecture.html"><a href="week-12-lecture.html#two-factor-nested-anova"><i class="fa fa-check"></i><b>22.9</b> Two factor nested ANOVA</a><ul>
@@ -304,6 +305,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22.10.1" data-path="week-12-lecture.html"><a href="week-12-lecture.html#completely-randomized-design"><i class="fa fa-check"></i><b>22.10.1</b> Completely randomized design</a></li>
 <li class="chapter" data-level="22.10.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#randomized-block-design"><i class="fa fa-check"></i><b>22.10.2</b> Randomized block design</a></li>
 <li class="chapter" data-level="22.10.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#latin-square-design"><i class="fa fa-check"></i><b>22.10.3</b> Latin square design</a></li>
+<li class="chapter" data-level="22.10.4" data-path="week-12-lecture.html"><a href="week-12-lecture.html#split-plot-design"><i class="fa fa-check"></i><b>22.10.4</b> Split plot design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="week-12-lab.html"><a href="week-12-lab.html"><i class="fa fa-check"></i><b>23</b> Week 12 Lab</a><ul>
@@ -439,13 +441,13 @@ Poisson: dpois, ppois, qpois, rpois</p>
 <p>First, lets draw a couple of random values from the standard normal. We can take 100 random draws from the Standard Normal N(0,1) using the R function ‘rnorm’.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data&lt;-<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dt">mean=</span><span class="dv">0</span>,<span class="dt">sd=</span><span class="dv">1</span>)
 <span class="kw">head</span>(data)</code></pre></div>
-<pre><code>## [1] 1.1968993 0.2568043 0.9722996 0.8540522 0.3670208 0.7011279</code></pre>
+<pre><code>## [1] -0.5169592 -1.0322050  0.1109938 -0.7403484  0.1744978  0.8950619</code></pre>
 <p>Note that you could have left off the “mean” and “sd” since R knows the order of inputs, that is you could simply write</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>)) </code></pre></div>
-<pre><code>## [1] -0.8325132 -1.6915997  0.3193697 -1.6316457 -1.7022335 -2.7438698</code></pre>
+<pre><code>## [1]  1.46820432  1.88210046  0.07169529 -0.52813276  0.31190452  0.20032316</code></pre>
 <p>or even</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>)) </code></pre></div>
-<pre><code>## [1] -0.5397722 -0.8954624 -1.7964619 -0.5607048 -0.4585879  1.4972788</code></pre>
+<pre><code>## [1]  2.9024696 -2.0938638 -0.7067349 -0.6150456 -0.4126112 -0.2028287</code></pre>
 <p>since mean=0, sd=1 is the default. Until you are 100% comfortable with R, its better to leave all the options spelled out.</p>
 <p>Make a histogram of data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(data)</code></pre></div>
@@ -465,11 +467,11 @@ Poisson: dpois, ppois, qpois, rpois</p>
 ## [16]  4.0
 ## 
 ## $counts
-##  [1]   1   4  15  52 100 144 184 176 161  88  48  17   6   1   3
+##  [1]   1   6  16  36  83 151 202 177 154  98  49  19   5   2   1
 ## 
 ## $density
-##  [1] 0.002 0.008 0.030 0.104 0.200 0.288 0.368 0.352 0.322 0.176 0.096 0.034
-## [13] 0.012 0.002 0.006
+##  [1] 0.002 0.012 0.032 0.072 0.166 0.302 0.404 0.354 0.308 0.196 0.098 0.038
+## [13] 0.010 0.004 0.002
 ## 
 ## $mids
 ##  [1] -3.25 -2.75 -2.25 -1.75 -1.25 -0.75 -0.25  0.25  0.75  1.25  1.75  2.25
@@ -510,12 +512,12 @@ quantiles&lt;-<span class="kw">qnorm</span>(probability,<span class="dt">mean=</
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">count&lt;-<span class="kw">rpois</span>(<span class="dv">500</span>,<span class="dt">lambda=</span><span class="dv">3</span>)
 <span class="kw">table</span>(count)</code></pre></div>
 <pre><code>## count
-##   0   1   2   3   4   5   6   7   8   9  11 
-##  26  85 110 110  71  47  30  13   5   2   1</code></pre>
+##   0   1   2   3   4   5   6   7   8   9 
+##  20  82 117 108  83  45  30   7   7   1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(count)</code></pre></div>
-<pre><code>## [1] 2.988</code></pre>
+<pre><code>## [1] 2.982</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(count)</code></pre></div>
-<pre><code>## [1] 3.370597</code></pre>
+<pre><code>## [1] 2.967611</code></pre>
 </div>
 <div id="standard-deviation-vs.standard-error" class="section level2">
 <h2><span class="header-section-number">6.3</span> Standard deviation vs. Standard error</h2>
@@ -533,11 +535,11 @@ sample3&lt;-<span class="kw">rpois</span>(<span class="dv">100000</span>,<span c
 <span class="kw">hist</span>(sample3)</code></pre></div>
 <p><img src="Week-3-lab_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(sample1)</code></pre></div>
-<pre><code>## [1] 1.806041</code></pre>
+<pre><code>## [1] 1.684534</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(sample2)</code></pre></div>
-<pre><code>## [1] 1.737326</code></pre>
+<pre><code>## [1] 1.764218</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(sample3)</code></pre></div>
-<pre><code>## [1] 1.726346</code></pre>
+<pre><code>## [1] 1.733869</code></pre>
 <p>Notice that the standard deviation has not appreciably changed as we have increased the sample size.</p>
 <p>Now lets run some code to calculate the standard error of the mean:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample.size&lt;-<span class="dv">1000</span>
@@ -551,9 +553,9 @@ means&lt;-<span class="kw">c</span>()
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.e.<span class="dv">1</span>&lt;-<span class="kw">sqrt</span>(<span class="kw">var</span>(<span class="kw">rpois</span>(sample.size,<span class="dt">lambda=</span><span class="dv">3</span>))<span class="op">/</span>sample.size)
 s.e.<span class="dv">2</span>&lt;-<span class="kw">sd</span>(means)
 s.e.<span class="dv">1</span></code></pre></div>
-<pre><code>## [1] 0.05302349</code></pre>
+<pre><code>## [1] 0.05607552</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.e.<span class="dv">2</span></code></pre></div>
-<pre><code>## [1] 0.05528797</code></pre>
+<pre><code>## [1] 0.05331038</code></pre>
 <p>Note that the number of experiments I looped through (2000 in this case) is not relevant. It just has to be big enough that you get a sense of what the distribution of means looks like. Now go back and modify the code so that sample.size=10000 - how does that change the result?</p>
 <p>On Tuesday we discussed the probability mass function for the binomial. While an individual flip of the coin can be thought of as a success/failure, the binomial is answering the question “How many succesess do I expect if I try n times.”</p>
 <p>We can plot this for varying numbers of trials assuming p=0.5</p>
@@ -607,9 +609,9 @@ p=<span class="fl">0.1</span>
 sample.pois&lt;-<span class="kw">rpois</span>(<span class="dv">1000</span>,<span class="dt">lambda=</span><span class="dv">20</span>)
 fit&lt;-<span class="kw">fitdistr</span>(sample.pois,<span class="st">&quot;gamma&quot;</span>,<span class="dt">start=</span><span class="kw">list</span>(<span class="dt">shape=</span><span class="dv">20</span>,<span class="dt">scale=</span><span class="dv">1</span>))
 fit</code></pre></div>
-<pre><code>##      shape        scale   
-##   17.6246682    1.1380642 
-##  ( 0.7808033) ( 0.0511416)</code></pre>
+<pre><code>##       shape         scale   
+##   20.56274079    0.98372119 
+##  ( 0.91213835) ( 0.04417239)</code></pre>
 <p>(Sometimes you get a warnings message about NAs when using fitdistr. The best explanation I can find says that this means R “encountered some difficulties during fitting”. I can find no difference in the fits when you get the warning and when you don’t, and the same sample.pois will sometimes give a warning and sometimes not, so it appears independent of the data itself. Do not ignore warnings() in R but don’t be paralized by them, especially in a context where R is searching parameter space during an optimization. Be sure to search around for an explanation and make sure you are confident that R is still giving reasonable answers.)</p>
 <p>Notice that we are fitting a gamma distribution to this data, and we specify what distribution we want to fit using the name of the distribution in quotes. <em>Remember that rgamma can take as inputs shape,scale or shape,rate=1/scale. I am using scale as the input because it is consistent with the way I introduced the gamma distribution in class. Be aware that some people will use rate and some will use scale and you always have to check.</em></p>
 <p>When we print the object fit, we get the estimates and the standard errors, but at first it isn’t obvious how to extract the estimates (and errors) so we can use them in other calculations.</p>
@@ -618,15 +620,15 @@ fit</code></pre></div>
 <pre><code>## [1] &quot;estimate&quot; &quot;sd&quot;       &quot;vcov&quot;     &quot;loglik&quot;   &quot;n&quot;</code></pre>
 <p>We now look at</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>estimate</code></pre></div>
-<pre><code>##     shape     scale 
-## 17.624668  1.138064</code></pre>
+<pre><code>##      shape      scale 
+## 20.5627408  0.9837212</code></pre>
 <p>and notice that we can pull out the two estimates as</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>estimate[<span class="dv">1</span>]</code></pre></div>
 <pre><code>##    shape 
-## 17.62467</code></pre>
+## 20.56274</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>estimate[<span class="dv">2</span>]</code></pre></div>
-<pre><code>##    scale 
-## 1.138064</code></pre>
+<pre><code>##     scale 
+## 0.9837212</code></pre>
 <p>Now we want to plot the data, and the best fit line:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x.vals&lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">5</span>,<span class="dt">to=</span><span class="dv">40</span>,<span class="dt">by=</span><span class="dv">1</span>)
 <span class="kw">hist</span>(sample.pois,<span class="dt">breaks=</span>x.vals)

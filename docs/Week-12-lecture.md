@@ -4,6 +4,7 @@ Week 12 Lecture
 
 
 Outline:
+
 1. ANOVA for two-way factorial design
 
 2. (a) Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS
@@ -359,11 +360,11 @@ This means that there is no added variance due to the combinations of A and B.
 
 If both effects are random, most of the ANOVA table is exactly the same, however, the **F-ratio is calculated differently**.
 
-| Source of variation | F ratio for fixed effects only  | F ratio for random effects only |
-| ------------------- |:-------------------------------:|:-------------------------------:|
-| Factor A | $\frac{\text{MS}_{A}}{\text{MS}_{\text{within}}}$ | $\frac{\text{MS}_{A}}{\text{MS}_{AB}}$ |
-| Factor B | $\frac{\text{MS}_{B}}{\text{MS}_{\text{within}}}$ | $\frac{\text{MS}_{B}}{\text{MS}_{AB}}$ |
-| Interaction | $\frac{\text{MS}_{AB}}{\text{MS}_{\text{within}}}$ |  $\frac{\text{MS}_{AB}}{\text{MS}_{\text{within}}}$ |
+| Source of variation | F ratio for fixed effects only  | F ratio for random effects only | F ratio for A random / B fixed |
+| ------------------- |:-------------------------------:|:-------------------------------:|:-------------------------------:|
+| Factor A | $\frac{\text{MS}_{A}}{\text{MS}_{\text{within}}}$ | $\frac{\text{MS}_{A}}{\text{MS}_{AB}}$ | $\frac{\text{MS}_{A}}{\text{MS}_{\text{within}}}$ |
+| Factor B | $\frac{\text{MS}_{B}}{\text{MS}_{\text{within}}}$ | $\frac{\text{MS}_{B}}{\text{MS}_{AB}}$ | $\frac{\text{MS}_{B}}{\text{MS}_{AB}}$ |
+| Interaction | $\frac{\text{MS}_{AB}}{\text{MS}_{\text{within}}}$ |  $\frac{\text{MS}_{AB}}{\text{MS}_{\text{within}}}$ | $\frac{\text{MS}_{AB}}{\text{MS}_{\text{within}}}$ |
 
 The F ratio is the MS (MS is a estimator of a variance component) of the factor of interest divided by the MS for the term that has everything but the factor of interest. When you have factor A and are considering interactions with a random effects variable B, that adds a new component to the expected variance of A (remember the new variance term, $\sigma_{AB}^2$ with random effects). Therefore, the appropriate comparison for the F ratio test is the MS for the interaction term, which includes both the within group error and this additional variance component associated with the random factor.
 
@@ -547,29 +548,36 @@ The order in which you add factors in a model has a huge influence. This is the 
 The sums of squares for factors A and B in Type I models are estimated using the differences in the sums of squares error for a model with just the overall mean, to a model with just factor A, to a model with factor A and factor B (but no interaction). To estimate the sums of squares for factor A, we compare the difference in the sums of squares error between the model with just the overall mean to the model with just factor A:
 
 $$
-Y_{ijk} = \mu + \epsilon_{ijk}
+Y_{ijk} = \mu + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + \epsilon_{ijk}
 $$
 
+Notice that the variance associated with $\epsilon_{ijk}$ on the left hand side gets divided up: some will be 'assigned' to factor $A$ and some will still be left over in $\epsilon_{ijk}$ on the right hand side. 
+
+In other words,
+
 $$
-Y_{ijk} = \mu + A_i + \epsilon_{ijk}
+\epsilon_{ijk} \sim N(0,\sigma^2_{\epsilon1}) \longrightarrow \epsilon_{ijk} \sim N(0,\sigma^2_{\epsilon2})
 $$
+
+where $\sigma^2_{\epsilon_2} < \sigma^2_{\epsilon_1}$ because some of that variation is now explained by factor $A$. We use that difference in residual variation as a measure of how much variation is 'taken up' or 'explained' by the factor $A$. 
 
 $$
 \text{SS}_{A} = \text{SSE}(\mu) - \text{SSE}(A)
 $$
-To estimate the sums of squares for factor B, we compare the difference in the sums of squares error between the model with factor A to the model with factor A and factor B (but no interaction):
+SSE is the sum-of-squares error, or the residual sum-of-squares variation left over after the model. The model with no factors is comparing each data point to the grand mean $\mu$, so here $SSE(\mu)$ is just the total sum-of-squares variation. (In other words, with no covariates, *all* variation is residual.) $SSE(A)$ is the residual sum-of-squares variation with $A$ in the model.
+
+To estimate the sums of squares for factor B, we compare the difference in the sums of squares error between the model with factor A to the model with factor A and factor B (but no interaction). In other words, we add the factor $B$
 
 $$
-Y_{ijk} = \mu + A_i + \epsilon_{ijk}
+Y_{ijk} = \mu + A_i + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
 $$
 
-$$
-Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
-$$
+and calculate the decrease in the residual variation in going from an A-only model to an (A+B) model.
 
 $$
 \text{SS}_{B} = \text{SSE}(A) - \text{SSE}(A + B)
 $$
+
 ### Type II (hierarchical) sums of squares
 
 $\text{SS}(A | B)$ for factor A
@@ -582,11 +590,7 @@ With hierarchical sums of squares, we assume no significant interaction. This do
 The sums of squares for each main effect are calculated by comparing the sums of squares error in a model with the factor of interest to a model without it (including all other terms at the same or lower level). To estimate the sums of squares for factor A, we compare the difference in the sums of squares error between the model with factor A to the model without it (notice the missing interaction):
 
 $$
-Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
-$$
-
-$$
-Y_{ijk} = \mu + B_i + \epsilon_{ijk}
+Y_{ijk} = \mu + B_i + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
 $$
 
 $$
@@ -596,11 +600,7 @@ $$
 To estimate the sums of squares for factor B, we compare the difference in the sums of squares error between the model with factor B to the model without it:
 
 $$
-Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
-$$
-
-$$
-Y_{ijk} = \mu + A_i + \epsilon_{ijk}
+Y_{ijk} = \mu + A_i + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
 $$
 
 $$
@@ -619,11 +619,7 @@ With marginal sums of squares, we are estimating the marginal effect of a factor
 The sums of squares are estimated in Type III models by comparing the difference in the sums of squares between the full model and the model without the main effect being measured. To estimate the sums of squares for factor A, we compare the difference in the sums of squares error between the full model and the model missing factor A:
 
 $$
-Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}
-$$
-
-$$
-Y_{ijk} = \mu + B_i + (AB)_{ij} + \epsilon_{ijk}
+Y_{ijk} = \mu + B_i + (AB)_{ij} + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}
 $$
 
 $$
@@ -633,11 +629,7 @@ $$
 To estimate the sums of squares for factor B, we compare the difference in the sums of squares error between the full model and the model missing factor B:
 
 $$
-Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}
-$$
-
-$$
-Y_{ijk} = \mu + A_i + (AB)_{ij} + \epsilon_{ijk}
+Y_{ijk} = \mu + A_i + (AB)_{ij} + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}
 $$
 
 $$
@@ -657,8 +649,7 @@ When an entire cell (a combination of factors) is missing, it is not possible to
 
 ## Two factor nested ANOVA
 
-In nested designs, the categories of the nested factor within each level of the main factor are unique.
-Usually this happens because 1) you have unique organisms within each treatment, or 2) you have unique plots within each treatment. The nested factors are usually random effects (but not always).
+In nested designs, the categories of the nested factor within each level of the main factor are unique. Usually this happens because 1) you have unique organisms within each treatment, or 2) you have unique plots within each treatment. The nested factors are usually random effects (but not always).
 
 Let's imagine we are measuring the amount of glycogen in rat livers. We have **three treatments** that we gave rats. We included **two rats in each treatment**. We took three liver samples from each rat. What would our model equation look like?
 
@@ -740,6 +731,7 @@ There is no $\sum^n_{k = 1}$ because there is only one replicate of each treatme
 A Latin square design is a special case of a randomized block design for cases where environmental heterogeneity may occur along two dimensions (east-west and north-south for example). In this case you want each treatment to occur exactly once in each row and in each column (like Sudoku).
 
 ![](LatinSquare.png)
+
 ### Split plot design
 
 With a split plot design, we have an experimental design that exists at two scales: a large unit (which has a whole plot treatment assigned), and smaller units within the large unit (which have split plot treatments). This is a hierarchical design in that the large unit treatments are pseudoreplicates, but the split plots have informative factor levels that mean exactly the same thing in other plots (unlike rat individuals in nested designs). For example, the large unit could be "pond," to which you apply different nutrient addition treatments, and the smaller unit could be "predation treatment" where you multiple different cage setups within each pond. The predation treatments mean the same thing in the other ponds.

@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-20" />
+<meta name="date" content="2020-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -293,8 +293,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22.6" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-designs"><i class="fa fa-check"></i><b>22.6</b> Unbalanced designs</a></li>
 <li class="chapter" data-level="22.7" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-design-different-sample-sizes"><i class="fa fa-check"></i><b>22.7</b> Unbalanced design – Different sample sizes</a><ul>
 <li class="chapter" data-level="22.7.1" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-i-sequential-sums-of-squares"><i class="fa fa-check"></i><b>22.7.1</b> Type I (sequential) sums of squares</a></li>
-<li class="chapter" data-level="22.7.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-iii-marginal-sums-of-squares"><i class="fa fa-check"></i><b>22.7.2</b> Type III (marginal) sums of squares</a></li>
-<li class="chapter" data-level="22.7.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#comparing-type-i-ii-and-iii-ss"><i class="fa fa-check"></i><b>22.7.3</b> Comparing type I, II, and III SS</a></li>
+<li class="chapter" data-level="22.7.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-ii-hierarchical-sums-of-squares"><i class="fa fa-check"></i><b>22.7.2</b> Type II (hierarchical) sums of squares</a></li>
+<li class="chapter" data-level="22.7.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-iii-marginal-sums-of-squares"><i class="fa fa-check"></i><b>22.7.3</b> Type III (marginal) sums of squares</a></li>
+<li class="chapter" data-level="22.7.4" data-path="week-12-lecture.html"><a href="week-12-lecture.html#comparing-type-i-ii-and-iii-ss"><i class="fa fa-check"></i><b>22.7.4</b> Comparing type I, II, and III SS</a></li>
 </ul></li>
 <li class="chapter" data-level="22.8" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-design-missing-cells"><i class="fa fa-check"></i><b>22.8</b> Unbalanced design – Missing cells</a></li>
 <li class="chapter" data-level="22.9" data-path="week-12-lecture.html"><a href="week-12-lecture.html#two-factor-nested-anova"><i class="fa fa-check"></i><b>22.9</b> Two factor nested ANOVA</a><ul>
@@ -304,6 +305,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22.10.1" data-path="week-12-lecture.html"><a href="week-12-lecture.html#completely-randomized-design"><i class="fa fa-check"></i><b>22.10.1</b> Completely randomized design</a></li>
 <li class="chapter" data-level="22.10.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#randomized-block-design"><i class="fa fa-check"></i><b>22.10.2</b> Randomized block design</a></li>
 <li class="chapter" data-level="22.10.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#latin-square-design"><i class="fa fa-check"></i><b>22.10.3</b> Latin square design</a></li>
+<li class="chapter" data-level="22.10.4" data-path="week-12-lecture.html"><a href="week-12-lecture.html#split-plot-design"><i class="fa fa-check"></i><b>22.10.4</b> Split plot design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="week-12-lab.html"><a href="week-12-lab.html"><i class="fa fa-check"></i><b>23</b> Week 12 Lab</a><ul>
@@ -382,8 +384,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="week-12-lecture" class="section level1">
 <h1><span class="header-section-number">22</span> Week 12 Lecture</h1>
-<p>Outline: 1. ANOVA for two-way factorial design</p>
-<ol start="2" style="list-style-type: decimal">
+<p>Outline:</p>
+<ol style="list-style-type: decimal">
+<li><p>ANOVA for two-way factorial design</p></li>
 <li><ol style="list-style-type: lower-alpha">
 <li>Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS</li>
 </ol></li>
@@ -915,15 +918,17 @@ H_0: \sigma^2_{AB} = 0
 <p>If both effects are random, most of the ANOVA table is exactly the same, however, the <strong>F-ratio is calculated differently</strong>.</p>
 <table style="width:100%;">
 <colgroup>
-<col width="22%" />
-<col width="38%" />
-<col width="38%" />
+<col width="16%" />
+<col width="27%" />
+<col width="27%" />
+<col width="27%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Source of variation</th>
 <th align="center">F ratio for fixed effects only</th>
 <th align="center">F ratio for random effects only</th>
+<th align="center">F ratio for A random / B fixed</th>
 </tr>
 </thead>
 <tbody>
@@ -931,14 +936,17 @@ H_0: \sigma^2_{AB} = 0
 <td>Factor A</td>
 <td align="center"><span class="math inline">\(\frac{\text{MS}_{A}}{\text{MS}_{\text{within}}}\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\text{MS}_{A}}{\text{MS}_{AB}}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\text{MS}_{A}}{\text{MS}_{\text{within}}}\)</span></td>
 </tr>
 <tr class="even">
 <td>Factor B</td>
 <td align="center"><span class="math inline">\(\frac{\text{MS}_{B}}{\text{MS}_{\text{within}}}\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\text{MS}_{B}}{\text{MS}_{AB}}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\text{MS}_{B}}{\text{MS}_{AB}}\)</span></td>
 </tr>
 <tr class="odd">
 <td>Interaction</td>
+<td align="center"><span class="math inline">\(\frac{\text{MS}_{AB}}{\text{MS}_{\text{within}}}\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\text{MS}_{AB}}{\text{MS}_{\text{within}}}\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\text{MS}_{AB}}{\text{MS}_{\text{within}}}\)</span></td>
 </tr>
@@ -1120,75 +1128,68 @@ B_j \sim \mathrm{N}(0, \sigma^2_B) \\
 <p>The order in which you add factors in a model has a huge influence. This is the default in R’s function <code>anova()</code>, despite often not being what you are interested in!</p>
 <p><img src="Logan_TypeISS.png" /> The sums of squares for factors A and B in Type I models are estimated using the differences in the sums of squares error for a model with just the overall mean, to a model with just factor A, to a model with factor A and factor B (but no interaction). To estimate the sums of squares for factor A, we compare the difference in the sums of squares error between the model with just the overall mean to the model with just factor A:</p>
 <p><span class="math display">\[
-Y_{ijk} = \mu + \epsilon_{ijk}
+Y_{ijk} = \mu + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + \epsilon_{ijk}
 \]</span></p>
+<p>Notice that the variance associated with <span class="math inline">\(\epsilon_{ijk}\)</span> on the left hand side gets divided up: some will be ‘assigned’ to factor <span class="math inline">\(A\)</span> and some will still be left over in <span class="math inline">\(\epsilon_{ijk}\)</span> on the right hand side.</p>
+<p>In other words,</p>
 <p><span class="math display">\[
-Y_{ijk} = \mu + A_i + \epsilon_{ijk}
+\epsilon_{ijk} \sim N(0,\sigma^2_{\epsilon1}) \longrightarrow \epsilon_{ijk} \sim N(0,\sigma^2_{\epsilon2})
 \]</span></p>
+<p>where <span class="math inline">\(\sigma^2_{\epsilon_2} &lt; \sigma^2_{\epsilon_1}\)</span> because some of that variation is now explained by factor <span class="math inline">\(A\)</span>. We use that difference in residual variation as a measure of how much variation is ‘taken up’ or ‘explained’ by the factor <span class="math inline">\(A\)</span>.</p>
 <p><span class="math display">\[
 \text{SS}_{A} = \text{SSE}(\mu) - \text{SSE}(A)
-\]</span> To estimate the sums of squares for factor B, we compare the difference in the sums of squares error between the model with factor A to the model with factor A and factor B (but no interaction):</p>
+\]</span> SSE is the sum-of-squares error, or the residual sum-of-squares variation left over after the model. The model with no factors is comparing each data point to the grand mean <span class="math inline">\(\mu\)</span>, so here <span class="math inline">\(SSE(\mu)\)</span> is just the total sum-of-squares variation. (In other words, with no covariates, <em>all</em> variation is residual.) <span class="math inline">\(SSE(A)\)</span> is the residual sum-of-squares variation with <span class="math inline">\(A\)</span> in the model.</p>
+<p>To estimate the sums of squares for factor B, we compare the difference in the sums of squares error between the model with factor A to the model with factor A and factor B (but no interaction). In other words, we add the factor <span class="math inline">\(B\)</span></p>
 <p><span class="math display">\[
-Y_{ijk} = \mu + A_i + \epsilon_{ijk}
+Y_{ijk} = \mu + A_i + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
 \]</span></p>
-<p><span class="math display">\[
-Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
-\]</span></p>
+<p>and calculate the decrease in the residual variation in going from an A-only model to an (A+B) model.</p>
 <p><span class="math display">\[
 \text{SS}_{B} = \text{SSE}(A) - \text{SSE}(A + B)
-\]</span> ### Type II (hierarchical) sums of squares</p>
+\]</span></p>
+</div>
+<div id="type-ii-hierarchical-sums-of-squares" class="section level3">
+<h3><span class="header-section-number">22.7.2</span> Type II (hierarchical) sums of squares</h3>
 <p><span class="math inline">\(\text{SS}(A | B)\)</span> for factor A</p>
 <p><span class="math inline">\(\text{SS}(B | A)\)</span> for factor B</p>
 <p>With hierarchical sums of squares, we assume no significant interaction. This does not depend on the order that factors are input. This can be done using the <code>Anova()</code> function in the package <code>car</code>.</p>
 <p><img src="Logan_TypeIISS.png" /> The sums of squares for each main effect are calculated by comparing the sums of squares error in a model with the factor of interest to a model without it (including all other terms at the same or lower level). To estimate the sums of squares for factor A, we compare the difference in the sums of squares error between the model with factor A to the model without it (notice the missing interaction):</p>
 <p><span class="math display">\[
-Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
-\]</span></p>
-<p><span class="math display">\[
-Y_{ijk} = \mu + B_i + \epsilon_{ijk}
+Y_{ijk} = \mu + B_i + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
 \]</span></p>
 <p><span class="math display">\[
 \text{SS}_{A} = \text{SSE}(B) - \text{SSE}(A + B)
 \]</span></p>
 <p>To estimate the sums of squares for factor B, we compare the difference in the sums of squares error between the model with factor B to the model without it:</p>
 <p><span class="math display">\[
-Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
-\]</span></p>
-<p><span class="math display">\[
-Y_{ijk} = \mu + A_i + \epsilon_{ijk}
+Y_{ijk} = \mu + A_i + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + \epsilon_{ijk}
 \]</span></p>
 <p><span class="math display">\[
 \text{SS}_{B} = \text{SSE}(A) - \text{SSE}(A + B)
 \]</span></p>
 </div>
 <div id="type-iii-marginal-sums-of-squares" class="section level3">
-<h3><span class="header-section-number">22.7.2</span> Type III (marginal) sums of squares</h3>
+<h3><span class="header-section-number">22.7.3</span> Type III (marginal) sums of squares</h3>
 <p><span class="math inline">\(\text{SS}(A | B, AB)\)</span> for factor A</p>
 <p><span class="math inline">\(\text{SS}(B | A, AB)\)</span> for factor B</p>
 <p>With marginal sums of squares, we are estimating the marginal effect of a factor after the effect of the other factors (and interactions) have been taken into account. Back to our earlier example, we would be “controlling for” education, by testing whether men make more money than women in a population in which all educational levels are equally likely, or “controlling” for education by estimating the effect of gender only after the effect of education had already been taken into account. This can be done using the <code>Anova()</code> function in the package <code>car</code>.</p>
 <p><img src="Logan_TypeIIISS.png" /> The sums of squares are estimated in Type III models by comparing the difference in the sums of squares between the full model and the model without the main effect being measured. To estimate the sums of squares for factor A, we compare the difference in the sums of squares error between the full model and the model missing factor A:</p>
 <p><span class="math display">\[
-Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}
-\]</span></p>
-<p><span class="math display">\[
-Y_{ijk} = \mu + B_i + (AB)_{ij} + \epsilon_{ijk}
+Y_{ijk} = \mu + B_i + (AB)_{ij} + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}
 \]</span></p>
 <p><span class="math display">\[
 \text{SS}_{A} = \text{SSE}(B + A:B) - \text{SSE}(A + B + A:B)
 \]</span></p>
 <p>To estimate the sums of squares for factor B, we compare the difference in the sums of squares error between the full model and the model missing factor B:</p>
 <p><span class="math display">\[
-Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}
-\]</span></p>
-<p><span class="math display">\[
-Y_{ijk} = \mu + A_i + (AB)_{ij} + \epsilon_{ijk}
+Y_{ijk} = \mu + A_i + (AB)_{ij} + \epsilon_{ijk} \longrightarrow Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}
 \]</span></p>
 <p><span class="math display">\[
 \text{SS}_{B} = \text{SSE}(A + A:B) - \text{SSE}(A + B + A:B)
 \]</span></p>
 </div>
 <div id="comparing-type-i-ii-and-iii-ss" class="section level3">
-<h3><span class="header-section-number">22.7.3</span> Comparing type I, II, and III SS</h3>
+<h3><span class="header-section-number">22.7.4</span> Comparing type I, II, and III SS</h3>
 <p>When the design is balanced (equal sample sizes in each category), the factors are “orthogonal,” and Types I,II, and III all give equivalent results. When the interaction AB is not significant, then Type II and III SS estimates are equivalent. Aho 10.14 contains more detail.</p>
 <p>Note that <span class="math inline">\(\text{SS}_{AB}\)</span> and <span class="math inline">\(\text{SS}_{\text{within}}\)</span> are the same for all three ways of calculating SS. <span class="math inline">\(\text{SS}_{\text{within}}\)</span> is the sum of squared deviations between each fitted data point <span class="math inline">\(\hat{Y}_{ijk} = \bar{Y}_{ij}\)</span> and the overall mean for the full model (<span class="math inline">\(Y_{ijk} = \mu + A_i + B_i + (AB)_{ij} + \epsilon_{ijk}\)</span>), and <span class="math inline">\(\text{SS}_{AB}\)</span> is calculated as the difference in sums of squares between the full model and the model without the interaction term. There are only differences in estimates of SS for the main effects terms for the three different SS methods because it depends on the way you calculate <strong>marginal</strong> means.</p>
 </div>
@@ -1332,7 +1333,13 @@ Y_{ijk} = \mu + A_i + B_j +\epsilon_{ijk}, \text{where } \epsilon_{ijk} \sim \ma
 <div id="latin-square-design" class="section level3">
 <h3><span class="header-section-number">22.10.3</span> Latin square design</h3>
 <p>A Latin square design is a special case of a randomized block design for cases where environmental heterogeneity may occur along two dimensions (east-west and north-south for example). In this case you want each treatment to occur exactly once in each row and in each column (like Sudoku).</p>
-<p><img src="LatinSquare.png" /> ### Split plot design</p>
+<div class="figure">
+<img src="LatinSquare.png" />
+
+</div>
+</div>
+<div id="split-plot-design" class="section level3">
+<h3><span class="header-section-number">22.10.4</span> Split plot design</h3>
 <p>With a split plot design, we have an experimental design that exists at two scales: a large unit (which has a whole plot treatment assigned), and smaller units within the large unit (which have split plot treatments). This is a hierarchical design in that the large unit treatments are pseudoreplicates, but the split plots have informative factor levels that mean exactly the same thing in other plots (unlike rat individuals in nested designs). For example, the large unit could be “pond,” to which you apply different nutrient addition treatments, and the smaller unit could be “predation treatment” where you multiple different cage setups within each pond. The predation treatments mean the same thing in the other ponds.</p>
 <p>Often one factor is applied at the block level because of logistical constraints. One example might be an experiment to test insecticide application vs. grass seed type. If insecticides are being applied by airplane, then it is easier to apply one insecticide treatment to a whole field instead of just to a portion of field, in which case insecticide might be applied at the field level but grass variety might vary among subplots within the larger field (“block”).</p>
 

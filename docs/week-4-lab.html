@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-20" />
+<meta name="date" content="2020-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -293,8 +293,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22.6" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-designs"><i class="fa fa-check"></i><b>22.6</b> Unbalanced designs</a></li>
 <li class="chapter" data-level="22.7" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-design-different-sample-sizes"><i class="fa fa-check"></i><b>22.7</b> Unbalanced design – Different sample sizes</a><ul>
 <li class="chapter" data-level="22.7.1" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-i-sequential-sums-of-squares"><i class="fa fa-check"></i><b>22.7.1</b> Type I (sequential) sums of squares</a></li>
-<li class="chapter" data-level="22.7.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-iii-marginal-sums-of-squares"><i class="fa fa-check"></i><b>22.7.2</b> Type III (marginal) sums of squares</a></li>
-<li class="chapter" data-level="22.7.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#comparing-type-i-ii-and-iii-ss"><i class="fa fa-check"></i><b>22.7.3</b> Comparing type I, II, and III SS</a></li>
+<li class="chapter" data-level="22.7.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-ii-hierarchical-sums-of-squares"><i class="fa fa-check"></i><b>22.7.2</b> Type II (hierarchical) sums of squares</a></li>
+<li class="chapter" data-level="22.7.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#type-iii-marginal-sums-of-squares"><i class="fa fa-check"></i><b>22.7.3</b> Type III (marginal) sums of squares</a></li>
+<li class="chapter" data-level="22.7.4" data-path="week-12-lecture.html"><a href="week-12-lecture.html#comparing-type-i-ii-and-iii-ss"><i class="fa fa-check"></i><b>22.7.4</b> Comparing type I, II, and III SS</a></li>
 </ul></li>
 <li class="chapter" data-level="22.8" data-path="week-12-lecture.html"><a href="week-12-lecture.html#unbalanced-design-missing-cells"><i class="fa fa-check"></i><b>22.8</b> Unbalanced design – Missing cells</a></li>
 <li class="chapter" data-level="22.9" data-path="week-12-lecture.html"><a href="week-12-lecture.html#two-factor-nested-anova"><i class="fa fa-check"></i><b>22.9</b> Two factor nested ANOVA</a><ul>
@@ -304,6 +305,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22.10.1" data-path="week-12-lecture.html"><a href="week-12-lecture.html#completely-randomized-design"><i class="fa fa-check"></i><b>22.10.1</b> Completely randomized design</a></li>
 <li class="chapter" data-level="22.10.2" data-path="week-12-lecture.html"><a href="week-12-lecture.html#randomized-block-design"><i class="fa fa-check"></i><b>22.10.2</b> Randomized block design</a></li>
 <li class="chapter" data-level="22.10.3" data-path="week-12-lecture.html"><a href="week-12-lecture.html#latin-square-design"><i class="fa fa-check"></i><b>22.10.3</b> Latin square design</a></li>
+<li class="chapter" data-level="22.10.4" data-path="week-12-lecture.html"><a href="week-12-lecture.html#split-plot-design"><i class="fa fa-check"></i><b>22.10.4</b> Split plot design</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="week-12-lab.html"><a href="week-12-lab.html"><i class="fa fa-check"></i><b>23</b> Week 12 Lab</a><ul>
@@ -505,14 +507,14 @@ sigma=params[<span class="dv">2</span>]
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opt1&lt;-<span class="kw">optim</span>(<span class="dt">par=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">fn=</span>neg.ll.v2,<span class="dt">x=</span>x)
 opt1</code></pre></div>
 <pre><code>## $par
-## [1] 0.9708203 2.0030056
+## [1] 0.9766186 2.0939993
 ## 
 ## $value
-## [1] 2113.715
+## [1] 2157.93
 ## 
 ## $counts
 ## function gradient 
-##       53       NA 
+##       55       NA 
 ## 
 ## $convergence
 ## [1] 0
@@ -523,8 +525,8 @@ opt1</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
 <span class="kw">fitdistr</span>(x,<span class="st">&quot;normal&quot;</span>)</code></pre></div>
 <pre><code>##       mean          sd    
-##   0.97080642   2.00326032 
-##  (0.06334865) (0.04479426)</code></pre>
+##   0.97617902   2.09382349 
+##  (0.06621251) (0.04681932)</code></pre>
 <p>Notice that this function outputs the SE as well, whereas our function and ‘optim’ only give the MLE. You will learn how to put CI on estimators in Problem Set #3.</p>
 <p>The likelihood is a relative concept that only makes sense relative to other possible datasets. The absolute magnitude depends on the “sample space” of the data and sometimes even the maximum likelihood is a very small value. So all we can do is compare relative likelihoods. We could base our confidence intervals on any likelihood cut-off, but we can use the fact that the NLL (in the asymptotic case of having lots of data) follows a chi-squared distribution</p>
 <p><span class="math display">\[
