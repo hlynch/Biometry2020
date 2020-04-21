@@ -7,7 +7,9 @@ Outline:
 
 1. ANOVA for two-way factorial design
 
-2. (a) Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS
+2. 
+
+   (a) Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS
 
    (b) Dealing with unbalanced design- missing cells
     
@@ -125,22 +127,37 @@ $$
 
 Let's go through multiple examples of hypothetical two-way factorial ANOVA results to interpret the main effects and interactions in each outcome.
 
+
+*Example #1*
+
 <img src="Week-12-lecture_files/figure-html/unnamed-chunk-5-1.png" width="384" />
 
-A large positive value for factor A is associated with an increase in the response variable, a large positive value for factor B is associated with an increase in the response variable, and there is an interaction of A $\times$ B, showing that B has little effect at low A, but a large effect at high A.
+A large positive value for factor A is associated with an increase in the response variable, a large positive value for factor B is associated with an increase in the response variable, and there is an interaction of A $\times$ B, showing that B has little effect at low A, but a large effect at high A. We can see this more clearly in the diagram below. For evaluating the main effect of factor B (left panel), we average across ('marginalize out') all the A levels and see the impact of changing the B level. Likewise, evaluating the main effect of factor A (right panel) requires us to average across all the B levels. In both cases, when we average across the levels of the other factor, we see that both A and B are associated with a change in the mean response. (There is also an interaction here as well.)
+
+![](Two_Way_Main_Effects_1.png)
+
+*Example #2*
 
 <img src="Week-12-lecture_files/figure-html/unnamed-chunk-6-1.png" width="384" />
 
-Factor A is associated with an increase in the response variable, Factor B is associated with an increase in the response variable, but there is no interaction of A $\times$ B.
+Once again, we can see the main effects by averaging across the levels of the other factor. Here both A and B have a main effect on the response, but there is no interaction because the effect of factor A is the same for both levels of factor B (and vice versa).
+
+![](Two_Way_Main_Effects_2.png)
+*Example #3*
 
 <img src="Week-12-lecture_files/figure-html/unnamed-chunk-7-1.png" width="384" />
 
-There is no main effect for Factor A, Factor B is associated with an increase in the response variable, and there is no interaction of A $\times$ B.
+Below we can see that there is no main effect for Factor A because when we average over the levels of B, A has no effect on the response (right panel). There is, however, a main effect of B (left panel). There is no interaction of A $\times$ B.
 
+![](Two_Way_Main_Effects_3.png)
+
+*Example #4*
 
 <img src="Week-12-lecture_files/figure-html/unnamed-chunk-8-1.png" width="384" />
 
-Factor A has no main effect (to see this, average/marginalize across B), Factor B has no main effect (marginalize across A), but there is an interaction of A $\times$ B.
+Below we see that Factor A has no main effect (right panel) and Factor B also has no main effect (left panel). There is, however, an interaction of A $\times$ B. In fact, the effect of A is negative for B=Low and positive for B=High. 
+
+![](Two_Way_Main_Effects_4.png)
 
 Let's continue interpreting two-way ANOVA plots of main effects and interactions with Aho Fig. 10.9. The response variable is biomass. Factor A, water level, is shown on the x-axis, and factor B, nutrient level, is shown with the line type, where a solid line represents added N, and a dashed line represents the control.
 

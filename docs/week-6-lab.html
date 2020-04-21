@@ -401,32 +401,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       }
   }
 p.values</code></pre></div>
-<pre><code>##       [,1]      [,2]       [,3]       [,4]      [,5]      [,6]      [,7]
-##  [1,]   NA 0.1797745 0.09348012 0.03907419 0.1540715 0.3158670 0.1329998
-##  [2,]   NA        NA 0.73577804 0.29139298 0.8873464 0.6922953 0.8479872
-##  [3,]   NA        NA         NA 0.39613388 0.5450237 0.4481149 0.8950661
-##  [4,]   NA        NA         NA         NA 0.1912115 0.1717624 0.3658186
-##  [5,]   NA        NA         NA         NA        NA 0.7273158 0.7025377
-##  [6,]   NA        NA         NA         NA        NA        NA 0.5574168
-##  [7,]   NA        NA         NA         NA        NA        NA        NA
-##  [8,]   NA        NA         NA         NA        NA        NA        NA
-##  [9,]   NA        NA         NA         NA        NA        NA        NA
-## [10,]   NA        NA         NA         NA        NA        NA        NA
-##             [,8]      [,9]     [,10]
-##  [1,] 0.04547566 0.3082292 0.1269600
-##  [2,] 0.39086058 0.6569169 0.7258572
-##  [3,] 0.54297678 0.4024009 0.9361898
-##  [4,] 0.75323327 0.1511230 0.5022768
-##  [5,] 0.23985430 0.6790090 0.5964511
-##  [6,] 0.22167818 0.9785759 0.4851340
-##  [7,] 0.49583453 0.5183113 0.8549966
-##  [8,]         NA 0.1907083 0.6688448
-##  [9,]         NA        NA 0.4529850
-## [10,]         NA        NA        NA</code></pre>
+<pre><code>##       [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]
+##  [1,]   NA 0.2191471 0.6730909 0.2318368 0.3995456 0.7224847 0.9339620
+##  [2,]   NA        NA 0.4963179 0.9867326 0.7301358 0.4385923 0.3136027
+##  [3,]   NA        NA        NA 0.4984271 0.7304038 0.9422554 0.6964849
+##  [4,]   NA        NA        NA        NA 0.7253295 0.4428283 0.3180534
+##  [5,]   NA        NA        NA        NA        NA 0.6676239 0.4797366
+##  [6,]   NA        NA        NA        NA        NA        NA 0.7375275
+##  [7,]   NA        NA        NA        NA        NA        NA        NA
+##  [8,]   NA        NA        NA        NA        NA        NA        NA
+##  [9,]   NA        NA        NA        NA        NA        NA        NA
+## [10,]   NA        NA        NA        NA        NA        NA        NA
+##            [,8]      [,9]     [,10]
+##  [1,] 0.3754982 0.8646074 0.5992184
+##  [2,] 0.6499034 0.2697981 0.6146471
+##  [3,] 0.7610422 0.6372612 0.8984641
+##  [4,] 0.6485969 0.2753327 0.6126759
+##  [5,] 0.9396075 0.4255902 0.8492400
+##  [6,] 0.6906749 0.6759975 0.8431192
+##  [7,] 0.4862660 0.9472934 0.6288058
+##  [8,]        NA 0.4262685 0.8904858
+##  [9,]        NA        NA 0.5750333
+## [10,]        NA        NA        NA</code></pre>
 <p>Now we can see how many of these p.values are “significant”. We know these are false positives, because all the data were generated from the same distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">false.positives&lt;-<span class="kw">sum</span>(p.values<span class="op">&lt;</span><span class="fl">0.05</span>,<span class="dt">na.rm=</span>T)
 false.positives</code></pre></div>
-<pre><code>## [1] 2</code></pre>
+<pre><code>## [1] 0</code></pre>
 <p>We could correct this using the Bonferonni method:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k&lt;-<span class="dv">45</span>
 new.threshold.B&lt;-<span class="fl">0.05</span><span class="op">/</span>k
@@ -467,7 +467,7 @@ min.p.values.all&lt;-<span class="kw">c</span>()
 new.threshold.R&lt;-<span class="kw">quantile</span>(min.p.values.all,<span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>))
 new.threshold.R</code></pre></div>
 <pre><code>##          5% 
-## 0.001621305</code></pre>
+## 0.001346957</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">false.positives.R&lt;-<span class="kw">sum</span>(p.values<span class="op">&lt;</span>new.threshold.R,<span class="dt">na.rm=</span>T)
 false.positives.R</code></pre></div>
 <pre><code>## [1] 0</code></pre>

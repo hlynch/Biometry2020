@@ -387,12 +387,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Outline:</p>
 <ol style="list-style-type: decimal">
 <li><p>ANOVA for two-way factorial design</p></li>
-<li><ol style="list-style-type: lower-alpha">
-<li>Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS</li>
-</ol></li>
+<li></li>
 </ol>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Dealing with unbalanced design- missing cells</li>
+<ol style="list-style-type: lower-alpha">
+<li><p>Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS</p></li>
+<li><p>Dealing with unbalanced design- missing cells</p></li>
 </ol>
 <ol start="3" style="list-style-type: decimal">
 <li><p>ANOVA for two-way nested design</p></li>
@@ -553,14 +552,30 @@ Y_{ijk} = \mu + A_i + B_j + {AB}_{ij} + \epsilon_{ijk} \text{, where } \epsilon_
 \text{Effect of factor A alone} + \text{Effect of factor B alone} \neq \text{Effect of A and B together}
 \]</span></p>
 <p>Let’s go through multiple examples of hypothetical two-way factorial ANOVA results to interpret the main effects and interactions in each outcome.</p>
+<p><em>Example #1</em></p>
 <p><img src="Week-12-lecture_files/figure-html/unnamed-chunk-5-1.png" width="384" /></p>
-<p>A large positive value for factor A is associated with an increase in the response variable, a large positive value for factor B is associated with an increase in the response variable, and there is an interaction of A <span class="math inline">\(\times\)</span> B, showing that B has little effect at low A, but a large effect at high A.</p>
+<p>A large positive value for factor A is associated with an increase in the response variable, a large positive value for factor B is associated with an increase in the response variable, and there is an interaction of A <span class="math inline">\(\times\)</span> B, showing that B has little effect at low A, but a large effect at high A. We can see this more clearly in the diagram below. For evaluating the main effect of factor B (left panel), we average across (‘marginalize out’) all the A levels and see the impact of changing the B level. Likewise, evaluating the main effect of factor A (right panel) requires us to average across all the B levels. In both cases, when we average across the levels of the other factor, we see that both A and B are associated with a change in the mean response. (There is also an interaction here as well.)</p>
+<div class="figure">
+<img src="Two_Way_Main_Effects_1.png" />
+
+</div>
+<p><em>Example #2</em></p>
 <p><img src="Week-12-lecture_files/figure-html/unnamed-chunk-6-1.png" width="384" /></p>
-<p>Factor A is associated with an increase in the response variable, Factor B is associated with an increase in the response variable, but there is no interaction of A <span class="math inline">\(\times\)</span> B.</p>
+<p>Once again, we can see the main effects by averaging across the levels of the other factor. Here both A and B have a main effect on the response, but there is no interaction because the effect of factor A is the same for both levels of factor B (and vice versa).</p>
+<p><img src="Two_Way_Main_Effects_2.png" /> <em>Example #3</em></p>
 <p><img src="Week-12-lecture_files/figure-html/unnamed-chunk-7-1.png" width="384" /></p>
-<p>There is no main effect for Factor A, Factor B is associated with an increase in the response variable, and there is no interaction of A <span class="math inline">\(\times\)</span> B.</p>
+<p>Below we can see that there is no main effect for Factor A because when we average over the levels of B, A has no effect on the response (right panel). There is, however, a main effect of B (left panel). There is no interaction of A <span class="math inline">\(\times\)</span> B.</p>
+<div class="figure">
+<img src="Two_Way_Main_Effects_3.png" />
+
+</div>
+<p><em>Example #4</em></p>
 <p><img src="Week-12-lecture_files/figure-html/unnamed-chunk-8-1.png" width="384" /></p>
-<p>Factor A has no main effect (to see this, average/marginalize across B), Factor B has no main effect (marginalize across A), but there is an interaction of A <span class="math inline">\(\times\)</span> B.</p>
+<p>Below we see that Factor A has no main effect (right panel) and Factor B also has no main effect (left panel). There is, however, an interaction of A <span class="math inline">\(\times\)</span> B. In fact, the effect of A is negative for B=Low and positive for B=High.</p>
+<div class="figure">
+<img src="Two_Way_Main_Effects_4.png" />
+
+</div>
 <p>Let’s continue interpreting two-way ANOVA plots of main effects and interactions with Aho Fig. 10.9. The response variable is biomass. Factor A, water level, is shown on the x-axis, and factor B, nutrient level, is shown with the line type, where a solid line represents added N, and a dashed line represents the control.</p>
 <pre><code>## Loading required package: tcltk</code></pre>
 <p><img src="Week-12-lecture_files/figure-html/unnamed-chunk-9-1.png" width="576" /></p>
