@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-14" />
+<meta name="date" content="2020-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -382,7 +382,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="week-12-lecture" class="section level1">
 <h1><span class="header-section-number">22</span> Week 12 Lecture</h1>
-<p>Outline: 1. ANOVA for two-way factorial design 2. (a) Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS (b) Dealing with unbalanced design- missing cells 3. ANOVA for two-way nested design 4. Some more experimental design</p>
+<p>Outline: 1. ANOVA for two-way factorial design</p>
+<ol start="2" style="list-style-type: decimal">
+<li><ol style="list-style-type: lower-alpha">
+<li>Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS</li>
+</ol></li>
+</ol>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Dealing with unbalanced design- missing cells</li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li><p>ANOVA for two-way nested design</p></li>
+<li><p>Some more experimental design</p></li>
+</ol>
 <div id="review-anova-with-one-factor" class="section level2">
 <h2><span class="header-section-number">22.1</span> Review: ANOVA with one factor</h2>
 <ul>
@@ -1227,7 +1239,7 @@ Y_{ijk} = \mu + A_i + B_{j(i)} + \epsilon_{ijk} \text{, where } \epsilon_{ijk} \
 </tr>
 <tr class="even">
 <td>Among replicates within groups (nesting factor B)</td>
-<td align="center"><span class="math inline">\(\sum^a_{i = 1} \sum^b_{j = 1} \sum^n_{k = 1} (\bar{Y}_{j(i)} - \bar{Y})^2\)</span></td>
+<td align="center"><span class="math inline">\(\sum^a_{i = 1} \sum^b_{j = 1} \sum^n_{k = 1} (\bar{Y}_{j(i)} - \bar{Y}_{i})^2\)</span></td>
 <td align="center"><span class="math inline">\(a (b - 1)\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\text{SS}_{\text{among rep.}}}{\text{DOF}_{\text{among rep.}}}\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\text{MS}_{\text{among rep.}}}{\text{MS}_{\text{residual}}}\)</span></td>

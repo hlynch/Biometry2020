@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-14" />
+<meta name="date" content="2020-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -399,28 +399,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       }
   }
 p.values</code></pre></div>
-<pre><code>##       [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]
-##  [1,]   NA 0.2020104 0.5418955 0.3071350 0.8112680 0.9064204 0.6345312
-##  [2,]   NA        NA 0.5486575 0.6124636 0.4007857 0.3457553 0.3949352
-##  [3,]   NA        NA        NA 0.8604129 0.7850089 0.6323622 0.8390297
-##  [4,]   NA        NA        NA        NA 0.6347243 0.5185857 0.6559252
-##  [5,]   NA        NA        NA        NA        NA 0.8016584 0.9134534
-##  [6,]   NA        NA        NA        NA        NA        NA 0.7193581
-##  [7,]   NA        NA        NA        NA        NA        NA        NA
-##  [8,]   NA        NA        NA        NA        NA        NA        NA
-##  [9,]   NA        NA        NA        NA        NA        NA        NA
-## [10,]   NA        NA        NA        NA        NA        NA        NA
-##            [,8]      [,9]     [,10]
-##  [1,] 0.6653723 0.2767241 0.1662602
-##  [2,] 0.5216949 0.9279806 0.7973923
-##  [3,] 0.9310982 0.6308710 0.6578272
-##  [4,] 0.7987513 0.7070432 0.7506699
-##  [5,] 0.8657334 0.4741563 0.4656124
-##  [6,] 0.7003942 0.4002161 0.3993000
-##  [7,] 0.9291543 0.4810097 0.4497449
-##  [8,]        NA 0.5964983 0.6197938
-##  [9,]        NA        NA 0.8896401
-## [10,]        NA        NA        NA</code></pre>
+<pre><code>##       [,1]     [,2]      [,3]      [,4]      [,5]      [,6]      [,7]      [,8]
+##  [1,]   NA 0.562243 0.1570045 0.8939159 0.2001269 0.8679510 0.4576649 0.6892632
+##  [2,]   NA       NA 0.4201393 0.5677350 0.5386224 0.6617155 0.9116861 0.8241854
+##  [3,]   NA       NA        NA 0.2326374 0.7831910 0.1933503 0.4463640 0.2717204
+##  [4,]   NA       NA        NA        NA 0.2896541 0.7963900 0.4962321 0.6678212
+##  [5,]   NA       NA        NA        NA        NA 0.2483737 0.5803233 0.3528444
+##  [6,]   NA       NA        NA        NA        NA        NA 0.5512613 0.8107414
+##  [7,]   NA       NA        NA        NA        NA        NA        NA 0.7156467
+##  [8,]   NA       NA        NA        NA        NA        NA        NA        NA
+##  [9,]   NA       NA        NA        NA        NA        NA        NA        NA
+## [10,]   NA       NA        NA        NA        NA        NA        NA        NA
+##            [,9]     [,10]
+##  [1,] 0.2154065 0.3134618
+##  [2,] 0.5512992 0.6910959
+##  [3,] 0.7909162 0.6657463
+##  [4,] 0.2975460 0.3751635
+##  [5,] 0.9997327 0.8438656
+##  [6,] 0.2658479 0.3806858
+##  [7,] 0.5948436 0.7519638
+##  [8,] 0.3713651 0.5080340
+##  [9,]        NA 0.8490839
+## [10,]        NA        NA</code></pre>
 <p>Now we can see how many of these p.values are “significant”. We know these are false positives, because all the data were generated from the same distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">false.positives&lt;-<span class="kw">sum</span>(p.values<span class="op">&lt;</span><span class="fl">0.05</span>,<span class="dt">na.rm=</span>T)
 false.positives</code></pre></div>
@@ -464,8 +464,8 @@ min.p.values.all&lt;-<span class="kw">c</span>()
   }
 new.threshold.R&lt;-<span class="kw">quantile</span>(min.p.values.all,<span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>))
 new.threshold.R</code></pre></div>
-<pre><code>##          5% 
-## 0.001625197</code></pre>
+<pre><code>##        5% 
+## 0.0014825</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">false.positives.R&lt;-<span class="kw">sum</span>(p.values<span class="op">&lt;</span>new.threshold.R,<span class="dt">na.rm=</span>T)
 false.positives.R</code></pre></div>
 <pre><code>## [1] 0</code></pre>

@@ -5,9 +5,13 @@ Week 12 Lecture
 
 Outline:
 1. ANOVA for two-way factorial design
+
 2. (a) Dealing with unbalanced design – unequal sample sizes: Type I, II, and III SS
-    (b) Dealing with unbalanced design- missing cells
+
+   (b) Dealing with unbalanced design- missing cells
+    
 3. ANOVA for two-way nested design
+
 4. Some more experimental design
 
 ## Review: ANOVA with one factor
@@ -682,7 +686,7 @@ Now we know why subsampling is helpful, but why not just average among the subsa
 | Source of variation | SS        | DOF       | MS        | F         |
 | ------------------- |:---------:|:---------:|:---------:|:---------:|
 | Among groups (factor A) | $\sum^a_{i = 1} \sum^b_{j = 1} \sum^n_{k = 1} (\bar{Y}_{i} - \bar{Y})^2$ | $a - 1$ | $\frac{\text{SS}_{\text{among grp.}}}{\text{DOF}_{\text{among grp.}}}$ | $\frac{\text{MS}_{\text{among grp.}}}{\text{MS}_{\text{residual}}}$ |
-| Among replicates within groups (nesting factor B) | $\sum^a_{i = 1} \sum^b_{j = 1} \sum^n_{k = 1} (\bar{Y}_{j(i)} - \bar{Y})^2$ | $a (b - 1)$ | $\frac{\text{SS}_{\text{among rep.}}}{\text{DOF}_{\text{among rep.}}}$ | $\frac{\text{MS}_{\text{among rep.}}}{\text{MS}_{\text{residual}}}$ | 
+| Among replicates within groups (nesting factor B) | $\sum^a_{i = 1} \sum^b_{j = 1} \sum^n_{k = 1} (\bar{Y}_{j(i)} - \bar{Y}_{i})^2$ | $a (b - 1)$ | $\frac{\text{SS}_{\text{among rep.}}}{\text{DOF}_{\text{among rep.}}}$ | $\frac{\text{MS}_{\text{among rep.}}}{\text{MS}_{\text{residual}}}$ | 
 | Subsamples within replicates (residual) | $\sum^a_{i = 1} \sum^b_{j = 1} \sum^n_{k = 1} (Y_{ijk} - \bar{Y}_{j(i)})^2$ | $ab (n - 1)$ | $\frac{\text{SS}_{\text{residual}}}{\text{DOF}_{\text{residual}}}$ | |
 | Total | $\sum^a_{i = 1} \sum^b_{j = 1} \sum^n_{k = 1} (Y_{ijk} - \bar{Y})^2$ | $abn - 1$ | | |
 
