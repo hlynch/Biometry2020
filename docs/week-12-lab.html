@@ -524,14 +524,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>For example, what is the mean salary of a man with a PhD. Going from the baseline condition of the intercept to a Man with a PhD we have to make two swaps: Female-&gt;Male and Masters-&gt;PhD. This involves both the main effects of Gender and Education but also the interaction between Gender and Education. Let’s do this stepwise:</p>
 <p><span class="math display">\[
 \mbox{Female&amp;Masters}=25 \\
-\mbox{Change for a woman getting a PhD}=4.25 \rightarrow \mbox{Women&amp;PhD}=25+4.25=29.25 \\
-\mbox{Change for a Woman with PhD becoming a Man} = 2-3.85 = -1.85 \rightarrow \mbox{Man&amp;PhD} = 29.25-1.85=27.4
+\mbox{Change for a woman getting a PhD}=4.25 \\ 
+ ------- \rightarrow\mbox{Women&amp;PhD}=25+4.25=29.25 \\
+\mbox{Change for a Woman with PhD becoming a Man} = 2-3.85 = -1.85\\  
+------- \rightarrow \mbox{Man&amp;PhD} = 29.25-1.85=27.4
 \]</span></p>
 <p>This is exactly what the table shows as well. Note that because of the interaction, a woman with a PhD is better off staying a woman because the benefit of getting a PhD is much bigger for a woman than for a man and this more than compensates for the negative effect being female has on average salary. Another way of thinking about it would be to do the gender swap first:</p>
 <p><span class="math display">\[
 \mbox{Female&amp;Masters}=25 \\
-\mbox{Change for a Woman with Masters becoming a Man} = 2 \rightarrow \mbox{Man&amp;Masters} = 25+2 = 27 \mbox{#Magic, no additional skills required! :)}\\
-\mbox{Change for a Man getting a PhD}=4.25-3.85 =0.4 \rightarrow \mbox{Man&amp;PhD}=27+0.4=27.4 \\
+\mbox{Change for a Woman with Masters becoming a Man} = 2 \\
+------- \rightarrow \mbox{Man&amp;Masters} = 25+2 = 27 \mbox{    [Magic, no additional skills required! :) ]}\\
+\mbox{Change for a Man getting a PhD}=4.25-3.85 =0.4 \\
+------- \rightarrow \mbox{Man&amp;PhD}=27+0.4=27.4 \\
 \]</span></p>
 <p>Now try doing the “same” analysis but switching the order of inputs</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm.fit.2way&lt;-<span class="kw">lm</span>(Salary<span class="op">~</span>Gender<span class="op">+</span>Education<span class="op">+</span>Gender<span class="op">:</span>Education,<span class="dt">data=</span>salaries)
@@ -616,7 +620,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="example-2-nested-design" class="section level2">
 <h2><span class="header-section-number">23.2</span> Example #2: Nested design</h2>
-<p>We will work through one of the classic examples from Sokal &amp; Rohlf (see handout Figure #1) in which we are looking at the effect of a treatment on rat livers. We have three treatments, two rats per treatment, three liver samples per rat, and two measurements of each liver sample.</p>
+<p>We will work through one of the classic examples from Sokal &amp; Rohlf in which we are looking at the effect of a treatment on rat livers. We have three treatments, two rats per treatment, three liver samples per rat, and two measurements of each liver sample. The experimental design is sketched out here:</p>
+<div class="figure">
+<img src="RatDesign.png" />
+
+</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rats&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Biometry/Week 12 Nested and factorial ANOVA/Week 12 Lab/rats.txt&quot;</span>,<span class="dt">header=</span>T)
 <span class="kw">attach</span>(rats)
 Treatment&lt;-<span class="kw">factor</span>(TREAT)

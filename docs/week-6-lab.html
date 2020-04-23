@@ -401,32 +401,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       }
   }
 p.values</code></pre></div>
-<pre><code>##       [,1]     [,2]      [,3]      [,4]      [,5]      [,6]      [,7]      [,8]
-##  [1,]   NA 0.874407 0.4165237 0.5014703 0.6187876 0.8706437 0.6015672 0.8618122
-##  [2,]   NA       NA 0.3297883 0.5938027 0.4838801 0.7466488 0.4618071 0.9717632
-##  [3,]   NA       NA        NA 0.1512570 0.6498919 0.5132870 0.6437475 0.3594709
-##  [4,]   NA       NA        NA        NA 0.1870497 0.4074507 0.1640572 0.6730343
-##  [5,]   NA       NA        NA        NA        NA 0.7613682 0.9949823 0.5230915
-##  [6,]   NA       NA        NA        NA        NA        NA 0.7489910 0.7481666
-##  [7,]   NA       NA        NA        NA        NA        NA        NA 0.5074382
-##  [8,]   NA       NA        NA        NA        NA        NA        NA        NA
-##  [9,]   NA       NA        NA        NA        NA        NA        NA        NA
-## [10,]   NA       NA        NA        NA        NA        NA        NA        NA
-##             [,9]     [,10]
-##  [1,] 0.15604515 0.4694588
-##  [2,] 0.11114211 0.3441944
-##  [3,] 0.56951100 0.7756977
-##  [4,] 0.04022353 0.1080605
-##  [5,] 0.26024349 0.8052754
-##  [6,] 0.20992575 0.6051920
-##  [7,] 0.24890015 0.7987505
-##  [8,] 0.13900349 0.3999999
-##  [9,]         NA 0.3270434
-## [10,]         NA        NA</code></pre>
+<pre><code>##       [,1]       [,2]      [,3]       [,4]       [,5]        [,6]      [,7]
+##  [1,]   NA 0.02101172 0.2883720 0.31375819 0.52722608 0.936924381 0.3227857
+##  [2,]   NA         NA 0.1363263 0.09404364 0.03968569 0.009125264 0.2202754
+##  [3,]   NA         NA        NA 0.90871789 0.58826775 0.245559885 0.9543071
+##  [4,]   NA         NA        NA         NA 0.65003362 0.264529450 0.8755873
+##  [5,]   NA         NA        NA         NA         NA 0.504789237 0.6048047
+##  [6,]   NA         NA        NA         NA         NA          NA 0.2993466
+##  [7,]   NA         NA        NA         NA         NA          NA        NA
+##  [8,]   NA         NA        NA         NA         NA          NA        NA
+##  [9,]   NA         NA        NA         NA         NA          NA        NA
+## [10,]   NA         NA        NA         NA         NA          NA        NA
+##             [,8]       [,9]      [,10]
+##  [1,] 0.25061009 0.80117784 0.70817836
+##  [2,] 0.09483964 0.02761469 0.06545072
+##  [3,] 0.99267534 0.39222619 0.54033131
+##  [4,] 0.90413631 0.42941159 0.58941589
+##  [5,] 0.54522668 0.69958538 0.85802958
+##  [6,] 0.18938869 0.83419380 0.72752861
+##  [7,] 0.94447625 0.42454318 0.55045645
+##  [8,]         NA 0.34875903 0.51297850
+##  [9,]         NA         NA 0.87902643
+## [10,]         NA         NA         NA</code></pre>
 <p>Now we can see how many of these p.values are “significant”. We know these are false positives, because all the data were generated from the same distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">false.positives&lt;-<span class="kw">sum</span>(p.values<span class="op">&lt;</span><span class="fl">0.05</span>,<span class="dt">na.rm=</span>T)
 false.positives</code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>## [1] 4</code></pre>
 <p>We could correct this using the Bonferonni method:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k&lt;-<span class="dv">45</span>
 new.threshold.B&lt;-<span class="fl">0.05</span><span class="op">/</span>k
@@ -467,7 +467,7 @@ min.p.values.all&lt;-<span class="kw">c</span>()
 new.threshold.R&lt;-<span class="kw">quantile</span>(min.p.values.all,<span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>))
 new.threshold.R</code></pre></div>
 <pre><code>##          5% 
-## 0.002051603</code></pre>
+## 0.002092462</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">false.positives.R&lt;-<span class="kw">sum</span>(p.values<span class="op">&lt;</span>new.threshold.R,<span class="dt">na.rm=</span>T)
 false.positives.R</code></pre></div>
 <pre><code>## [1] 0</code></pre>

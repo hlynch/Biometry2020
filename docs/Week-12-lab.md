@@ -240,16 +240,20 @@ For example, what is the mean salary of a man with a PhD. Going from the baselin
 
 $$
 \mbox{Female&Masters}=25 \\
-\mbox{Change for a woman getting a PhD}=4.25 \rightarrow \mbox{Women&PhD}=25+4.25=29.25 \\
-\mbox{Change for a Woman with PhD becoming a Man} = 2-3.85 = -1.85 \rightarrow \mbox{Man&PhD} = 29.25-1.85=27.4
+\mbox{Change for a woman getting a PhD}=4.25 \\ 
+ ------- \rightarrow\mbox{Women&PhD}=25+4.25=29.25 \\
+\mbox{Change for a Woman with PhD becoming a Man} = 2-3.85 = -1.85\\  
+------- \rightarrow \mbox{Man&PhD} = 29.25-1.85=27.4
 $$
 
 This is exactly what the table shows as well. Note that because of the interaction, a woman with a PhD is better off staying a woman because the benefit of getting a PhD is much bigger for a woman than for a man and this more than compensates for the negative effect being female has on average salary. Another way of thinking about it would be to do the gender swap first:
 
 $$
 \mbox{Female&Masters}=25 \\
-\mbox{Change for a Woman with Masters becoming a Man} = 2 \rightarrow \mbox{Man&Masters} = 25+2 = 27 \mbox{#Magic, no additional skills required! :)}\\
-\mbox{Change for a Man getting a PhD}=4.25-3.85 =0.4 \rightarrow \mbox{Man&PhD}=27+0.4=27.4 \\
+\mbox{Change for a Woman with Masters becoming a Man} = 2 \\
+------- \rightarrow \mbox{Man&Masters} = 25+2 = 27 \mbox{    [Magic, no additional skills required! :) ]}\\
+\mbox{Change for a Man getting a PhD}=4.25-3.85 =0.4 \\
+------- \rightarrow \mbox{Man&PhD}=27+0.4=27.4 \\
 $$
 
 
@@ -371,7 +375,9 @@ Which is correct? It depends on whether you think that there is value in pooling
 
 ##Example #2: Nested design
 
-We will work through one of the classic examples from Sokal & Rohlf (see handout Figure #1) in which we are looking at the effect of a treatment on rat livers. We have three treatments, two rats per treatment, three liver samples per rat, and two measurements of each liver sample. 
+We will work through one of the classic examples from Sokal & Rohlf in which we are looking at the effect of a treatment on rat livers. We have three treatments, two rats per treatment, three liver samples per rat, and two measurements of each liver sample. The experimental design is sketched out here:
+
+![](RatDesign.png)
 
 
 ```r
