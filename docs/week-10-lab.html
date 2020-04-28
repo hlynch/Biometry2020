@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-27" />
+<meta name="date" content="2020-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -704,7 +704,7 @@ challenger.larger.model &lt;-<span class="st"> </span><span class="kw">glm</span
 <span class="co"># Calculate the deviance difference of the two models </span>
 dev_diff &lt;-<span class="st"> </span><span class="kw">deviance</span>(challenger.smaller.model) <span class="op">-</span><span class="st"> </span><span class="kw">deviance</span>(challenger.larger.model)
 dev_diff</code></pre></div>
-<pre><code>## [1] 0.9198257</code></pre>
+<pre><code>## [1] 0.01898059</code></pre>
 <p>Notice that even though the covariate that we added is just noise, it still decreases the deviance.</p>
 <p>Now we need to repeat those steps a number of times to generate a distribution of expected deviance differences</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dev_diff &lt;-<span class="st"> </span><span class="kw">c</span>()
@@ -724,9 +724,11 @@ dev_diff</code></pre></div>
   
   dev_diff &lt;-<span class="st"> </span><span class="kw">c</span>(dev_diff, dev_diff_rand)
 }</code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot the distribution and add a line for a chi-square with df=1 </span>
 <span class="kw">hist</span>(dev_diff, <span class="dt">xlab=</span><span class="st">&quot;Deviance Difference&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Expected distribution&quot;</span>, <span class="dt">freq=</span><span class="ot">FALSE</span>,<span class="dt">breaks=</span><span class="dv">30</span>)
 <span class="kw">lines</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="fl">0.1</span>), <span class="kw">dchisq</span>(<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="fl">0.1</span>),<span class="dt">df=</span><span class="dv">1</span>), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>

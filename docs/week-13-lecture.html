@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-27" />
+<meta name="date" content="2020-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -473,7 +473,7 @@ Y = f(X) + \epsilon
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)
 <span class="kw">durbinWatsonTest</span>(web.fit)</code></pre></div>
 <pre><code>##  lag Autocorrelation D-W Statistic p-value
-##    1     -0.03369874      2.059546   0.954
+##    1     -0.03369874      2.059546    0.92
 ##  Alternative hypothesis: rho != 0</code></pre>
 <p><strong>Question: How do we interpret the results of this hypothesis test?</strong></p>
 <p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> We have insufficient evidence to reject the null hypothesis that the residuals are independent. </span> </details></p>
@@ -611,7 +611,7 @@ Y = r \left ( 1 - \left ( \frac{N_t}{K} \right ) ^\gamma \right )
 <p><strong>Question: What are the parameters in a linear model with one categorical predictor (which has four levels)?</strong></p>
 <p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\alpha_1\)</span>, <span class="math inline">\(\alpha_2\)</span>, <span class="math inline">\(\alpha_3\)</span> (depends on how you code the model, but there will be four parameters describing the mean behavior if the model is not overparameterized), and <span class="math inline">\(\sigma\)</span> </span> </details></p>
 <p><strong>Question: What are the parameters in a Poisson generalized linear model with one continuous predictor?</strong></p>
-<p><em>Hint:</em> <span class="math inline">\(Y_i \sim \mathrm{Pois} (\lambda_i), \quad \lambda_i = \beta_0 + \beta_1 X_i\)</span></p>
+<p><em>Hint:</em> <span class="math inline">\(Y_i \sim \mathrm{Pois} (\lambda_i), \quad log(\lambda_i) = \beta_0 + \beta_1 X_i\)</span></p>
 <p><details> <summary>Click for Answer</summary> <span style="color: blueviolet;"> <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> </span> </details></p>
 <p>Remember the deviance difference from Week 10? Under the null hypothesis that the larger model fits no better than the smaller model, the deviance difference goes as a chi-square distribution.</p>
 <p><span class="math display">\[D = 2 * \log \frac{\mathcal{L}_{\text{larger model}}}{\mathcal{L}_{\text{smaller model}}} = 2 (\ell_{\text{larger model}} - \ell_{\text{smaller model}}) \\

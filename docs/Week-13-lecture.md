@@ -156,7 +156,7 @@ durbinWatsonTest(web.fit)
 
 ```
 ##  lag Autocorrelation D-W Statistic p-value
-##    1     -0.03369874      2.059546   0.954
+##    1     -0.03369874      2.059546    0.92
 ##  Alternative hypothesis: rho != 0
 ```
 
@@ -430,7 +430,7 @@ $\mu$, $\alpha_1$, $\alpha_2$, $\alpha_3$ (depends on how you code the model, bu
 
 **Question: What are the parameters in a Poisson generalized linear model with one continuous predictor?**
 
-*Hint:* $Y_i \sim \mathrm{Pois} (\lambda_i), \quad \lambda_i = \beta_0 + \beta_1 X_i$
+*Hint:* $Y_i \sim \mathrm{Pois} (\lambda_i), \quad log(\lambda_i) = \beta_0 + \beta_1 X_i$
 
 <details>
   <summary>Click for Answer</summary>
