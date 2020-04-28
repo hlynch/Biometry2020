@@ -53,39 +53,15 @@ We will look at a past Biometry exam question to both practice for the exam and 
 Below are four plots depicting the residuals of a linear model plotted as a function of $\hat{Y}$. For each panel, state whether the model violates any of the assumptions of linear regression and, if yes, which assumption(s) of linear regression are violated. 
 
 ![](Residuals.png)
+
 a. No apparent violations
 
-b. Variance is heteroscedastic (not constant). Larger fitted values have larger variance. (depending on your data, what type of regression may be more appropriate here?)
-
-b. Poisson regression (mean = variance). You could also consider transforming the data or fitting a weighted regression to resolve this pattern.
+b. Variance is heteroscedastic (not constant). Larger fitted values have larger variance. Depending on your data, what type of regression may be more appropriate here? Poisson regression (why? mean = variance). You could also consider transforming the data or fitting a weighted regression to resolve this pattern.
 
 c. Linear pattern in the residuals, the errors are not independent
 
 d. Nonlinear pattern in the residuals (consider transforming data or fitting the predictor quadratically).
 
-Note that the definition of residuals for GLMs is a bit different. Residuals can be defined as $\hat{Y}_i - Y_i$. For normally distributed linear models, this is equal to the statistical error $\epsilon_i = \mathrm{E}(Y_i) - Y_i$. Remember that $\mathrm{E}(Y_i)$ or $\hat{Y}_i$ for a binomial or Poisson GLM is $\hat{p_i}$ or $\hat{\lambda_i}$, respectively, so not on the same scale as the data ($Y_i$ for binomial or Poisson is an integer 0 through *n*). Also, nonconstant variance is an inherent part of GLMs.
-
-We can use different types of residuals for model criticism of GLMs. We can look at the residuals on the scale of the fitted values or response (using the inverse link function): `residuals.glm(crab.glm, type = "response")`, or residuals that are scaled by the variance inherent to the GLM: deviance residuals `type = "deviance"` or Pearson residuals `type = "pearson"` (see 9.20.7.1 in Aho for details). R provides these in diagnostic plots.
-
-```{r fig.height=3, fig.width=4}
-crabs <- read.csv(file = "~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lecture/crabs.csv")
-crab.glm <- glm(satell ~ width,  family = "poisson", data = crabs)
-plot(crab.glm, which = 1)
-```
-
-We can use different types of residuals for model criticism of GLMs. We can look at the residuals on the scale of the fitted values or response (using the inverse link function): `residuals.glm(crab.glm, type = "response")`, or residuals that are scaled by the variance inherent to the GLM: deviance residuals `type = "deviance"` or Pearson residuals `type = "pearson"` (see 9.20.7.1 in Aho for more). R provides these in diagnostic plots.
-
-```{r fig.height=3, fig.width=4}
-crab.glm <- glm(satell ~ width,  family = "poisson", data = crabs)
-plot(crab.glm, which = 2)
-```
-
-We can use different types of residuals for model criticism of GLMs. We can look at the residuals on the scale of the fitted values or response (using the inverse link function): `residuals.glm(crab.glm, type = "response")`, or residuals that are scaled by the variance inherent to the GLM: deviance residuals `type = "deviance"` or Pearson residuals `type = "pearson"` (see 9.20.7.1 in Aho for more). R provides these in diagnostic plots.
-
-```{r fig.height=3, fig.width=4}
-crab.glm <- glm(satell ~ width,  family = "poisson", data = crabs)
-plot(crab.glm, which = 5)
-```
 
 ##Residuals
 
@@ -100,8 +76,8 @@ y.i <- Duncan[outliers[1], 2]
 ggplot(data = Duncan, aes(x = education, y = income)) + geom_point() +
   geom_point(x = x.i, y = y.i, col = "firebrick1", size = 3) + 
   geom_point(x = x.i, y = y.i.hat, col = "palegreen3", size = 3) + 
-  annotate(geom = "text", x = x.i + 1.5, y = y.i.hat, label = "hat(Y[i])", parse = TRUE, col = "palegreen3", size = 5) +
-  annotate(geom = "text", x = x.i + 1, y = y.i - 0.0001, label = "Y[i]", parse = TRUE, col = "firebrick1", size = 5) +
+  annotate(geom = "text", x = x.i + 3, y = y.i.hat, label = "hat(Y[i])", parse = TRUE, col = "palegreen3", size = 5) +
+  annotate(geom = "text", x = x.i + 3, y = y.i - 0.0001, label = "Y[i]", parse = TRUE, col = "firebrick1", size = 5) +
   geom_abline(intercept = Duncan.fit$coefficients[1], slope = Duncan.fit$coefficients[2], col = "palegreen1") +
   labs(x = "Percent high-school graduates", y = "% earning $3500 or more in 1950") + theme_classic() + 
   theme(text = element_text(size = text.size))
@@ -115,7 +91,7 @@ The leverage of the $i^{\text{th}}$ point is called $h_{ii}$ (the $i^{\text{th}}
 
 Average leverage is considered to be equal to $p / n$, or the number of parameters divided by the sample size. Twice the average leverage is considered high.
 
-##Influential
+##Influence
 
 An observation is said to be influential if removing the observation substantially changes the estimate of the regression coefficients. Influence can be thought of as the **product of leverage and outlierness**.
 
@@ -259,11 +235,6 @@ Calculate the leave-one-out residuals for each data point and scale them by the 
 $$
 t_i = \frac{Y_i - \hat{Y}_{i, (-i)}}{\sqrt{\mathrm{Var} (Y_i - \hat{Y}_{i, (-i)})}}
 $$
-Calculate the leave-one-out residuals for each data point and scale them by the standard deviation of the leave-one-out residuals. Data points with $t_i > 2$ are potential outliers, $t_i > 3$ are more serious outliers.
-
-$$
-t_i = \frac{Y_i - \hat{Y}_{i, (-i)}}{\sqrt{\mathrm{Var} (Y_i - \hat{Y}_{i, (-i)})}}
-$$
 
 ```{r}
 library(MASS)
@@ -284,6 +255,31 @@ cutoff <- 4 / (nrow(Duncan) - 3 - 1)
 cooks.distance(Duncan.fit)[which(cooks.distance(Duncan.fit) > cutoff)]  # in car package
 ```
 
+## Residuals for GLMs
+
+Note that the definition of residuals for GLMs is a bit different. Residuals can be defined as $\hat{Y}_i - Y_i$. For normally distributed linear models, this is equal to the statistical error $\epsilon_i = \mathrm{E}(Y_i) - Y_i$. Remember that $\mathrm{E}(Y_i)$ or $\hat{Y}_i$ for a binomial or Poisson GLM is $\hat{p_i}$ or $\hat{\lambda_i}$, respectively, so not on the same scale as the data ($Y_i$ for binomial or Poisson is an integer 0 through *n*). Also, nonconstant variance is an inherent part of GLMs.
+
+We can use different types of residuals for model criticism of GLMs. We can look at the residuals on the scale of the fitted values or response (using the inverse link function): `residuals.glm(crab.glm, type = "response")`, or residuals that are scaled by the variance inherent to the GLM: deviance residuals `type = "deviance"` or Pearson residuals `type = "pearson"` (see 9.20.7.1 in Aho for details). R provides these in diagnostic plots.
+
+```{r fig.height=3, fig.width=4}
+crabs <- read.csv(file = "~/Dropbox/Biometry/Week 13 Model selection and criticism/Week 13 Lecture/crabs.csv")
+crab.glm <- glm(satell ~ width,  family = "poisson", data = crabs)
+plot(crab.glm, which = 1)
+```
+
+```{r fig.height=3, fig.width=4}
+crab.glm <- glm(satell ~ width,  family = "poisson", data = crabs)
+plot(crab.glm, which = 2)
+```
+
+```{r fig.height=3, fig.width=4}
+crab.glm <- glm(satell ~ width,  family = "poisson", data = crabs)
+plot(crab.glm, which = 5)
+```
+
+
+## Model selection vs. model criticism
+
 Before we move on to model selection, let's review the difference between model selection and model criticism: Model criticism involves determining whether the model is appropriate, meets assumptions, and accurately represents the data. Model selection gives us the best model, the best suite of models, or the best averaged model.
 
 Your analyses should always involve model criticism, and may also additionally involve model selection.
@@ -292,17 +288,13 @@ To decide what model is best, we first need to determine what our goal was in mo
 
 We will revisit some ideas from the Shmueli (2010) paper that was assigned Week 8. 
 
-## If our goal is to explain...
-
-then we are interested in the amount of variation in the response variable that is explained by each of the covariates.
+If our goal is to explain, then we are interested in the amount of variation in the response variable that is explained by each of the covariates.
 
 With mechanism-based, explanatory models, we use Occam's razor—the law of **parsimony**. By applying this principle, we identify models that are simple but effective, and we do not consider models that are needlessly complex. In other words, given two models, **we prefer the smaller model unless the larger model is significantly better**. 
 
 Additionally, all parameters should be **biologically important**, as identified by the modeler.
 
-## If our goal is to predict...
-
-then we want to **minimize the expected prediction error**, or our expectation of the difference between a new predicted value and the fitted value. For a model:
+If our goal is to predict, then we want to **minimize the expected prediction error**, or our expectation of the difference between a new predicted value and the fitted value. For a model:
 
 $$
 Y = f(X) + \epsilon, \text{ where } \epsilon \sim \mathrm{N} (0, \sigma^2 )
@@ -343,7 +335,81 @@ If we are generating models to test mechanisms, we can use the following three c
 
 3. Bayesian Information Criterion (BIC)
 
-## Likelihood
+The likelihood ratio test is one way of comparing two nested models. Before we get into the details of the LRT, let's review for a second what we mean by *nested*.
+
+###Nested or not?
+
+**Question: Are these models nested?**
+
+$$
+Y \sim X_1 + X_2 + X_3 \\
+Y \sim X_1 + X_2 + X_4
+$$
+
+<details>
+  <summary>Click for Answer</summary>
+  <span style="color: blueviolet;">
+No, neither model is a subset of the other
+</span>
+</details>
+
+**Question: What about these models?**
+
+$$
+Y \sim X_1 + X_2 + X_3 \\
+Y \sim X_1 + X_2
+$$
+
+<details>
+  <summary>Click for Answer</summary>
+  <span style="color: blueviolet;">
+Yes, the second model is a subset of the first model
+</span>
+</details>
+
+Note that this usage of "nested" is completely different from the way we used it with nested ANOVAs.
+
+**Question: Nested?**
+
+$$
+Y = a \\
+Y = a + b X
+$$
+<details>
+  <summary>Click for Answer</summary>
+  <span style="color: blueviolet;">
+Nested. The second model is equal to the first model with $b = 0$.
+</span>
+</details>
+
+**Question: Nested?**
+
+$$
+Y = a + b X \\
+Y = a + b X + c X^2
+$$
+<details>
+  <summary>Click for Answer</summary>
+  <span style="color: blueviolet;">
+Nested. The second model is equal to the first model with $c = 0$.
+</span>
+</details>
+
+**Question: Nested?**
+
+$$
+Y = r \left ( 1 - \frac{N_t}{K} \right ) \\
+Y = r \left ( 1 - \left ( \frac{N_t}{K} \right ) ^\gamma \right )
+$$
+
+<details>
+  <summary>Click for Answer</summary>
+  <span style="color: blueviolet;">
+Nested. The second model is equal to the first model with $\gamma = 1$. This model is called the Ricker model (top model is the usual form and the bottom model is the generalized version). It's used in ecology to model the abundance of animal populations with density dependence.
+</span>
+</details>
+
+### Likelihood Ratio Test (LRT)
 
 Likelihoods are crucial for model selection, they can be used generally for a wide variety of models. We'll start with a brief review of likelihood.
 
@@ -450,86 +516,11 @@ The larger model explains significantly more variation in the data than we would
 </span>
 </details>
 
-##Nested or not?
-
-**Question: Are these models nested?**
-
-$$
-Y \sim X_1 + X_2 + X_3 \\
-Y \sim X_1 + X_2 + X_4
-$$
-
-<details>
-  <summary>Click for Answer</summary>
-  <span style="color: blueviolet;">
-No, neither model is a subset of the other
-</span>
-</details>
-
-**Question: What about these models?**
-
-$$
-Y \sim X_1 + X_2 + X_3 \\
-Y \sim X_1 + X_2
-$$
-
-<details>
-  <summary>Click for Answer</summary>
-  <span style="color: blueviolet;">
-Yes, the second model is a subset of the first model
-</span>
-</details>
-
-Note that this usage of "nested" is completely different from the way we used it with nested ANOVAs.
-
-**Question: Nested?**
-
-$$
-Y = a \\
-Y = a + b X
-$$
-<details>
-  <summary>Click for Answer</summary>
-  <span style="color: blueviolet;">
-Nested. The second model is equal to the first model with $b = 0$.
-</span>
-</details>
-
-**Question: Nested?**
-
-$$
-Y = a + b X \\
-Y = a + b X + c X^2
-$$
-<details>
-  <summary>Click for Answer</summary>
-  <span style="color: blueviolet;">
-Nested. The second model is equal to the first model with $c = 0$.
-</span>
-</details>
-
-**Question: Nested?**
-
-$$
-Y = r \left ( 1 - \frac{N_t}{K} \right ) \\
-Y = r \left ( 1 - \left ( \frac{N_t}{K} \right ) ^\gamma \right )
-$$
-
-<details>
-  <summary>Click for Answer</summary>
-  <span style="color: blueviolet;">
-Nested. The second model is equal to the first model with $\gamma = 1$. This model is called the Ricker model (top model is the usual form and the bottom model is the generalized version). It's used in ecology to model the abundance of animal populations with density dependence.
-</span>
-</details>
-
-
-## Akaike's Information Criterion
+### Akaike's Information Criterion (AIC)
 
 AIC is just one of the many **information theoretic** alternatives that have been developed to compare the “divergence” between our particular model (which is an approximation of the true mechanism) and the “true” model (the mechanism that's actually going on in the real world). We always lose some information when approximating the truth using a model.
 
 If you have a set of models that you could consider different alternative hypotheses, information theoretic methods allow you to rank them.
-
-See Burnham et al. (2011) on Blackboard.
 
 In practice, all information theoretic methods reduce to finding the model that minimizes some criterion that includes the sum of two terms: one is based on the **likelihood** and the other is a **penalty term** which penalizes for increasing model complexity. For AIC:
 
@@ -602,7 +593,7 @@ Yes, $\Delta \mathrm{AIC} > 10$.
 </span>
 </details>
 
-## Bayesian Information Criterion
+### Bayesian Information Criterion (BIC)
 
 BIC uses the same idea as AIC, but with a different penalty for model complexity. This is sometimes called the Schwarz criterion. **Smaller BIC means better model fit**.
 
@@ -626,13 +617,13 @@ The larger model.
 
 The penalty for BIC is different than for AIC. For AIC, the probability of Type I error (in this case, choosing the larger model erroneously, that is, when the smaller model is the true model) depends on $k$ but does not depend on sample size. This means that as sample size goes to infinity, you still choose the larger model with some probability (the Type I error rate). When this happens, we say that an estimator is not “consistent”. The BIC corrects for this by increasing the penalty term as sample size, $n$, gets large. Proponents of BIC like that it tends to select simpler models (fewer parameters) relative to AIC, because it is a consistent estimator of model fit.
 
-However, Johnson and Omland (2004, on Blackboard) include a strong critique of BIC. They state that it is not based in KL information theory, and it relies on the assumption that there is one true model and it is contained in the set of candidate models.
+However, Johnson and Omland (2004) include a strong critique of BIC. They state that it is not based in KL information theory, and it relies on the assumption that there is one true model and it is contained in the set of candidate models.
 
-## Comparing LRT and AIC/BIC
+### Comparing LRT and AIC/BIC
 
-1. LRT allows you to put a *P*-value on model terms. Because you have a sampling distribution for the difference in deviances, you can compare the difference in deviance to the quantiles on the chi-squared distribution to get a *P*-value.
+1. LRT allows you to put a p-value on model terms. Because you have a sampling distribution for the difference in deviances, you can compare the difference in deviance to the quantiles on the chi-squared distribution to get a p-value.
 
-2. AIC/BIC values do not allow you to refer to one model as being significantly different than another. No *P*-values.
+2. AIC/BIC values do not allow you to refer to one model as being significantly different than another. No p-values.
 
 3. LRT require nested models and Information Theoretic Criterion like AIC do not. This is a major advantage for AIC/BIC!
 
@@ -727,7 +718,7 @@ What happens if all of your models are pretty bad, and you use model selection m
 
 You'll still get a best/most parsimonious model!
 
-You need to also provide evidence of model explanatory power using metrics like the coefficient of determination $R^2$ (or adjusted $R^2$, or marginal/conditional $R^2$ for mixed/hierarchical models, or goodness-of-fit tests) in addition to model fit diagnostics like AIC. Also don't forget about your coefficient hypothesis tests! See Mac Nally et al. (2017) on Blackboard for more on comparing model fit and model explanatory power.
+You need to also provide evidence of model explanatory power using metrics like the coefficient of determination $R^2$ (or adjusted $R^2$, or marginal/conditional $R^2$ for mixed/hierarchical models, or goodness-of-fit tests) in addition to model fit diagnostics like AIC. Also don't forget about your coefficient hypothesis tests! See Mac Nally et al. (2017) for more on comparing model fit and model explanatory power.
 
 $$
 R^2 = \frac{\mathrm{SSR}}{\mathrm{SST}} = \frac{\sum_{i = 1}^n (Y_i - \hat{Y}_i)^2}{\sum_{i = 1}^n (Y_i - \bar{Y})^2}
@@ -742,7 +733,7 @@ In many situations, you might have a large number of potential covariates to inc
 
 3. **Use stepwise regression**. Here, you would add in or remove variables one at a time to find the best model based on some criterion.
 
-### Stepwise regression
+## Stepwise regression
 
 With stepwise regression, you add in or remove parameters one at a time, then a test is done to check whether some variables can be deleted without appreciably increasing the residual sum of squares (RSS) or some other criterion (for example, AIC can be used). The procedure stops when the available improvement falls below some critical value. Using this approach, you do not test all possible models, because the algorithm only compares models to the optimal model from the previous step.
 
