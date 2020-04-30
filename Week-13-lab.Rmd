@@ -86,15 +86,13 @@ Better, but we still have a lot of multicollinearity between meanmin and meanmax
 
 We could choose one or the other but at this point, let's leave them both in and try and find the best model we can.
 
-First, let's do a little review of the four comparison criteria we discussed on Tuesday:
+First, let's do a little review of the three comparison criteria we discussed on Tuesday:
 
 1. Likelihood (specifically, likelihood ratio)
 
-2. Mallows Cp
+2. Akaike's Information Criteria (AIC)
 
-3. Akaike's Information Criteria (AIC)
-
-4. Bayesian Information Criterion (BIC)
+3. Bayesian Information Criterion (BIC)
 
 We get the log-likelihood of a model in R using the logLik command
 
@@ -137,14 +135,6 @@ We could also have also compared these models by looking at the ANOVA table for 
 
 ```{r}
 anova(frogs.glm0,frogs.glm1)
-```
-
-How do we get Mallows Cp?
-
-We can use the 'anova' function again...
-
-```{r}
-anova(frogs.glm0,frogs.glm1,test="Cp")
 ```
 
 How do we calculate AIC for these two models?
@@ -226,7 +216,7 @@ What does the output mean "with shrinkage"? These estimates include a zero value
 Part 2: Model criticism
 ------------------------
 
-We are going to use a dataset that comes from the journal Ecology, which was posted on Blackboard.
+We are going to use a dataset that comes from the journal Ecology, which is available [here](https://github.com/hlynch/Biometry2020/tree/master/_data/Ernest2003.pdf).
 
 STOP: Let's read the abstract so we know what we are modelling.
 

@@ -199,15 +199,13 @@ Better, but we still have a lot of multicollinearity between meanmin and meanmax
 
 We could choose one or the other but at this point, let's leave them both in and try and find the best model we can.
 
-First, let's do a little review of the four comparison criteria we discussed on Tuesday:
+First, let's do a little review of the three comparison criteria we discussed on Tuesday:
 
 1. Likelihood (specifically, likelihood ratio)
 
-2. Mallows Cp
+2. Akaike's Information Criteria (AIC)
 
-3. Akaike's Information Criteria (AIC)
-
-4. Bayesian Information Criterion (BIC)
+3. Bayesian Information Criterion (BIC)
 
 We get the log-likelihood of a model in R using the logLik command
 
@@ -300,27 +298,6 @@ anova(frogs.glm0,frogs.glm1)
 ##   Resid. Df Resid. Dev Df  Deviance
 ## 1       204     197.62             
 ## 2       205     197.65 -1 -0.029411
-```
-
-How do we get Mallows Cp?
-
-We can use the 'anova' function again...
-
-
-```r
-anova(frogs.glm0,frogs.glm1,test="Cp")
-```
-
-```
-## Analysis of Deviance Table
-## 
-## Model 1: pres.abs ~ altitude + log(distance) + log(NoOfPools) + NoOfSites + 
-##     avrain + meanmin + meanmax
-## Model 2: pres.abs ~ log(distance) + log(NoOfPools) + NoOfSites + avrain + 
-##     meanmin + meanmax
-##   Resid. Df Resid. Dev Df  Deviance     Cp
-## 1       204     197.62              213.62
-## 2       205     197.65 -1 -0.029411 211.65
 ```
 
 How do we calculate AIC for these two models?
@@ -1009,7 +986,7 @@ What does the output mean "with shrinkage"? These estimates include a zero value
 Part 2: Model criticism
 ------------------------
 
-We are going to use a dataset that comes from the journal Ecology, which was posted on Blackboard.
+We are going to use a dataset that comes from the journal Ecology, which is available [here](https://github.com/hlynch/Biometry2020/tree/master/_data/Ernest2003.pdf).
 
 STOP: Let's read the abstract so we know what we are modelling.
 
@@ -1051,37 +1028,37 @@ Before fitting any models, let's just look at each potential covariate vs. maxim
 plot(MaxLifespan~Order)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ```r
 plot(MaxLifespan~Family)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-23-2.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-22-2.png" width="672" />
 
 ```r
 plot(MaxLifespan~Genus)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-23-3.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-22-3.png" width="672" />
 
 ```r
 plot(MaxLifespan~Species)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-23-4.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-22-4.png" width="672" />
 
 ```r
 plot(MaxLifespan~Mass)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-23-5.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-22-5.png" width="672" />
 
 ```r
 plot(MaxLifespan~Gestation)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-23-6.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-22-6.png" width="672" />
 
 Note that most of the covariates need to be transformed to linearize the relationship. The easiest transformation to try is the log() - the covariates that should probably be transformed relate to mass and time periods: Mass, Gestation, Newborn,Weaning,WeanMass,AFR,LittersPerYear (possible, not clear what the best transmation is for this). In other words, look at:
 
@@ -1090,13 +1067,13 @@ Note that most of the covariates need to be transformed to linearize the relatio
 plot(MaxLifespan~log10(Mass))
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 ```r
 plot(MaxLifespan~log10(Gestation))
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-24-2.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-23-2.png" width="672" />
 
 etc.
 
@@ -1145,7 +1122,7 @@ Let's look at the residuals as a function of the fitted values:
 plot(fitted(fit),residuals(fit))
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 Let's look at the residuals using the 'car' package function 'residualPlots'. This command produces scatterplots of the residuals versus each of the predictors and versus the final fitted value. Note that what we did manually above is reproduced as the final panel here.
 
@@ -1154,7 +1131,7 @@ Let's look at the residuals using the 'car' package function 'residualPlots'. Th
 residualPlots(fit)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 ```
 ##             Test stat Pr(>|Test stat|)    
@@ -1177,7 +1154,7 @@ yfit<-dnorm(xfit)
 lines(xfit,yfit)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 A variation on the basic residual plot is the marginal model plot.
 
@@ -1186,7 +1163,7 @@ A variation on the basic residual plot is the marginal model plot.
 marginalModelPlots(fit)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 Note that loess smoothers have been added showing the non-parametric regression between the actual data (solid line) and the model prediction (dashed line) against each of the predictor variables. If these two lines are close together, that is an indication of good model fit.
 
@@ -1312,7 +1289,7 @@ avPlots(fit,id.n=2)
 ## parameter
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 The id.n option will cause the plot to identify the two points that are furthest from the mean on the x axis and the two with the largest absolute residuals.
 
@@ -1325,7 +1302,7 @@ We can also look at leverage by using the command 'leveragePlots'
 leveragePlots(fit)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 For covariates with only a single degree of freedom (i.e. not different levels of a factor), this will simply be a rescaled version of the added-variable plots.
 
@@ -1353,7 +1330,7 @@ Plot the qqplot for the studentized residuals using the 'car' package function q
 qqPlot(fit)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 ```
 ## [1] 1439 1440
@@ -1543,7 +1520,7 @@ cutoff<-4/((nrow(data)-length(fit$coefficients)-2))
 plot(fit,which=4,cook.levels=cutoff)
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 Another useful plot is created by 'influencePlot' which creates a "bubble" plot of studentized residuals by hat values, with the areas of the circles representing the observations proportional to Cook's distances. Vertical reference lines are drawn at twice and three times the average hat value, horizontal reference lines at -2,0,2 on the studentized-residual scale.
 
@@ -1581,7 +1558,7 @@ influencePlot(fit,id.method="identify")
 ## graphical parameter
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 ```
 ##         StudRes        Hat       CookD
@@ -1618,7 +1595,7 @@ spreadLevelPlot(fit)
 ## 47 negative fitted values removed
 ```
 
-<img src="Week-13-lab_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<img src="Week-13-lab_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 ```
 ## 

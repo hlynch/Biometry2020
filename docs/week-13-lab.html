@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-28" />
+<meta name="date" content="2020-04-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -505,10 +505,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>Better, but we still have a lot of multicollinearity between meanmin and meanmax.</p>
 <p>We could choose one or the other but at this point, let’s leave them both in and try and find the best model we can.</p>
-<p>First, let’s do a little review of the four comparison criteria we discussed on Tuesday:</p>
+<p>First, let’s do a little review of the three comparison criteria we discussed on Tuesday:</p>
 <ol style="list-style-type: decimal">
 <li><p>Likelihood (specifically, likelihood ratio)</p></li>
-<li><p>Mallows Cp</p></li>
 <li><p>Akaike’s Information Criteria (AIC)</p></li>
 <li><p>Bayesian Information Criterion (BIC)</p></li>
 </ol>
@@ -555,18 +554,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##   Resid. Df Resid. Dev Df  Deviance
 ## 1       204     197.62             
 ## 2       205     197.65 -1 -0.029411</code></pre>
-<p>How do we get Mallows Cp?</p>
-<p>We can use the ‘anova’ function again…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(frogs.glm0,frogs.glm1,<span class="dt">test=</span><span class="st">&quot;Cp&quot;</span>)</code></pre></div>
-<pre><code>## Analysis of Deviance Table
-## 
-## Model 1: pres.abs ~ altitude + log(distance) + log(NoOfPools) + NoOfSites + 
-##     avrain + meanmin + meanmax
-## Model 2: pres.abs ~ log(distance) + log(NoOfPools) + NoOfSites + avrain + 
-##     meanmin + meanmax
-##   Resid. Df Resid. Dev Df  Deviance     Cp
-## 1       204     197.62              213.62
-## 2       205     197.65 -1 -0.029411 211.65</code></pre>
 <p>How do we calculate AIC for these two models?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">logLik</span>(frogs.glm0)</code></pre></div>
 <pre><code>## &#39;log Lik.&#39; -98.81244 (df=8)</code></pre>
@@ -1124,7 +1111,7 @@ AIC.glm0</code></pre></div>
 </div>
 <div id="part-2-model-criticism" class="section level2">
 <h2><span class="header-section-number">25.3</span> Part 2: Model criticism</h2>
-<p>We are going to use a dataset that comes from the journal Ecology, which was posted on Blackboard.</p>
+<p>We are going to use a dataset that comes from the journal Ecology, which is available <a href="https://github.com/hlynch/Biometry2020/tree/master/_data/Ernest2003.pdf">here</a>.</p>
 <p>STOP: Let’s read the abstract so we know what we are modelling.</p>
 <p>The goal is to create the best possible, most parsimonious model for maximum longevity in non-volant mammals. The covariates we have in this dataset to consider are:</p>
 <p>Order<br />
@@ -1149,22 +1136,22 @@ Litters/year</p>
 ## [13] &quot;LittersPerYear&quot;</code></pre>
 <p>Before fitting any models, let’s just look at each potential covariate vs. maximum longevity to get a sense for which variables need to be transformed. I list get the first few here…</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(MaxLifespan<span class="op">~</span>Order)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(MaxLifespan<span class="op">~</span>Family)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(MaxLifespan<span class="op">~</span>Genus)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-23-3.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-22-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(MaxLifespan<span class="op">~</span>Species)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-23-4.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-22-4.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(MaxLifespan<span class="op">~</span>Mass)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-23-5.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-22-5.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(MaxLifespan<span class="op">~</span>Gestation)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-23-6.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-22-6.png" width="672" /></p>
 <p>Note that most of the covariates need to be transformed to linearize the relationship. The easiest transformation to try is the log() - the covariates that should probably be transformed relate to mass and time periods: Mass, Gestation, Newborn,Weaning,WeanMass,AFR,LittersPerYear (possible, not clear what the best transmation is for this). In other words, look at:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(MaxLifespan<span class="op">~</span><span class="kw">log10</span>(Mass))</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(MaxLifespan<span class="op">~</span><span class="kw">log10</span>(Gestation))</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
 <p>etc.</p>
 <p>For now, let’s ignore the taxonomic covariates and focus on just three covariates: Mass, AFR, and LitterSize.</p>
 <p><em>Fitting the model using ‘lm’</em></p>
@@ -1195,10 +1182,10 @@ Litters/year</p>
 <p><em>Model diagnostics</em></p>
 <p>Let’s look at the residuals as a function of the fitted values:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">fitted</span>(fit),<span class="kw">residuals</span>(fit))</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Let’s look at the residuals using the ‘car’ package function ‘residualPlots’. This command produces scatterplots of the residuals versus each of the predictors and versus the final fitted value. Note that what we did manually above is reproduced as the final panel here.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">residualPlots</span>(fit)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <pre><code>##             Test stat Pr(&gt;|Test stat|)    
 ## log10(Mass)   12.8413           &lt;2e-16 ***
 ## log10(AFR)    11.6289           &lt;2e-16 ***
@@ -1212,10 +1199,10 @@ Litters/year</p>
 xfit&lt;-<span class="kw">seq</span>(<span class="kw">min</span>(sresid),<span class="kw">max</span>(sresid),<span class="dt">length=</span><span class="dv">40</span>)
 yfit&lt;-<span class="kw">dnorm</span>(xfit)
 <span class="kw">lines</span>(xfit,yfit)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>A variation on the basic residual plot is the marginal model plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">marginalModelPlots</span>(fit)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>Note that loess smoothers have been added showing the non-parametric regression between the actual data (solid line) and the model prediction (dashed line) against each of the predictor variables. If these two lines are close together, that is an indication of good model fit.</p>
 <p>Note that the marginal plots display the relationship between the response and each covariates IGNORING the other covariates. We can also look at the relationship between the response and each covariates CONTROLLING for the other covariates. We do this through “added variable plots”.</p>
 <p>Let’s say we have the following model</p>
@@ -1273,12 +1260,12 @@ X_{1} \sim X_{2} + X_{3}
 <pre><code>## Warning in title(...): &quot;id.n&quot; is not a graphical parameter</code></pre>
 <pre><code>## Warning in plot.xy(xy.coords(x, y), type = type, ...): &quot;id.n&quot; is not a graphical
 ## parameter</code></pre>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>The id.n option will cause the plot to identify the two points that are furthest from the mean on the x axis and the two with the largest absolute residuals.</p>
 <p>The added variable plot allows us to visualize the effect of each covariate after adjusting for all the other covariates in the model.</p>
 <p>We can also look at leverage by using the command ‘leveragePlots’</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveragePlots</span>(fit)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>For covariates with only a single degree of freedom (i.e. not different levels of a factor), this will simply be a rescaled version of the added-variable plots.</p>
 <p><em>Outliers</em></p>
 <p>Let’s look for outliers using the ‘car’ function ‘outlierTest’ which reports the Bonferroni p-values for Studentized residuals:</p>
@@ -1290,7 +1277,7 @@ X_{1} \sim X_{2} + X_{3}
 ## 1437 4.488601         8.9697e-06   4.3862e-03</code></pre>
 <p>Plot the qqplot for the studentized residuals using the ‘car’ package function qqPlot. WARNING: This is not the same as qqplot (lower case p); this is a specialized function in the ‘car’ package that will plot the appropriate qqplot for the studentized residuals given a fitted model as input.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqPlot</span>(fit)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <pre><code>## [1] 1439 1440</code></pre>
 <p>To identify points with high leverage, we want to calculate the hat values for each of the points. We can do this using the ‘hatvalues&quot; command in the ’car’ package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hatvalues</span>(fit)</code></pre></div>
@@ -1462,7 +1449,7 @@ X_{1} \sim X_{2} + X_{3}
 <p>We can make a plot that highlights highly influential values. We will use John Fox’s suggested cut-off of 4/(n-p-1) where n=number of data points and p=number of estimated parameters.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cutoff&lt;-<span class="dv">4</span><span class="op">/</span>((<span class="kw">nrow</span>(data)<span class="op">-</span><span class="kw">length</span>(fit<span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">2</span>))
 <span class="kw">plot</span>(fit,<span class="dt">which=</span><span class="dv">4</span>,<span class="dt">cook.levels=</span>cutoff)</code></pre></div>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>Another useful plot is created by ‘influencePlot’ which creates a “bubble” plot of studentized residuals by hat values, with the areas of the circles representing the observations proportional to Cook’s distances. Vertical reference lines are drawn at twice and three times the average hat value, horizontal reference lines at -2,0,2 on the studentized-residual scale.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">influencePlot</span>(fit,<span class="dt">id.method=</span><span class="st">&quot;identify&quot;</span>)</code></pre></div>
 <pre><code>## Warning in plot.window(...): &quot;id.method&quot; is not a graphical parameter</code></pre>
@@ -1476,7 +1463,7 @@ X_{1} \sim X_{2} + X_{3}
 <pre><code>## Warning in title(...): &quot;id.method&quot; is not a graphical parameter</code></pre>
 <pre><code>## Warning in plot.xy(xy.coords(x, y), type = type, ...): &quot;id.method&quot; is not a
 ## graphical parameter</code></pre>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre><code>##         StudRes        Hat       CookD
 ## 981  -0.4853275 0.12224961 0.008214314
 ## 1047 -0.7584248 0.05140668 0.007799829
@@ -1492,7 +1479,7 @@ X_{1} \sim X_{2} + X_{3}
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">spreadLevelPlot</span>(fit)</code></pre></div>
 <pre><code>## Warning in spreadLevelPlot.lm(fit): 
 ## 47 negative fitted values removed</code></pre>
-<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="Week-13-lab_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <pre><code>## 
 ## Suggested power transformation:  0.4508167</code></pre>
 <p><em>Multicollinearity</em></p>
