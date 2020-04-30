@@ -25,6 +25,14 @@ Here are the datasets used in this course. You can download the data set from th
 <p class="caption">(\#fig:unnamed-chunk-1)The dataset links take you here. The "raw" button allows you to download the file</p>
 </div>
 
+Another way to do it is to use the 'readr' package, as I demonstrate here for the clouds.csv dataset:
+
+
+```r
+library(readr)
+clouds <- read_csv("https://raw.githubusercontent.com/hlynch/Biometry2020/master/_data/clouds.csv")
+```
+
 * `clouds` (csv): [link](https://github.com/hlynch/Biometry2020/tree/master/_data/clouds.csv) [1]
 * `clouds` (txt): [link](https://github.com/hlynch/Biometry2020/tree/master/_data/clouds.txt) [1]
 * `Prestige`: [link](https://github.com/hlynch/Biometry2020/tree/master/_data/Prestige.csv) [2]

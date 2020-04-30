@@ -399,6 +399,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 Figure 0.1: The dataset links take you here. The “raw” button allows you to download the file
 </p>
 </div>
+<p>Another way to do it is to use the ‘readr’ package, as I demonstrate here for the clouds.csv dataset:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+clouds &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/hlynch/Biometry2020/master/_data/clouds.csv&quot;</span>)</code></pre></div>
 <ul>
 <li><code>clouds</code> (csv): <a href="https://github.com/hlynch/Biometry2020/tree/master/_data/clouds.csv">link</a> [1]</li>
 <li><code>clouds</code> (txt): <a href="https://github.com/hlynch/Biometry2020/tree/master/_data/clouds.txt">link</a> [1]</li>
