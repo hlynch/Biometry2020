@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-30" />
+<meta name="date" content="2020-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -402,28 +402,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       }
   }
 p.values</code></pre></div>
-<pre><code>##       [,1]      [,2]       [,3]       [,4]      [,5]       [,6]      [,7]
-##  [1,]   NA 0.1465921 0.77257153 0.55059121 0.8343373 0.55113878 0.7600500
-##  [2,]   NA        NA 0.04296811 0.06864749 0.3094667 0.02552689 0.1696755
-##  [3,]   NA        NA         NA 0.68439705 0.6350998 0.71196652 0.4891795
-##  [4,]   NA        NA         NA         NA 0.4668270 0.90528919 0.3667198
-##  [5,]   NA        NA         NA         NA        NA 0.46272396 0.9732882
-##  [6,]   NA        NA         NA         NA        NA         NA 0.3105018
-##  [7,]   NA        NA         NA         NA        NA         NA        NA
-##  [8,]   NA        NA         NA         NA        NA         NA        NA
-##  [9,]   NA        NA         NA         NA        NA         NA        NA
-## [10,]   NA        NA         NA         NA        NA         NA        NA
-##            [,8]       [,9]      [,10]
-##  [1,] 0.6121629 0.45113128 0.89174636
-##  [2,] 0.2751801 0.03323231 0.06039086
-##  [3,] 0.3631825 0.57076272 0.85592070
-##  [4,] 0.2885187 0.92738124 0.59013761
-##  [5,] 0.8313293 0.38432153 0.72996147
-##  [6,] 0.2266276 0.80872743 0.58766456
-##  [7,] 0.8081810 0.26475106 0.60414532
-##  [8,]        NA 0.19929686 0.45640230
-##  [9,]        NA         NA 0.47478440
-## [10,]        NA         NA         NA</code></pre>
+<pre><code>##       [,1]      [,2]       [,3]      [,4]      [,5]       [,6]       [,7]
+##  [1,]   NA 0.0426775 0.05717604 0.1678708 0.0437653 0.05630844 0.03203463
+##  [2,]   NA        NA 0.68383182 0.5260805 0.6020798 0.94197129 0.58415308
+##  [3,]   NA        NA         NA 0.3979771 0.9316721 0.65431090 0.94421482
+##  [4,]   NA        NA         NA        NA 0.3384523 0.58708282 0.31056108
+##  [5,]   NA        NA         NA        NA        NA 0.57604414 0.98294232
+##  [6,]   NA        NA         NA        NA        NA         NA 0.55788060
+##  [7,]   NA        NA         NA        NA        NA         NA         NA
+##  [8,]   NA        NA         NA        NA        NA         NA         NA
+##  [9,]   NA        NA         NA        NA        NA         NA         NA
+## [10,]   NA        NA         NA        NA        NA         NA         NA
+##            [,8]      [,9]     [,10]
+##  [1,] 0.1249838 0.1940988 0.1947497
+##  [2,] 0.8517739 0.9848350 0.6652410
+##  [3,] 0.8916447 0.7632937 0.4918548
+##  [4,] 0.5605973 0.7127715 0.9250705
+##  [5,] 0.8306385 0.7061370 0.4322205
+##  [6,] 0.8200622 0.9813290 0.7151528
+##  [7,] 0.8372113 0.7073141 0.4147073
+##  [8,]        NA 0.8755123 0.6385504
+##  [9,]        NA        NA 0.7827069
+## [10,]        NA        NA        NA</code></pre>
 <p>Now we can see how many of these p.values are “significant”. We know these are false positives, because all the data were generated from the same distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">false.positives&lt;-<span class="kw">sum</span>(p.values<span class="op">&lt;</span><span class="fl">0.05</span>,<span class="dt">na.rm=</span>T)
 false.positives</code></pre></div>
@@ -468,7 +468,7 @@ min.p.values.all&lt;-<span class="kw">c</span>()
 new.threshold.R&lt;-<span class="kw">quantile</span>(min.p.values.all,<span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>))
 new.threshold.R</code></pre></div>
 <pre><code>##          5% 
-## 0.001710507</code></pre>
+## 0.001837348</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">false.positives.R&lt;-<span class="kw">sum</span>(p.values<span class="op">&lt;</span>new.threshold.R,<span class="dt">na.rm=</span>T)
 false.positives.R</code></pre></div>
 <pre><code>## [1] 0</code></pre>

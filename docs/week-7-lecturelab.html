@@ -24,7 +24,7 @@
 <meta name="author" content="Heather Lynch" />
 
 
-<meta name="date" content="2020-04-30" />
+<meta name="date" content="2020-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -690,8 +690,8 @@ mypalette&lt;-<span class="kw">brewer.pal</span>(<span class="dv">7</span>,<span
 <p><img src="Week-7-lecture_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Be aware of overplotting (points that overlap) especially when data are discrete or rounded. One strategy for overcoming this is jittering the points so the density of points can be displayed without overly distorting the underlying relationships. You can use the ‘jitter’ command in the base package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">jitter</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">7</span>))</code></pre></div>
-<pre><code>## [1] -0.0005609857 -0.0164850678  0.0040038104 -0.0196806329  0.0128927777
-## [6] -0.0062583750 -0.0189029634</code></pre>
+<pre><code>## [1] -0.018194968  0.015349701  0.016499456 -0.008148836  0.013997522
+## [6] -0.015540915 -0.014805333</code></pre>
 <p>Before we launch into three-dimensional plotting, we should introduce ‘ggplot2’ which is quickly becoming “industry standard” for making plots in R. There is <em>so</em> much that can be done with ggplot2 that we will only scratch the surface today, but at least this introduction will illustrate some of the things that ggplot2 can do.</p>
 <p>The basic function to make plots using ggplot2 is ‘qplot’. We can recreate the scatterplot of the mtcars data using ggplot2 as follows</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
@@ -732,8 +732,8 @@ y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2
 ## 
 ## Number of data points:  2000 
 ## Number of grid bins:  200 x 200 
-## X range: ( -12.52945 , 13.15754 )
-## Y range: ( -12.52945 , 13.15754 )</code></pre>
+## X range: ( -16.72557 , 14.15541 )
+## Y range: ( -16.72557 , 14.15541 )</code></pre>
 <p>Notice that we had to use “same.scale=T” to make sure that distances along the x and y axes were comparable.</p>
 <p>Now we will use the hisr2d function to create inputs for a three-dimensional perspective plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h2d &lt;-<span class="st"> </span><span class="kw">hist2d</span>(x,y,<span class="dt">show=</span><span class="ot">FALSE</span>, <span class="dt">same.scale=</span><span class="ot">TRUE</span>, <span class="dt">nbins=</span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">30</span>))
